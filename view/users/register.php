@@ -49,9 +49,9 @@ $user = $view->getVariable("user");
 				
 
 				<div class="wrap-input100 validate-input">
-				<select class="input100">
-  					<option value="hombre">Hombre</option>
-  					<option value="mujer">Mujer</option>
+				<select name="sexo" class="input100">
+  					<option name="sexo" value="hombre">Hombre</option>
+  					<option name="sexo" value="mujer">Mujer</option>
   				</select>
 				  <span class="focus-input100"></span>
 					<span class="label-input100">Sexo</span>

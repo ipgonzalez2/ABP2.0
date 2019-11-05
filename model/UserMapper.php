@@ -46,9 +46,9 @@ class UserMapper {
 		$user->getEmail(), $user->getIdUsuario()));
 	}
 
-	public function delete($user) {
+	public function delete($id_usuario) {
 		$stmt = $this->db->prepare("DELETE FROM USUARIO WHERE ID_USUARIO = ?"); 
-		$stmt->execute(array($user->getIdUsuario()));
+		$stmt->execute(array($id_usuario));
 	}
 
 	/**

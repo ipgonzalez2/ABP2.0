@@ -80,7 +80,7 @@ class UsersController extends BaseController {
 				$_SESSION["userrol"]=$user->getRol();
 
 				// send user to the restricted area (HTTP 302 code)
-				$this->view->redirect("main", "main");
+				$this->view->redirect("users", "main");
 
 			}else{
 				$errors = array();
@@ -122,29 +122,10 @@ class UsersController extends BaseController {
 	*/
 
 	public function main() {
-		if (isset($_POST["username"])){ // reaching via HTTP Post...
-			//process login form
-			if ($this->userMapper->isValidUser($_POST["username"],$_POST["passwd"])) {
 
-				$user = $this->userMapper->findByUserEmail($_POST["username"]);
-				$id = $this->userMapper->findByUserID($_POST["username"]);
-				$_SESSION["currentuser"]= $_POST["username"];
-				$_SESSION["userid"]= $id;
-				
-				//$_SESSION["useremail"]= $id;
-
-				$_SESSION["useremail"]=$user->getEmail();
-
-				$_SESSION["userrol"]=$user->getRol();
-
-				// send user to the restricted area (HTTP 302 code)
-				$this->view->redirect("main", "main");
-
-			}else{
-				$errors = array();
-				$errors["general"] = "Username is not valid";
-				$this->view->setVariable("errors", $errors);
-			}
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
 		}
 
 		// render the view (/view/users/login.php)
@@ -248,10 +229,11 @@ class UsersController extends BaseController {
 			$this->view->redirect("users", "login");
 		}
 
-		if (isset($_POST["username"])){ // reaching via HTTP Post...
+		if (isset($_POST["id_usuario"])){ // reaching via HTTP Post...
 			//process login form
 
-			$this->userMapper->delete($user);
+			$this->userMapper->delete($_POST["id_usuario"]);
+			$this->view->redirect("users","logout");
 
 			//redirect
 		}
@@ -260,7 +242,7 @@ class UsersController extends BaseController {
 		$this->view->setVariable("user", $user);
 
 		// render the view (/view/users/login.php)
-		$this->view->render("users", "delete");
+		$this->view->render("users", "edit");
 	}
 
 	/**

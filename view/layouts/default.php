@@ -13,9 +13,9 @@ $currentuser = $view->getVariable("currentusername");
 	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css">	
 	<link rel="stylesheet" href="css/fontawesome-all.min.css" type="text/css">
 	<link rel="stylesheet" href="css/noscript.css" type="text/css">
-	<link rel="stylesheet" href="css/styeMain.css" type="text/css">
-	<link rel="stylesheet" href="css/styeLogin.css" type="text/css">
-	<link rel="stylesheet" href="css/dashboard.component.css" type="text/css">
+	<link rel="stylesheet" href="css/styleMain.css" type="text/css">
+	<link rel="stylesheet" href="css/styleLogin.css" type="text/css">
+	<link rel="stylesheet" href="css/main.css" type="text/css">
 
 
 
