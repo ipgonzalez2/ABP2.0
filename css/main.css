@@ -158,10 +158,6 @@ textarea {
     width: device-width;
 }
 
-body {
-    -ms-overflow-style: scrollbar;
-}
-
 @media screen and (max-width: 480px) {
     html,
     body {
@@ -2105,16 +2101,6 @@ select:focus::-ms-value {
 
 select::-ms-expand {
     display: none;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="tel"],
-input[type="search"],
-input[type="url"],
-select {
-    height: 2.75rem;
 }
 
 textarea {
