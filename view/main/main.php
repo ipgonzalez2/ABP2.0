@@ -19,7 +19,7 @@ $errors = $view->getVariable("errors");
             </ul>
         </div>
         <div class="image">
-            <img src="/images/banner.jpg" alt="" />
+            <img src="./images/padel6.jpg" alt="" />
         </div>
     </section>
 
@@ -33,7 +33,7 @@ $errors = $view->getVariable("errors");
             </ul>
         </div>
         <div class="image">
-            <img src="/images/spotlight01.jpg" alt="" />
+            <img src="./images/icono.png" alt="" />
         </div>
     </section>
 
