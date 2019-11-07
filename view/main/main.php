@@ -5,18 +5,7 @@ $view->setVariable("title", "Main");
 $errors = $view->getVariable("errors");
 ?>
 
-<header class="header-section">
-    <div class="nav-switch">
-        <i class="fa fa-bars"></i>
-    </div>
-    <div class="header-social">
-        <a href=""><i class="fa fa-table-tennis"></i></a>
-        <a href=""><i class="far fa-calendar-alt"></i></a>
-        <a href=""><i class="far fa-futbol"></i></a>
-        <a href=""><i class="fas fa-user"></i></i></a>
-        <a href="./index.php?contoller=user&action=logout"><i class="fas fa-sign-out-alt"></i></a>
-    </div>
-</header>
+
 
 <!-- Wrapper -->
 <div id="wrapper" class="divided">
