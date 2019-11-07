@@ -11,20 +11,11 @@ $currentuser = $view->getVariable("currentusername");
 <head>
 	<title><?= $view->getVariable("title", "no title") ?></title>
 	<meta charset="utf-8">
-<<<<<<< HEAD
 	<link href="css/all.css" rel="stylesheet">
 	<!--load all styles -->
 	<link href="css/fontawesome.css" rel="stylesheet">
 	<link href="css/brands.css" rel="stylesheet">
 	<link href="css/solid.css" rel="stylesheet">
-=======
-	
-	
-	<link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
-	
-	<link rel="stylesheet" href="./css/main.css" type="text/css">
-	<link rel="stylesheet" href="./css/header.css" type="text/css">
->>>>>>> master
 
 	<link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 
