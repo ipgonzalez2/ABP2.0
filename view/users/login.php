@@ -64,11 +64,11 @@ $errors = $view->getVariable("errors");
 
                     <div class="login100-form-social flex-c-m">
                         <a href="/dashboard" class="login100-form-social-item flex-c-m bg1 m-r-5">
-                            <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                        <i class="fab fa-facebook"></i></i>
                         </a>
 
                         <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                        <i class="fab fa-twitter"></i></i>
                         </a>
                     </div>
                 </form>

@@ -9,17 +9,20 @@ $currentuser = $view->getVariable("currentusername");
 <head>
 	<title><?= $view->getVariable("title", "no title") ?></title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="css/style.css" type="text/css">
-	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css">	
-	<link rel="stylesheet" href="css/fontawesome-all.min.css" type="text/css">
-	<link rel="stylesheet" href="css/noscript.css" type="text/css">
-	<link rel="stylesheet" href="css/styleMain.css" type="text/css">
-	<link rel="stylesheet" href="css/styleLogin.css" type="text/css">
-	<link rel="stylesheet" href="css/main.css" type="text/css">
+	<link href="css/all.css" rel="stylesheet">
+	<!--load all styles -->
+	<link href="css/fontawesome.css" rel="stylesheet">
+	<link href="css/brands.css" rel="stylesheet">
+	<link href="css/solid.css" rel="stylesheet">
 
+	<link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 
+	<link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
 
+	<link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 
+	<link rel="stylesheet" href="./css/main.css" type="text/css">
+	<link rel="stylesheet" href="./css/header.css" type="text/css">
 
 	<!-- enable ji18n() javascript function to translate inside your scripts -->
 	<script src="index.php?controller=language&amp;action=i18njs">
