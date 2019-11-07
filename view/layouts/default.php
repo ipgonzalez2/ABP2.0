@@ -9,13 +9,12 @@ $currentuser = $view->getVariable("currentusername");
 <head>
 	<title><?= $view->getVariable("title", "no title") ?></title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="css/style.css" type="text/css">
-	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css">	
-	<link rel="stylesheet" href="css/fontawesome-all.min.css" type="text/css">
-	<link rel="stylesheet" href="css/noscript.css" type="text/css">
-	<link rel="stylesheet" href="css/styleMain.css" type="text/css">
-	<link rel="stylesheet" href="css/styleLogin.css" type="text/css">
-	<link rel="stylesheet" href="css/main.css" type="text/css">
+	
+	
+	<link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+	
+	<link rel="stylesheet" href="./css/main.css" type="text/css">
+	<link rel="stylesheet" href="./css/header.css" type="text/css">
 
 
 
