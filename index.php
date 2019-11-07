@@ -4,12 +4,12 @@
 /**
 * Default controller if any controller is passed in the URL
 */
-define("DEFAULT_CONTROLLER", "users");
+define("DEFAULT_CONTROLLER", "index");
 
 /**
 * Default action if any action is passed in the URL
 */
-define("DEFAULT_ACTION", "login");
+define("DEFAULT_ACTION", "indexNoLogged");
 
 /**
 * Main router (single entry-point for all requests)

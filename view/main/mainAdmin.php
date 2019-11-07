@@ -10,9 +10,9 @@ $errors = $view->getVariable("errors");
         <i class="fa fa-bars"></i>
     </div>
     <div class="header-social">
-        <a href=""><i class="fa fa-calendar-alt"></i></a>
         <a href=""><i class="fa fa-table-tennis"></i></a>
-        <a href=""><i class="fa fa-medal"></i></a>
+        <a href=""><i class="far fa-calendar-alt"></i></a>
+        <a href=""><i class="far fa-futbol"></i></a>
         <a href="./index.php?controller=users&action=edit"><i class="fas fa-user"></i></i></a>
         <a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
     </div>
@@ -25,8 +25,11 @@ $errors = $view->getVariable("errors");
     <!-- One -->
     <section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
         <div class="content">
-            <h1>PadelBit </h1>
+            <h1>PadelAdmin </h1>
             <p class="major">La mejor web de padel del mundo .</p>
+            <ul class="actions stacked">
+                <li><a href="#first" class="button big wide smooth-scroll-middle">Que quiere hacer</a></li>
+            </ul>
         </div>
         <div class="image">
             <img src="./images/padel6.jpg" alt="" />
@@ -36,42 +39,42 @@ $errors = $view->getVariable("errors");
     <!-- Two -->
     <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
         <div class="content">
-            <h2>¿Quiéres hacer una reserva?</h2>
-            <p>Tienes que hacerlo con una semana de antelación.</p>
+            <h2>Quieres hacer la reserva</h2>
+            <p>Esta reserva es la mejor del mundo mundial.</p>
             <ul class="actions stacked">
-                <li><a href="#" class="button">Reserva</a></li>
+                <li><a href="#" class="button">Reservar</a></li>
             </ul>
         </div>
         <div class="image">
-            <img src="./images/calendar.jpg" alt="" />
+            <img src="./images/icono.png" alt="" />
         </div>
     </section>
 
     <!-- Three -->
     <section class="spotlight style1 orient-left content-align-left image-position-center onscroll-image-fade-in">
         <div class="content">
-            <h2>Únete a un partido</h2>
-            <p>Conoce a otros deportistas.</p>
+            <h2>Perfil de usuario</h2>
+            <p>Quieres ver tus stats de mierda .</p>
             <ul class="actions stacked">
-                <li><a href="" class="button">Adelante</a></li>
+                <li><a href="./index.php?controller=users&action=edit" class="button">Adelante !!!</a></li>
             </ul>
         </div>
         <div class="image">
-            <img src="./images/partido.jpg" alt="" />
+            <img src="/images/spotlight02.jpg" alt="" />
         </div>
     </section>
 
     <!-- Four -->
     <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
         <div class="content">
-            <h2>¿Te atreves con un campeonato?</h2>
-            <p>Apúntate con tu pareja.</p>
+            <h2>Pistas</h2>
+            <p>Quieres reservar las mejores pista del mundo.</p>
             <ul class="actions stacked">
-                <li><a href="#" class="button">Inscríbete</a></li>
+                <li><a href="#" class="button">Dale duro Broh </a></li>
             </ul>
         </div>
         <div class="image">
-            <img src="./images/icon.jpg" alt="" />
+            <img src="/images/spotlight03.jpg" alt="" />
         </div>
     </section>
 
@@ -79,7 +82,7 @@ $errors = $view->getVariable("errors");
     <section class="wrapper style1 align-center">
         <div class="inner">
             <h2>Quiere ver nuestras instalaciones</h2>
-            <p>Acércate al club.</p>
+            <p>Son las mejores.</p>
         </div>
 
         <!-- Gallery -->

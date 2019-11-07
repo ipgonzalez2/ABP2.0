@@ -70,6 +70,7 @@ class UsersController extends BaseController {
 
 				$user = $this->userMapper->findByUserEmail($_POST["username"]);
 				$id = $this->userMapper->findByUserID($_POST["username"]);
+				$rol = $this->userMapper->findByUserRol($_POST["username"]);
 				$_SESSION["currentuser"]= $_POST["username"];
 				$_SESSION["userid"]= $id;
 				
@@ -77,10 +78,10 @@ class UsersController extends BaseController {
 
 				$_SESSION["useremail"]=$user->getEmail();
 
-				$_SESSION["userrol"]=$user->getRol();
+				$_SESSION["userrol"]=$rol;
 
 				// send user to the restricted area (HTTP 302 code)
-				$this->view->redirect("users", "main");
+				$this->view->redirect("index", "indexLogged");
 
 			}else{
 				$errors = array();
@@ -121,17 +122,6 @@ class UsersController extends BaseController {
 	* @return void
 	*/
 
-	public function main() {
-
-		if (!isset($this->currentUser)) {
-			$this->view->setFlashDanger("You must be logged");
-			$this->view->redirect("users", "login");
-		}
-
-		$this->view->setLayout("default");
-		// render the view (/view/users/login.php)
-		$this->view->render("main", "main");
-	}
 
 	public function reservar() {
 
@@ -278,7 +268,7 @@ class UsersController extends BaseController {
 		// perform a redirection. More or less:
 		// header("Location: index.php?controller=users&action=login")
 		// die();
-		$this->view->redirect("users", "login");
+		$this->view->redirect("index", "indexNoLogged");
 
 	}
 

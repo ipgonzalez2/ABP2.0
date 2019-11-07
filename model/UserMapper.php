@@ -108,6 +108,18 @@ class UserMapper {
 		}
 	}
 
+	public function findByUserRol($username) {
+		$stmt = $this->db->prepare("SELECT ROL FROM USUARIO where USERNAME=?");
+		$stmt->execute(array($username));
+		$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if($user != null) {
+			return $user["ROL"];
+		} else {
+			return NULL;
+		}
+	}
+
 	public function findUser($id_usuario){
 		$stmt = $this->db->prepare("SELECT * FROM USUARIO WHERE ID_USUARIO=?");
 		$stmt->execute(array($id_usuario));
