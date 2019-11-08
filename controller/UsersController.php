@@ -64,6 +64,7 @@ class UsersController extends BaseController {
 	* @return void
 	*/
 	public function login() {
+
 		if (isset($_POST["username"])){ // reaching via HTTP Post...
 			//process login form
 			if ($this->userMapper->isValidUser($_POST["username"],$_POST["passwd"])) {
@@ -122,19 +123,6 @@ class UsersController extends BaseController {
 	* @return void
 	*/
 
-
-	public function reservar() {
-
-		if (!isset($this->currentUser)) {
-			$this->view->setFlashDanger("You must be logged");
-			$this->view->redirect("users", "login");
-		}
-
-		$this->view->setLayout("default");
-		// render the view (/view/users/login.php)
-		$this->view->render("main", "main");
-	}
-
 	public function register() {
 
 		$user = new User();
@@ -192,6 +180,7 @@ class UsersController extends BaseController {
 	}
 
 	public function edit() {
+		
 		$userId = $this->view->getVariable("userId");
 		$user = $this->userMapper->findUser($userId);
 		$userPasswd = $user->getPasswd();

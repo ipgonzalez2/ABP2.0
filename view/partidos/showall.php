@@ -36,7 +36,10 @@ $userRol = $view->getVariable("userRol");
   <?php if($userRol == "ADMINISTRADOR"){?>
     <td><a href="<?="index.php?controller=partidos&action=deletePartido&idPartido=".$partido->getIdPartido() ?>">
     <i class="fa fa-trash-alt"></i>
-  </a></td><?php } ?>
+  </a></td><?php }else{ ?>
+    <td><a href="<?="index.php?controller=partidos&action=showPartidoInscribir&idPartido=".$partido->getIdPartido() ?>">
+    <i class="fa fa-user-plus"></i>
+  <?php } ?>
 </tr>
 <?php endforeach; ?>
 </table> 

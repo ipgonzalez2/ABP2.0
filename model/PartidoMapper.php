@@ -62,7 +62,27 @@ class PartidoMapper {
 			array_push($partidos, new Partido($partido["ID_PARTIDO"],$partido["FECHA_PARTIDO"], $partido["PRECIO_PARTIDO"],
 			$partido["ESTADO_PARTIDO"], $partido["FECHA_FIN_INSCRIPCION"]));
 		}
+
 		return $partidos;
+	}
+
+	public function actualizarPartidos() 
+	{
+		$stmt = $this->db->prepare("SELECT * FROM PARTIDO");
+		$stmt->execute();
+		
+		$partidos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$partidos = array();
+
+		foreach ($partidos_db as $partido) {
+			$fechaInscripcionPartido=date("Y-m-d",strtotime($partido["FECHA_FIN_INSCRIPCION"]));
+			$fechaActual=date("Y-m-d",strtotime("Today"));
+			if(($fechaInscripcionPartido <= $fechaActual) && ($partido["ESTADO_PARTIDO"] == "ABIERTO")){
+				$stmt = $this->db->prepare("UPDATE PARTIDO SET 
+				ESTADO_PARTIDO = ? WHERE ID_PARTIDO = ?");
+				$stmt->execute(array("CERRADO",$partido["ID_PARTIDO"]));
+			}
+		}
 	}
 
 	public function deletePartido($idPartido){
@@ -70,6 +90,37 @@ class PartidoMapper {
 		$stmt = $this->db->prepare("DELETE FROM PARTIDO WHERE ID_PARTIDO = ?"); 
 		$stmt->execute(array($idPartido));
 
+	}
+
+	public function comprobarPartido($idPartido){
+
+		$stmt = $this->db->prepare("SELECT ESTADO_PARTIDO WHERE ID_PARTIDO = ?"); 
+		$stmt->execute(array($idPartido));
+
+		$estado = $stmt->fetch(PDO::FETCH_ASSOC);
+		if($estado == "CERRADO"){
+			$this->actualizarPartidos();
+			return false;
+		}
+		return true;
+
+	}
+
+	public function findPartido($id_partido){
+		$stmt = $this->db->prepare("SELECT * FROM PARTIDO WHERE ID_PARTIDO=?");
+		$stmt->execute(array($id_partido));
+		$partido = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if($partido != null) {
+			return new Partido(
+			$id_partido,
+			$partido["FECHA_PARTIDO"],
+			$partido["PRECIO_PARTIDO"],
+			$partido["ESTADO_PARTIDO"],
+			$partido["FECHA_FIN_INSCRIPCION"]);
+		} else {
+			return NULL;
+		}
 	}
 
 

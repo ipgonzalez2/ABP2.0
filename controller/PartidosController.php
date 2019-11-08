@@ -38,6 +38,15 @@ class PartidosController extends BaseController {
 	
 	public function addPartido() {
 		$partido = new Partido();
+		$userRol = $this->view->getVariable("userRol");
+
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+		if($userRol == "DEPORTISTA"){
+			$this->view->redirect("index", "indexLogged");
+		}
 
 		if (isset($_POST["fechaPartido"])){ // reaching via HTTP Post...
 			// populate the User object with data form the form
@@ -75,6 +84,7 @@ class PartidosController extends BaseController {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
+		$this->partidoMapper->actualizarPartidos();
 		if($userRol == "ADMINISTRADOR"){
 		$partidos = $this->partidoMapper->findAllPartidos();
 		}else{
@@ -86,10 +96,15 @@ class PartidosController extends BaseController {
 	}	
 
 	public function deletePartido() {
+
+		$userRol = $this->view->getVariable("userRol");
 		
 		if (!isset($this->currentUser)) {
-			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
+		}
+
+		if($userRol=="DEPORTISTA"){
+			$this->view->redirect("index", "indexLogged");
 		}
 
 		if(isset($_GET["idPartido"])){
@@ -100,6 +115,31 @@ class PartidosController extends BaseController {
 		}
 
 		$this->view->render("partidos", "showall");
+	}
+
+	public function showPartidoInscribir() {
+
+		$userRol = $this->view->getVariable("userRol");
+		
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+		if($userRol == "ADMINISTRADOR") {
+			$this->view->redirect("index","indexLogged");
+		}
+
+		if(isset($_GET["idPartido"])){
+
+
+
+			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
+			
+			$this->view->setVariable("partido", $partido);
+
+		}
+
+		$this->view->render("partidos", "showPartidoInscribir");
 	}
 
 	
