@@ -33,10 +33,10 @@ $userRol = $view->getVariable("userRol");
   <td><?= $partido->getPrecioPartido()?></td>
   <td><?= $partido->getEstadoPartido()?></td>
   <td><?= $partido->getFechaFinInscripcion()?></td>
-  <?php if($userRol == "ADMINISTRADOR"){?>
+  <?php if($userRol == "ADMINISTRADOR" && $partido->getEstadoPartido() == "ABIERTO"){?>
     <td><a href="<?="index.php?controller=partidos&action=deletePartido&idPartido=".$partido->getIdPartido() ?>">
     <i class="fa fa-trash-alt"></i>
-  </a></td><?php }else{ ?>
+  </a></td><?php }else if($userRol == "DEPORTISTA"){ ?>
     <td><a href="<?="index.php?controller=partidos&action=showPartidoInscribir&idPartido=".$partido->getIdPartido() ?>">
     <i class="fa fa-user-plus"></i>
   <?php } ?>

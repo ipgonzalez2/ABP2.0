@@ -217,27 +217,15 @@ class UsersController extends BaseController {
 	public function delete() {
 
 		$userId = $this->view->getVariable("userId");
-		$user = $this->userMapper->findUser($userId);
 
 		if (!isset($this->currentUser)) {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
 
-		if (isset($_POST["id_usuario"])){ // reaching via HTTP Post...
-			//process login form
+		$this->userMapper->delete($userId);
+		$this->view->redirect("users","logout");
 
-			$this->userMapper->delete($_POST["id_usuario"]);
-			$this->view->redirect("users","logout");
-
-			//redirect
-		}
-
-		// Put the User object visible to the view
-		$this->view->setVariable("user", $user);
-
-		// render the view (/view/users/login.php)
-		$this->view->render("users", "edit");
 	}
 
 	public function notificaciones() {

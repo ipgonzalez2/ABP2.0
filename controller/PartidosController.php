@@ -116,9 +116,25 @@ class PartidosController extends BaseController {
 		}
 
 		if(isset($_GET["idPartido"])){
-
+			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
+			$fechaPartido = $partido->getFechaPartido();
+			if($partido->getEstadoPartido() == "CERRADO"){
+				$this->view->redirect("index","indexLogged");
+			}
 			$this->partidoMapper->deletePartido($_GET["idPartido"]);
-			$this->view->redirect("partidos", "showallPartidos");
+			$numInscripciones = $this->inscripcionPartidoMapper->getNumInscripciones($_GET["idPartido"]);
+			if($numInscripciones > 0){
+				$inscritos = $this->inscripcionPartidoMapper->getInscritos($_GET["idPartido"]);
+				foreach($inscritos as $inscrito){
+					$notificacion = new Notificacion();
+					$notificacion->setIdUsuarioNotificacion($inscrito);
+					$notificacion->setMensaje("El partido con fecha ".$fechaPartido." ha sido cancelado.
+					\nLo sentimos.\n");
+					$this->notificacionMapper->save($notificacion);
+				}
+				$this->inscripcionPartidoMapper->deleteInscripciones($_GET["idPartido"]);
+			}
+			$this->view->redirect("index", "indexLogged");
 
 		}
 
@@ -128,6 +144,7 @@ class PartidosController extends BaseController {
 	public function showPartidoInscribir() {
 
 		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
 		
 		if (!isset($this->currentUser)) {
 			$this->view->setFlashDanger("You must be logged");
@@ -139,9 +156,12 @@ class PartidosController extends BaseController {
 
 		if(isset($_GET["idPartido"])){
 
-
-
 			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
+			$inscrito = $this->inscripcionPartidoMapper->estaInscrito($userId,$_GET["idPartido"]);
+
+			if($inscrito || $partido->getEstadoPartido()=="CERRADO"){
+				$this->view->redirect("index","indexLogged");
+			}
 			
 			$this->view->setVariable("partido", $partido);
 
@@ -164,7 +184,14 @@ class PartidosController extends BaseController {
 		}
 
 		if(isset($_GET["idPartido"])){
+
 			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
+			$inscrito = $this->inscripcionPartidoMapper->estaInscrito($userId,$_GET["idPartido"]);
+
+			if($inscrito || $partido->getEstadoPartido()=="CERRADO"){
+				$this->view->redirect("index","indexLogged");
+			}
+
 			$fechaPartido = $partido->getFechaPartido();
 			$pago = $partido->getPrecioPartido();
 			$inscripcionPartido = new InscripcionPartido();
@@ -179,7 +206,7 @@ class PartidosController extends BaseController {
 					$notificacion = new Notificacion();
 					$notificacion->setIdUsuarioNotificacion($inscrito);
 					$notificacion->setMensaje("El partido con fecha ".$fechaPartido." ha sido cerrado.
-					\nRecuerde que tendrá que pagar un importe de ".$pago." al acceder al mismo.");
+					\nRecuerde que tendrá que pagar un importe de ".$pago." al acceder al mismo.\n");
 					$this->notificacionMapper->save($notificacion);
 				}
 			}else if($numInscripciones>-1 && $numInscripciones<4){

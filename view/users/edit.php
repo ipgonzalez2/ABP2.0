@@ -50,16 +50,14 @@ $user = $view->getVariable("user");
                     </div>
                 </div>
             </form>
-            <form class="contact100-form validate-form" method="POST" action = "./index.php?controller=users&action=delete">
-            <input type="text" name="id_usuario" value="<?= $user->getIdUsuario() ?>" style="display:none;">
+    
             <div class="container-login100-form-btn">
                     
                     <button class="login100-form-btn">
-                         Borrar 
-                         
+                         <a href= "./index.php?controller=users&action=delete">Borrar</a>  
                     </button>
-                </div>
-                </form>
+            </div>
+                
         </div>
     </div>
 

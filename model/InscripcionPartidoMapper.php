@@ -76,5 +76,19 @@ class InscripcionPartidoMapper {
 		return $inscritos;
     }
 
+    public function estaInscrito($id_usuario,$id_partido) {
+		$stmt = $this->db->prepare("SELECT count(ID_INSCRIPCION_USUARIO) FROM INSCRIPCIONPARTIDO where ID_INSCRIPCION_USUARIO=? and ID_INSCRIPCION_PARTIDO=?");
+		$stmt->execute(array($id_usuario, $id_partido));
+
+		if ($stmt->fetchColumn() > 0) {
+			return true;
+		}
+	}
+
+	public function deleteInscripciones($id_partido) {
+		$stmt = $this->db->prepare("DELETE FROM INSCRIPCIONPARTIDO where ID_INSCRIPCION_PARTIDO=?");
+		$stmt->execute(array($id_partido));
+	}
+
 
 }
