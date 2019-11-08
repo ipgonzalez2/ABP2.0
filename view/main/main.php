@@ -26,7 +26,7 @@ $errors = $view->getVariable("errors");
     <section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
         <div class="content">
             <h1>PadelBit </h1>
-            <p class="major">La mejor web de padel del mundo .</p>
+            <p class="major">La mejor web de padel del mundo.</p>
         </div>
         <div class="image">
             <img src="./images/padel6.jpg" alt="" />
@@ -53,7 +53,7 @@ $errors = $view->getVariable("errors");
             <h2>Únete a un partido</h2>
             <p>Conoce a otros deportistas.</p>
             <ul class="actions stacked">
-                <li><a href="" class="button">Adelante</a></li>
+                <li><a href="./index.php?controller=partidos&action=showallPartidos" class="button">Adelante</a></li>
             </ul>
         </div>
         <div class="image">

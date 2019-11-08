@@ -28,7 +28,7 @@ $user = $view->getVariable("user");
                     <input class="input100" type="password" name="passwd" placeholder = "*****" value="">
                     <span class="focus-input100"></span>
                 </div>
-
+                <?php if($user->getRol()== "DEPORTISTA"){ ?>
                 <div class="wrap-input100">
                     <span class="label-input100"></span>
                     <input class="input100" type="text" name="nombre" value="<?= $user->getNombre() ?>">
@@ -40,6 +40,7 @@ $user = $view->getVariable("user");
                     <input class="input100" type="email" name="email" value="<?= $user->getEmail() ?>">
                     <span class="focus-input100"></span>
                 </div>
+                <?php } ?>
 
                 <div class="container-login100-form-btn">
                     

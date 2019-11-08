@@ -55,7 +55,7 @@ $errors = $view->getVariable("errors");
 
                     <div class="text-center p-t-46 p-b-20">
                         <span class="txt2">
-                        <a href="./index.php?contoller=user&action=register" >
+                        <a href="./index.php?controller=users&action=register" >
                         o regístrate
                         </a>
 							
