@@ -5,6 +5,10 @@ require_once(__DIR__."/../core/I18n.php");
 
 require_once(__DIR__."/../model/Partido.php");
 require_once(__DIR__."/../model/PartidoMapper.php");
+require_once(__DIR__."/../model/InscripcionPartido.php");
+require_once(__DIR__."/../model/InscripcionPartidoMapper.php");
+require_once(__DIR__."/../model/Notificacion.php");
+require_once(__DIR__."/../model/NotificacionMapper.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -29,6 +33,8 @@ class PartidosController extends BaseController {
 		parent::__construct();
 
 		$this->partidoMapper = new PartidoMapper();
+		$this->inscripcionPartidoMapper = new InscripcionPartidoMapper();
+		$this->notificacionMapper = new NotificacionMapper();
 
 		// Users controller operates in a "welcome" layout
 		// different to the "default" layout where the internal
@@ -79,6 +85,7 @@ class PartidosController extends BaseController {
 	public function showallPartidos() {
 
 		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
 		
 		if (!isset($this->currentUser)) {
 			$this->view->setFlashDanger("You must be logged");
@@ -88,7 +95,8 @@ class PartidosController extends BaseController {
 		if($userRol == "ADMINISTRADOR"){
 		$partidos = $this->partidoMapper->findAllPartidos();
 		}else{
-		$partidos = $this->partidoMapper->findAllPartidosAbiertos();
+		$partidosInscrito = $this->inscripcionPartidoMapper->findPartidosInscritos($userId);
+		$partidos = $this->partidoMapper->findAllPartidosAbiertos($partidosInscrito);
 		}
 		$this->view->setVariable("partidos", $partidos);
 
@@ -141,6 +149,73 @@ class PartidosController extends BaseController {
 
 		$this->view->render("partidos", "showPartidoInscribir");
 	}
+
+	public function inscribirPartido() {
+
+		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
+
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+		if($userRol == "ADMINISTRADOR") {
+			$this->view->redirect("index","indexLogged");
+		}
+
+		if(isset($_GET["idPartido"])){
+			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
+			$fechaPartido = $partido->getFechaPartido();
+			$pago = $partido->getPrecioPartido();
+			$inscripcionPartido = new InscripcionPartido();
+			$inscripcionPartido->setIdInscripcionPartido($_GET["idPartido"]);
+			$inscripcionPartido->setIdInscripcionUsuario($userId);
+			$numInscripciones = $this->inscripcionPartidoMapper->getNumInscripciones($_GET["idPartido"]);
+			if($numInscripciones == 3){
+				$this->inscripcionPartidoMapper->save($inscripcionPartido);
+				$this->partidoMapper->cerrarPartido($_GET["idPartido"]);
+				$inscritos = $this->inscripcionPartidoMapper->getInscritos($_GET["idPartido"]);
+				foreach($inscritos as $inscrito){
+					$notificacion = new Notificacion();
+					$notificacion->setIdUsuarioNotificacion($inscrito);
+					$notificacion->setMensaje("El partido con fecha ".$fechaPartido." ha sido cerrado.
+					\nRecuerde que tendrá que pagar un importe de ".$pago." al acceder al mismo.");
+					$this->notificacionMapper->save($notificacion);
+				}
+			}else if($numInscripciones>-1 && $numInscripciones<4){
+				$this->inscripcionPartidoMapper->save($inscripcionPartido);
+			}else{
+				$this->partidoMapper->cerrarPartido($_GET["idPartido"]);
+			}
+
+		}
+		$this->view->redirect("index","indexLogged");
+
+	}
+
+	
+
+	public function showallPartidosInscrito() {
+
+		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
+		
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+		if($userRol == "ADMINISTRADOR"){
+			$this->view->redirect("index","indexLogged");
+		}
+		$partidosInscrito = $this->inscripcionPartidoMapper->findPartidosInscritos($userId);
+		$partidos = $this->partidoMapper->findAllPartidosInscrito($partidosInscrito);
+
+		$this->view->setVariable("partidos", $partidos);
+
+		$this->view->render("partidos", "showallInscrito");
+	}	
+
+	
 
 	
 

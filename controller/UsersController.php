@@ -5,6 +5,8 @@ require_once(__DIR__."/../core/I18n.php");
 
 require_once(__DIR__."/../model/User.php");
 require_once(__DIR__."/../model/UserMapper.php");
+require_once(__DIR__."/../model/Notificacion.php");
+require_once(__DIR__."/../model/NotificacionMapper.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -29,6 +31,7 @@ class UsersController extends BaseController {
 		parent::__construct();
 
 		$this->userMapper = new UserMapper();
+		$this->notificacionMapper = new NotificacionMapper();
 
 		// Users controller operates in a "welcome" layout
 		// different to the "default" layout where the internal
@@ -235,6 +238,24 @@ class UsersController extends BaseController {
 
 		// render the view (/view/users/login.php)
 		$this->view->render("users", "edit");
+	}
+
+	public function notificaciones() {
+
+		$userId = $this->view->getVariable("userId");
+
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+
+		$notificaciones = $this->notificacionMapper->findNotificacionesId($userId);
+
+		// Put the User object visible to the view
+		$this->view->setVariable("notificaciones", $notificaciones);
+
+		// render the view (/view/users/login.php)
+		$this->view->render("users", "notificaciones");
 	}
 
 	/**

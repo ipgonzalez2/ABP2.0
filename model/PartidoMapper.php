@@ -50,7 +50,7 @@ class PartidoMapper {
 		return $partidos;
 	}
 
-	public function findAllPartidosAbiertos() 
+	public function findAllPartidosAbiertos($partidosInscrito) 
 	{
 		$stmt = $this->db->prepare("SELECT * FROM PARTIDO WHERE ESTADO_PARTIDO=?");
 		$stmt->execute(array("ABIERTO"));
@@ -59,8 +59,10 @@ class PartidoMapper {
 		$partidos = array();
 
 		foreach ($partidos_db as $partido) {
-			array_push($partidos, new Partido($partido["ID_PARTIDO"],$partido["FECHA_PARTIDO"], $partido["PRECIO_PARTIDO"],
-			$partido["ESTADO_PARTIDO"], $partido["FECHA_FIN_INSCRIPCION"]));
+				if(!(in_array($partido["ID_PARTIDO"],$partidosInscrito))){
+					array_push($partidos, new Partido($partido["ID_PARTIDO"],$partido["FECHA_PARTIDO"], $partido["PRECIO_PARTIDO"],
+					$partido["ESTADO_PARTIDO"], $partido["FECHA_FIN_INSCRIPCION"]));
+				}
 		}
 
 		return $partidos;
@@ -121,6 +123,30 @@ class PartidoMapper {
 		} else {
 			return NULL;
 		}
+	}
+
+	public function cerrarPartido($idPartido)
+    {
+        $stmt = $this->db->prepare("UPDATE PARTIDO SET ESTADO_PARTIDO = ? WHERE ID_PARTIDO=?");
+        $stmt->execute(array("CERRADO",$idPartido));
+	}
+	
+	public function findAllPartidosInscrito($partidosInscrito) 
+	{
+		$stmt = $this->db->prepare("SELECT * FROM PARTIDO");
+		$stmt->execute();
+		
+		$partidos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$partidos = array();
+
+		foreach ($partidos_db as $partido) {
+				if((in_array($partido["ID_PARTIDO"],$partidosInscrito))){
+					array_push($partidos, new Partido($partido["ID_PARTIDO"],$partido["FECHA_PARTIDO"], $partido["PRECIO_PARTIDO"],
+					$partido["ESTADO_PARTIDO"], $partido["FECHA_FIN_INSCRIPCION"]));
+				}
+		}
+
+		return $partidos;
 	}
 
 
