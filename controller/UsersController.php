@@ -5,6 +5,8 @@ require_once(__DIR__."/../core/I18n.php");
 
 require_once(__DIR__."/../model/User.php");
 require_once(__DIR__."/../model/UserMapper.php");
+require_once(__DIR__."/../model/Notificacion.php");
+require_once(__DIR__."/../model/NotificacionMapper.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -29,6 +31,7 @@ class UsersController extends BaseController {
 		parent::__construct();
 
 		$this->userMapper = new UserMapper();
+		$this->notificacionMapper = new NotificacionMapper();
 
 		// Users controller operates in a "welcome" layout
 		// different to the "default" layout where the internal
@@ -64,12 +67,14 @@ class UsersController extends BaseController {
 	* @return void
 	*/
 	public function login() {
+
 		if (isset($_POST["username"])){ // reaching via HTTP Post...
 			//process login form
 			if ($this->userMapper->isValidUser($_POST["username"],$_POST["passwd"])) {
 
 				$user = $this->userMapper->findByUserEmail($_POST["username"]);
 				$id = $this->userMapper->findByUserID($_POST["username"]);
+				$rol = $this->userMapper->findByUserRol($_POST["username"]);
 				$_SESSION["currentuser"]= $_POST["username"];
 				$_SESSION["userid"]= $id;
 				
@@ -77,10 +82,10 @@ class UsersController extends BaseController {
 
 				$_SESSION["useremail"]=$user->getEmail();
 
-				$_SESSION["userrol"]=$user->getRol();
+				$_SESSION["userrol"]=$rol;
 
 				// send user to the restricted area (HTTP 302 code)
-				$this->view->redirect("users", "main");
+				$this->view->redirect("index", "indexLogged");
 
 			}else{
 				$errors = array();
@@ -120,19 +125,6 @@ class UsersController extends BaseController {
 	*
 	* @return void
 	*/
-
-	public function main() {
-
-		if (!isset($this->currentUser)) {
-			$this->view->setFlashDanger("You must be logged");
-			$this->view->redirect("users", "login");
-		}
-
-		$this->view->setLayout("default");
-		// render the view (/view/users/login.php)
-		$this->view->render("main", "main");
-	}
-
 	public function reservar() {
 
 		if (!isset($this->currentUser)) {
@@ -203,6 +195,7 @@ class UsersController extends BaseController {
 	}
 
 	public function edit() {
+		
 		$userId = $this->view->getVariable("userId");
 		$user = $this->userMapper->findUser($userId);
 		$userPasswd = $user->getPasswd();
@@ -236,27 +229,33 @@ class UsersController extends BaseController {
 	public function delete() {
 
 		$userId = $this->view->getVariable("userId");
-		$user = $this->userMapper->findUser($userId);
 
 		if (!isset($this->currentUser)) {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
 
-		if (isset($_POST["id_usuario"])){ // reaching via HTTP Post...
-			//process login form
+		$this->userMapper->delete($userId);
+		$this->view->redirect("users","logout");
 
-			$this->userMapper->delete($_POST["id_usuario"]);
-			$this->view->redirect("users","logout");
+	}
 
-			//redirect
+	public function notificaciones() {
+
+		$userId = $this->view->getVariable("userId");
+
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
 		}
 
+		$notificaciones = $this->notificacionMapper->findNotificacionesId($userId);
+
 		// Put the User object visible to the view
-		$this->view->setVariable("user", $user);
+		$this->view->setVariable("notificaciones", $notificaciones);
 
 		// render the view (/view/users/login.php)
-		$this->view->render("users", "edit");
+		$this->view->render("users", "notificaciones");
 	}
 
 	/**
@@ -279,7 +278,7 @@ class UsersController extends BaseController {
 		// perform a redirection. More or less:
 		// header("Location: index.php?controller=users&action=login")
 		// die();
-		$this->view->redirect("users", "login");
+		$this->view->redirect("index", "indexNoLogged");
 
 	}
 

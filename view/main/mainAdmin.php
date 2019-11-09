@@ -10,10 +10,9 @@ $errors = $view->getVariable("errors");
         <i class="fa fa-bars"></i>
     </div>
     <div class="header-social">
-        <a href=""><i class="fa fa-calendar-alt"></i></a>
-        <a href="./index.php?controller=partidos&action=showallPartidosInscrito"><i class="fa fa-table-tennis"></i></a>
+        <a href=""><i class="far fa-calendar-alt"></i></a>
+        <a href="./index.php?controller=partidos&action=showallPartidos"><i class="fa fa-table-tennis"></i></a>
         <a href=""><i class="fa fa-medal"></i></a>
-        <a href="./index.php?controller=users&action=notificaciones"><i class="fa fa-envelope"></i></a>
         <a href="./index.php?controller=users&action=edit"><i class="fas fa-user"></i></i></a>
         <a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
     </div>
@@ -37,10 +36,10 @@ $errors = $view->getVariable("errors");
     <!-- Two -->
     <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
         <div class="content">
-            <h2>¿Quiéres hacer una reserva?</h2>
-            <p>Tienes que hacerlo con una semana de antelación.</p>
+            <h2>Ver calendario</h2>
+            <p>Así podrás ver todos los eventos.</p>
             <ul class="actions stacked">
-                <li><a href="./index.php?controller=users&action=reservar" class="button">Reservar</a></li>
+                <li><a href="#" class="button">Ver</a></li>
             </ul>
         </div>
         <div class="image">
@@ -51,10 +50,10 @@ $errors = $view->getVariable("errors");
     <!-- Three -->
     <section class="spotlight style1 orient-left content-align-left image-position-center onscroll-image-fade-in">
         <div class="content">
-            <h2>Únete a un partido</h2>
-            <p>Conoce a otros deportistas.</p>
+            <h2>Añadir partidos</h2>
+            <p></p>
             <ul class="actions stacked">
-                <li><a href="./index.php?controller=partidos&action=showallPartidos" class="button">Adelante</a></li>
+                <li><a href="./index.php?controller=partidos&action=addPartido" class="button">Añadir</a></li>
             </ul>
         </div>
         <div class="image">
@@ -65,10 +64,10 @@ $errors = $view->getVariable("errors");
     <!-- Four -->
     <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
         <div class="content">
-            <h2>¿Te atreves con un campeonato?</h2>
-            <p>Apúntate con tu pareja.</p>
+            <h2>Crear un campeonato</h2>
+            <p>Quieres reservar las mejores pista del mundo.</p>
             <ul class="actions stacked">
-                <li><a href="#" class="button">Inscríbete</a></li>
+                <li><a href="#" class="button">Crear</a></li>
             </ul>
         </div>
         <div class="image">
@@ -80,7 +79,7 @@ $errors = $view->getVariable("errors");
     <section class="wrapper style1 align-center">
         <div class="inner">
             <h2>Quiere ver nuestras instalaciones</h2>
-            <p>Acércate al club.</p>
+            <p>Son las mejores.</p>
         </div>
 
         <!-- Gallery -->
