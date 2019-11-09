@@ -14,7 +14,7 @@ $errors = $view->getVariable("errors");
         <a href=""><i class="far fa-calendar-alt"></i></a>
         <a href=""><i class="far fa-futbol"></i></a>
         <a href=""><i class="fas fa-user"></i></i></a>
-        <a href=""><i class="fas fa-sign-out-alt"></i></a>
+        <a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
     </div>
 </header>
 
@@ -42,7 +42,7 @@ $errors = $view->getVariable("errors");
             <h2>Quieres hacer la reserva</h2>
             <p>Esta reserva es la mejor del mundo mundial.</p>
             <ul class="actions stacked">
-                <li><a href="#" class="button">Reservar</a></li>
+                <li><a href="./index.php?controller=users&action=reservar" class="button">Reservar</a></li>
             </ul>
         </div>
         <div class="image">

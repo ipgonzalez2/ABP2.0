@@ -142,7 +142,8 @@ class UsersController extends BaseController {
 
 		$this->view->setLayout("default");
 		// render the view (/view/users/login.php)
-		$this->view->render("main", "main");
+		$this->view->render("reservar", "reservar");
+		
 	}
 
 	public function register() {

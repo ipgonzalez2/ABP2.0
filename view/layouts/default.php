@@ -25,8 +25,14 @@ $currentuser = $view->getVariable("currentusername");
 
 	<link rel="stylesheet" href="./css/main.css" type="text/css">
 	<link rel="stylesheet" href="./css/header.css" type="text/css">
-
+	<link href="styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+	<link href="styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
 	<!-- enable ji18n() javascript function to translate inside your scripts -->
+
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/kendo.web.min.js"></script>
+
 	<script src="index.php?controller=language&amp;action=i18njs">
 	</script>
 	<?= $view->getFragment("css") ?>
@@ -34,6 +40,8 @@ $currentuser = $view->getVariable("currentusername");
 </head>
 
 <body>
+
+
 	<!-- header -->
 	<header class="header-section">
 		<div class="nav-switch">
@@ -57,9 +65,11 @@ $currentuser = $view->getVariable("currentusername");
 	</main>
 
 	<footer>
-		<?php
-		include(__DIR__ . "/language_select_element.php");
-		?>
+		<footer>
+			<p>Posted by: Nacho Quintas</p>
+			<p>Helpled by: Ines Prieto</p>
+			<p>Jorge no hagas nada :)</a>.</p>
+		</footer>
 	</footer>
 
 </body>
