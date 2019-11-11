@@ -1,7 +1,7 @@
 <?php
 //file: view/users/login.php
 
-require_once(__DIR__."/../../core/ViewManager.php");
+require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $view->setVariable("title", "PARTIDOS");
 $errors = $view->getVariable("errors");
@@ -11,39 +11,56 @@ $userRol = $view->getVariable("userRol");
 
 ?>
 
-<?php if(count($partidos) == 0){ ?>
+
+<div>
+
+
+
+  <?php if (count($partidos) == 0) { ?>
     <div class="alert alert-warning text-center" style="width:100%; height:7%;" id="success-warning" role="alert">
 
-        No hay partidos abiertos
+      No hay partidos abiertos
     </div>
-<?php } ?>
-<div class="row">
-<table style="width:100%">
-<tr>
-  <th>Fecha</th>
-  <th>Precio</th>
-  <th>Estado</th>
-  <th>Límite inscripcion</th>
-</tr>
-    <?php foreach($partidos as $partido):?>
-
-
-<tr>
-  <td><?= $partido->getFechaPartido()?></td>
-  <td><?= $partido->getPrecioPartido()?></td>
-  <td><?= $partido->getEstadoPartido()?></td>
-  <td><?= $partido->getFechaFinInscripcion()?></td>
-  <?php if($userRol == "ADMINISTRADOR" && $partido->getEstadoPartido() == "ABIERTO"){?>
-    <td><a href="<?="index.php?controller=partidos&action=deletePartido&idPartido=".$partido->getIdPartido() ?>">
-    <i class="fa fa-trash-alt"></i>
-  </a></td><?php }else if($userRol == "DEPORTISTA"){ ?>
-    <td><a href="<?="index.php?controller=partidos&action=showPartidoInscribir&idPartido=".$partido->getIdPartido() ?>">
-    <i class="fa fa-user-plus"></i>
   <?php } ?>
-</tr>
-<?php endforeach; ?>
-</table> 
-   
 
+
+  <div class="table100 ver2 m-b-110">
+    <div class="table100-head">
+      <table>
+        <thead>
+          <tr class="row100 head">
+            <th class="cell100 column1">Fecha</th>
+            <th class="cell100 column2">Precio</th>
+            <th class="cell100 column3">Estado</th>
+            <th class="cell100 column4">Límite inscripcion</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <?php foreach ($partidos as $partido) : ?>
+
+      <div class="table100-body js-pscroll">
+        <table>
+          <tbody>
+            <tr class="row100 body">
+              <td class="cell100 column1"><?= $partido->getFechaPartido() ?></td>
+              <td class="cell100 column2"><?= $partido->getPrecioPartido() ?></td>
+              <td class="cell100 column3"><?= $partido->getEstadoPartido() ?></td>
+              <td class="cell100 column4"><?= $partido->getFechaFinInscripcion() ?></td>
+              <?php if ($userRol == "ADMINISTRADOR" && $partido->getEstadoPartido() == "ABIERTO") { ?>
+                <td><a href="<?= "index.php?controller=partidos&action=deletePartido&idPartido=" . $partido->getIdPartido() ?>">
+                    <i class="fa fa-trash-alt"></i>
+                  </a></td><?php } else if ($userRol == "DEPORTISTA") { ?>
+                <td><a href="<?= "index.php?controller=partidos&action=showPartidoInscribir&idPartido=" . $partido->getIdPartido() ?>">
+                    <i class="fa fa-user-plus"></i>
+                  <?php } ?>
+            </tr>
+          <?php endforeach; ?>
+        </table>
+
+        </tbody>
+        </table>
+      </div>
+  </div>
 
 </div>
