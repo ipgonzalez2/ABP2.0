@@ -12,7 +12,7 @@ $errors = $view->getVariable("errors");
     <div class="header-social">
         <a href=""><i class="far fa-calendar-alt"></i></a>
         <a href="./index.php?controller=partidos&action=showallPartidos"><i class="fa fa-table-tennis"></i></a>
-        <a href=""><i class="fa fa-medal"></i></a>
+        <a href="./index.php?controller=campeonatos&action=showallCampeonatos"><i class="fa fa-medal"></i></a>
         <a href="./index.php?controller=users&action=edit"><i class="fas fa-user"></i></i></a>
         <a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
     </div>
@@ -67,7 +67,7 @@ $errors = $view->getVariable("errors");
             <h2>Crear un campeonato</h2>
             <p>Quieres reservar las mejores pista del mundo.</p>
             <ul class="actions stacked">
-                <li><a href="#" class="button">Crear</a></li>
+                <li><a href="./index.php?controller=campeonatos&action=addCampeonato" class="button">Crear</a></li>
             </ul>
         </div>
         <div class="image">

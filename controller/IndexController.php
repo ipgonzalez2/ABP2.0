@@ -29,7 +29,6 @@ class IndexController extends BaseController {
 		parent::__construct();
 
 		$this->userMapper = new UserMapper();
-
 		// Users controller operates in a "welcome" layout
 		// different to the "default" layout where the internal
 		// menu is displayed
@@ -71,7 +70,7 @@ class IndexController extends BaseController {
             $this->view->setLayout("default");
             $this->view->render("main", "main");
 
-        }
+		}
 
 	}
 
