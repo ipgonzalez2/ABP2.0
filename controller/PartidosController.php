@@ -77,6 +77,7 @@ class PartidosController extends BaseController {
 					// die();
 					$this->view->redirect("index", "indexLogged");
 		}
+		$this->view->setLayout("forms");
 
 		// render the view (/view/users/login.php)
 		$this->view->render("partidos", "addPartido");
@@ -99,6 +100,7 @@ class PartidosController extends BaseController {
 		$partidos = $this->partidoMapper->findAllPartidosAbiertos($partidosInscrito);
 		}
 		$this->view->setVariable("partidos", $partidos);
+		$this->view->setLayout("table");
 
 		$this->view->render("partidos", "showall");
 	}	

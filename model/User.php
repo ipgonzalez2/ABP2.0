@@ -226,41 +226,36 @@ class User {
 	*
 	* @return void
 	*/
-	public function checkIsValidForRegister() {
+public function checkIsValidForRegister() {
         $errors = array();
         $patternEmail="/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/";
         $patternDigitosyLetras="/^[-_a-zA-Z0-9.]+$/";
+        $patterSoloLetras="/^[a-zA-ZáéíóúÁÉÍÓÚäëïöüÄËÏÖÜàèìòùÀÈÌÒÙ\s]+$/";
         
-		if (strlen($this->username) < 5 && (preg_match($patternDigitosyLetras,$this->username)==1)) {
-			$errors["username"] = "Username must be at least 5 characters length";
+		if (strlen($this->username) < 5 || !preg_match($patternDigitosyLetras,$this->username)) {
+			$errors["username"] = "El usuario debe tener al menos 5 caracteres y deben de ser sólo digitos o letras";
+			
 		}
-		if (strlen($this->passwd) < 5 && preg_match($patternDigitosyLetras,$this->passwd)) {
-			$errors["passwd"] = "Password must be at least 5 characters length";
+		if (strlen($this->passwd) < 5 || !preg_match($patternDigitosyLetras,$this->passwd)) {
+			$errors["passwd"] = "La contraseña debe tener al menos 5 caracteres y deben de ser sólo digitos o letras";
+			
 		}
-		if (strlen($this->nombre) < 5 && solo_letras($this->nombre)) {
-			$errors["nombre"] = "Name must be at least 5 characters length";
+		if (strlen($this->nombre) < 5 || !preg_match($patterSoloLetras,$this->nombre)) {
+			$errors["nombre"] = "El nombre debe tener al menos 5 caracteres y deben de ser únicamente letras";
+			
 		}
-		if (strlen($this->email) < 10 && preg_match($patternEmail,$this->email)) {
-			$errors["email"] = "Email must be at least 10 characters length";
+		if (strlen($this->email) < 10 || !preg_match($patternEmail,$this->email)) {
+			$errors["email"] = "El email debe tener al menos 10 caracteres";
+			
 		}
 		if (strlen($this->sexo) < 5 ) {
-			$errors["sexo"] = "Sex must be at least 1 characters length";
+			$errors["sexo"] = "Sex must be at least 5 characters length";
+			
 		}
 		if (sizeof($errors)>0){
 			throw new ValidationException($errors, "user is not valid");
 		}
     }
 
-    function solo_letras($cadena){ 
-        $permitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "; 
-        for ($i=0; $i<strlen($cadena); $i++){ 
-        if (strpos($permitidos, substr($cadena,$i,1))===false){ 
-        //no es válido; 
-        return false; 
-        } 
-        }  
-        //si estoy aqui es que todos los caracteres son validos 
-        return true; 
-        }  
 
 }
