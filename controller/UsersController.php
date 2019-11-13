@@ -125,6 +125,14 @@ class UsersController extends BaseController {
 	*
 	* @return void
 	*/
+	public function reservar() {
+
+		
+		$this->view->setLayout("reservar");
+		// render the view (/view/users/login.php)
+		$this->view->render("reservar", "reservar");
+		
+	}
 
 	public function register() {
 

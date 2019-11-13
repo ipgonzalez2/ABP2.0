@@ -3,7 +3,7 @@
 
 class PDOConnection {
 	private static $dbhost = "127.0.0.1";
-	private static $dbname = "padel";
+	private static $dbname = "PADEL";
 	private static $dbuser = "padelUser";
 	private static $dbpass = "padel19";
 	private static $db_singleton = null;
