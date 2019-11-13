@@ -30,9 +30,24 @@ class CalendarioMapper {
 	* @return void
 	*/
 	public function save($calendario) {
-		$stmt = $this->db->prepare("INSERT INTO calendario values (?,?,?,?)");
-        $stmt->execute(array(0,$calendario->getIdCalendario(), $calendario->getFechaCalendario(), 
-        $calendario->getEstadoCalendario(), $calendario->getPistaCalendario()));
+		$stmt = $this->db->prepare("INSERT INTO calendario values (?,?,?)");
+        $stmt->execute(array($calendario->getFechaCalendario(), 
+        $calendario->getEstadoCalendario(), $calendario->getHoraCalendario()));
+	}
+
+	public function getHoras($fecha) {
+		$horasFijas = array("09:00:00", "10:30:00", "12:00:00", "13:30:00", "15:00:00", "16:30:00", "18:00:00", "19:30:00", "21:00");
+		$stmt = $this->db->prepare("SELECT HORA_CALENDARIO FROM calendario where FECHA_CALENDARIO=? AND ESTADO_CALENDARIO=?");
+        $stmt->execute(array($fecha,"OCUPADO"));
+		
+		$horas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$horasOcupadas = array();
+
+		foreach ($horas_db as $hora) {
+			array_push($horasOcupadas, $hora["HORA_CALENDARIO"]);
+		}
+		
+		return array_diff($horasFijas, $horasOcupadas);
 	}
 
 

@@ -5,11 +5,6 @@ require_once(__DIR__."/../core/ValidationException.php");
 
 class Calendario {
 
-	/**
-	* The reservation name of the reservation
-	* @var string
-	*/
-	private $id_calendario;
 
 	/**
 	* The reservation name of the reservation
@@ -27,7 +22,8 @@ class Calendario {
 	* The reservation name of the reservation
 	* @var string
 	*/
-    private $pista_calendario;
+	private $hora_calendario;
+	
 
 	
 	
@@ -37,46 +33,29 @@ class Calendario {
 	* @param string $fecha_calendario The name of the reservation
 	* @param string $Precio The password of the reservation
 	*/
-    public function __construct($id_calendario=NULL, $fecha_calendario=NULL, $estado_calendario=NULL,
-    $pista_calendario=NULL) {
-		$this->id_calendario = $id_calendario;
+    public function __construct($fecha_calendario=NULL, $estado_calendario=NULL,
+    $hora_calendario=NULL) {
         $this->fecha_calendario = $fecha_calendario;
         $this->estado_calendario = $estado_calendario;
-        $this->pista_calendario = $pista_calendario;
+		$this->hora_calendario = $hora_calendario;
 	}
 	
-	/**
-	* Gets the tipoPista of this reservation
-	*
-	* @return string The tipoPista of this reservation
-	*/
-	public function getIdCalendario() {
-		return $this->id_calendario;
-	}
+
+	
 
 	/**
-	* Sets the tipoPista of this reservation
+	* Gets the tipohora of this reservation
 	*
-	* @param string $fecha_calendario The tipoPista of this reservation
-	* @return void
-	*/
-	public function setIdCalendario($id_calendario) {
-		$this->id_calendario = $id_calendario;
-	}
-
-	/**
-	* Gets the tipoPista of this reservation
-	*
-	* @return string The tipoPista of this reservation
+	* @return string The tipohora of this reservation
 	*/
 	public function getFechaCalendario() {
 		return $this->fecha_calendario;
 	}
 
 	/**
-	* Sets the tipoPista of this reservation
+	* Sets the tipohora of this reservation
 	*
-	* @param string $fecha_calendario The tipoPista of this reservation
+	* @param string $fecha_calendario The tipohora of this reservation
 	* @return void
 	*/
 	public function setFechaCalendario($fecha_calendario) {
@@ -85,18 +64,18 @@ class Calendario {
     
     
 	/**
-	* Gets the tipoPista of this reservation
+	* Gets the tipohora of this reservation
 	*
-	* @return string The tipoPista of this reservation
+	* @return string The tipohora of this reservation
 	*/
 	public function getEstadoCalendario() {
 		return $this->estado_calendario;
 	}
 
 	/**
-	* Sets the tipoPista of this reservation
+	* Sets the tipohora of this reservation
 	*
-	* @param string $fecha_calendario The tipoPista of this reservation
+	* @param string $fecha_calendario The tipohora of this reservation
 	* @return void
 	*/
 	public function setEstadoCalendario($estado_calendario) {
@@ -105,23 +84,25 @@ class Calendario {
     
     
 	/**
-	* Gets the tipoPista of this reservation
+	* Gets the tipohora of this reservation
 	*
-	* @return string The tipoPista of this reservation
+	* @return string The tipohora of this reservation
 	*/
-	public function getPistaCalendario() {
-		return $this->pista_calendario;
+	public function gethoraCalendario() {
+		return $this->hora_calendario;
 	}
 
 	/**
-	* Sets the tipoPista of this reservation
+	* Sets the tipohora of this reservation
 	*
-	* @param string $fecha_calendario The tipoPista of this reservation
+	* @param string $fecha_calendario The tipohora of this reservation
 	* @return void
 	*/
-	public function setPistaCalendario($pista_calendario) {
-		$this->pista_calendario = $pista_calendario;
-    }
+	public function sethoraCalendario($hora_calendario) {
+		$this->hora_calendario = $hora_calendario;
+	}
+	
+
     
     
 	
