@@ -1,6 +1,5 @@
 <?php
 // file: index.php
-
 /**
 * Default controller if any controller is passed in the URL
 */

@@ -3,12 +3,10 @@
 require_once(__DIR__."/../core/ViewManager.php");
 require_once(__DIR__."/../core/I18n.php");
 
-require_once(__DIR__."/../model/Partido.php");
-require_once(__DIR__."/../model/PartidoMapper.php");
-require_once(__DIR__."/../model/InscripcionPartido.php");
-require_once(__DIR__."/../model/InscripcionPartidoMapper.php");
-require_once(__DIR__."/../model/Notificacion.php");
-require_once(__DIR__."/../model/NotificacionMapper.php");
+require_once(__DIR__."/../model/Campeonato.php");
+require_once(__DIR__."/../model/CampeonatoMapper.php");
+require_once(__DIR__."/../model/CategoriaNivel.php");
+require_once(__DIR__."/../model/CategoriaNivelMapper.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -19,7 +17,7 @@ require_once(__DIR__."/../controller/BaseController.php");
 *
 * @author lipido <lipido@gmail.com>
 */
-class PartidosController extends BaseController {
+class CampeonatosController extends BaseController {
 
 	/**
 	* Reference to the UserMapper to interact
@@ -27,16 +25,14 @@ class PartidosController extends BaseController {
 	*
 	* @var UserMapper
 	*/
-	private $partidoMapper;
-	private $inscripcionPartidoMapper;
-	private $notificacionMapper;
+    private $campeonatoMapper;
+    private $categoriaNivelMapper;
 
 	public function __construct() {
 		parent::__construct();
 
-		$this->partidoMapper = new PartidoMapper();
-		$this->inscripcionPartidoMapper = new InscripcionPartidoMapper();
-		$this->notificacionMapper = new NotificacionMapper();
+        $this->campeonatoMapper = new CampeonatoMapper();
+        $this->categoriaNivelMapper = new CategoriaNivelMapper();
 
 		// Users controller operates in a "welcome" layout
 		// different to the "default" layout where the internal
@@ -44,8 +40,8 @@ class PartidosController extends BaseController {
 		$this->view->setLayout("welcome");
 	}
 	
-	public function addPartido() {
-		$partido = new Partido();
+	public function addCampeonato() {
+		$campeonato = new Campeonato();
 		$userRol = $this->view->getVariable("userRol");
 
 		if (!isset($this->currentUser)) {
@@ -56,36 +52,52 @@ class PartidosController extends BaseController {
 			$this->view->redirect("index", "indexLogged");
 		}
 
-		if (isset($_POST["fechaPartido"])){ // reaching via HTTP Post...
+		if (isset($_POST["nombreCampeonato"])){ // reaching via HTTP Post...
 			// populate the User object with data form the form
-			$fechaPartido=date("Y-m-d",strtotime($_POST["fechaPartido"]));
-			$fechaInscripcionPartido=date("Y-m-d", strtotime("-1 day", strtotime($_POST["fechaPartido"])));
-			$partido->setFechaPartido($fechaPartido);
-            $partido->setFechaFinInscripcion($fechaInscripcionPartido);
-            $partido->setPrecioPartido($_POST["precioPartido"]);
-            $partido->setEstadoPartido("ABIERTO");
+			$fechaCampeonato=date("Y-m-d",strtotime($_POST["fechaInicio"]));
+            $fechaInscripcionCampeonato=date("Y-m-d", strtotime("-3 day", strtotime($_POST["fechaInicio"])));
+            $campeonato->setNombreCampeonato($_POST["nombreCampeonato"]);
+            $campeonato->setFechaInicio($fechaCampeonato);
+            $campeonato->setFechaFin($_POST["fechaFin"]);
+            $campeonato->setFechaLimiteInscripcion($fechaInscripcionCampeonato);
+            $campeonato->setPrecioCampeonato($_POST["precioCampeonato"]);
+            $campeonato->setEstadoCampeonato("ABIERTO");
 
-					$this->partidoMapper->save($partido);
+                    $id = $this->campeonatoMapper->save($campeonato);
+
+                    $categorias = array("MASCULINA", "FEMENINA", "MIXTO");
+
+                    for($i = 1; $i < 4; $i++){
+                        for($j = 0; $j < 3; $j++){
+                        $categoriaNivel = new CategoriaNivel();
+                        $categoriaNivel->setCategoria($categorias[$j]);
+                        $categoriaNivel->setNivel($i);
+                        $categoriaNivel->setCampeonato($id);
+                        $this->categoriaNivelMapper->save($categoriaNivel);
+                        }
+                    }
+                    
+
 
 					// POST-REDIRECT-GET
 					// Everything OK, we will redirect the user to the list of posts
 					// We want to see a message after redirection, so we establish
 					// a "flash" message (which is simply a Session variable) to be
 					// get in the view after redirection.
-					$this->view->setFlash("Username ".$partido->getIdPartido()." successfully added. Please login now");
+					$this->view->setFlash("Username ".$campeonato->getIdCampeonato()." successfully added. Please login now");
 
 					// perform the redirection. More or less:
 					// header("Location: index.php?controller=users&action=login")
 					// die();
+					$this->view->setLayout("forms");
 					$this->view->redirect("index", "indexLogged");
 		}
-		$this->view->setLayout("forms");
 
 		// render the view (/view/users/login.php)
-		$this->view->render("partidos", "addPartido");
+		$this->view->render("campeonatos", "addCampeonato");
 	}
 
-	public function showallPartidos() {
+	public function showallCampeonatos() {
 
 		$userRol = $this->view->getVariable("userRol");
 		$userId = $this->view->getVariable("userId");
@@ -93,20 +105,21 @@ class PartidosController extends BaseController {
 		if (!isset($this->currentUser)) {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
-		}
-		$this->partidoMapper->actualizarPartidos();
+        }
+        
+        //$this->partidoMapper->actualizarPartidos();
+        
 		if($userRol == "ADMINISTRADOR"){
-		$partidos = $this->partidoMapper->findAllPartidos();
+		$campeonatos = $this->campeonatoMapper->findAllCampeonatos();
 		}else{
-		$partidosInscrito = $this->inscripcionPartidoMapper->findPartidosInscritos($userId);
-		$partidos = $this->partidoMapper->findAllPartidosAbiertos($partidosInscrito);
+		$campeonatosInscrito = $this->inscripcionPartidoMapper->findPartidosInscritos($userId);
+		$campeonatos = $this->partidoMapper->findAllPartidosAbiertos($partidosInscrito);
 		}
-		$this->view->setVariable("partidos", $partidos);
-		$this->view->setLayout("table");
+		$this->view->setVariable("campeonatos", $campeonatos);
 
-		$this->view->render("partidos", "showall");
+		$this->view->render("campeonatos", "showall");
 	}	
-
+/*
 	public function deletePartido() {
 
 		$userRol = $this->view->getVariable("userRol");
@@ -120,9 +133,9 @@ class PartidosController extends BaseController {
 		}
 
 		if(isset($_GET["idPartido"])){
-			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
-			$fechaPartido = $partido->getFechaPartido();
-			if($partido->getEstadoPartido() == "CERRADO"){
+			$campeonato = $this->partidoMapper->findPartido($_GET["idPartido"]);
+			$fechaPartido = $campeonato->getFechaPartido();
+			if($campeonato->getEstadoPartido() == "CERRADO"){
 				$this->view->redirect("index","indexLogged");
 			}
 			$this->partidoMapper->deletePartido($_GET["idPartido"]);
@@ -142,7 +155,7 @@ class PartidosController extends BaseController {
 
 		}
 
-		$this->view->render("partidos", "showall");
+		$this->view->render("campeonatos", "showall");
 	}
 
 	public function showPartidoInscribir() {
@@ -160,18 +173,18 @@ class PartidosController extends BaseController {
 
 		if(isset($_GET["idPartido"])){
 
-			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
+			$campeonato = $this->partidoMapper->findPartido($_GET["idPartido"]);
 			$inscrito = $this->inscripcionPartidoMapper->estaInscrito($userId,$_GET["idPartido"]);
 
-			if($inscrito || $partido->getEstadoPartido()=="CERRADO"){
+			if($inscrito || $campeonato->getEstadoPartido()=="CERRADO"){
 				$this->view->redirect("index","indexLogged");
 			}
 			
-			$this->view->setVariable("partido", $partido);
+			$this->view->setVariable("partido", $campeonato);
 
 		}
 
-		$this->view->render("partidos", "showPartidoInscribir");
+		$this->view->render("campeonatos", "showPartidoInscribir");
 	}
 
 	public function inscribirPartido() {
@@ -189,15 +202,15 @@ class PartidosController extends BaseController {
 
 		if(isset($_GET["idPartido"])){
 
-			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
+			$campeonato = $this->partidoMapper->findPartido($_GET["idPartido"]);
 			$inscrito = $this->inscripcionPartidoMapper->estaInscrito($userId,$_GET["idPartido"]);
 
-			if($inscrito || $partido->getEstadoPartido()=="CERRADO"){
+			if($inscrito || $campeonato->getEstadoPartido()=="CERRADO"){
 				$this->view->redirect("index","indexLogged");
 			}
 
-			$fechaPartido = $partido->getFechaPartido();
-			$pago = $partido->getPrecioPartido();
+			$fechaPartido = $campeonato->getFechaPartido();
+			$pago = $campeonato->getPrecioPartido();
 			$inscripcionPartido = new InscripcionPartido();
 			$inscripcionPartido->setIdInscripcionPartido($_GET["idPartido"]);
 			$inscripcionPartido->setIdInscripcionUsuario($userId);
@@ -239,12 +252,12 @@ class PartidosController extends BaseController {
 			$this->view->redirect("index","indexLogged");
 		}
 		$partidosInscrito = $this->inscripcionPartidoMapper->findPartidosInscritos($userId);
-		$partidos = $this->partidoMapper->findAllPartidosInscrito($partidosInscrito);
+		$campeonatos = $this->partidoMapper->findAllPartidosInscrito($partidosInscrito);
 
-		$this->view->setVariable("partidos", $partidos);
+		$this->view->setVariable("campeonatos", $campeonatos);
 
-		$this->view->render("partidos", "showallInscrito");
-	}	
+		$this->view->render("campeonatos", "showallInscrito");
+	}*/	
 
 	
 
