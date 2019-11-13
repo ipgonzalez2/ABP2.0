@@ -127,12 +127,8 @@ class UsersController extends BaseController {
 	*/
 	public function reservar() {
 
-		if (!isset($this->currentUser)) {
-			$this->view->setFlashDanger("You must be logged");
-			$this->view->redirect("users", "login");
-		}
-
-		$this->view->setLayout("default");
+		
+		$this->view->setLayout("reservar");
 		// render the view (/view/users/login.php)
 		$this->view->render("reservar", "reservar");
 		

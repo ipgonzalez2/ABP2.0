@@ -42,7 +42,22 @@ $errors = $view->getVariable("errors");
             </ul>
         </div>
         <div class="image">
-            <img src="/images/spotlight03.jpg" alt="" />
+            <img src="./images/padel2.jpg" alt="" />
+        </div>
+    </section>
+
+     <!-- Four -->
+     <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
+       
+        <div class="image">
+            <img src="./images/bananas.jpg" alt="" />
+        </div>
+        <div class="content">
+            <h2>Calendario</h2>
+            <p>Calendario Para Ines.</p>
+            <ul class="actions stacked">
+                <li><a href="./index.php?controller=users&action=reservar" class="button">A ver si te gusta 😀 </a></li>
+            </ul>
         </div>
     </section>
 
