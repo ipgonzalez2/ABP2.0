@@ -10,11 +10,8 @@ $currentuser = $view->getVariable("currentusername");
 <head>
 <title></title>
 <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dateTimePicker.css">
+   
+
     
     <link href="css/all.css" rel="stylesheet">
 	<!--load all styles -->
@@ -27,9 +24,10 @@ $currentuser = $view->getVariable("currentusername");
 	<link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
 
 	<link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/header.css" type="text/css">
 
-	<link rel="stylesheet" href="./css/header.css" type="text/css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" href="./css/calendar.css" type="text/css">
+
 
 </head>
 <body>
@@ -55,13 +53,7 @@ $currentuser = $view->getVariable("currentusername");
 		<?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
 	</main>
 
-	<footer>
-		<footer>
-			<p>Posted by: Nacho Quintas</p>
-			<p>Helpled by: Ines Prieto</p>
-			<p>Jorge no hagas nada :)</a>.</p>
-		</footer>
-	</footer>
+
 </body>
 
 </html>
