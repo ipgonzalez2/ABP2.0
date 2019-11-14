@@ -6,82 +6,72 @@ $errors = $view->getVariable("errors");
 $fechas = $view->getVariable("fechas");
 $arrayHoras = $view->getVariable("horas");
 
-$i=0;
+$i =0;
+$pos =0;
+$z =0;
 ?>
 
 
 <section class='calendar'>
-  <h2>Noviembre 2019</h2>
-  <form method="POST" action="./index.php?controller=reservas&action=addReserva">
-   
+<?php foreach($fechas as $fecha):
+  
 
-    <?php foreach($fechas as $fecha): ?>
-    <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?> onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)"  >
-    
-    <?php if($i <7 ) {?>
+  endforeach ;?>
+
+<h2><?=date('M' , strtotime($fecha))?></h2>
+
+  <form method="POST" action="./index.php?controller=reservas&action=addReserva">
+
+  <?php foreach($fechas as $fecha): ?>
+
+    <?php if($i<7){ ?>
+      
       <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("D" , strtotime($fecha))?> </span>
       
-      <?$i++; }?>
-      
-      <?php $pos++;?>
-      <input style="display:none" class="todasFechas" name id=<?=date('d' , strtotime($fecha))?> value=<?=$fecha?>><?=date("d" , strtotime($fecha))?> </span>
-      <em></em>
+    <?php $i++;} ?>
+
+    <?php $pos++;?>
+
+    <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?> onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)"  >
+    <input style="display:none" class="todasFechas" name id=<?=date('d' , strtotime($fecha))?> value=<?=$fecha?>>
+    <span><?=date("d" , strtotime($fecha))?> </span>
+    </input>
+    <em></em>
     </label>
-    <?php endforeach;?>
-   
+
+  
+
+    <?php endforeach; ?>
+
     <div class='clearfix'></div>
+    </section>
+
+    <div class="appointment" id="myForm" dia="" posicion = ""> 
+
+    <label for="appt-time">Reserva (10:00 a 23:00) </label>
+
+    <?php for ($i = 0; $i <= 7; $i++) {?>
+
+      <select class="horas" name id=<?=$i?> style="display:none;">  
+      <?php foreach($arrayHoras[$i] as $hdia): ?>
+        <option value=<?=$hdia?>><?=$hdia?></option>
+      <?php endforeach; ?>
+      </select>
+
+    <?php } ?>
+
+    <div>
+          <button type="submit">Guardar</button>
+          <label type="button" onclick="closeForm()" >cerrar </label>
+    </div>
+
+    </div>
   
+  </form>
 
 
- 
-  
-        
-</form>
-
-
-</section>
-<div class="appointment" id="myForm" dia="" posicion = ""> 
-
- 
-        <label for="appt-time">Reserva (10:00 a 23:00) </label>
-        <?php 
-
-        for ($i = 0; $i <= 7; $i++) {?>
-            <select class="horas" name id=<?=$i?> style="display:none;">  
-                <?php foreach($arrayHoras[$i] as $hdia): ?>
-
-              <option value=<?=$hdia?>><?=$hdia?></option>
-              <?php endforeach ;?>
-
-            </select>
-
-              
-        <?}?>
-         <span class="validity"></span>
-        
-  
-      
-      <div>
-          <button type="submit">Guardas</button>
-          <label type="button"  onclick="closeForm()" >cerrar </label>
-      </div>
-</div>
 <script>
   
-
-var startTime = document.getElementById("startTime");
-var valueSpan = document.getElementById("value");
-
-startTime.addEventListener("input", function() {
-  valueSpan.innerText = startTime.value;
-}, false);
-
-
-function test(){
-
-
-}
-
 function openForm(d ,pos) {
   var fechas = document.getElementsByClassName("todasFechas");
   var list = document.getElementsByClassName("horas");
@@ -117,9 +107,3 @@ function closeForm() {
 }
 </script>
 
-</section>
-
-
-
-</body>
-</html>
