@@ -18,6 +18,7 @@ $z =0;
 
   endforeach ;?>
 
+
 <h2><?=date('M' , strtotime($fecha))?></h2>
 
   <form method="POST" action="./index.php?controller=reservas&action=addReserva">
