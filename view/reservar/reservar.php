@@ -8,16 +8,22 @@ $arrayHoras = $view->getVariable("horas");
 
 $i =0;
 $pos =0;
+$z =0;
 ?>
 
 
 <section class='calendar'>
-  <h2>Noviembre 2019</h2>
+<?php foreach($fechas as $fecha):
+  
+
+  endforeach ;?>
+
+<h2><?=date('M' , strtotime($fecha))?></h2>
+
   <form method="POST" action="./index.php?controller=reservas&action=addReserva">
    
 
     <?php foreach($fechas as $fecha): ?>
-    <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?> onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)"  >
     
     <?php if($i <7 ) {?>
       <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("D" , strtotime($fecha))?> </span>
@@ -25,29 +31,24 @@ $pos =0;
       <?$i++; }?>
       
       <?php $pos++;?>
-      <input style="display:none" class="todasFechas" name id=<?=date('d' , strtotime($fecha))?> value=<?=$fecha?>><?=date("d" , strtotime($fecha))?> </span>
+      
+      <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?> onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)"  >
+    <input style="display:none" class="todasFechas" name id=<?=date('d' , strtotime($fecha))?> value=<?=$fecha?>>
+      <span><?=date("d" , strtotime($fecha))?> </span>
+      </input>
+
       <em></em>
     </label>
     <?php endforeach ;?>
    
     <div class='clearfix'></div>
   
-
-
- 
-  
-        
-
-
-
 </section>
 <div class="appointment" id="myForm" dia="" posicion = ""> 
 
  
         <label for="appt-time">Reserva (10:00 a 23:00) </label>
-        <?php 
-
-        for ($i = 0; $i <= 7; $i++) {?>
+        <?php for ($i = 0; $i <= 7; $i++) {?>
             <select class="horas" name id=<?=$i?> style="display:none;">  
                 <?php foreach($arrayHoras[$i] as $hdia): ?>
 
@@ -59,12 +60,9 @@ $pos =0;
               
         <?}?>
          <span class="validity"></span>
-        
-  
-      
       <div>
-          <button type="submit">Guardas</button>
-          <label type="button"  onclick="closeForm()" >cerrar </label>
+          <button type="submit">Guardar</button>
+          <label type="button" onclick="closeForm()" >cerrar </label>
       </div>
 </div>
 </form>
@@ -120,8 +118,3 @@ function closeForm() {
 </script>
 
 
-
-
-
-</body>
-</html>
