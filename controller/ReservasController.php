@@ -52,7 +52,7 @@ class ReservasController extends BaseController {
 		$fechas = array();
 		$horas = array();
 		$numPistas = $this->pistaMapper->getNumPistas();
-        for($i=0; $i < 8; $i++){
+        for($i=0; $i < 14; $i++){
             $dias = "+".(7+$i)." days";
 			$fecha=date("Y-m-d",strtotime($dias));
 			$horasDia = $this->calendarioMapper->getHoras($fecha, $numPistas);
