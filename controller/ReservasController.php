@@ -70,6 +70,11 @@ class ReservasController extends BaseController {
 			$this->view->redirect("index", "indexLogged");
 		}
 
+		if(isset($_POST["hora"])){
+			var_dump($_POST);
+			exit();
+		}
+
 		
         $this->view->setLayout("reservar");
 		$this->view->setVariable("fechas", $fechas);
