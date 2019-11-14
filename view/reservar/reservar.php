@@ -25,10 +25,10 @@ $z =0;
 
     <?php foreach($fechas as $fecha): ?>
     
-    <?php if($i <7 ) {?>
+    <?php if($i<7) {?>
       <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("D" , strtotime($fecha))?> </span>
       
-      <?$i++; }?>
+      <?php $i++; }?>
       
       <?php $pos++;?>
       
@@ -58,8 +58,8 @@ $z =0;
             </select>
 
               
-        <?}?>
-         <span class="validity"></span>
+        <?php }?>
+       
       <div>
           <button type="submit">Guardar</button>
           <label type="button" onclick="closeForm()" >cerrar </label>
