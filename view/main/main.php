@@ -40,7 +40,7 @@ $errors = $view->getVariable("errors");
             <h2>¿Quiéres hacer una reserva?</h2>
             <p>Tienes que hacerlo con una semana de antelación.</p>
             <ul class="actions stacked">
-                <li><a href="./index.php?controller=users&action=reservar" class="button">Reservar</a></li>
+                <li><a href="./index.php?controller=reservas&action=addReserva" class="button">Reservar</a></li>
             </ul>
         </div>
         <div class="image">

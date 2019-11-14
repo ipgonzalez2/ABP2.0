@@ -52,7 +52,7 @@ $currentuser = $view->getVariable("currentusername");
 			<a href=""><i class="far fa-calendar-alt"></i></a>
 			<a href=""><i class="far fa-futbol"></i></a>
 			<a href=""><i class="fas fa-user"></i></i></a>
-			<a href="./index.php?contoller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
+			<a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
 		</div>
 	</header>
 

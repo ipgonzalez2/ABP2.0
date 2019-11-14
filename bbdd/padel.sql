@@ -82,7 +82,7 @@ create table if not exists calendario (
   estado_calendario enum('libre','ocupado') not null,
   hora_calendario time not null,
 
-  constraint pk_calendario primary key(fecha_calendario, hora_calendario),
+  constraint pk_calendario primary key(fecha_calendario, hora_calendario,pista_calendario),
   constraint fk_pista_calendario foreign key(pista_calendario) references pista(id_pista) on delete cascade
 
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
