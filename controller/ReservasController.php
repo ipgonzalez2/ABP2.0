@@ -49,16 +49,17 @@ class ReservasController extends BaseController {
 		$userRol = $this->view->getVariable("userRol");
 		$userId = $this->view->getVariable("userId");
         
-        $fechas = array();
+		$fechas = array();
+		$horas = array();
+		$numPistas = $this->pistaMapper->getNumPistas();
         for($i=0; $i < 8; $i++){
             $dias = "+".(7+$i)." days";
 			$fecha=date("Y-m-d",strtotime($dias));
-            array_push($fechas, $fecha);
+			$horasDia = $this->calendarioMapper->getHoras($fecha, $numPistas);
+			array_push($fechas, $fecha);
+			array_push($horas, $horasDia);
 		}
 
-		$numPistas = $this->pistaMapper->getNumPistas();
-		$horasFecha = $this->calendarioMapper->getHoras("2019-11-21", $numPistas);
-var_dump($horasFecha);exit();
 		if (!isset($this->currentUser)) {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
@@ -69,7 +70,8 @@ var_dump($horasFecha);exit();
 
 		
         $this->view->setLayout("forms");
-        $this->view->setVariable("fechas", $fechas);
+		$this->view->setVariable("fechas", $fechas);
+		$this->view->setVariable("horas", $horas);
 		// render the view (/view/users/login.php)
 		$this->view->render("reservas", "addReserva");
 	}
