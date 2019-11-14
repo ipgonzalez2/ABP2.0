@@ -49,11 +49,15 @@ class ReservasController extends BaseController {
 		$userRol = $this->view->getVariable("userRol");
 		$userId = $this->view->getVariable("userId");
         
-        $fechas = array();
+		$fechas = array();
+		$horas = array();
+		$numPistas = $this->pistaMapper->getNumPistas();
         for($i=0; $i < 8; $i++){
             $dias = "+".(7+$i)." days";
 			$fecha=date("Y-m-d",strtotime($dias));
-            array_push($fechas, $fecha);
+			$horasDia = $this->calendarioMapper->getHoras($fecha, $numPistas);
+			array_push($fechas, $fecha);
+			array_push($horas, $horasDia);
 		}
 
 	//	$numPistas = $this->pistaMapper->getNumPistas();
@@ -67,9 +71,9 @@ class ReservasController extends BaseController {
 		}
 
 		
-        $this->view->setLayout("reservar");
+        $this->view->setLayout("forms");
 		$this->view->setVariable("fechas", $fechas);
-		var_dump($fecha);
+		$this->view->setVariable("horas", $horas);
 		// render the view (/view/users/login.php)
 		$this->view->render("reservar", "reservar");
 	}
