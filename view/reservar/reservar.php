@@ -69,18 +69,7 @@ $z =0;
 <script>
   
 
-var startTime = document.getElementById("startTime");
-var valueSpan = document.getElementById("value");
 
-startTime.addEventListener("input", function() {
-  valueSpan.innerText = startTime.value;
-}, false);
-
-
-function test(){
-
-
-}
 
 function openForm(d ,pos) {
   var fechas = document.getElementsByClassName("todasFechas");
