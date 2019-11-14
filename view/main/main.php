@@ -86,8 +86,8 @@ $errors = $view->getVariable("errors");
         <!-- Gallery -->
         <div class="gallery style2 medium lightbox onscroll-fade-in">
             <article>
-                <a href="images/gallery/fulls/01.jpg" class="image">
-                    <img src="images/gallery/thumbs/01.jpg" alt="" />
+                <a href="./images/banana.jpg" class="image">
+                    <img src="./images/bananas.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Pistas</h3>
@@ -131,8 +131,8 @@ $errors = $view->getVariable("errors");
                 </div>
             </article>
             <article>
-                <a href="images/gallery/fulls/05.jpg" class="image">
-                    <img src="images/gallery/thumbs/05.jpg" alt="" />
+                <a href="./images/bananas.jpg" class="image">
+                    <img src="./images/bananas.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Servicio de Alquiler</h3>

@@ -30,14 +30,13 @@ $z =0;
       
     <?php $i++;} ?>
 
-    <?php $pos++;?>
-
     <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?> onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)"  >
     <input style="display:none" class="todasFechas" name id=<?=date('d' , strtotime($fecha))?> value=<?=$fecha?>>
     <span><?=date("d" , strtotime($fecha))?> </span>
     </input>
     <em></em>
     </label>
+    <?php $pos++;?>
 
   
 
