@@ -37,7 +37,7 @@ $pos =0;
  
   
         
-</form>
+
 
 
 </section>
@@ -67,6 +67,7 @@ $pos =0;
           <label type="button"  onclick="closeForm()" >cerrar </label>
       </div>
 </div>
+</form>
 <script>
   
 
