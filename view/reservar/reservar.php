@@ -6,8 +6,7 @@ $errors = $view->getVariable("errors");
 $fechas = $view->getVariable("fechas");
 $arrayHoras = $view->getVariable("horas");
 
-$i =0;
-$pos =0;
+$i=0;
 ?>
 
 
@@ -27,7 +26,7 @@ $pos =0;
       <span><?=date("d" , strtotime($fecha))?> </span>
       <em></em>
     </label>
-    <?php endforeach ;?>
+    <?php endforeach;?>
    
     <div class='clearfix'></div>
   
@@ -105,7 +104,7 @@ function closeForm() {
 }
 </script>
 
-
+</section>
 
 
 
