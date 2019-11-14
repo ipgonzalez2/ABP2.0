@@ -7,8 +7,8 @@ use `padel`;
 --
 -- damos permiso uso y borramos el usuario que queremos crear por si existe
 --
-grant usage on * . * to `padel`@`localhost`;
-	drop user `padel`@`localhost`;
+-- grant usage on * . * to `padel`@`localhost`;
+-- drop user `padel`@`localhost`;
 
 --
 -- creamos el usuario y le damos password,damos permiso de uso y damos permisos sobre la base de datos.
@@ -25,14 +25,14 @@ create table if not exists usuario(
   nombre varchar(255) not null,
 	email varchar(255) not null,
 	rol enum('administrador', 'deportista') not null,
-  sexo enum('hombre', 'mujer') not null,
+  sexo enum('hombre', 'mujer') not null ,
   nivel int(10) not null,
 
 	constraint pk_usuario primary key(id_usuario)
 
 )engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-insert into usuario values(0,'admin','admin','','','administrador','',0);
+insert into usuario values(0,'admin','admin','','','administrador','hombre',0);
 
 create table if not exists pista (
 
