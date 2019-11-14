@@ -30,20 +30,20 @@ class NotificacionMapper {
 	* @return void
 	*/
 	public function save($notificacion) {
-		$stmt = $this->db->prepare("INSERT INTO NOTIFICACION values (?,?,?)");
+		$stmt = $this->db->prepare("INSERT INTO notificacion values (?,?,?)");
 		$stmt->execute(array(0,$notificacion->getIdUsuarioNotificacion(), $notificacion->getMensaje()));
 	}
 
 	public function findNotificacionesId($id_usuario){
 
-		$stmt = $this->db->prepare("SELECT MENSAJE FROM NOTIFICACION WHERE ID_USUARIO_NOTIFICACION=?");
+		$stmt = $this->db->prepare("SELECT mansaje FROM notificacion WHERE id_usuario_notificacion=?");
 		$stmt->execute(array($id_usuario));
 		
 		$notificaciones_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$notificaciones = array();
 
 		foreach ($notificaciones_db as $notificacion) {
-			array_push($notificaciones, $notificacion["MENSAJE"]);
+			array_push($notificaciones, $notificacion["mansaje"]);
 		}
 		return $notificaciones;
 	}

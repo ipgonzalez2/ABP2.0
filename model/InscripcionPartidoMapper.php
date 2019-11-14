@@ -30,14 +30,14 @@ class InscripcionPartidoMapper {
 	* @return void
 	*/
 	public function save($inscripcionPartido) {
-		$stmt = $this->db->prepare("INSERT INTO INSCRIPCIONPARTIDO values (?,?)");
+		$stmt = $this->db->prepare("INSERT INTO inscripcionpartido values (?,?)");
         $stmt->execute(array($inscripcionPartido->getIdInscripcionPartido(), 
         $inscripcionPartido->getIdInscripcionUsuario()));
     }
     
     public function getNumInscripciones($idPartido)
     {
-        $stmt = $this->db->prepare("SELECT COUNT(ID_INSCRIPCION_USUARIO) AS NUM FROM INSCRIPCIONPARTIDO WHERE ID_INSCRIPCION_PARTIDO=?");
+        $stmt = $this->db->prepare("SELECT COUNT(id_inscripcion_partido) AS num FROM inscripcionpartido WHERE id_inscripcion_partido=?");
         $stmt->execute(array($idPartido));
 
         $inscripciones_db = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -48,14 +48,14 @@ class InscripcionPartidoMapper {
 
     public function findPartidosInscritos($idUsuario){
 
-        $stmt = $this->db->prepare("SELECT ID_INSCRIPCION_PARTIDO FROM INSCRIPCIONPARTIDO WHERE ID_INSCRIPCION_USUARIO=?");
+        $stmt = $this->db->prepare("SELECT id_inscripcion_partido FROM inscripcionpartido WHERE id_inscripcion_partido=?");
 		$stmt->execute(array($idUsuario));
 		
 		$inscritos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$inscritos = array();
 
 		foreach ($inscritos_db as $inscrito) {
-			array_push($inscritos, $inscrito["ID_INSCRIPCION_PARTIDO"]);
+			array_push($inscritos, $inscrito["id_inscripcion_partido"]);
 		}
 
 		return $inscritos;
@@ -63,21 +63,21 @@ class InscripcionPartidoMapper {
 
     public function getInscritos($idPartido){
 
-        $stmt = $this->db->prepare("SELECT ID_INSCRIPCION_USUARIO FROM INSCRIPCIONPARTIDO WHERE ID_INSCRIPCION_PARTIDO=?");
+        $stmt = $this->db->prepare("SELECT id_inscripcion_partido FROM inscripcionpartido WHERE id_inscripcion_partido=?");
 		$stmt->execute(array($idPartido));
 		
 		$inscritos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$inscritos = array();
 
 		foreach ($inscritos_db as $inscrito) {
-			array_push($inscritos, $inscrito["ID_INSCRIPCION_USUARIO"]);
+			array_push($inscritos, $inscrito["id_inscripcion_partido"]);
 		}
 
 		return $inscritos;
     }
 
     public function estaInscrito($id_usuario,$id_partido) {
-		$stmt = $this->db->prepare("SELECT count(ID_INSCRIPCION_USUARIO) FROM INSCRIPCIONPARTIDO where ID_INSCRIPCION_USUARIO=? and ID_INSCRIPCION_PARTIDO=?");
+		$stmt = $this->db->prepare("SELECT count(id_inscripcion_partido) FROM inscripcionpartido where id_inscripcion_partido=? and id_inscripcion_partido=?");
 		$stmt->execute(array($id_usuario, $id_partido));
 
 		if ($stmt->fetchColumn() > 0) {
@@ -86,7 +86,7 @@ class InscripcionPartidoMapper {
 	}
 
 	public function deleteInscripciones($id_partido) {
-		$stmt = $this->db->prepare("DELETE FROM INSCRIPCIONPARTIDO where ID_INSCRIPCION_PARTIDO=?");
+		$stmt = $this->db->prepare("DELETE FROM inscripcionpartido where id_inscripcion_partido=?");
 		$stmt->execute(array($id_partido));
 	}
 

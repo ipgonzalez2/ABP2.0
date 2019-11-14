@@ -30,24 +30,24 @@ class UserMapper {
 	* @return void
 	*/
 	public function save($user) {
-		$stmt = $this->db->prepare("INSERT INTO USUARIO values (?,?,?,?,?,?,?,?)");
+		$stmt = $this->db->prepare("INSERT INTO usuario values (?,?,?,?,?,?,?,?)");
 		$stmt->execute(array(NULL,$user->getUsername(), $user->getPasswd(), $user->getNombre(), $user->getEmail(),
 		$user->getRol(), $user->getSexo(), $user->getNivel()));
 	}
 
 	public function edit($user) {
-		$stmt = $this->db->prepare("UPDATE USUARIO SET 
-		USERNAME = ?,
-		PASSWD = ?,
-		NOMBRE = ?,
-		EMAIL = ?
-		WHERE ID_USUARIO = ?");
+		$stmt = $this->db->prepare("UPDATE usuario SET 
+		username = ?,
+		passwd = ?,
+		nombre = ?,
+		email = ?
+		WHERE id_usuario = ?");
 		$stmt->execute(array($user->getUsername(), $user->getPasswd(), $user->getNombre(),
-		$user->getEmail(), $user->getIdUsuario()));
+		$user->getEmail(), $user->getIdusuario()));
 	}
 
 	public function delete($id_usuario) {
-		$stmt = $this->db->prepare("DELETE FROM USUARIO WHERE ID_USUARIO = ?"); 
+		$stmt = $this->db->prepare("DELETE FROM usuario WHERE id_usuario = ?"); 
 		$stmt->execute(array($id_usuario));
 	}
 
@@ -58,7 +58,7 @@ class UserMapper {
 	* @return boolean true if the username exists, false otherwise
 	*/
 	public function usernameExists($username) {
-		$stmt = $this->db->prepare("SELECT count(USERNAME) FROM USUARIO where USERNAME=?");
+		$stmt = $this->db->prepare("SELECT count(username) FROM usuario where username=?");
 		$stmt->execute(array($username));
 
 		if ($stmt->fetchColumn() > 0) {
@@ -83,13 +83,13 @@ class UserMapper {
 	}
 
 	public function findByUserEmail($username) {
-		$stmt = $this->db->prepare("SELECT EMAIL FROM usuario where USERNAME=?");
+		$stmt = $this->db->prepare("SELECT email FROM usuario where username=?");
 		$stmt->execute(array($username));
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		if($user != null) {
 			return new User(
-			$user["EMAIL"]
+			$user["email"]
 			);
 		} else {
 			return NULL;
@@ -97,44 +97,44 @@ class UserMapper {
 	}
 
 	public function findByUserID($username) {
-		$stmt = $this->db->prepare("SELECT ID_USUARIO FROM usuario where USERNAME=?");
+		$stmt = $this->db->prepare("SELECT id_usuario FROM usuario where username=?");
 		$stmt->execute(array($username));
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		if($user != null) {
-			return $user["ID_USUARIO"];
+			return $user["id_usuario"];
 		} else {
 			return NULL;
 		}
 	}
 
 	public function findByUserRol($username) {
-		$stmt = $this->db->prepare("SELECT ROL FROM USUARIO where USERNAME=?");
+		$stmt = $this->db->prepare("SELECT rol FROM usuario where username=?");
 		$stmt->execute(array($username));
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		if($user != null) {
-			return $user["ROL"];
+			return $user["rol"];
 		} else {
 			return NULL;
 		}
 	}
 
 	public function findUser($id_usuario){
-		$stmt = $this->db->prepare("SELECT * FROM USUARIO WHERE ID_USUARIO=?");
+		$stmt = $this->db->prepare("SELECT * FROM usuario WHERE id_usuario=?");
 		$stmt->execute(array($id_usuario));
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		if($user != null) {
 			return new User(
 			$id_usuario,
-			$user["USERNAME"],
-			$user["PASSWD"],
-			$user["NOMBRE"],
-			$user["EMAIL"],
-			$user["ROL"],
-			$user["SEXO"],
-			$user["NIVEL"]);
+			$user["username"],
+			$user["passwd"],
+			$user["nombre"],
+			$user["email"],
+			$user["rol"],
+			$user["sexo"],
+			$user["nivel"]);
 		} else {
 			return NULL;
 		}

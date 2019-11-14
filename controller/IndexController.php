@@ -60,12 +60,12 @@ class IndexController extends BaseController {
         
         $userRol = $this->view->getVariable("userRol");
 
-        if($userRol == "ADMINISTRADOR"){
+        if($userRol == "administrador"){
 
             $this->view->setLayout("default");
             $this->view->render("main", "mainAdmin");
 
-        }else if($userRol == "DEPORTISTA"){
+        }else if($userRol == "deportista"){
 
             $this->view->setLayout("default");
             $this->view->render("main", "main");

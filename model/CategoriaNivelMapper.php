@@ -30,7 +30,7 @@ class CategoriaNivelMapper {
 	* @return void
 	*/
 	public function save($categoria_nivel) {
-		$stmt = $this->db->prepare("INSERT INTO CATEGORIANIVEL values (?,?,?)");
+		$stmt = $this->db->prepare("INSERT INTO categorianivel values (?,?,?)");
         $stmt->execute(array($categoria_nivel->getCategoria(), $categoria_nivel->getNivel(), 
         $categoria_nivel->getCampeonato()));
 	}
