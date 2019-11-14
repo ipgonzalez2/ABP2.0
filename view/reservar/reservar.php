@@ -20,12 +20,12 @@ $pos =0;
     <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?> onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)"  >
     
     <?php if($i <7 ) {?>
-      <span value=<?=$fecha?> name ="fecha"><?=date("D" , strtotime($fecha))?> </span>
+      <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("D" , strtotime($fecha))?> </span>
       
       <?$i++; }?>
       
       <?php $pos++;?>
-      <input class="todasFechas" name id=<?=date('d' , strtotime($fecha))?> value=<?=$fecha?>><?=date("d" , strtotime($fecha))?> </span>
+      <input style="display:none" class="todasFechas" name id=<?=date('d' , strtotime($fecha))?> value=<?=$fecha?>><?=date("d" , strtotime($fecha))?> </span>
       <em></em>
     </label>
     <?php endforeach ;?>
@@ -34,7 +34,14 @@ $pos =0;
   
 
 
-  <div class="appointment" id="myForm" dia="" posicion = ""> 
+ 
+  
+        
+</form>
+
+
+</section>
+<div class="appointment" id="myForm" dia="" posicion = ""> 
 
  
         <label for="appt-time">Reserva (10:00 a 23:00) </label>
@@ -42,7 +49,7 @@ $pos =0;
 
         for ($i = 0; $i <= 7; $i++) {?>
             <select class="horas" name id=<?=$i?> style="display:none;">  
-                <?php   foreach($arrayHoras[$i] as $hdia): ?>
+                <?php foreach($arrayHoras[$i] as $hdia): ?>
 
               <option value=<?=$hdia?>><?=$hdia?></option>
               <?php endforeach ;?>
@@ -54,17 +61,12 @@ $pos =0;
          <span class="validity"></span>
         
   
-      </div>
+      
       <div>
           <button type="submit">Guardas</button>
           <label type="button"  onclick="closeForm()" >cerrar </label>
-         </div>
-        
-</form>
-
-
-</section>
-
+      </div>
+</div>
 <script>
   
 
