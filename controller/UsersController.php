@@ -145,7 +145,7 @@ class UsersController extends BaseController {
 			$user->setPasswd($_POST["passwd"]);
 			$user->setNombre($_POST["nombre"]);
 			$user->setEmail($_POST["email"]);
-			$user->setRol("DEPORTISTA");
+			$user->setRol("deportista");
 			$user->setSexo($_POST["sexo"]);
 			$user->setNivel(0);
 

@@ -48,7 +48,7 @@ class CampeonatosController extends BaseController {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
-		if($userRol == "DEPORTISTA"){
+		if($userRol == "deportista"){
 			$this->view->redirect("index", "indexLogged");
 		}
 
@@ -61,11 +61,11 @@ class CampeonatosController extends BaseController {
             $campeonato->setFechaFin($_POST["fechaFin"]);
             $campeonato->setFechaLimiteInscripcion($fechaInscripcionCampeonato);
             $campeonato->setPrecioCampeonato($_POST["precioCampeonato"]);
-            $campeonato->setEstadoCampeonato("ABIERTO");
+            $campeonato->setEstadoCampeonato("abierto");
 
                     $id = $this->campeonatoMapper->save($campeonato);
 
-                    $categorias = array("MASCULINA", "FEMENINA", "MIXTO");
+                    $categorias = array("masculina", "femenina", "mixto");
 
                     for($i = 1; $i < 4; $i++){
                         for($j = 0; $j < 3; $j++){
@@ -109,7 +109,7 @@ class CampeonatosController extends BaseController {
         
         //$this->partidoMapper->actualizarPartidos();
         
-		if($userRol == "ADMINISTRADOR"){
+		if($userRol == "administrador"){
 		$campeonatos = $this->campeonatoMapper->findAllCampeonatos();
 		}else{
 		$campeonatosInscrito = $this->inscripcionPartidoMapper->findPartidosInscritos($userId);
@@ -128,7 +128,7 @@ class CampeonatosController extends BaseController {
 			$this->view->redirect("users", "login");
 		}
 
-		if($userRol=="DEPORTISTA"){
+		if($userRol=="deportista"){
 			$this->view->redirect("index", "indexLogged");
 		}
 
@@ -167,7 +167,7 @@ class CampeonatosController extends BaseController {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
-		if($userRol == "ADMINISTRADOR") {
+		if($userRol == "administrador") {
 			$this->view->redirect("index","indexLogged");
 		}
 
@@ -196,7 +196,7 @@ class CampeonatosController extends BaseController {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
-		if($userRol == "ADMINISTRADOR") {
+		if($userRol == "administrador") {
 			$this->view->redirect("index","indexLogged");
 		}
 
@@ -248,7 +248,7 @@ class CampeonatosController extends BaseController {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
-		if($userRol == "ADMINISTRADOR"){
+		if($userRol == "administrador"){
 			$this->view->redirect("index","indexLogged");
 		}
 		$partidosInscrito = $this->inscripcionPartidoMapper->findPartidosInscritos($userId);

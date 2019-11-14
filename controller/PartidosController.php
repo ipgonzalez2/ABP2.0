@@ -52,18 +52,18 @@ class PartidosController extends BaseController {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
-		if($userRol == "DEPORTISTA"){
+		if($userRol == "deportista"){
 			$this->view->redirect("index", "indexLogged");
 		}
 
 		if (isset($_POST["fechaPartido"])){ // reaching via HTTP Post...
 			// populate the User object with data form the form
 			$fechaPartido=date("Y-m-d",strtotime($_POST["fechaPartido"]));
-			$fechaInscripcionPartido=date("Y-m-d", strtotime("-1 day", strtotime($_POST["fechaPartido"])));
+			$fechaInscripcionPartido=date("Y-m-d", strtotime("-3 day", strtotime($_POST["fechaPartido"])));
 			$partido->setFechaPartido($fechaPartido);
             $partido->setFechaFinInscripcion($fechaInscripcionPartido);
             $partido->setPrecioPartido($_POST["precioPartido"]);
-            $partido->setEstadoPartido("ABIERTO");
+            $partido->setEstadoPartido("abierto");
 
 					$this->partidoMapper->save($partido);
 
@@ -95,7 +95,7 @@ class PartidosController extends BaseController {
 			$this->view->redirect("users", "login");
 		}
 		$this->partidoMapper->actualizarPartidos();
-		if($userRol == "ADMINISTRADOR"){
+		if($userRol == "administrador"){
 		$partidos = $this->partidoMapper->findAllPartidos();
 		}else{
 		$partidosInscrito = $this->inscripcionPartidoMapper->findPartidosInscritos($userId);
@@ -115,14 +115,14 @@ class PartidosController extends BaseController {
 			$this->view->redirect("users", "login");
 		}
 
-		if($userRol=="DEPORTISTA"){
+		if($userRol=="deportista"){
 			$this->view->redirect("index", "indexLogged");
 		}
 
 		if(isset($_GET["idPartido"])){
 			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
 			$fechaPartido = $partido->getFechaPartido();
-			if($partido->getEstadoPartido() == "CERRADO"){
+			if($partido->getEstadoPartido() == "cerrado"){
 				$this->view->redirect("index","indexLogged");
 			}
 			$this->partidoMapper->deletePartido($_GET["idPartido"]);
@@ -154,7 +154,7 @@ class PartidosController extends BaseController {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
-		if($userRol == "ADMINISTRADOR") {
+		if($userRol == "administrador") {
 			$this->view->redirect("index","indexLogged");
 		}
 
@@ -163,7 +163,7 @@ class PartidosController extends BaseController {
 			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
 			$inscrito = $this->inscripcionPartidoMapper->estaInscrito($userId,$_GET["idPartido"]);
 
-			if($inscrito || $partido->getEstadoPartido()=="CERRADO"){
+			if($inscrito || $partido->getEstadoPartido()=="cerrado"){
 				$this->view->redirect("index","indexLogged");
 			}
 			
@@ -183,7 +183,7 @@ class PartidosController extends BaseController {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
-		if($userRol == "ADMINISTRADOR") {
+		if($userRol == "administrador") {
 			$this->view->redirect("index","indexLogged");
 		}
 
@@ -192,7 +192,7 @@ class PartidosController extends BaseController {
 			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
 			$inscrito = $this->inscripcionPartidoMapper->estaInscrito($userId,$_GET["idPartido"]);
 
-			if($inscrito || $partido->getEstadoPartido()=="CERRADO"){
+			if($inscrito || $partido->getEstadoPartido()=="cerrado"){
 				$this->view->redirect("index","indexLogged");
 			}
 
@@ -235,7 +235,7 @@ class PartidosController extends BaseController {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
-		if($userRol == "ADMINISTRADOR"){
+		if($userRol == "administrador"){
 			$this->view->redirect("index","indexLogged");
 		}
 		$partidosInscrito = $this->inscripcionPartidoMapper->findPartidosInscritos($userId);

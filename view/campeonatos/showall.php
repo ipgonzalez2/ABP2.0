@@ -37,10 +37,10 @@ $userRol = $view->getVariable("userRol");
   <td><?= $campeonato->getPrecioCampeonato()?></td>
   <td><?= $campeonato->getFechaLimiteInscripcion()?></td>
   <td><?= $campeonato->getEstadoCampeonato()?></td>
-  <?php if($userRol == "ADMINISTRADOR" && $campeonato->getEstadoCampeonato() == "ABIERTO"){?>
+  <?php if($userRol == "administrador" && $campeonato->getEstadoCampeonato() == "abierto"){?>
     <td><a href="<?="index.php?controller=campeonatos&action=deleteCampeonato&idCampeonato=".$campeonato->getIdCampeonato() ?>">
     <i class="fa fa-trash-alt"></i>
-  </a></td><?php }else if($userRol == "DEPORTISTA"){ ?>
+  </a></td><?php }else if($userRol == "deportista"){ ?>
     <td><a href="<?="index.php?controller=campeonatos&action=showCampeonatoInscribir&idCampeonato=".$campeonato->getIdCampeonato() ?>">
     <i class="fa fa-user-plus"></i>
   <?php } ?>

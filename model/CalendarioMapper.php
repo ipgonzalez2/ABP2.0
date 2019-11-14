@@ -37,18 +37,18 @@ class CalendarioMapper {
 
 	public function getHoras($fecha,$numPistas) {
 		$horasFijas = array("09:00:00", "10:30:00", "12:00:00", "13:30:00", "15:00:00", "16:30:00", "18:00:00", "19:30:00", "21:00:00");
-		$stmt = $this->db->prepare("SELECT HORA_CALENDARIO FROM calendario where FECHA_CALENDARIO=? AND ESTADO_CALENDARIO=?");
-        $stmt->execute(array($fecha,"OCUPADO"));
+		$stmt = $this->db->prepare("SELECT hora_calendario FROM calendario where fecha_calendario=? AND estado_calendario=?");
+        $stmt->execute(array($fecha,"ocupado"));
 		
 		$horas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$horasOcupadas = array();
 
 		foreach ($horas_db as $hora) {
-			$stmt = $this->db->prepare("SELECT COUNT(PISTA_CALENDARIO) FROM calendario where FECHA_CALENDARIO=? AND ESTADO_CALENDARIO=? AND HORA_CALENDARIO=?");
-			$stmt->execute(array($fecha,"OCUPADO",$hora["HORA_CALENDARIO"]));
+			$stmt = $this->db->prepare("SELECT COUNT(pista_calendario) FROM calendario where fecha_calendario=? AND estado_calendario=? AND hora_calendario=?");
+			$stmt->execute(array($fecha,"ocupado",$hora["hora_calendario"]));
 			$count = $stmt->fetch(PDO::FETCH_ASSOC);
-			if($count["COUNT(PISTA_CALENDARIO)"]==$numPistas){
-			array_push($horasOcupadas, $hora["HORA_CALENDARIO"]);
+			if($count["COUNT(pista_calendario)"]==$numPistas){
+			array_push($horasOcupadas, $hora["hora_calendario"]);
 			}
 		}
 		

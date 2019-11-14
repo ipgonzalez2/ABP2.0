@@ -63,7 +63,7 @@ var_dump($horasFecha);exit();
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
 		}
-		if($userRol == "ADMINISTRADOR"){
+		if($userRol == "administrador"){
 			$this->view->redirect("index", "indexLogged");
 		}
 

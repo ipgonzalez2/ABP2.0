@@ -30,13 +30,13 @@ class UserMapper {
 	* @return void
 	*/
 	public function save($user) {
-		$stmt = $this->db->prepare("INSERT INTO USUARIO values (?,?,?,?,?,?,?,?)");
+		$stmt = $this->db->prepare("INSERT INTO usuario values (?,?,?,?,?,?,?,?)");
 		$stmt->execute(array(NULL,$user->getUsername(), $user->getPasswd(), $user->getNombre(), $user->getEmail(),
 		$user->getRol(), $user->getSexo(), $user->getNivel()));
 	}
 
 	public function edit($user) {
-		$stmt = $this->db->prepare("UPDATE USUARIO SET 
+		$stmt = $this->db->prepare("UPDATE usuario SET 
 		USERNAME = ?,
 		PASSWD = ?,
 		NOMBRE = ?,
@@ -47,7 +47,7 @@ class UserMapper {
 	}
 
 	public function delete($id_usuario) {
-		$stmt = $this->db->prepare("DELETE FROM USUARIO WHERE ID_USUARIO = ?"); 
+		$stmt = $this->db->prepare("DELETE FROM usuario WHERE ID_USUARIO = ?"); 
 		$stmt->execute(array($id_usuario));
 	}
 
@@ -58,7 +58,7 @@ class UserMapper {
 	* @return boolean true if the username exists, false otherwise
 	*/
 	public function usernameExists($username) {
-		$stmt = $this->db->prepare("SELECT count(USERNAME) FROM USUARIO where USERNAME=?");
+		$stmt = $this->db->prepare("SELECT count(USERNAME) FROM usuario where USERNAME=?");
 		$stmt->execute(array($username));
 
 		if ($stmt->fetchColumn() > 0) {
@@ -109,7 +109,7 @@ class UserMapper {
 	}
 
 	public function findByUserRol($username) {
-		$stmt = $this->db->prepare("SELECT ROL FROM USUARIO where USERNAME=?");
+		$stmt = $this->db->prepare("SELECT ROL FROM usuario where USERNAME=?");
 		$stmt->execute(array($username));
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -121,7 +121,7 @@ class UserMapper {
 	}
 
 	public function findUser($id_usuario){
-		$stmt = $this->db->prepare("SELECT * FROM USUARIO WHERE ID_USUARIO=?");
+		$stmt = $this->db->prepare("SELECT * FROM usuario WHERE ID_USUARIO=?");
 		$stmt->execute(array($id_usuario));
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
