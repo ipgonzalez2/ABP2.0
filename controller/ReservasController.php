@@ -71,11 +71,13 @@ class ReservasController extends BaseController {
 		}
 
 		
-        $this->view->setLayout("forms");
+        $this->view->setLayout("reservar");
 		$this->view->setVariable("fechas", $fechas);
 		$this->view->setVariable("horas", $horas);
 		// render the view (/view/users/login.php)
 		$this->view->render("reservar", "reservar");
 	}
+
+	
 
 }

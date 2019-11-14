@@ -13,11 +13,11 @@ $pos =0;
 
 <section class='calendar'>
   <h2>Noviembre 2019</h2>
-  <form action='./index.php?controller=users&action=logout'>
+  <form action='#'>
    
 
     <?php foreach($fechas as $fecha): ?>
-    <label class='day' data-day=<?=$fecha?> onclick="this.form.submit()">
+    <label class='day' data-day=<?=$fecha?> onclick="openForm(<?=date('d' , strtotime($fecha))?> , <?=$pos?>)">
     
     <?php if($i <7 ) {?>
       <span><?=date("D" , strtotime($fecha))?> </span>
@@ -51,8 +51,6 @@ $pos =0;
         </form>     
       </div>
 
-<p class ="hola" id = "p" style="display:none"> hola<p>
-   
 <script>
   
 
@@ -87,7 +85,3 @@ function closeForm() {
 
 </body>
 </html>
-
-</section>
-
- 
