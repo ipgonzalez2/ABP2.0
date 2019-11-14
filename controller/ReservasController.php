@@ -7,6 +7,8 @@ require_once(__DIR__."/../model/Reserva.php");
 require_once(__DIR__."/../model/ReservaMapper.php");
 require_once(__DIR__."/../model/Calendario.php");
 require_once(__DIR__."/../model/CalendarioMapper.php");
+require_once(__DIR__."/../model/Pista.php");
+require_once(__DIR__."/../model/PistaMapper.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -26,13 +28,15 @@ class ReservasController extends BaseController {
 	* @var UserMapper
 	*/
     private $reservaMapper;
-    private $calendarioMapper;
+	private $calendarioMapper;
+	private $pistaMapper;
 
 	public function __construct() {
 		parent::__construct();
 
         $this->reservaMapper = new ReservaMapper();
-        $this->calendarioMapper = new CalendarioMapper();
+		$this->calendarioMapper = new CalendarioMapper();
+		$this->pistaMapper = new PistaMapper();
 
 		// Users controller operates in a "welcome" layout
 		// different to the "default" layout where the internal
@@ -42,15 +46,19 @@ class ReservasController extends BaseController {
 
 	public function addReserva() {
 		$reserva = new Reserva();
-        $userRol = $this->view->getVariable("userRol");
+		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
         
         $fechas = array();
         for($i=0; $i < 8; $i++){
             $dias = "+".(7+$i)." days";
-            $fecha=date("Y-m-d",strtotime($dias));
+			$fecha=date("Y-m-d",strtotime($dias));
             array_push($fechas, $fecha);
-        }
+		}
 
+		$numPistas = $this->pistaMapper->getNumPistas();
+		$horasFecha = $this->calendarioMapper->getHoras("2019-11-21", $numPistas);
+var_dump($horasFecha);exit();
 		if (!isset($this->currentUser)) {
 			$this->view->setFlashDanger("You must be logged");
 			$this->view->redirect("users", "login");
@@ -59,19 +67,11 @@ class ReservasController extends BaseController {
 			$this->view->redirect("index", "indexLogged");
 		}
 
-		if (isset($_POST["fecha"])){ // reaching via HTTP Post...
-            // populate the User object with data form the form
-            $this->view->setVariable("fechas", $fechas);
-            $this->view->setVariable("fecha", $_POST["fecha"]);
-            $horas = $this->calendarioMapper->getHoras($_POST["fecha"]);
-            $this->view->setVariable("horas", $horas);
-            $this->view->render("reservas","addReserva");			
-		}
+		
         $this->view->setLayout("forms");
         $this->view->setVariable("fechas", $fechas);
 		// render the view (/view/users/login.php)
 		$this->view->render("reservas", "addReserva");
 	}
-
 
 }

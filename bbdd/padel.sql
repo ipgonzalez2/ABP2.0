@@ -1,138 +1,140 @@
-DROP DATABASE IF EXISTS `PADEL`;
-CREATE DATABASE `PADEL` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+drop database if exists `padel`;
+create database `padel` default character set utf8 collate utf8_general_ci;
 --
--- SELECCIONAMOS PARA USAR
+-- seleccionamos para usar
 --
-USE `PADEL`;
+use `padel`;
 --
--- DAMOS PERMISO USO Y BORRAMOS EL USUARIO QUE QUEREMOS CREAR POR SI EXISTE
+-- damos permiso uso y borramos el usuario que queremos crear por si existe
 --
-GRANT USAGE ON * . * TO `PADEL`@`localhost`;
-	DROP USER `PADEL`@`localhost`;
+grant usage on * . * to `padel`@`localhost`;
+	drop user `padel`@`localhost`;
 
 --
--- CREAMOS EL USUARIO Y LE DAMOS PASSWORD,DAMOS PERMISO DE USO Y DAMOS PERMISOS SOBRE LA BASE DE DATOS.
+-- creamos el usuario y le damos password,damos permiso de uso y damos permisos sobre la base de datos.
 --
-CREATE USER IF NOT EXISTS `padelUser`@`localhost` IDENTIFIED BY 'padel19';
-GRANT USAGE ON *.* TO `padelUser`@`localhost` REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
-GRANT ALL PRIVILEGES ON `PADEL`.* TO `padelUser`@`localhost` WITH GRANT OPTION;
+create user if not exists `padeluser`@`localhost` identified by 'padel19';
+grant usage on *.* to `padeluser`@`localhost` require none with max_queries_per_hour 0 max_connections_per_hour 0 max_updates_per_hour 0 max_user_connections 0;
+grant all privileges on `padel`.* to `padeluser`@`localhost` with grant option;
 
-CREATE TABLE IF NOT EXISTS USUARIO(
+create table if not exists usuario(
 
-	ID_USUARIO INT(10) AUTO_INCREMENT,
-	USERNAME VARCHAR(255) NOT NULL,
-	PASSWD VARCHAR(255) NOT NULL,
-  NOMBRE VARCHAR(255) NOT NULL,
-	EMAIL VARCHAR(255) NOT NULL,
-	ROL ENUM('ADMINISTRADOR', 'DEPORTISTA') NOT NULL,
-  SEXO ENUM('HOMBRE', 'MUJER') NOT NULL,
-  NIVEL INT(10) NOT NULL,
+	id_usuario int(10) auto_increment,
+	username varchar(255) not null,
+	passwd varchar(255) not null,
+  nombre varchar(255) not null,
+	email varchar(255) not null,
+	rol enum('administrador', 'deportista') not null,
+  sexo enum('hombre', 'mujer') not null,
+  nivel int(10) not null,
 
-	CONSTRAINT PK_USUARIO PRIMARY KEY(ID_USUARIO)
+	constraint pk_usuario primary key(id_usuario)
 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+)engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-INSERT INTO USUARIO VALUES(0,'admin','admin','','','ADMINISTRADOR','',0);
+insert into usuario values(0,'admin','admin','','','administrador','',0);
 
-CREATE TABLE IF NOT EXISTS PISTA (
+create table if not exists pista (
 
-  ID_PISTA int(10) AUTO_INCREMENT,
-  TIPO_PISTA ENUM('ABIERTA','CERRADA') NOT NULL,
+  id_pista int(10) auto_increment,
+  tipo_pista enum('abierta','cerrada') not null,
   
-  CONSTRAINT PK_PISTA PRIMARY KEY(ID_PISTA)
+  constraint pk_pista primary key(id_pista)
 
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-INSERT INTO PISTA VALUES(NULL,'ABIERTA');
-INSERT INTO PISTA VALUES(NULL,'ABIERTA');
-INSERT INTO PISTA VALUES(NULL,'CERRADA');
-INSERT INTO PISTA VALUES(NULL,'CERRADA');
+insert into pista values(null,'abierta');
+insert into pista values(null,'abierta');
+insert into pista values(null,'cerrada');
+insert into pista values(null,'cerrada');
 
 
-CREATE TABLE IF NOT EXISTS RESERVA(
+create table if not exists reserva(
 
-  ID_RESERVA INT(10) AUTO_INCREMENT,
-  FECHA DATE NOT NULL,
-  PRECIO FLOAT(10,2) NOT NULL,
-  USUARIO_RESERVA INT(10) NOT NULL,
-  PISTA_RESERVA INT(10) NOT NULL,
-  HORA TIME NOT NULL,
+  id_reserva int(10) auto_increment,
+  fecha date not null,
+  precio float(10,2) not null,
+  usuario_reserva int(10) not null,
+  pista_reserva int(10) not null,
+  hora time not null,
 
-  CONSTRAINT FK_USUARIO FOREIGN KEY(USUARIO_RESERVA) REFERENCES USUARIO(ID_USUARIO) ON DELETE CASCADE,
-  CONSTRAINT FK_PISTA FOREIGN KEY(PISTA_RESERVA) REFERENCES PISTA(ID_PISTA) ON DELETE CASCADE,
-  CONSTRAINT PK_RESERVA PRIMARY KEY(ID_RESERVA)
+  constraint fk_usuario foreign key(usuario_reserva) references usuario(id_usuario) on delete cascade,
+  constraint fk_pista foreign key(pista_reserva) references pista(id_pista) on delete cascade,
+  constraint pk_reserva primary key(id_reserva)
 
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-CREATE TABLE IF NOT EXISTS PAGO(
-  ID_PAGO INT(10) AUTO_INCREMENT,
-  TIPO_PAGO ENUM('EFECTIVO','TARJETA') NOT NULL,
-  ESTADO_PAGO ENUM('REALIZADO','PENDIENTE') NOT NULL,
-  RESERVA_PAGO INT(10) NOT NULL,
-  CANTIDAD FLOAT(10,2) NOT NULL,
+create table if not exists pago(
+  id_pago int(10) auto_increment,
+  tipo_pago enum('efectivo','tarjeta') not null,
+  estado_pago enum('realizado','pendiente') not null,
+  reserva_pago int(10) not null,
+  cantidad float(10,2) not null,
 
-  CONSTRAINT FK_RESERVA FOREIGN KEY(RESERVA_PAGO) REFERENCES RESERVA(ID_RESERVA) ON DELETE CASCADE,
-  CONSTRAINT PK_PAGO PRIMARY KEY(ID_PAGO)
+  constraint fk_reserva foreign key(reserva_pago) references reserva(id_reserva) on delete cascade,
+  constraint pk_pago primary key(id_pago)
 
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-CREATE TABLE IF NOT EXISTS CALENDARIO (
-  FECHA_CALENDARIO DATE NOT NULL,
-  ESTADO_CALENDARIO ENUM('LIBRE','OCUPADO') NOT NULL,
-  HORA_CALENDARIO TIME NOT NULL,
+create table if not exists calendario (
+  fecha_calendario date not null,
+  pista_calendario int(10) not null,
+  estado_calendario enum('libre','ocupado') not null,
+  hora_calendario time not null,
 
-  CONSTRAINT PK_CALENDARIO PRIMARY KEY(FECHA_CALENDARIO, HORA_CALENDARIO)
+  constraint pk_calendario primary key(fecha_calendario, hora_calendario),
+  constraint fk_pista_calendario foreign key(pista_calendario) references pista(id_pista) on delete cascade
 
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-CREATE TABLE IF NOT EXISTS PARTIDO (
-  ID_PARTIDO INT(10) AUTO_INCREMENT,
-  FECHA_PARTIDO DATE NOT NULL,
-  PRECIO_PARTIDO FLOAT(10,2) NOT NULL,
-  ESTADO_PARTIDO ENUM('ABIERTO','CERRADO') NOT NULL,
-  FECHA_FIN_INSCRIPCION DATE NOT NULL,
+create table if not exists partido (
+  id_partido int(10) auto_increment,
+  fecha_partido date not null,
+  precio_partido float(10,2) not null,
+  estado_partido enum('abierto','cerrado') not null,
+  fecha_fin_inscripcion date not null,
 
-  CONSTRAINT PK_PARTIDO PRIMARY KEY(ID_PARTIDO)
+  constraint pk_partido primary key(id_partido)
 
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-CREATE TABLE IF NOT EXISTS INSCRIPCIONPARTIDO (
-  ID_INSCRIPCION_PARTIDO INT(10) NOT NULL,
-  ID_INSCRIPCION_USUARIO INT(10) NOT NULL,
+create table if not exists inscripcionpartido (
+  id_inscripcion_partido int(10) not null,
+  id_inscripcion_usuario int(10) not null,
 
-  CONSTRAINT PK_PARTIDO PRIMARY KEY(ID_INSCRIPCION_PARTIDO, ID_INSCRIPCION_USUARIO)
+  constraint pk_partido primary key(id_inscripcion_partido, id_inscripcion_usuario)
   
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-CREATE TABLE IF NOT EXISTS NOTIFICACION (
-  ID_NOTIFICACION INT(10) AUTO_INCREMENT,
-  ID_USUARIO_NOTIFICACION INT(10) NOT NULL,
-  MENSAJE VARCHAR(255) NOT NULL,
+create table if not exists notificacion (
+  id_notificacion int(10) auto_increment,
+  id_usuario_notificacion int(10) not null,
+  mensaje varchar(255) not null,
 
-  CONSTRAINT PK_NOTIFICACION PRIMARY KEY(ID_NOTIFICACION),
-  CONSTRAINT FK_USUARIO_NOTIFICACION FOREIGN KEY(ID_USUARIO_NOTIFICACION) REFERENCES USUARIO(ID_USUARIO) ON DELETE CASCADE
+  constraint pk_notificacion primary key(id_notificacion),
+  constraint fk_usuario_notificacion foreign key(id_usuario_notificacion) references usuario(id_usuario) on delete cascade
   
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-CREATE TABLE IF NOT EXISTS CAMPEONATO (
-  ID_CAMPEONATO INT(10) AUTO_INCREMENT,
-  NOMBRE_CAMPEONATO VARCHAR(255) NOT NULL,
-  FECHA_INICIO DATE NOT NULL,
-  FECHA_FIN DATE NOT NULL,
-  PRECIO_CAMPEONATO FLOAT(10,2) NOT NULL,
-  FECHA_LIMITE_INSCRIPCION DATE NOT NULL,
-  ESTADO_CAMPEONATO ENUM('ABIERTO','CERRADO'),
+create table if not exists campeonato (
+  id_campeonato int(10) auto_increment,
+  nombre_campeonato varchar(255) not null,
+  fecha_inicio date not null,
+  fecha_fin date not null,
+  precio_campeonato float(10,2) not null,
+  fecha_limite_inscripcion date not null,
+  estado_campeonato enum('abierto','cerrado'),
 
-  CONSTRAINT PK_CAMPEONATO PRIMARY KEY(ID_CAMPEONATO)
+  constraint pk_campeonato primary key(id_campeonato)
   
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-CREATE TABLE IF NOT EXISTS CATEGORIANIVEL (
-  CATEGORIA ENUM('MASCULINA','FEMENINA','MIXTO'),
-  NIVEL ENUM('1','2','3'),
-  CAMPEONATO INT(10) NOT NULL,
+create table if not exists categorianivel (
+  categoria enum('masculina','femenina','mixto'),
+  nivel enum('1','2','3'),
+  campeonato int(10) not null,
 
-  CONSTRAINT PK_CATEGORIANIVEL PRIMARY KEY(CATEGORIA,NIVEL,CAMPEONATO),
-  CONSTRAINT FK_CAMPEONATO FOREIGN KEY(CAMPEONATO) REFERENCES CAMPEONATO(ID_CAMPEONATO) ON DELETE CASCADE
+  constraint pk_categorianivel primary key(categoria,nivel,campeonato),
+  constraint fk_campeonato foreign key(campeonato) references campeonato(id_campeonato) on delete cascade
   
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;

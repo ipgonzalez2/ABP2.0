@@ -34,5 +34,12 @@ class PistaMapper {
 		$stmt->execute(array(0,$pista->getTipoPista()));
 	}
 
+	public function getNumPistas(){
+		$stmt = $this->db->prepare("SELECT COUNT(ID_PISTA) FROM PISTA");
+		$stmt->execute();
+		$count = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $count["COUNT(ID_PISTA)"];
+	}
+
 
 }
