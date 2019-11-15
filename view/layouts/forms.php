@@ -12,15 +12,12 @@ $currentuser = $view->getVariable("currentusername");
 	<title><?=$view->getVariable("title", "no title")?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+
+	<link rel="stylesheet" href="./css/style.css" type="text/css">
+
+	<link href="css/all.css" rel="stylesheet">
+
 	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/mainForms.css">
 
 	<link href="css/all.css" rel="stylesheet">
 	<!--load all styles -->
@@ -33,9 +30,8 @@ $currentuser = $view->getVariable("currentusername");
 	<link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
 
 	<link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
-
 	<link rel="stylesheet" href="./css/header.css" type="text/css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/mainForms.css">
 
 
 
@@ -50,7 +46,8 @@ $currentuser = $view->getVariable("currentusername");
 	<!-- header -->
 	<header class="header-section">
 		<div class="nav-switch">
-			<i class="fa fa-bars"></i>
+			<a href="javascript:history.back()">
+		<i class="fas fa-long-arrow-alt-left"></i>
 		</div>
 		<div class="header-social">
         <a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>
@@ -62,7 +59,7 @@ $currentuser = $view->getVariable("currentusername");
     </div>
 	</header>
 
-	<main style="padding-top: 150px;">
+	<main style="padding-top: 110px;">
 		<div id="flash">
 			<?=$view->popFlash()?>
 		</div>

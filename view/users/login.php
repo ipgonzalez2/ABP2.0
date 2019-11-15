@@ -18,14 +18,12 @@ $errors = $view->getVariable("errors");
 
                     <div class="wrap-input100 validate-input" >
                         <input class="input100" type="text" name="username" placeholder="Login">
-                        <span class="focus-input100"></span>
                         <!--<span class="label-input100">Email</span>-->
                     </div>
 
 
                     <div class="wrap-input100 validate-input" >
                         <input class="input100" type="password" name="passwd" placeholder="Contraseña">
-                        <span class="focus-input100"></span>
                         <!--<span class="label-input100">Password</span>-->
                     </div>
 
@@ -34,14 +32,14 @@ $errors = $view->getVariable("errors");
                             <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" 
                              <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?>>
                             <label class="label-checkbox100" for="ckb1">
-								Remember me
+								Recordarme
 							</label>
                         </div>
 	
 
                         <div>
                             <a href="#" class="txt1">
-								Forgot Password?
+								Olvidaste Contraseña
 							</a>
                         </div>
                     </div>

@@ -17,26 +17,35 @@ $userRol = $view->getVariable("userRol");
         No hay campeonatos abiertos
     </div>
 <?php } ?>
-<div class="row">
-<table style="width:100%">
-<tr>
-  <th>Nombre</th>
-  <th>Fecha inicio</th>
-  <th>Fecha fin</th>
-  <th>Precio</th>
-  <th>Fecha limite inscripcion</th>
-  <th>Estado</th>
-</tr>
+
+<div class="table100 ver2 m-b-110">
+<div class="table100-head">
+      <table>
+        <thead>
+          <tr class="row100 head">
+             <th class="cell100 column1">Nombre</th>
+             <th class="cell100 column2">Fecha inicio</th>
+             <th class="cell100 column3">Fecha fin</th>
+             <th class="cell100 column4">Precio</th>
+             <th class="cell100 column4">Fecha limite inscripcion</th>
+             <th class="cell100 column4">Estado</th>
+           </tr>
+         </thead>
+        </table>
+      </div>
     <?php foreach($campeonatos as $campeonato):?>
 
 
-<tr>
-  <td><?= $campeonato->getNombreCampeonato()?></td>
-  <td><?= $campeonato->getFechaInicio()?></td>
-  <td><?= $campeonato->getFechaFin()?></td>
-  <td><?= $campeonato->getPrecioCampeonato()?></td>
-  <td><?= $campeonato->getFechaLimiteInscripcion()?></td>
-  <td><?= $campeonato->getEstadoCampeonato()?></td>
+      <div class="table100-body js-pscroll">
+      <table>
+          <tbody>
+            <tr class="row100 body">
+  <td class="cell100 column1"><?= $campeonato->getNombreCampeonato()?></td>
+  <td class="cell100 column2"><?= $campeonato->getFechaInicio()?></td>
+  <td class="cell100 column3"><?= $campeonato->getFechaFin()?></td>
+  <td class="cell100 column4"><?= $campeonato->getPrecioCampeonato()?></td>
+  <td class="cell100 column5"><?= $campeonato->getFechaLimiteInscripcion()?></td>
+  <td class="cell100 column6"><?= $campeonato->getEstadoCampeonato()?></td>
   <?php if($userRol == "administrador" && $campeonato->getEstadoCampeonato() == "abierto"){?>
     <td><a href="<?="index.php?controller=campeonatos&action=deleteCampeonato&idCampeonato=".$campeonato->getIdCampeonato() ?>">
     <i class="fa fa-trash-alt"></i>

@@ -22,28 +22,24 @@ $user = $view->getVariable("user");
 					Regístrate
 				</span>
 
-				<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+				<div class="wrap-input100 validate-input" >
 					<input class="input100" type="text"  name="username"  placeholder="Login">
-					<span class=" focus-input100"></span>
-					<span class="label-input100"></span>
+
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate="Password is required">
+				<div class="wrap-input100 validate-input" >
 					<input class="input100" type="password" name="passwd" placeholder="Contraseña">
-					<span class="focus-input100"></span>
-					<span class="label-input100"></span>
+
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+				<div class="wrap-input100 validate-input" >
 					<input class="input100" type="text" name="nombre" placeholder="Nombre">
-					<span class="focus-input100"></span>
-					<span class="label-input100"></span>
+					
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+				<div class="wrap-input100 validate-input" >
 					<input class="input100" type="email" name="email" placeholder="Email">
-					<span class="focus-input100"></span>
-					<span class="label-input100"></span>
+					
 				</div>
 
 				
@@ -53,7 +49,7 @@ $user = $view->getVariable("user");
   					<option name="sexo" value="hombre">Hombre</option>
   					<option name="sexo" value="mujer">Mujer</option>
   				</select>
-				  <span class="focus-input100"></span>
+				  <span ></span>
 					<span class="label-input100">Sexo</span>
 				</div>
 
