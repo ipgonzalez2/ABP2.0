@@ -86,70 +86,70 @@ $errors = $view->getVariable("errors");
         <!-- Gallery -->
         <div class="gallery style2 medium lightbox onscroll-fade-in">
             <article>
-                <a href="images/gallery/fulls/01.jpg" class="image">
-                    <img src="images/gallery/thumbs/01.jpg" alt="" />
+                <a href="images/01.jpg" class="image">
+                    <img src="images/01.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Pistas</h3>
                     <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
+                        <li><span class="button small">Detalles</span></li>
                     </ul>
                 </div>
             </article>
             <article>
-                <a href="images/gallery/fulls/02.jpg" class="image">
-                    <img src="images/gallery/thumbs/02.jpg" alt="" />
+                <a href="images/06.jpg" class="image">
+                    <img src="images/07.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Vestuarios</h3>
                     <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
+                        <li><span class="button small">Detalles</span></li>
                     </ul>
                 </div>
             </article>
             <article>
-                <a href="images/gallery/fulls/03.jpg" class="image">
-                    <img src="images/gallery/thumbs/03.jpg" alt="" />
+                <a href="images/03.jpg" class="image">
+                    <img src="images/03.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Profesores</h3>
                     <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
+                        <li><span class="button small">Detalles</span></li>
                     </ul>
                 </div>
             </article>
             <article>
-                <a href="images/gallery/fulls/04.jpg" class="image">
-                    <img src="images/gallery/thumbs/04.jpg" alt="" />
+                <a href="images/04.jpg" class="image">
+                    <img src="images/04.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Bar</h3>
                     <p>Quieres unas copas.</p>
                     <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
+                        <li><span class="button small">Detalles</span></li>
                     </ul>
                 </div>
             </article>
             <article>
-                <a href="images/gallery/fulls/05.jpg" class="image">
-                    <img src="images/gallery/thumbs/05.jpg" alt="" />
+                <a href="images/05.jpg" class="image">
+                    <img src="images/05.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Servicio de Alquiler</h3>
                     <p>Palas y pelotas.</p>
                     <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
+                        <li><span class="button small">Detalles</span></li>
                     </ul>
                 </div>
             </article>
             <article>
-                <a href="images/gallery/fulls/06.jpg" class="image">
-                    <img src="images/gallery/thumbs/06.jpg" alt="" />
+                <a href="images/06.jpg" class="image">
+                    <img src="images/06.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Quieres tu posibles colegas</h3>
                     <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
+                        <li><span class="button small">Detalles</span></li>
                     </ul>
                 </div>
             </article>
@@ -232,24 +232,24 @@ $errors = $view->getVariable("errors");
     <!-- Seven -->
     <section class="wrapper style1 align-center">
         <div class="inner medium">
-            <h2>Get in touch</h2>
+            <h2>Contactanos 🐒</h2>
             <form method="post" action="#">
                 <div class="fields">
                     <div class="field half">
-                        <label for="name">Name</label>
+                        <label for="name">Nombre</label>
                         <input type="text" name="name" id="name" value="" />
                     </div>
                     <div class="field half">
-                        <label for="email">Email</label>
+                        <label for="email">E-mail ✉️</label>
                         <input type="email" name="email" id="email" value="" />
                     </div>
                     <div class="field">
-                        <label for="message">Message</label>
+                        <label for="message">Mensaje</label>
                         <textarea name="message" id="message" rows="6"></textarea>
                     </div>
                 </div>
                 <ul class="actions special">
-                    <li><input type="submit" name="submit" id="submit" value="Send Message" /></li>
+                    <li><input type="submit" name="submit" id="submit" value="Envia" /></li>
                 </ul>
             </form>
 
@@ -262,7 +262,7 @@ $errors = $view->getVariable("errors");
             <ul class="icons">
                 <li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
                 <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="https://www.instagram.com/ig2na/" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
                 <li><a href="#" class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
                 <li><a href="#" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
             </ul>
