@@ -13,30 +13,37 @@ $z =0;
 
 
 <section class='calendar'>
+<div class="cabecera">
 <?php foreach($fechas as $fecha):
-  
+  if($z<1){?>
+  <h2><i class="fas fa-hand-middle-finger"></i>&nbsp&nbsp&nbsp&nbsp&nbsp<?=$fecha?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="far fa-calendar-alt"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
 
+  <?php } 
+  $z++;
   endforeach ;?>
 
 
-<h2><?=date('M' , strtotime($fecha))?></h2>
-
+<?=$fecha?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fas fa-hand-middle-finger"></i></h2>
+  </div>
   <form method="POST" action="./index.php?controller=reservas&action=addReserva">
 
   <?php foreach($fechas as $fecha): ?>
 
-    <?php if($i<7){ ?>
+    <?php if($i==7){ ?>
       
-      <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("D" , strtotime($fecha))?> </span>
-      
-    <?php $i++;} ?>
+    <?php } $i++?>
+  <div class="cuadrado" onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)">
+    <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("l" , strtotime($fecha))?> </span>
 
     <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?> onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)"  >
+    
     <input style="display:none" class="todasFechas" name id=<?=date('d' , strtotime($fecha))?> value=<?=$fecha?>>
     <span><?=date("d" , strtotime($fecha))?> </span>
     </input>
     <em></em>
     </label>
+  </div>
+
     <?php $pos++;?>
 
   
@@ -48,9 +55,9 @@ $z =0;
 
     <div class="appointment" id="myForm" dia="" posicion = ""> 
 
-    <label for="appt-time">Reserva (10:00 a 23:00) </label>
+    <label id="dia" for="appt-time"></label>
 
-    <?php for ($i = 0; $i <= 7; $i++) {?>
+    <?php for ($i = 0; $i <= 15; $i++) {?>
 
       <select class="horas" name id=<?=$i?> style="display:none;">  
       <?php foreach($arrayHoras[$i] as $hdia): ?>
@@ -60,9 +67,9 @@ $z =0;
 
     <?php } ?>
 
-    <div>
+    <div class="botones">
           <button type="submit">Guardar</button>
-          <label type="button" onclick="closeForm()" >cerrar </label>
+          <button type="button" onclick="closeForm()" >cerrar </button>
     </div>
 
     </div>
@@ -92,6 +99,7 @@ function openForm(d ,pos) {
   document.getElementById("myForm").style.display = "block";
   document.getElementById("myForm").setAttribute("dia",""+d);
   document.getElementById("myForm").setAttribute("posicion",""+pos);
+  document.getElementById("dia").innerHTML = "Reserva del dia " +d+"  (09:00 a 21:00)" ;
   document.cookie="posicion = " + pos;
   document.cookie="dia = " + d;
 
