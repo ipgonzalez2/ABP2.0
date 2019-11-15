@@ -56,5 +56,25 @@ class ReservaMapper {
 		return $count;
 	}
 
+	public function getReservasActivas($id_usuario) {
+		$stmt = $this->db->prepare("SELECT * from reserva where usuario_reserva=?");
+		$stmt->execute(array($id_usuario));
+
+		$reservas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$reservas = array();
+		$fecha_actual = date("Y-m-d");
+		$hora_actual = date("H:i:s",time());
+
+
+		foreach($reservas_db as $reserva){
+			if(($reserva["fecha"] > $fecha_actual) || (($reserva["fecha"] == $fecha_actual) && ($reserva["hora"] > $hora_actual))){
+				array_push($reservas, new Reserva($reserva["id_reserva"], $reserva["fecha"], $reserva["precio"],
+				$reserva["usuario_reserva"], $reserva["pista_reserva"], $reserva["hora"]));
+			}
+		}
+
+		return $reservas;
+	}
+
 
 }

@@ -132,11 +132,32 @@ class ReservasController extends BaseController {
 			array_push($horas, $horasDia);
 		}
 
-		
         $this->view->setLayout("reservar");
 		$this->view->setVariable("fechas", $fechas);
 		$this->view->setVariable("horas", $horas);
 		$this->view->render("reservar", "reservar");
+	}
+
+	public function showallReservasActivas(){
+
+		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
+
+
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+
+		if($userRol == "administrador"){
+			$this->view->redirect("index", "indexLogged");
+		}
+
+		$reservasActivas = $this->reservaMapper->getReservasActivas($userId);
+		$this->view->setLayout("table");
+
+		$this->view->setVariable("reservasActivas", $reservasActivas);
+		$this->view->render("reservas", "showReservasActivas");
 	}
 
 	
