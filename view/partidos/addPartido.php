@@ -20,14 +20,12 @@ $errors = $view->getVariable("errors");
 
 			<div class="wrap-input100 validate-input">
 				<input class="input100" type="date" name="fechaPartido" placeholder="Fecha">
-				<span class=" focus-input100"></span>
-				<span class="label-input100"></span>
+
 			</div>
 
 			<div class="wrap-input100 validate-input">
 				<input class="input100" type="text" name="precioPartido" placeholder="Precio">
-				<span class="focus-input100"></span>
-				<span class="label-input100"></span>
+
 			</div>
 
 			<div class="container-contact100-form-btn">
