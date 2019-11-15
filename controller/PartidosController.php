@@ -170,6 +170,7 @@ class PartidosController extends BaseController {
 			$this->view->setVariable("partido", $partido);
 
 		}
+		$this->view->setLayout("table");
 
 		$this->view->render("partidos", "showPartidoInscribir");
 	}
@@ -242,6 +243,7 @@ class PartidosController extends BaseController {
 		$partidos = $this->partidoMapper->findAllPartidosInscrito($partidosInscrito);
 
 		$this->view->setVariable("partidos", $partidos);
+		$this->view->setLayout("table");
 
 		$this->view->render("partidos", "showallInscrito");
 	}	

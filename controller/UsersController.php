@@ -93,6 +93,7 @@ class UsersController extends BaseController {
 				$this->view->setVariable("errors", $errors);
 			}
 		}
+		$this->view->setLayout("welcome");
 
 		// render the view (/view/users/login.php)
 		$this->view->render("users", "login");
@@ -250,6 +251,7 @@ class UsersController extends BaseController {
 
 		// Put the User object visible to the view
 		$this->view->setVariable("notificaciones", $notificaciones);
+		$this->view->setLayout("forms");
 
 		// render the view (/view/users/login.php)
 		$this->view->render("users", "notificaciones");
