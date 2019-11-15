@@ -5,6 +5,7 @@ $view->setVariable("title", "Reservar");
 $errors = $view->getVariable("errors");
 $fechas = $view->getVariable("fechas");
 $arrayHoras = $view->getVariable("horas");
+$arrayHoras[0] = array();
 
 $i = 0;
 $pos = 0;
@@ -30,8 +31,8 @@ endforeach;?>
 
   <?php foreach ($fechas as $fecha): ?>
 
-   <?php if (count($arrayHoras[$pos]) > 1) {?>
-  <div class="cuadrado" onclick="openForm(<?=date('d', strtotime($fecha))?> ,'<?=date('Y-m-d', strtotime($fecha))?>' ,<?=$pos?>)">
+   <?php if (empty($arrayHoras[$pos])) {?>
+  <div class="cuadrado-cerrado" >
     <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("l", strtotime($fecha))?> </span>
 
     <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?>>
@@ -45,7 +46,7 @@ endforeach;?>
 
     <?php $pos++;?>
    <?php } else {?>
-    <div class="cuadrado-cerrado" onclick="openForm(<?=date('d', strtotime($fecha))?> ,'<?=date('Y-m-d', strtotime($fecha))?>' ,<?=$pos?>)">
+    <div class="cuadrado" onclick="openForm(<?=date('d', strtotime($fecha))?> ,'<?=date('Y-m-d', strtotime($fecha))?>' ,<?=$pos?>)">
     <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("l", strtotime($fecha))?> </span>
 
     <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?>>

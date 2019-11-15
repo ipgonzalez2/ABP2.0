@@ -64,7 +64,7 @@
         padding: 20px;
         margin: auto;
         margin-top: 3%;
-        cursor: copy;
+        cursor: not-allowed;
     }
     
     .cabecera {}
