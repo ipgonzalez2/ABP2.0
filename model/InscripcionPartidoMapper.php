@@ -48,7 +48,7 @@ class InscripcionPartidoMapper {
 
     public function findPartidosInscritos($idUsuario){
 
-        $stmt = $this->db->prepare("SELECT id_inscripcion_partido FROM inscripcionpartido WHERE id_inscripcion_partido=?");
+        $stmt = $this->db->prepare("SELECT id_inscripcion_partido FROM inscripcionpartido WHERE id_inscripcion_usuario=?");
 		$stmt->execute(array($idUsuario));
 		
 		$inscritos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);

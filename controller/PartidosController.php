@@ -278,7 +278,14 @@ class PartidosController extends BaseController {
 		$partidosInscrito = $this->inscripcionPartidoMapper->findPartidosInscritos($userId);
 		$partidos = $this->partidoMapper->findAllPartidosInscrito($partidosInscrito);
 
+		$pistas = array();
+		foreach($partidos as $partido){
+			$pistaPartido = $this->reservaMapper->getPistaPartido($partido->getIdPartido());
+			array_push($pistas, $pistaPartido);
+		}
+
 		$this->view->setVariable("partidos", $partidos);
+		$this->view->setVariable("pistas", $pistas);
 		$this->view->setLayout("table");
 
 		$this->view->render("partidos", "showallInscrito");

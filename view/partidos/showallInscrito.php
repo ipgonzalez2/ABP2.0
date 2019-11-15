@@ -6,7 +6,8 @@ $view = ViewManager::getInstance();
 $view->setVariable("title", "PARTIDOS INSCRITO");
 $errors = $view->getVariable("errors");
 $partidos = $view->getVariable("partidos");
-
+$pistas = $view->getVariable("pistas");
+$pos=0;
 ?>
 
 <?php if(count($partidos) == 0){ ?>
@@ -25,7 +26,8 @@ $partidos = $view->getVariable("partidos");
             <th class="cell100 column1">Fecha</th>
             <th class="cell100 column2">Precio</th>
             <th class="cell100 column3">Estado</th>
-            <th class="cell100 column4">Límite inscripcion</th>
+            <th class="cell100 column4">Hora</th>
+            <th class="cell100 column4">Pista</th>
             </tr>
         </thead>
       </table>
@@ -39,12 +41,15 @@ $partidos = $view->getVariable("partidos");
               <td class="cell100 column1"><?= $partido->getFechaPartido()?></td>
               <td class="cell100 column2"><?= $partido->getPrecioPartido()?></td>
               <td class="cell100 column3"><?= $partido->getEstadoPartido()?></td>
-              <td class="cell100 column4"><?= $partido->getFechaFinInscripcion()?></td>
+              <td class="cell100 column4"><?= $partido->getHoraPartido()?></td>
+              <?php if($pistas[$pos]!=NULL){ ?>
+              <td class="cell100 column4"><?= $pistas[$pos]?></td>
+              <?php } ?>
             </tr>
      
           </tbody>
         </table>
       </div>
-  <?php endforeach; ?>
+  <?php $pos++; endforeach; ?>
 </div>
 

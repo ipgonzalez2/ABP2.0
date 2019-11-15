@@ -114,5 +114,15 @@ class ReservaMapper {
 		
 	}
 
+	public function getPistaPartido($id_partido){
+		$stmt = $this->db->prepare("SELECT pista_reserva from reserva where partido_reserva=?");
+		$stmt->execute(array($id_partido));
+
+		$pista = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+		return $pista["pista_reserva"];
+	}
+
 
 }
