@@ -79,7 +79,13 @@ class ReservasController extends BaseController {
 			$this->view->redirect("index", "indexLogged");
 		}
 
+        
 		if(isset($_POST["hora"])){
+
+        if (isset($_POST)) {
+            var_dump($_POST);
+            exit;
+        }
 			$numPistas = $this->pistaMapper->getNumPistas();
 			$pistas = $this->pistaMapper->getPistas();
 			$pista = $this->calendarioMapper->getPistaLibre($_POST["fecha"],$_POST["hora"],$pistas);
@@ -121,6 +127,7 @@ class ReservasController extends BaseController {
 			$this->view->redirect("index","indexLogged");
 		}
 
+        
 		$fechas = array();
 		$horas = array();
 		$numPistas = $this->pistaMapper->getNumPistas();
