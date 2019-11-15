@@ -31,9 +31,13 @@ $z =0;
 
     <?php if($i==7){ ?>
       
+<<<<<<< HEAD
     <?php } $i++?>
   <div class="cuadrado" onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)">
     <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("l" , strtotime($fecha))?> </span>
+=======
+    <?php $i++;} ?>
+>>>>>>> 37229d3599d7d00490e787e706d18efaed8e0404
 
     <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?> onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)"  >
     
@@ -45,7 +49,6 @@ $z =0;
   </div>
 
     <?php $pos++;?>
-
 
   
 
