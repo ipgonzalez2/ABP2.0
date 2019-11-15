@@ -15,26 +15,36 @@ $partidos = $view->getVariable("partidos");
         No tienes ningun partido
     </div>
 <?php } ?>
-<div class="row">
-<table style="width:100%">
-<tr>
-  <th>Fecha</th>
-  <th>Precio</th>
-  <th>Estado</th>
-  <th>Límite inscripcion</th>
-</tr>
+
+
+<div class="table100 ver2 m-b-110">
+    <div class="table100-head">
+      <table>
+        <thead>
+          <tr class="row100 head">
+            <th class="cell100 column1">Fecha</th>
+            <th class="cell100 column2">Precio</th>
+            <th class="cell100 column3">Estado</th>
+            <th class="cell100 column4">Límite inscripcion</th>
+            </tr>
+        </thead>
+      </table>
+    </div>
     <?php foreach($partidos as $partido):?>
 
-
-<tr>
-  <td><?= $partido->getFechaPartido()?></td>
-  <td><?= $partido->getPrecioPartido()?></td>
-  <td><?= $partido->getEstadoPartido()?></td>
-  <td><?= $partido->getFechaFinInscripcion()?></td>
-</tr>
-<?php endforeach; ?>
-</table> 
-   
-
-
+      <div class="table100-body js-pscroll">
+        <table>
+          <tbody>
+            <tr class="row100 body">
+              <td class="cell100 column1"><?= $partido->getFechaPartido()?></td>
+              <td class="cell100 column2"><?= $partido->getPrecioPartido()?></td>
+              <td class="cell100 column3"><?= $partido->getEstadoPartido()?></td>
+              <td class="cell100 column4"><?= $partido->getFechaFinInscripcion()?></td>
+            </tr>
+     
+          </tbody>
+        </table>
+      </div>
+  <?php endforeach; ?>
 </div>
+

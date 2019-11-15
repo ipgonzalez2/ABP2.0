@@ -64,7 +64,9 @@ $currentuser = $view->getVariable("currentusername");
 	<!-- header -->
 	<header class="header-section">
 		<div class="nav-switch">
-			<i class="fa fa-bars"></i>
+	
+			<a href="javascript:history.back()">
+		<i class="fas fa-long-arrow-alt-left"></i>
 		</div>
 		<div class="header-social">
         <a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>

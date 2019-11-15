@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/../../core/ViewManager.php");
+require_once __DIR__ . "/../../core/ViewManager.php";
 $view = ViewManager::getInstance();
 $view->setVariable("title", "Main");
 $errors = $view->getVariable("errors");
@@ -7,7 +7,6 @@ $errors = $view->getVariable("errors");
 
 <header class="header-section">
     <div class="nav-switch">
-        <i class="fa fa-bars"></i>
     </div>
     <div class="header-social">
         <a href="./index.php?controller=users&action=login"><i class="fas fa-user"></i></i></a>
@@ -38,7 +37,7 @@ $errors = $view->getVariable("errors");
             <h2>Pistas</h2>
             <p>Quieres reservar las mejores pista del mundo.</p>
             <ul class="actions stacked">
-                <li><a href="#" class="button">Dale duro Broh </a></li>
+                <li><a href="./index.php?controller=users&action=login" class="button">Dale duro Broh </a></li>
             </ul>
         </div>
         <div class="image">
@@ -48,15 +47,15 @@ $errors = $view->getVariable("errors");
 
      <!-- Four -->
      <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
-       
+
         <div class="image">
             <img src="./images/bananas.jpg" alt="" />
         </div>
         <div class="content">
             <h2>Calendario</h2>
-            <p>Calendario Para Ines.</p>
+            <p>Calendario</p>
             <ul class="actions stacked">
-                <li><a href="./index.php?controller=users&action=reservar" class="button">A ver si te gusta 😀 </a></li>
+                <li><a href="./index.php?controller=users&action=login" class="button">A ver si te gusta 😀 </a></li>
             </ul>
         </div>
     </section>
@@ -143,27 +142,27 @@ $errors = $view->getVariable("errors");
 
     </section>
 
-    <!-- Seven -->
-    <section class="wrapper style1 align-center">
+     <!-- Seven -->
+     <section class="wrapper style1 align-center">
         <div class="inner medium">
-            <h2>Get in touch</h2>
+            <h2>Contactanos 🐒</h2>
             <form method="post" action="#">
                 <div class="fields">
                     <div class="field half">
-                        <label for="name">Name</label>
+                        <label for="name">Nombre</label>
                         <input type="text" name="name" id="name" value="" />
                     </div>
                     <div class="field half">
-                        <label for="email">Email</label>
+                        <label for="email">E-mail ✉️</label>
                         <input type="email" name="email" id="email" value="" />
                     </div>
                     <div class="field">
-                        <label for="message">Message</label>
+                        <label for="message">Mensaje</label>
                         <textarea name="message" id="message" rows="6"></textarea>
                     </div>
                 </div>
                 <ul class="actions special">
-                    <li><input type="submit" name="submit" id="submit" value="Send Message" /></li>
+                    <li><input type="submit" name="submit" id="submit" value="Envia" /></li>
                 </ul>
             </form>
 
@@ -176,7 +175,7 @@ $errors = $view->getVariable("errors");
             <ul class="icons">
                 <li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
                 <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="https://www.instagram.com/ig2na/" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
                 <li><a href="#" class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
                 <li><a href="#" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
             </ul>

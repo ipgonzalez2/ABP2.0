@@ -56,11 +56,11 @@ $userRol = $view->getVariable("userRol");
                   <?php } ?>
             </tr>
           <?php endforeach; ?>
-        </table>
 
         </tbody>
         </table>
       </div>
   </div>
 
+  
 </div>
