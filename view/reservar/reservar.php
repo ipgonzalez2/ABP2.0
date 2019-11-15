@@ -24,7 +24,8 @@ endforeach;?>
 
 
 <?=$fecha?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fas fa-hand-middle-finger"></i></h2>
-  </div>
+</div>
+
   <form method="POST" action="./index.php?controller=reservas&action=addReserva">
 
   <?php foreach ($fechas as $fecha): ?>
@@ -109,7 +110,6 @@ function openForm(d, anho ,pos) {
   document.getElementById("myForm").setAttribute("dia",""+d);
   document.getElementById("myForm").setAttribute("posicion",""+pos);
   document.getElementById("dia").innerHTML = "Reserva del dia " +d+"  (09:00 a 21:00)" ;
-
 
 
 
