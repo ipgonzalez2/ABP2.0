@@ -86,13 +86,8 @@ $errors = $view->getVariable("errors");
         <!-- Gallery -->
         <div class="gallery style2 medium lightbox onscroll-fade-in">
             <article>
-<<<<<<< HEAD
                 <a href="images/01.jpg" class="image">
                     <img src="images/01.jpg" alt="" />
-=======
-                <a href="./images/banana.jpg" class="image">
-                    <img src="./images/bananas.jpg" alt="" />
->>>>>>> 37229d3599d7d00490e787e706d18efaed8e0404
                 </a>
                 <div class="caption">
                     <h3>Pistas</h3>
@@ -136,13 +131,8 @@ $errors = $view->getVariable("errors");
                 </div>
             </article>
             <article>
-<<<<<<< HEAD
                 <a href="images/05.jpg" class="image">
                     <img src="images/05.jpg" alt="" />
-=======
-                <a href="./images/bananas.jpg" class="image">
-                    <img src="./images/bananas.jpg" alt="" />
->>>>>>> 37229d3599d7d00490e787e706d18efaed8e0404
                 </a>
                 <div class="caption">
                     <h3>Servicio de Alquiler</h3>
