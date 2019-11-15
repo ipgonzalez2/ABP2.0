@@ -26,6 +26,7 @@ $userRol = $view->getVariable("userRol");
             <th class="cell100 column2">Hora</th>
             <th class="cell100 column3">Precio</th>
             <th class="cell100 column4">Pista</th>
+            <th class="cell100 column4"></th>
           </tr>
             </thead>
       </table>

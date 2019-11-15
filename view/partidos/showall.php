@@ -33,6 +33,7 @@ $userRol = $view->getVariable("userRol");
             <th class="cell100 column2">Precio</th>
             <th class="cell100 column3">Estado</th>
             <th class="cell100 column4">Límite inscripcion</th>
+            <th class="cell100 column4">Borrar</th>
           </tr>
         </thead>
       </table>
@@ -53,7 +54,9 @@ $userRol = $view->getVariable("userRol");
                   </a></td><?php } else if ($userRol == "deportista") { ?>
                 <td><a href="<?= "index.php?controller=partidos&action=showPartidoInscribir&idPartido=" . $partido->getIdPartido() ?>">
                     <i class="fa fa-user-plus"></i></a>
-                  <?php } ?>
+                  <?php }else{ ?>
+                    <td> <i class="far fa-times-circle"></i></td>
+                  <?php }?>
             </tr>
           <?php endforeach; ?>
 

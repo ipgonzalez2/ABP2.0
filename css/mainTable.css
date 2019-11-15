@@ -209,14 +209,15 @@ td {
 
 .column2 {
     width: 13%;
+    text-align: center;
 }
 
 .column3 {
     text-align: center;
-    width: 38%;
 }
 
 .column4 {
+    text-align: center;
     width: 19%;
 }
 
