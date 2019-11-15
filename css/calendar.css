@@ -50,6 +50,23 @@
         cursor: copy;
     }
     
+    .cuadrado-cerrado {
+        top: 50px;
+        left: 50px;
+        text-align: center;
+        align-items: center;
+        width: 139px;
+        height: 100px;
+        background-color: rgb(253, 139, 139);
+        /*border-radius: 1px rgb(210, 210, 210) 10px;*/
+        border: 1px solid rgb(210, 210, 210);
+        border-radius: 20px;
+        padding: 20px;
+        margin: auto;
+        margin-top: 3%;
+        cursor: copy;
+    }
+    
     .cabecera {}
     
     section.calendar {
