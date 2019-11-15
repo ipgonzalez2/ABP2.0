@@ -33,7 +33,9 @@ class Partido {
 	* The reservation name of the reservation
 	* @var string
 	*/
-    private $fecha_fin_inscripcion;
+	private $fecha_fin_inscripcion;
+	
+	private $hora_partido;
 	
 	
 	/** 
@@ -43,12 +45,13 @@ class Partido {
 	* @param string $Precio The password of the reservation
 	*/
     public function __construct($id_partido=NULL, $fecha_partido=NULL, $precio_partido=NULL,
-    $estado_partido=NULL, $fecha_fin_inscripcion=NULL) {
+    $estado_partido=NULL, $fecha_fin_inscripcion=NULL, $hora_partido=NULL) {
 		$this->id_partido = $id_partido;
         $this->fecha_partido = $fecha_partido;
         $this->precio_partido = $precio_partido;
         $this->estado_partido = $estado_partido;
-        $this->fecha_fin_inscripcion = $fecha_fin_inscripcion;
+		$this->fecha_fin_inscripcion = $fecha_fin_inscripcion;
+		$this->hora_partido = $hora_partido;
 	}
 	
 	/**
@@ -145,6 +148,20 @@ class Partido {
 	*/
 	public function setFechaFinInscripcion($fecha_fin_inscripcion) {
 		$this->fecha_fin_inscripcion = $fecha_fin_inscripcion;
+	}
+
+	public function getHoraPartido() {
+		return $this->hora_partido;
+	}
+
+	/**
+	* Sets the tipoPista of this reservation
+	*
+	* @param string $fecha_partido The tipoPista of this reservation
+	* @return void
+	*/
+	public function setHoraPartido($hora_partido) {
+		$this->hora_partido = $hora_partido;
 	}
 	
 	public function checkIsValidForRegister() {

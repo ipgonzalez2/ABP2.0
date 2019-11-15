@@ -9,6 +9,12 @@ require_once(__DIR__."/../model/Calendario.php");
 require_once(__DIR__."/../model/CalendarioMapper.php");
 require_once(__DIR__."/../model/Pista.php");
 require_once(__DIR__."/../model/PistaMapper.php");
+require_once(__DIR__."/../model/Partido.php");
+require_once(__DIR__."/../model/PartidoMapper.php");
+require_once(__DIR__."/../model/InscripcionPartido.php");
+require_once(__DIR__."/../model/InscripcionPartidoMapper.php");
+require_once(__DIR__."/../model/Notificacion.php");
+require_once(__DIR__."/../model/NotificacionMapper.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -30,6 +36,9 @@ class ReservasController extends BaseController {
     private $reservaMapper;
 	private $calendarioMapper;
 	private $pistaMapper;
+	private $partidoMapper;
+	private $inscripcionPartidoMapper;
+	private $notificacionMapper;
 
 	public function __construct() {
 		parent::__construct();
@@ -37,6 +46,9 @@ class ReservasController extends BaseController {
         $this->reservaMapper = new ReservaMapper();
 		$this->calendarioMapper = new CalendarioMapper();
 		$this->pistaMapper = new PistaMapper();
+		$this->partidoMapper = new PartidoMapper();
+		$this->inscripcionPartidoMapper = new InscripcionPartidoMapper();
+		$this->notificacionMapper = new NotificacionMapper();
 
 		// Users controller operates in a "welcome" layout
 		// different to the "default" layout where the internal
@@ -45,10 +57,70 @@ class ReservasController extends BaseController {
 	}
 
 	public function addReserva() {
+
 		$reserva = new Reserva();
+		$calendario = new Calendario();
 		$userRol = $this->view->getVariable("userRol");
 		$userId = $this->view->getVariable("userId");
-        
+
+
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+
+		if($userRol == "administrador"){
+			$this->view->redirect("index", "indexLogged");
+		}
+		
+		$numReservasUser = $this->reservaMapper->getNumReservasUser($userId);
+		if($numReservasUser == 5){
+			$this->view->setFlashDanger("Maximo de 5 reservas activas");
+			$this->view->redirect("index", "indexLogged");
+		}
+
+		if(isset($_POST["hora"])){
+			$numPistas = $this->pistaMapper->getNumPistas();
+			$pistas = $this->pistaMapper->getPistas();
+			$pista = $this->calendarioMapper->getPistaLibre($_POST["fecha"],$_POST["hora"],$pistas);
+			$esUltimaPistaLibre = $this->calendarioMapper->esUltimaPistaLibre($_POST["fecha"],$_POST["hora"],$pista,$numPistas);
+			$reserva->setFecha($_POST["fecha"]);
+			$reserva->setPrecio(16);
+			$reserva->setUsuarioReserva($userId);
+			$reserva->setPistaReserva($pista);
+			$reserva->setHora($_POST["hora"]);
+
+
+			if($esUltimaPistaLibre){
+				$partidoMismaFecha = $this->partidoMapper->getPartidoFecha($_POST["fecha"], $_POST["hora"]);
+				if($partidoMismaFecha!=NULL){
+					$this->partidoMapper->cerrarPartido($partidoMismaFecha);
+					$numInscripciones = $this->inscripcionPartidoMapper->getNumInscripciones($partidoMismaFecha);
+					if($numInscripciones > 0){
+						$inscritos = $this->inscripcionPartidoMapper->getInscritos($partidoMismaFecha);
+						foreach($inscritos as $inscrito){
+						$notificacion = new Notificacion();
+						$notificacion->setIdUsuarioNotificacion($inscrito);
+						$notificacion->setMensaje("El partido con fecha ".$_POST["fecha"]." ha sido cancelado.
+						\nLo sentimos.\n");
+						$this->notificacionMapper->save($notificacion);
+						}
+						$this->inscripcionPartidoMapper->deleteInscripciones($partidoMismaFecha);
+						}
+				}
+			}
+			
+			$calendario->setFechaCalendario($_POST["fecha"]);
+			$calendario->setEstadoCalendario("ocupado");
+			$calendario->setPistaCalendario($pista);
+			$calendario->setHoraCalendario($_POST["hora"]);
+
+
+			$this->reservaMapper->save($reserva);
+			$this->calendarioMapper->save($calendario);
+			$this->view->redirect("index","indexLogged");
+		}
+
 		$fechas = array();
 		$horas = array();
 		$numPistas = $this->pistaMapper->getNumPistas();
@@ -60,26 +132,10 @@ class ReservasController extends BaseController {
 			array_push($horas, $horasDia);
 		}
 
-	//	$numPistas = $this->pistaMapper->getNumPistas();
-	//	$horasFecha = $this->calendarioMapper->getHoras("2019-11-21", $numPistas);
-		if (!isset($this->currentUser)) {
-			$this->view->setFlashDanger("You must be logged");
-			$this->view->redirect("users", "login");
-		}
-		if($userRol == "administrador"){
-			$this->view->redirect("index", "indexLogged");
-		}
-
-		if(isset($_POST["hora"])){
-			var_dump($_POST);
-			exit();
-		}
-
 		
         $this->view->setLayout("reservar");
 		$this->view->setVariable("fechas", $fechas);
 		$this->view->setVariable("horas", $horas);
-		// render the view (/view/users/login.php) 
 		$this->view->render("reservar", "reservar");
 	}
 

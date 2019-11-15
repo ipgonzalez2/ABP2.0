@@ -41,5 +41,18 @@ class PistaMapper {
 		return $count["COUNT(id_pista)"];
 	}
 
+	public function getPistas(){
+		$stmt = $this->db->prepare("SELECT id_pista FROM pista");
+		$stmt->execute();
+		$pistas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$pistas = array();
+
+		foreach($pistas_db as $pista){
+			array_push($pistas, $pista["id_pista"]);
+		}
+
+		return $pistas;
+	}
+
 
 }

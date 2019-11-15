@@ -149,5 +149,17 @@ class PartidoMapper {
 		return $partidos;
 	}
 
+	public function getPartidoFecha($fecha, $hora){
+		$stmt = $this->db->prepare("SELECT id_partido FROM partido WHERE fecha_partido=? AND hora_partido=? AND estado_partido=?");
+		$stmt->execute(array($fecha, $hora, "abierto"));
+		$partido = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if($partido != null) {
+			return $partido["id_partido"];
+		} else {
+			return NULL;
+		}
+	}
+
 
 }

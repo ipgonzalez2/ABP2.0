@@ -23,6 +23,8 @@ class Calendario {
 	* @var string
 	*/
 	private $hora_calendario;
+
+	private $pista_calendario;
 	
 
 	
@@ -33,9 +35,10 @@ class Calendario {
 	* @param string $fecha_calendario The name of the reservation
 	* @param string $Precio The password of the reservation
 	*/
-    public function __construct($fecha_calendario=NULL, $estado_calendario=NULL,
+    public function __construct($fecha_calendario=NULL,$pista_calendario=NULL, $estado_calendario=NULL,
     $hora_calendario=NULL) {
-        $this->fecha_calendario = $fecha_calendario;
+		$this->fecha_calendario = $fecha_calendario;
+		$this->pista_calendario = $pista_calendario;
         $this->estado_calendario = $estado_calendario;
 		$this->hora_calendario = $hora_calendario;
 	}
@@ -60,6 +63,20 @@ class Calendario {
 	*/
 	public function setFechaCalendario($fecha_calendario) {
 		$this->fecha_calendario = $fecha_calendario;
+	}
+	
+	public function getPistaCalendario() {
+		return $this->pista_calendario;
+	}
+
+	/**
+	* Sets the tipohora of this reservation
+	*
+	* @param string $fecha_calendario The tipohora of this reservation
+	* @return void
+	*/
+	public function setPistaCalendario($pista_calendario) {
+		$this->pista_calendario = $pista_calendario;
     }
     
     

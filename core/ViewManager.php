@@ -272,6 +272,20 @@ class ViewManager {
 		die();
 	}
 
+	public function setFlashDanger($flashMessage) {
+		$this->setVariable("_flasherror_", $flashMessage, true);
+
+	}
+
+	/**
+	* Retrieves the flash danger message (and pops it)
+	*
+	* @return string The flash message
+	*/
+	public function popFlashDanger() {
+		return $this->getVariable("_flasherror_", "");
+	}
+
 	/**
 	* Renders the layout
 	*

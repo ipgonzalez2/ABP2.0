@@ -30,8 +30,8 @@ class CalendarioMapper {
 	* @return void
 	*/
 	public function save($calendario) {
-		$stmt = $this->db->prepare("INSERT INTO calendario values (?,?,?)");
-        $stmt->execute(array($calendario->getFechaCalendario(), 
+		$stmt = $this->db->prepare("INSERT INTO calendario values (?,?,?,?)");
+        $stmt->execute(array($calendario->getFechaCalendario(), $calendario->getPistaCalendario(),
         $calendario->getEstadoCalendario(), $calendario->getHoraCalendario()));
 	}
 
@@ -53,6 +53,36 @@ class CalendarioMapper {
 		}
 		
 		return array_diff($horasFijas, $horasOcupadas);
+	}
+
+	public function getPistaLibre($fecha, $hora, $pistas){
+		$stmt = $this->db->prepare("SELECT pista_calendario FROM calendario where fecha_calendario=? AND hora_calendario=? AND estado_calendario=?");
+		$stmt->execute(array($fecha,$hora,"ocupado"));
+		
+		$pistas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$pistasOcupadas = array();
+
+		foreach ($pistas_db as $pista) {
+			
+			array_push($pistasOcupadas, $pista["pista_calendario"]);
+			
+		}
+		$pistasLibres1 = array_diff($pistas, $pistasOcupadas);
+		$pistasLibres = array();
+		foreach($pistasLibres1 as $pistaLibre){
+			array_push($pistasLibres, $pistaLibre);
+		}
+
+		return $pistasLibres[0];
+	}
+
+	public function esUltimaPistaLibre($fecha, $hora, $pista, $numPistas){
+		$stmt = $this->db->prepare("SELECT COUNT(pista_calendario) FROM calendario where fecha_calendario=? AND hora_calendario=? AND estado_calendario=?");
+		$stmt->execute(array($fecha,$hora,"ocupado"));
+		
+		$pistas_ocupadas = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		return $pistas_ocupadas["COUNT(pista_calendario)"]==($numPistas-1);
 	}
 
 

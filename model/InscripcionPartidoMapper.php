@@ -41,7 +41,7 @@ class InscripcionPartidoMapper {
         $stmt->execute(array($idPartido));
 
         $inscripciones_db = $stmt->fetch(PDO::FETCH_ASSOC);
-        $numInscripciones = $inscripciones_db["NUM"];
+        $numInscripciones = $inscripciones_db["num"];
         
         return $numInscripciones;
     }
@@ -63,14 +63,14 @@ class InscripcionPartidoMapper {
 
     public function getInscritos($idPartido){
 
-        $stmt = $this->db->prepare("SELECT id_inscripcion_partido FROM inscripcionpartido WHERE id_inscripcion_partido=?");
+        $stmt = $this->db->prepare("SELECT id_inscripcion_usuario FROM inscripcionpartido WHERE id_inscripcion_partido=?");
 		$stmt->execute(array($idPartido));
 		
 		$inscritos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$inscritos = array();
 
 		foreach ($inscritos_db as $inscrito) {
-			array_push($inscritos, $inscrito["id_inscripcion_partido"]);
+			array_push($inscritos, $inscrito["id_inscripcion_usuario"]);
 		}
 
 		return $inscritos;

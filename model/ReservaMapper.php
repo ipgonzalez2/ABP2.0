@@ -31,8 +31,29 @@ class ReservaMapper {
 	*/
 	public function save($reserva) {
 		$stmt = $this->db->prepare("INSERT INTO reserva values (?,?,?,?,?,?)");
-		$stmt->execute(array(0,$reserva->getIdReserva(), $reserva->getFecha(), $reserva->getPrecio(),
-		$reserva->getUsuarioReserva(), $reserva->getPistaReserva()));
+		$stmt->execute(array(0, $reserva->getFecha(), $reserva->getPrecio(),
+		$reserva->getUsuarioReserva(), $reserva->getPistaReserva(), $reserva->getHora()));
+	}
+
+	public function getNumReservasUser($id_usuario) {
+		$stmt = $this->db->prepare("SELECT fecha,hora from reserva where usuario_reserva=?");
+		$stmt->execute(array($id_usuario));
+
+		$reservas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$count = 0;
+		$fecha_actual = date("Y-m-d");
+		$hora_actual = date("H:i:s",time());
+
+
+		foreach($reservas_db as $reserva){
+			if($reserva["fecha"] > $fecha_actual){
+				$count++;
+			}else if(($reserva["fecha"] == $fecha_actual) && ($reserva["hora"] > $hora_actual)){
+				$count++;
+			}
+		}
+
+		return $count;
 	}
 
 
