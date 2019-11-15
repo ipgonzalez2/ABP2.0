@@ -28,12 +28,31 @@ $currentuser = $view->getVariable("currentusername");
 	<link href="styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
 	<link href="styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
 	<!-- enable ji18n() javascript function to translate inside your scripts -->
+	<link rel="canonical" href="https://html5up.net/story">
+	<script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.es.xhypXBFw-YI.O/m=auth/exm=plusone/rt=j/sv=1/d=1/ed=1/am=wQE/rs=AGLTcCNIYS8P8MA2BPqaol3qYCZ18OvnqA/cb=gapi.loaded_1" async=""></script>
 
+
+	<script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.es.xhypXBFw-YI.O/m=plusone/rt=j/sv=1/d=1/ed=1/am=wQE/rs=AGLTcCNIYS8P8MA2BPqaol3qYCZ18OvnqA/cb=gapi.loaded_0" async=""></script>
+
+	<script src="https://connect.facebook.net/en_US/sdk.js?hash=f26ad3eae2197b8988f4c18e71a52410&amp;ua=modern_es6" async="" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" async="" src="https://apis.google.com/js/plusone.js" gapi_processed="true"></script>
+
+	<script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.0"></script>
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/kendo.web.min.js"></script>
 
 	<script src="index.php?controller=language&amp;action=i18njs">
+
+
+<script src="js/jquery.min.js"></script>
+			<script src="js/jquery.scrollex.min.js"></script>
+			<script src="js/jquery.scrolly.min.js"></script>
+			<script src="js/browser.min.js"></script>
+			<script src="js/breakpoints.min.js"></script>
+			<script src="js/util.js"></script>
+			<script src="js/main.js"></script>
 	</script>
 	<?=$view->getFragment("css")?>
 	<?=$view->getFragment("javascript")?>

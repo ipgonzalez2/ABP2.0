@@ -92,6 +92,7 @@ class CampeonatosController extends BaseController {
 					$this->view->setLayout("forms");
 					$this->view->redirect("index", "indexLogged");
 		}
+		$this->view->setLayout("forms");
 
 		// render the view (/view/users/login.php)
 		$this->view->render("campeonatos", "addCampeonato");
@@ -116,6 +117,7 @@ class CampeonatosController extends BaseController {
 		$campeonatos = $this->partidoMapper->findAllPartidosAbiertos($partidosInscrito);
 		}
 		$this->view->setVariable("campeonatos", $campeonatos);
+		$this->view->setLayout("table");
 
 		$this->view->render("campeonatos", "showall");
 	}	

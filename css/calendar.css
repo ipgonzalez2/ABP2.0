@@ -1,255 +1,263 @@
-    html {
-        position: relative;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-    }
-    
-    form {
-        margin-top: 5%;
-        text-align: center;
-        display: flex;
-    }
-    
-    .name {
-        width: 70%;
-        height: 50%;
-    }
-    
-    span {
-        display: inline-block;
-        font-size: 80%;
-        line-height: normal;
-        line-height: 2rem;
-        /*border: 5px solid #a7e2f8;*/
-        cursor: pointer;
-    }
-    
-    h2 {
-        text-align: center;
-    }
-    
-    .cuadrado {
-        top: 50px;
-        left: 50px;
-        text-align: center;
-        align-items: center;
-        width: 139px;
-        height: 100px;
-        background-color: rgb(255, 255, 255);
-        /*border-radius: 1px rgb(210, 210, 210) 10px;*/
-        border: 1px solid rgb(210, 210, 210);
-        border-radius: 20px;
-        padding: 20px;
-        margin: auto;
-        margin-top: 3%;
-        cursor: copy;
-    }
-    
-    .cuadrado-cerrado {
-        top: 50px;
-        left: 50px;
-        text-align: center;
-        align-items: center;
-        width: 139px;
-        height: 100px;
-        background-color: rgb(253, 139, 139);
-        /*border-radius: 1px rgb(210, 210, 210) 10px;*/
-        border: 1px solid rgb(210, 210, 210);
-        border-radius: 20px;
-        padding: 20px;
-        margin: auto;
-        margin-top: 3%;
-        cursor: not-allowed;
-    }
-    
-    .cabecera {}
-    
-    section.calendar {
-        font-family: 'Dosis', sans-serif;
-        color: #000;
-        width: 75%;
-        padding: 45px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translateY(-50%) translateX(-50%);
-        transform: translateY(-50%) translateX(-50%);
-        box-shadow: 0px 0px 17px rgba(195, 195, 195, 0.6);
-        border-radius: 5px;
-    }
-    
-    section.calendar h1 {
-        text-align: center;
-        color: #fcee6d;
-        margin: 0 0 30px 0;
-    }
-    
-    section.calendar form {
-        position: relative;
-        /* display: flex;*/
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        align-content: flex-start;
-    }
-    
-    section.calendar form label.weekday {
-        display: inline-block;
-        width: 25px;
-        margin: 8px;
-        text-align: center;
-        color: #232323;
-    }
-    
-    section.calendar form form {
-        margin: 0;
-        padding: 0;
-    }
-    
-    section.calendar form label.day {
-        display: inline-block;
-        width: 25px;
-        margin: 8px;
-    }
-    
-    section.calendar form label.day span {
-        display: inline-block;
-        width: 25px;
-        height: 25px;
-        line-height: 25px;
-        margin: -2px 0 0 -2px;
-        border-radius: 50%;
-        /* border: 2px solid #f9f9f9;*/
-        text-align: center;
-        transition: all .2s linear;
-        cursor: pointer;
-    }
-    
-    section.calendar form label.day span:hover {
-        border-color: #e7d84f;
-    }
-    
-    section.calendar form label.day em {
-        display: inline-block;
-        position: absolute;
-        border-radius: 50%;
-        border-color: #29323f;
-        width: 3px;
-        height: 3px;
-        background-color: #685e02;
-        margin-left: 11px;
-        margin-top: 2px;
-        opacity: 0;
-        transition: all .2s linear;
-    }
-    
-    section.calendar form label.day input[type=time] {
-        border: 0;
-        opacity: 0;
-        position: absolute;
-        margin-top: 40px;
-        left: -45px;
-        width: 380px;
-        height: 1px;
-        padding: 0;
-        outline: none;
-        font-size: 16px;
-        transition: height .2s linear, opacity .2s linear, color .02s linear;
-        color: #fff;
-    }
-    
-    section.calendar form label.day input[type=time]:focus {
-        opacity: 1;
-        height: 35px;
-        padding: 10px 40px;
-        left: -45px;
-        width: 300px;
-        color: #29323f;
-    }
-    
-    section.calendar form label.day :focus+span {
-        color: #fcee6d;
-        border-color: #fcee6d;
-        background: #fcee6d;
-        color: #29323f;
-        font-weight: bold;
-        margin-bottom: 65px;
-    }
-    
-    section.calendar form label.day input[type=time]:focus~em {
-        border-radius: 0;
-        border: 5px solid transparent;
-        background: transparent;
-        border-bottom-color: white;
-        margin-top: -62px;
-        margin-left: 7px;
-        width: 0;
-        height: 0;
-        display: inline-block;
-        opacity: 1;
-    }
-    
-    section.calendar form label.day input[type=time]:valid~em {
-        display: inline-block;
-        opacity: 1;
-    }
-    
-    section.calendar form label.day.invalid {
-        opacity: 0;
-        width: 25px;
-        height: 25px;
-    }
-    
-    section.calendar form label.day.invalid span,
-    section.calendar form label.day.invalid input {
-        display: none;
-    }
-    
-    section.calendar div.clearfix {
-        clear: both;
-    }
-    
-    section.calendar div.hidden {
-        display: none;
-    }
-    /* Button used to open the contact form - fixed at the bottom of the page */
-    
-    .open-button {
-        background-color: #555;
-        color: white;
-        padding: 16px 20px;
-        border: none;
-        cursor: pointer;
-        opacity: 0.8;
-        position: fixed;
-        bottom: 23px;
-        right: 28px;
-        width: 280px;
-    }
-    /* The popup form - hidden by default */
-    /* Add styles to the form container */
-    
-    .appointment {
-        max-width: 300px;
-        padding: 10px;
-        display: none;
-        position: fixed;
-        right: 15px;
-        z-index: 9;
-        background-color: #f9f9f9;
-        position: absolute;
-        top: 54%;
-        left: 50%;
-        margin-top: -50px;
-        margin-left: -50px;
-        box-shadow: 0px 0px 17px rgba(195, 195, 195, 0.6);
-    }
-    /* Full-width input fields 
+html {
+    position: relative;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+form {
+    margin-top: 5%;
+    text-align: center;
+    display: flex;
+}
+
+.name {
+    width: 70%;
+    height: 50%;
+}
+
+span {
+    display: inline-block;
+    font-size: 80%;
+    line-height: normal;
+    line-height: 2rem;
+    /*border: 5px solid #a7e2f8;*/
+    cursor: pointer;
+}
+
+h2 {
+    text-align: center;
+}
+
+.cuadrado {
+    top: 50px;
+    left: 50px;
+    text-align: center;
+    align-items: center;
+    width: 139px;
+    height: 100px;
+    background-color: rgb(255, 255, 255);
+    /*border-radius: 1px rgb(210, 210, 210) 10px;*/
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 20px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 3%;
+    cursor: pointer;
+}
+
+.cuadrado-no-valido {
+    top: 50px;
+    left: 50px;
+    text-align: center;
+    align-items: center;
+    width: 139px;
+    height: 100px;
+    background-color: rgb(255, 158, 158);
+    /*border-radius: 1px rgb(210, 210, 210) 10px;*/
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 20px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 3%;
+    cursor: not-allowed;
+}
+
+.cabecera {}
+
+section.calendar {
+    font-family: 'Dosis', sans-serif;
+    color: #000;
+    width: 75%;
+    padding: 45px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+    box-shadow: 0px 0px 17px rgba(195, 195, 195, 0.6);
+    border-radius: 5px;
+}
+
+section.calendar h1 {
+    text-align: center;
+    color: #fcee6d;
+    margin: 0 0 30px 0;
+}
+
+section.calendar form {
+    position: relative;
+    /* display: flex;*/
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+section.calendar form label.weekday {
+    display: inline-block;
+    width: 25px;
+    margin: 8px;
+    text-align: center;
+    color: #232323;
+}
+
+section.calendar form form {
+    margin: 0;
+    padding: 0;
+}
+
+section.calendar form label.day {
+    display: inline-block;
+    width: 25px;
+    margin: 8px;
+}
+
+section.calendar form label.day span {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    margin: -2px 0 0 -2px;
+    border-radius: 50%;
+    /* border: 2px solid #f9f9f9;*/
+    text-align: center;
+    transition: all .2s linear;
+    cursor: pointer;
+}
+
+section.calendar form label.day span:hover {
+    border-color: #e7d84f;
+}
+
+section.calendar form label.day em {
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border-color: #29323f;
+    width: 3px;
+    height: 3px;
+    background-color: #685e02;
+    margin-left: 11px;
+    margin-top: 2px;
+    opacity: 0;
+    transition: all .2s linear;
+}
+
+section.calendar form label.day input[type=time] {
+    border: 0;
+    opacity: 0;
+    position: absolute;
+    margin-top: 40px;
+    left: -45px;
+    width: 380px;
+    height: 1px;
+    padding: 0;
+    outline: none;
+    font-size: 16px;
+    transition: height .2s linear, opacity .2s linear, color .02s linear;
+    color: #fff;
+}
+
+section.calendar form label.day input[type=time]:focus {
+    opacity: 1;
+    height: 35px;
+    padding: 10px 40px;
+    left: -45px;
+    width: 300px;
+    color: #29323f;
+}
+
+section.calendar form label.day :focus+span {
+    color: #fcee6d;
+    border-color: #fcee6d;
+    background: #fcee6d;
+    color: #29323f;
+    font-weight: bold;
+    margin-bottom: 65px;
+}
+
+section.calendar form label.day input[type=time]:focus~em {
+    border-radius: 0;
+    border: 5px solid transparent;
+    background: transparent;
+    border-bottom-color: white;
+    margin-top: -62px;
+    margin-left: 7px;
+    width: 0;
+    height: 0;
+    display: inline-block;
+    opacity: 1;
+}
+
+section.calendar form label.day input[type=time]:valid~em {
+    display: inline-block;
+    opacity: 1;
+}
+
+section.calendar form label.day.invalid {
+    opacity: 0;
+    width: 25px;
+    height: 25px;
+}
+
+section.calendar form label.day.invalid span,
+section.calendar form label.day.invalid input {
+    display: none;
+}
+
+section.calendar div.clearfix {
+    clear: both;
+}
+
+section.calendar div.hidden {
+    display: none;
+}
+
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+}
+
+
+/* The popup form - hidden by default */
+
+
+/* Add styles to the form container */
+
+.appointment {
+    max-width: 300px;
+    padding: 10px;
+    display: none;
+    position: fixed;
+    right: 15px;
+    z-index: 9;
+    background-color: #f9f9f9;
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    box-shadow: 0px 0px 17px rgba(195, 195, 195, 0.6);
+}
+
+
+/* Full-width input fields 
 
 .appointment input[type=time],
 {
@@ -259,46 +267,54 @@
     border: none;
     background: #f1f1f1;
 }*/
-    /* When the inputs get focus, do something */
-    
-    .appointment input[type=time]:focus {
-        background-color: #ddd;
-        outline: none;
-    }
-    /* Set a style for the submit/login button */
-    
-    .appointment .btn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 16px 20px;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        margin-bottom: 10px;
-        opacity: 0.8;
-    }
-    /* Add a red background color to the cancel button */
-    
-    .appointment .cancel {
-        background-color: red;
-    }
-    
-    .appointment .summit {
-        background-color: red;
-    }
-    /* Add some hover effects to buttons */
-    
-    .appointment .btn:hover,
-    .open-button:hover {
-        opacity: 1;
-    }
-    
-    .botones {
-        display: inline-flex;
-        margin-top: 5%;
-    }
-    
-    label {
-        color: rgb(107, 107, 107);
-        text-align: center;
-    }
+
+
+/* When the inputs get focus, do something */
+
+.appointment input[type=time]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+
+/* Set a style for the submit/login button */
+
+.appointment .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+
+/* Add a red background color to the cancel button */
+
+.appointment .cancel {
+    background-color: red;
+}
+
+.appointment .summit {
+    background-color: red;
+}
+
+
+/* Add some hover effects to buttons */
+
+.appointment .btn:hover,
+.open-button:hover {
+    opacity: 1;
+}
+
+.botones {
+    display: inline-flex;
+    margin-top: 5%;
+}
+
+label {
+    color: rgb(107, 107, 107);
+    text-align: center;
+}

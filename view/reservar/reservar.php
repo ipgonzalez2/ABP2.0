@@ -1,81 +1,86 @@
 <?php
-require_once __DIR__ . "/../../core/ViewManager.php";
+require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $view->setVariable("title", "Reservar");
 $errors = $view->getVariable("errors");
 $fechas = $view->getVariable("fechas");
 $arrayHoras = $view->getVariable("horas");
-$arrayHoras[0] = array();
+$arrayHoras[1] = array();
 
-$i = 0;
-$pos = 0;
-$z = 0;
+$arrayHoras[5] = array();
+$arrayHoras[7] = array();
+$i =0;
+$pos =0;
+$z =0;
 ?>
 
 
 <section class='calendar'>
 <div class="cabecera">
-<?php foreach ($fechas as $fecha):
-    if ($z < 1) {?>
-	  <h2><i class="fas fa-hand-middle-finger"></i>&nbsp&nbsp&nbsp&nbsp&nbsp<?=$fecha?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="far fa-calendar-alt"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+<?php foreach($fechas as $fecha):
+  if($z<1){?>
+  <h2><i class="fas fa-hand-middle-finger"></i>&nbsp&nbsp&nbsp&nbsp&nbsp<?=date('d-m-Y' , strtotime($fecha))?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="far fa-calendar-alt"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
 
-	  <?php }
-    $z++;
-endforeach;?>
+  <?php } 
+  $z++;
+  endforeach ;?>
 
-
-<?=$fecha?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fas fa-hand-middle-finger"></i></h2>
-</div>
-
+<?=date('d-m-Y' , strtotime($fecha))?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fas fa-hand-middle-finger"></i></h2>
+  </div>
   <form method="POST" action="./index.php?controller=reservas&action=addReserva">
 
-  <?php foreach ($fechas as $fecha): ?>
+  <?php foreach($fechas as $fecha): ?>
+    <?php if(!empty($arrayHoras[$pos])){?>
+   
+      <div class="cuadrado" onclick="openForm(<?=date('d' , strtotime($fecha))?> ,'<?=date('Y-m-d' , strtotime($fecha))?>'  ,<?=$pos?>)">
+      <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("l" , strtotime($fecha))?> </span>
 
-   <?php if (empty($arrayHoras[$pos])) {?>
-  <div class="cuadrado-cerrado" >
-    <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("l", strtotime($fecha))?> </span>
+        <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?>>
+    
+          <input style="display:none" class="todasFechas" name id=<?=date('Y-m-d' , strtotime($fecha))?> value=<?=$fecha?>>
+          <span><?=date("d" , strtotime($fecha))?> </span>
+         </input>
+         <em></em>
+        </label>
+      </div>
 
-    <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?>>
+  <?php } else{?>
+    <div class="cuadrado-no-valido">
+      <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("l" , strtotime($fecha))?> </span>
 
-    <input style="display:none" class="todasFechas" name id=<?=date('Y-m-d', strtotime($fecha))?> value=<?=$fecha?>>
-    <span><?=date("d", strtotime($fecha))?> </span>
-    </input>
-    <em></em>
-    </label>
-  </div>
+        <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?>>
+    
+          <input style="display:none" class="todasFechas" name id=<?=date('Y-m-d' , strtotime($fecha))?> value=<?=$fecha?>>
+          <span><?=date("d" , strtotime($fecha))?> </span>
+         </input>
+         <em></em>
+        </label>
+      </div>
+  <?php } ?>
+
 
     <?php $pos++;?>
-   <?php } else {?>
-    <div class="cuadrado" onclick="openForm(<?=date('d', strtotime($fecha))?> ,'<?=date('Y-m-d', strtotime($fecha))?>' ,<?=$pos?>)">
-    <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("l", strtotime($fecha))?> </span>
 
-    <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?>>
+  
 
-    <input style="display:none" class="todasFechas" name id=<?=date('Y-m-d', strtotime($fecha))?> value=<?=$fecha?>>
-    <span><?=date("d", strtotime($fecha))?> </span>
-    </input>
-    <em></em>
-    </label>
-
-   <?php }?>
-    <?php endforeach;?>
+    <?php endforeach; ?>
 
     <div class='clearfix'></div>
     </section>
 
-    <div class="appointment" id="myForm" dia="" posicion = "">
+    <div class="appointment" id="myForm" dia="" posicion = ""> 
 
     <label id="dia" for="appt-time"></label>
 
     <?php for ($i = 0; $i < 14; $i++) {?>
 
-      <select class="horas" name id=<?=$i?> style="display:none;">
-      <?php foreach ($arrayHoras[$i] as $hdia): ?>
+      <select class="horas" name id=<?=$i?> style="display:none;">  
+      <?php foreach($arrayHoras[$i] as $hdia): ?>
         <option value=<?=$hdia?>><?=$hdia?></option>
-      <?php endforeach;?>
+      <?php endforeach; ?>
       </select>
 
-    <?php }?>
+    <?php } ?>
 
     <div class="botones">
           <button type="submit">Guardar</button>
@@ -83,12 +88,12 @@ endforeach;?>
     </div>
 
     </div>
-
+  
   </form>
 
 
 <script>
-
+  
 function openForm(d, anho ,pos) {
   console.log(d ,"<--dia",anho," <--año",pos)
   var fechas = document.getElementsByClassName("todasFechas");
@@ -99,7 +104,7 @@ function openForm(d, anho ,pos) {
     list[i].removeAttribute("name");
     fechas[i].removeAttribute("name");
   }
-
+  
   var selectAsd = document.getElementById( pos );
   selectAsd.style.display = 'block';
 
@@ -116,6 +121,7 @@ function openForm(d, anho ,pos) {
 
 
 
+  
 }
 
 function closeForm() {

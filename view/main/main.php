@@ -152,7 +152,10 @@ $errors = $view->getVariable("errors");
                     </ul>
                 </div>
             </article>
+            <div class="forward"></div>
+            <div class="backward"></div>
 
+            
         </div>
 
     </section>
