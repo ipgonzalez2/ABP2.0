@@ -57,7 +57,7 @@ $currentuser = $view->getVariable("currentusername");
 			<i class="fa fa-bars"></i>
 		</div>
 		<div class="header-social">
-        <a href=""><i class="fa fa-calendar-alt"></i></a>
+        <a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>
         <a href="./index.php?controller=partidos&action=showallPartidosInscrito"><i class="fa fa-table-tennis"></i></a>
         <a href=""><i class="fa fa-medal"></i></a>
         <a href="./index.php?controller=users&action=notificaciones"><i class="fa fa-envelope"></i></a>
