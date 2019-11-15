@@ -29,15 +29,13 @@ $z =0;
 
   <?php foreach($fechas as $fecha): ?>
 
-    <?php if($i==7){ ?>
-      
-    <?php } $i++?>
-  <div class="cuadrado" onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)">
+   
+  <div class="cuadrado" onclick="openForm(<?=date('d' , strtotime($fecha))?> ,'<?=date('Y-m-d' , strtotime($fecha))?>' ,<?=$pos?>)">
     <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("l" , strtotime($fecha))?> </span>
 
-    <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?> onclick="openForm(<?=date('d' , strtotime($fecha))?>  ,<?=$pos?>)"  >
+    <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?>>
     
-    <input style="display:none" class="todasFechas" name id=<?=date('d' , strtotime($fecha))?> value=<?=$fecha?>>
+    <input style="display:none" class="todasFechas" name id=<?=date('Y-m-d' , strtotime($fecha))?> value=<?=$fecha?>>
     <span><?=date("d" , strtotime($fecha))?> </span>
     </input>
     <em></em>
@@ -57,7 +55,7 @@ $z =0;
 
     <label id="dia" for="appt-time"></label>
 
-    <?php for ($i = 0; $i <= 15; $i++) {?>
+    <?php for ($i = 0; $i < 14; $i++) {?>
 
       <select class="horas" name id=<?=$i?> style="display:none;">  
       <?php foreach($arrayHoras[$i] as $hdia): ?>
@@ -79,11 +77,12 @@ $z =0;
 
 <script>
   
-function openForm(d ,pos) {
+function openForm(d, anho ,pos) {
+  console.log(d ,"<--dia",anho," <--año",pos)
   var fechas = document.getElementsByClassName("todasFechas");
   var list = document.getElementsByClassName("horas");
 
-  for(var i = 0;i<8;i++){
+  for(var i = 0;i<14;i++){
     list[i].style.display="none";
     list[i].removeAttribute("name");
     fechas[i].removeAttribute("name");
@@ -93,15 +92,13 @@ function openForm(d ,pos) {
   selectAsd.style.display = 'block';
 
   document.getElementById(pos).setAttribute("name","hora");
-  document.getElementById(d).setAttribute("name","fecha");
+  document.getElementById(anho).setAttribute("name","fecha");
 
 
   document.getElementById("myForm").style.display = "block";
   document.getElementById("myForm").setAttribute("dia",""+d);
   document.getElementById("myForm").setAttribute("posicion",""+pos);
   document.getElementById("dia").innerHTML = "Reserva del dia " +d+"  (09:00 a 21:00)" ;
-  document.cookie="posicion = " + pos;
-  document.cookie="dia = " + d;
 
 
 
@@ -112,6 +109,8 @@ function openForm(d ,pos) {
 
 function closeForm() {
   document.getElementById("myForm").style.display = "none";
+
+
 }
 </script>
 
