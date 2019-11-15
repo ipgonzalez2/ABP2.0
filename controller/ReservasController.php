@@ -75,7 +75,6 @@ class ReservasController extends BaseController {
 		
 		$numReservasUser = $this->reservaMapper->getNumReservasUser($userId);
 		if($numReservasUser == 5){
-			$this->view->setFlashDanger("Maximo de 5 reservas activas");
 			$this->view->redirect("index", "indexLogged");
 		}
 

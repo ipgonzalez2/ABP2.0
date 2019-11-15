@@ -19,7 +19,6 @@ $errors = $view->getVariable("errors");
     </div>
 </header>
 
-
 <!-- Wrapper -->
 <div id="wrapper" class="divided">
 

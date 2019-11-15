@@ -25,6 +25,7 @@ $view = ViewManager::getInstance();
 </head>
 
 <body>
+
 	<?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
 </body>
 

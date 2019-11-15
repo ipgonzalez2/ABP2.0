@@ -32,7 +32,26 @@ $userRol = $view->getVariable("userRol");
   <td><?= $reserva->getHora()?></td>
   <td><?= $reserva->getPrecio()?></td>
   <td><?= $reserva->getPistaReserva()?></td>
-  
+  <?php 
+  $fecha_actual = new DateTime(date("Y-m-d"));
+  $fecha = new DateTime($reserva->getFecha());
+  $interval = ($fecha_actual->diff($fecha))->format("%a");
+  if($interval == 0 || $interval == 1){
+    $hora_actual = new DateTime(date("H:i:s",time()));
+    $hora = new DateTime($reserva->getHora());
+    $intervalHoras = ($hora_actual->diff($hora))->format("%H");
+    $intervalMinutos = ($hora_actual->diff($hora))->format("%i");
+    if($intervalHoras>12 || ($intervalHoras==12 && $intervalMinutos==0)){?>
+    <td><a href="<?= "index.php?controller=reservas&action=deleteReserva&idReserva=" . $reserva->getIdReserva() ?>">
+                    <i class="fa fa-trash-alt"></i>
+                  </a></td>
+    <?php } }else{ ?>
+    <td><a href="<?= "index.php?controller=reservas&action=deleteReserva&idReserva=" . $reserva->getIdReserva()  ?>">
+        <i class="fa fa-trash-alt"></i>
+        </a></td>
+    <?php } ?>
+
+
 </tr>
 <?php endforeach; ?>
 </table> 

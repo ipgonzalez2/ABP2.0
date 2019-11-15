@@ -52,7 +52,7 @@ $userRol = $view->getVariable("userRol");
                     <i class="fa fa-trash-alt"></i>
                   </a></td><?php } else if ($userRol == "deportista") { ?>
                 <td><a href="<?= "index.php?controller=partidos&action=showPartidoInscribir&idPartido=" . $partido->getIdPartido() ?>">
-                    <i class="fa fa-user-plus"></i>
+                    <i class="fa fa-user-plus"></i></a>
                   <?php } ?>
             </tr>
           <?php endforeach; ?>
