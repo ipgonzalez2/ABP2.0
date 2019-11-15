@@ -162,5 +162,19 @@ class PartidoMapper {
 		}
 	}
 
+	public function getHoras($fecha){
+	$stmt = $this->db->prepare("SELECT hora_partido FROM partido where fecha_partido=? AND estado_partido=?");
+    $stmt->execute(array($fecha,"abierto"));
+		
+		$horas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$horasOcupadas = array();
+
+		foreach ($horas_db as $hora) {
+			array_push($horasOcupadas, $hora["hora_partido"]);
+		}
+		
+		return $horasOcupadas;
+	}
+
 
 }

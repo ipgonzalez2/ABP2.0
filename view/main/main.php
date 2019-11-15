@@ -3,7 +3,12 @@ require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $view->setVariable("title", "Main");
 $errors = $view->getVariable("errors");
+$pop = $view->popFlash();
+
+
 ?>
+
+
 
 <header class="header-section">
     <div class="nav-switch">

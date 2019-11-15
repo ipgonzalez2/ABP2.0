@@ -37,6 +37,8 @@ class Reserva {
 
 	private $hora;
 
+	private $partido_reserva;
+
 	
 	/** 
 	* The constructor
@@ -45,13 +47,14 @@ class Reserva {
 	* @param string $Precio The password of the reservation
 	*/
 	public function __construct($id_reserva=NULL, $fecha=NULL, $precio=NULL, $usuario_reserva=NULL,
-	$pista_reserva=NULL, $hora=NULL) {
+	$pista_reserva=NULL, $hora=NULL, $partido_reserva=NULL) {
 		$this->id_reserva = $id_reserva;
 		$this->fecha = $fecha;
 		$this->precio = $precio;
 		$this->usuario_reserva = $usuario_reserva;
 		$this->pista_reserva = $pista_reserva;
 		$this->hora = $hora;
+		$this->partido_reserva = $partido_reserva;
 	}
 	
 	/**
@@ -153,6 +156,15 @@ class Reserva {
 	public function setHora($hora){
 		$this->hora = $hora;
 	}
+
+	public function getPartidoReserva(){
+		return $this->partido_reserva;
+	}
+
+	public function setPartidoReserva($partido_reserva){
+		$this->partido_reserva = $partido_reserva;
+	}
+
 
 
 	/**

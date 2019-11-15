@@ -30,9 +30,9 @@ class ReservaMapper {
 	* @return void
 	*/
 	public function save($reserva) {
-		$stmt = $this->db->prepare("INSERT INTO reserva values (?,?,?,?,?,?)");
+		$stmt = $this->db->prepare("INSERT INTO reserva values (?,?,?,?,?,?,?)");
 		$stmt->execute(array(0, $reserva->getFecha(), $reserva->getPrecio(),
-		$reserva->getUsuarioReserva(), $reserva->getPistaReserva(), $reserva->getHora()));
+		$reserva->getUsuarioReserva(), $reserva->getPistaReserva(), $reserva->getHora(), $reserva->getPartidoReserva()));
 	}
 
 	public function getNumReservasUser($id_reserva) {
@@ -69,7 +69,7 @@ class ReservaMapper {
 		foreach($reservas_db as $reserva){
 			if(($reserva["fecha"] > $fecha_actual) || (($reserva["fecha"] == $fecha_actual) && ($reserva["hora"] > $hora_actual))){
 				array_push($reservas, new Reserva($reserva["id_reserva"], $reserva["fecha"], $reserva["precio"],
-				$reserva["usuario_reserva"], $reserva["pista_reserva"], $reserva["hora"]));
+				$reserva["usuario_reserva"], $reserva["pista_reserva"], $reserva["hora"], $reserva["partido_reserva"]));
 			}
 		}
 
@@ -89,7 +89,8 @@ class ReservaMapper {
 			$reserva["precio"],
 			$reserva["usuario_reserva"],
 			$reserva["pista_reserva"],
-			$reserva["hora"]);
+			$reserva["hora"],
+			$reserva["partido_reserva"]);
 		} else {
 			return NULL;
 		}

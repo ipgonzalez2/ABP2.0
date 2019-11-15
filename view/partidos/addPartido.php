@@ -1,45 +1,133 @@
 <?php
-//file: view/users/register.php
-
 require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
-$view->setVariable("title", "Crear Partido");
-
+$view->setVariable("title", "Añadir Partido");
 $errors = $view->getVariable("errors");
+$fechas = $view->getVariable("fechas");
+$arrayHoras = $view->getVariable("horas");
+$arrayHoras[1] = array();
+
+$arrayHoras[5] = array();
+$arrayHoras[7] = array();
+$i =0;
+$pos =0;
+$z =0;
 ?>
 
 
-<div class="container-contact100">
+<section class='calendar'>
+<div class="cabecera">
+<?php foreach($fechas as $fecha):
+  if($z<1){?>
+  <h2><i class="fas fa-hand-middle-finger"></i>&nbsp&nbsp&nbsp&nbsp&nbsp<?=date('d-m-Y' , strtotime($fecha))?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="far fa-calendar-alt"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
 
-	<div class="wrap-contact100">
+  <?php } 
+  $z++;
+  endforeach ;?>
 
-		<form class="contact100-form validate-form" method="POST" action="./index.php?controller=partidos&action=addPartido">
-			<span class="contact100-form-title">
-				Crear un partido
-			</span>
+<?=date('d-m-Y' , strtotime($fecha))?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fas fa-hand-middle-finger"></i></h2>
+  </div>
+  <form method="POST" action="./index.php?controller=partidos&action=addPartido">
 
-			<div class="wrap-input100 validate-input">
-				<input class="input100" type="date" name="fechaPartido" placeholder="Fecha">
+  <?php foreach($fechas as $fecha): ?>
+    <?php if(!empty($arrayHoras[$pos])){?>
+   
+      <div class="cuadrado" onclick="openForm(<?=date('d' , strtotime($fecha))?> ,'<?=date('Y-m-d' , strtotime($fecha))?>'  ,<?=$pos?>)">
+      <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("l" , strtotime($fecha))?> </span>
 
-			</div>
+        <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?>>
+    
+          <input style="display:none" class="todasFechas" name id=<?=date('Y-m-d' , strtotime($fecha))?> value=<?=$fecha?>>
+          <span><?=date("d" , strtotime($fecha))?> </span>
+         </input>
+         <em></em>
+        </label>
+      </div>
 
-			<div class="wrap-input100 validate-input">
-				<input class="input100" type="text" name="precioPartido" placeholder="Precio">
+  <?php } else{?>
+    <div class="cuadrado-no-valido">
+      <span value=<?=$fecha?> data-day=<?=$fecha?> name ="fecha"><?=date("l" , strtotime($fecha))?> </span>
 
-			</div>
-
-			<div class="container-contact100-form-btn">
-				<button class="contact100-form-btn">
-					<span>
-					<i class="fas fa-plus-circle"></i>					
-						Crear
-					</span>
-				</button>
-			</div>
-
-		</form>
-	</div>
-</div>
+        <label class='day' value=<?=$fecha?>  data-day=<?=$fecha?>>
+    
+          <input style="display:none" class="todasFechas" name id=<?=date('Y-m-d' , strtotime($fecha))?> value=<?=$fecha?>>
+          <span><?=date("d" , strtotime($fecha))?> </span>
+         </input>
+         <em></em>
+        </label>
+      </div>
+  <?php } ?>
 
 
+    <?php $pos++;?>
+
+  
+
+    <?php endforeach; ?>
+
+    <div class='clearfix'></div>
+    </section>
+
+    <div class="appointment" id="myForm" dia="" posicion = ""> 
+
+    <label id="dia" for="appt-time"></label>
+
+    <?php for ($i = 0; $i < 14; $i++) {?>
+
+      <select class="horas" name id=<?=$i?> style="display:none;">  
+      <?php foreach($arrayHoras[$i] as $hdia): ?>
+        <option value=<?=$hdia?>><?=$hdia?></option>
+      <?php endforeach; ?>
+      </select>
+
+    <?php } ?>
+
+    <div class="botones">
+          <button type="submit">Guardar</button>
+          <button type="button" onclick="closeForm()" >cerrar </button>
+    </div>
+
+    </div>
+  
+  </form>
+
+
+<script>
+  
+function openForm(d, anho ,pos) {
+  console.log(d ,"<--dia",anho," <--año",pos)
+  var fechas = document.getElementsByClassName("todasFechas");
+  var list = document.getElementsByClassName("horas");
+
+  for(var i = 0;i<14;i++){
+    list[i].style.display="none";
+    list[i].removeAttribute("name");
+    fechas[i].removeAttribute("name");
+  }
+  
+  var selectAsd = document.getElementById( pos );
+  selectAsd.style.display = 'block';
+
+  document.getElementById(pos).setAttribute("name","hora");
+  document.getElementById(anho).setAttribute("name","fecha");
+
+
+  document.getElementById("myForm").style.display = "block";
+  document.getElementById("myForm").setAttribute("dia",""+d);
+  document.getElementById("myForm").setAttribute("posicion",""+pos);
+  document.getElementById("dia").innerHTML = "Partido para el dia " +d+"  (09:00 a 21:00)" ;
+
+
+
+
+
+  
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+
+
+}
+</script>
 

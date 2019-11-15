@@ -9,6 +9,12 @@ require_once(__DIR__."/../model/InscripcionPartido.php");
 require_once(__DIR__."/../model/InscripcionPartidoMapper.php");
 require_once(__DIR__."/../model/Notificacion.php");
 require_once(__DIR__."/../model/NotificacionMapper.php");
+require_once(__DIR__."/../model/Calendario.php");
+require_once(__DIR__."/../model/CalendarioMapper.php");
+require_once(__DIR__."/../model/Pista.php");
+require_once(__DIR__."/../model/PistaMapper.php");
+require_once(__DIR__."/../model/Reserva.php");
+require_once(__DIR__."/../model/ReservaMapper.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -30,6 +36,9 @@ class PartidosController extends BaseController {
 	private $partidoMapper;
 	private $inscripcionPartidoMapper;
 	private $notificacionMapper;
+	private $calendarioMapper;
+	private $pistaMapper;
+	private $reservaMapper;
 
 	public function __construct() {
 		parent::__construct();
@@ -37,6 +46,9 @@ class PartidosController extends BaseController {
 		$this->partidoMapper = new PartidoMapper();
 		$this->inscripcionPartidoMapper = new InscripcionPartidoMapper();
 		$this->notificacionMapper = new NotificacionMapper();
+		$this->calendarioMapper = new CalendarioMapper();
+		$this->pistaMapper = new PistaMapper();
+		$this->reservaMapper = new ReservaMapper();
 
 		// Users controller operates in a "welcome" layout
 		// different to the "default" layout where the internal
@@ -56,14 +68,15 @@ class PartidosController extends BaseController {
 			$this->view->redirect("index", "indexLogged");
 		}
 
-		if (isset($_POST["fechaPartido"])){ // reaching via HTTP Post...
+		if (isset($_POST["hora"])){ 
+			// reaching via HTTP Post...
 			// populate the User object with data form the form
-			$fechaPartido=date("Y-m-d",strtotime($_POST["fechaPartido"]));
-			$fechaInscripcionPartido=date("Y-m-d", strtotime("-3 day", strtotime($_POST["fechaPartido"])));
-			$partido->setFechaPartido($fechaPartido);
+			$fechaInscripcionPartido=date("Y-m-d", strtotime("-1 day", strtotime($_POST["fecha"])));
+			$partido->setFechaPartido($_POST["fecha"]);
             $partido->setFechaFinInscripcion($fechaInscripcionPartido);
-            $partido->setPrecioPartido($_POST["precioPartido"]);
-            $partido->setEstadoPartido("abierto");
+            $partido->setPrecioPartido(9);
+			$partido->setEstadoPartido("abierto");
+			$partido->setHoraPartido($_POST["hora"]);
 
 					$this->partidoMapper->save($partido);
 
@@ -79,7 +92,22 @@ class PartidosController extends BaseController {
 					// die();
 					$this->view->redirect("index", "indexLogged");
 		}
-		$this->view->setLayout("forms");
+		$fechas = array();
+		$horas = array();
+		$numPistas = $this->pistaMapper->getNumPistas();
+        for($i=0; $i < 14; $i++){
+            $dias = "+".(7+$i)." days";
+			$fecha=date("Y-m-d",strtotime($dias));
+			$horasDia = $this->calendarioMapper->getHoras($fecha, $numPistas);
+			$horasPartido = $this->partidoMapper->getHoras($fecha);
+			$horasFinales = array_diff($horasDia, $horasPartido);
+			array_push($fechas, $fecha);
+			array_push($horas, $horasFinales);
+		}
+
+		$this->view->setLayout("reservar");
+		$this->view->setVariable("fechas", $fechas);
+		$this->view->setVariable("horas", $horas);
 
 		// render the view (/view/users/login.php)
 		$this->view->render("partidos", "addPartido");
@@ -122,9 +150,6 @@ class PartidosController extends BaseController {
 		if(isset($_GET["idPartido"])){
 			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
 			$fechaPartido = $partido->getFechaPartido();
-			if($partido->getEstadoPartido() == "cerrado"){
-				$this->view->redirect("index","indexLogged");
-			}
 			$this->partidoMapper->deletePartido($_GET["idPartido"]);
 			$numInscripciones = $this->inscripcionPartidoMapper->getNumInscripciones($_GET["idPartido"]);
 			if($numInscripciones > 0){
@@ -157,7 +182,7 @@ class PartidosController extends BaseController {
 		if($userRol == "administrador") {
 			$this->view->redirect("index","indexLogged");
 		}
-
+		$this->partidoMapper->actualizarPartidos();
 		if(isset($_GET["idPartido"])){
 
 			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
@@ -187,7 +212,7 @@ class PartidosController extends BaseController {
 		if($userRol == "administrador") {
 			$this->view->redirect("index","indexLogged");
 		}
-
+		$this->partidoMapper->actualizarPartidos();
 		if(isset($_GET["idPartido"])){
 
 			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
@@ -206,18 +231,29 @@ class PartidosController extends BaseController {
 			if($numInscripciones == 3){
 				$this->inscripcionPartidoMapper->save($inscripcionPartido);
 				$this->partidoMapper->cerrarPartido($_GET["idPartido"]);
+
+				//Reserva
+				$reserva = new Reserva();
+				$reserva->setFecha($partido->getFechaPartido());
+				$reserva->setPrecio($pago);
+				$pistas = $this->pistaMapper->getPistas();
+				$pista = $this->calendarioMapper->getPistaLibre($partido->getFechaPartido(),$partido->getHoraPartido(),$pistas);
+				$reserva->setPistaReserva($pista);
+				$reserva->setHora($partido->getHoraPartido());
+				$reserva->setPartidoReserva($_GET["idPartido"]);
+
+				$this->reservaMapper->save($reserva);
+
 				$inscritos = $this->inscripcionPartidoMapper->getInscritos($_GET["idPartido"]);
 				foreach($inscritos as $inscrito){
 					$notificacion = new Notificacion();
 					$notificacion->setIdUsuarioNotificacion($inscrito);
 					$notificacion->setMensaje("El partido con fecha ".$fechaPartido." ha sido cerrado.
-					\nRecuerde que tendrá que pagar un importe de ".$pago." al acceder al mismo.\n");
+					\nRecuerde que tendrá que pagar un importe de ".$pago." al acceder al mismo.\n Pista: ".$pista."\n");
 					$this->notificacionMapper->save($notificacion);
 				}
 			}else if($numInscripciones>-1 && $numInscripciones<4){
 				$this->inscripcionPartidoMapper->save($inscripcionPartido);
-			}else{
-				$this->partidoMapper->cerrarPartido($_GET["idPartido"]);
 			}
 
 		}

@@ -54,9 +54,10 @@ create table if not exists reserva(
   id_reserva int(10) auto_increment,
   fecha date not null,
   precio float(10,2) not null,
-  usuario_reserva int(10) not null,
+  usuario_reserva int(10),
   pista_reserva int(10) not null,
   hora time not null,
+  partido_reserva int(10),
 
   constraint fk_usuario foreign key(usuario_reserva) references usuario(id_usuario) on delete cascade,
   constraint fk_pista foreign key(pista_reserva) references pista(id_pista) on delete cascade,

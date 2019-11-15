@@ -86,6 +86,7 @@ $currentuser = $view->getVariable("currentusername");
 		<?=$view->getFragment(ViewManager::DEFAULT_FRAGMENT)?>
 	</main>
 
+
 	<footer>
 		<footer>
 			<p>Posted by: Nacho Quintas</p>
