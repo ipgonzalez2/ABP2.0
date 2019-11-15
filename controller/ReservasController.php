@@ -163,6 +163,51 @@ class ReservasController extends BaseController {
 		$this->view->render("reservas", "showReservasActivas");
 	}
 
-	
+	public function deleteReserva() {
 
-}
+		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
+		
+		if (!isset($this->currentUser)) {
+			$this->view->redirect("users", "login");
+		}
+
+		if($userRol=="administrador"){
+			$this->view->redirect("index", "indexLogged");
+		}
+
+		if(isset($_GET["idReserva"])){
+
+			if(!($this->reservaMapper->esPropietario($_GET["idReserva"], $userId))){
+				$this->view->redirect("index", "indexLogged");
+			}
+
+			$reserva = $this->reservaMapper->findReserva($_GET["idReserva"]);
+			$fecha_actual = new DateTime(date("Y-m-d"));
+ 			$fecha = new DateTime($reserva->getFecha());
+			 $interval = ($fecha_actual->diff($fecha))->format("%a");
+			if($interval==0){
+				$this->view->redirect("index", "indexLogged");
+			}
+  			if($interval == 1){
+				$hora_actual = (new DateTime(date("H:i:s",time())))->format("H");
+				$minutos_actual = (new DateTime(date("H:i:s",time())))->format("i");
+				$hora = (new DateTime($reserva->getHora()))->format("H");
+				$minutos = (new DateTime($reserva->getHora()))->format("i");
+			if(($hora<$hora_actual || ($hora==$hora_actual && $minutos<$minutos_actual))){   
+				$this->view->redirect("index", "indexLogged");
+			}
+			}
+			$this->reservaMapper->deleteReserva($_GET["idReserva"]);
+			$this->calendarioMapper->deleteCalendario($reserva->getFecha(), $reserva->getHora(), $reserva->getPistaReserva());
+			
+			$this->view->redirect("index", "indexLogged");
+
+		}
+
+		$this->view->render("reservas", "showReservasActivas");
+	}
+
+	
+	}
+

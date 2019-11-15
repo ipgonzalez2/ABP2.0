@@ -35,9 +35,9 @@ class ReservaMapper {
 		$reserva->getUsuarioReserva(), $reserva->getPistaReserva(), $reserva->getHora()));
 	}
 
-	public function getNumReservasUser($id_usuario) {
+	public function getNumReservasUser($id_reserva) {
 		$stmt = $this->db->prepare("SELECT fecha,hora from reserva where usuario_reserva=?");
-		$stmt->execute(array($id_usuario));
+		$stmt->execute(array($id_reserva));
 
 		$reservas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$count = 0;
@@ -56,9 +56,9 @@ class ReservaMapper {
 		return $count;
 	}
 
-	public function getReservasActivas($id_usuario) {
+	public function getReservasActivas($id_reserva) {
 		$stmt = $this->db->prepare("SELECT * from reserva where usuario_reserva=?");
-		$stmt->execute(array($id_usuario));
+		$stmt->execute(array($id_reserva));
 
 		$reservas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$reservas = array();
@@ -74,6 +74,43 @@ class ReservaMapper {
 		}
 
 		return $reservas;
+	}
+
+	public function findReserva($id_reserva) {
+		$stmt = $this->db->prepare("SELECT * from reserva where id_reserva=?");
+		$stmt->execute(array($id_reserva));
+
+		$reserva = $stmt->fetch(PDO::FETCH_ASSOC);
+		
+		if($reserva != null) {
+			return new Reserva(
+			$id_reserva,
+			$reserva["fecha"],
+			$reserva["precio"],
+			$reserva["usuario_reserva"],
+			$reserva["pista_reserva"],
+			$reserva["hora"]);
+		} else {
+			return NULL;
+		}
+
+		return $reserva;
+	}
+
+	public function esPropietario($id_reserva, $id_usuario) {
+		$stmt = $this->db->prepare("SELECT count(id_reserva) from reserva where id_reserva=? AND usuario_reserva=?");
+		$stmt->execute(array($id_reserva, $id_usuario));
+
+		if ($stmt->fetchColumn() > 0) {
+			return true;
+		}
+
+	}
+
+	public function deleteReserva($id_reserva) {
+		$stmt = $this->db->prepare("DELETE from reserva where id_reserva=?");
+		$stmt->execute(array($id_reserva));
+		
 	}
 
 

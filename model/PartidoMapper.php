@@ -30,9 +30,9 @@ class PartidoMapper {
 	* @return void
 	*/
 	public function save($partido) {
-		$stmt = $this->db->prepare("INSERT INTO partido values (?,?,?,?,?)");
-        $stmt->execute(array(NULL, $partido->getFechaPartido(), 
-        $partido->getPrecioPartido(), $partido->getEstadoPartido(), $partido->getFechaFinInscripcion()));
+		$stmt = $this->db->prepare("INSERT INTO partido values (?,?,?,?,?,?)");
+		$stmt->execute(array(NULL, $partido->getFechaPartido(), $partido->getPrecioPartido(), 
+		$partido->getEstadoPartido(), $partido->getFechaFinInscripcion(), $partido->getHoraPartido()));
 	}
 
 	public function findAllPartidos() 
@@ -45,7 +45,7 @@ class PartidoMapper {
 
 		foreach ($partidos_db as $partido) {
 			array_push($partidos, new Partido($partido["id_partido"],$partido["fecha_partido"], $partido["precio_partido"],
-			$partido["estado_partido"], $partido["fecha_fin_inscripcion"]));
+			$partido["estado_partido"], $partido["fecha_fin_inscripcion"], $partido["hora_partido"]));
 		}
 		return $partidos;
 	}
@@ -61,7 +61,7 @@ class PartidoMapper {
 		foreach ($partidos_db as $partido) {
 				if(!(in_array($partido["id_partido"],$partidosInscrito))){
 					array_push($partidos, new Partido($partido["id_partido"],$partido["fecha_partido"], $partido["precio_partido"],
-					$partido["estado_partido"], $partido["fecha_fin_inscripcion"]));
+					$partido["estado_partido"], $partido["fecha_fin_inscripcion"], $partido["hora_partido"]));
 				}
 		}
 
@@ -119,7 +119,8 @@ class PartidoMapper {
 			$partido["fecha_partido"],
 			$partido["precio_partido"],
 			$partido["estado_partido"],
-			$partido["fecha_fin_inscripcion"]);
+			$partido["fecha_fin_inscripcion"],
+			$partido["hora_partido"]);
 		} else {
 			return NULL;
 		}
@@ -142,7 +143,7 @@ class PartidoMapper {
 		foreach ($partidos_db as $partido) {
 				if((in_array($partido["id_partido"],$partidosInscrito))){
 					array_push($partidos, new Partido($partido["id_partido"],$partido["fecha_partido"], $partido["precio_partido"],
-					$partido["estado_partido"], $partido["fecha_fin_inscripcion"]));
+					$partido["estado_partido"], $partido["fecha_fin_inscripcion"], $partido["hora_partido"]));
 				}
 		}
 

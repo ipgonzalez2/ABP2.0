@@ -85,5 +85,11 @@ class CalendarioMapper {
 		return $pistas_ocupadas["COUNT(pista_calendario)"]==($numPistas-1);
 	}
 
+	public function deleteCalendario($fecha, $hora, $pista) {
+		$stmt = $this->db->prepare("DELETE from calendario where fecha_calendario=? AND hora_calendario=? AND pista_calendario=?");
+		$stmt->execute(array($fecha, $hora, $pista));
+		
+	}
+
 
 }
