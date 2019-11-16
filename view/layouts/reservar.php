@@ -45,8 +45,11 @@ $userRol = $view->getVariable("userRol");
 	<!-- header -->
 	<header class="header-section">
 	<div class="nav-switch">
+	<a href="./index.php?"><i class="fa fa-cannabis"></i></a>
 			<a href="javascript:history.back()">
 			<i class="fas fa-angle-double-left"></i>
+			</a>
+			
 		</div>
 		<div class="header-social">
         <?php if($userRol=="administrador"){?>

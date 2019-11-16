@@ -15,15 +15,9 @@ $userRol = $view->getVariable("userRol");
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-
+	
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/mainTable.css">
 
@@ -59,8 +53,10 @@ $userRol = $view->getVariable("userRol");
 	<!-- header -->
 	<header class="header-section">
 	<div class="nav-switch">
+	<a href="./index.php?"><i class="fa fa-cannabis fa-2x"></i></a>
 			<a href="javascript:history.back()">
-			<i class="fas fa-angle-double-left"></i>
+			<i class="fas fa-angle-double-left fa-2x" ></i></a>
+			
 		</div>
 		<div class="header-social">
         <?php if($userRol=="administrador"){?>

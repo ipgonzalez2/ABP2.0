@@ -12,7 +12,6 @@ $userRol = $view->getVariable("userRol");
 <head>
 	<title><?=$view->getVariable("title", "no title")?></title>
 	<meta charset="utf-8">
-	<link href="css/all.css" rel="stylesheet">
 	<!--load all styles -->
 	<link href="css/fontawesome.css" rel="stylesheet">
 	<link href="css/brands.css" rel="stylesheet">
@@ -42,6 +41,7 @@ $userRol = $view->getVariable("userRol");
 	<script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.0"></script>
 
 	<script src="js/jquery.min.js"></script>
+	<link href="css/all.css" rel="stylesheet">
 
 	<script src="index.php?controller=language&amp;action=i18njs">
 
@@ -64,8 +64,11 @@ $userRol = $view->getVariable("userRol");
 	<!-- header -->
 	<header class="header-section">
 	<div class="nav-switch">
+	<a href="./index.php?"><i class="fa fa-cannabis"></i></a>
 			<a href="javascript:history.back()">
-			<i class="fas fa-angle-double-left"></i>
+			<i class="fas fa-angle-double-left"></i></a>
+			
+
 		</div>
 		<div class="header-social">
 		<?php if($userRol=="administrador"){?>
