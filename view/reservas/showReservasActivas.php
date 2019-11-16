@@ -28,7 +28,7 @@ $userRol = $view->getVariable("userRol");
             <th class="cell100 column4">Pista</th>
             <th class="cell100 column4"></th>
           </tr>
-            </thead>
+         </thead>
       </table>
     </div>
     <?php foreach($reservasActivas as $reserva):?>
@@ -51,55 +51,59 @@ $userRol = $view->getVariable("userRol");
                     $hora = (new DateTime($reserva->getHora()))->format("H");
                     $minutos = (new DateTime($reserva->getHora()))->format("i");
                     if($hora>$hora_actual || ($hora==$hora_actual && $minutos>$minutos_actual)){?>
-                                 <td class="cell100 column4"><a class="cd-popup-trigger" href="<?= "index.php?controller=reservas&action=deleteReserva&idReserva=" . $reserva->getIdReserva() ?>">
+                                 <td class="cell100 column4"><a class="cd-popup-trigger" id="<?= "t".$reserva->getIdReserva() ?>"  href="<?= "index.php?controller=reservas&action=deleteReserva&idReserva=" . $reserva->getIdReserva() ?>">
                                  <i class="fa fa-trash-alt"></i>
                                   </a></td>
                                   <?php } }else if($interval>1){ ?>
-                                 <td class="cell100 column4"><a class="cd-popup-trigger" href="<?= "index.php?controller=reservas&action=deleteReserva&idReserva=" . $reserva->getIdReserva()  ?>">
+                                 <td class="cell100 column4"><a class="cd-popup-trigger" id="<?= "t".$reserva->getIdReserva() ?>"href="<?= "index.php?controller=reservas&action=deleteReserva&idReserva=" . $reserva->getIdReserva()  ?>">
                                  <i class="fa fa-trash-alt"></i>
                                  </a></td>
                                  <?php } ?>
               </tr>
         </table> 
         </div>
-      <?php endforeach; ?>
-      </div>
+        <div class="cd-popup" id="<?= "c".$reserva->getIdReserva() ?>" role="alert">
+	      <div class="cd-popup-container">
+	      	<p>Estas seguro que quieres borrar</p>
+		        <ul class="cd-buttons">
+		        	<li><a href="<?= "index.php?controller=reservas&action=deleteReserva&idReserva=" . $reserva->getIdReserva() ?>">Si</a></li>
+		        	<li><a  href="#0">No</a></li>
+		      </ul>
+		    <a href="#0" class="cd-popup-close img-replace"></a>
+    	</div> <!-- cd-popup-container -->
+      </div> <!-- cd-popup -->
 
-<div class="cd-popup" role="alert">
-	<div class="cd-popup-container">
-		<p>Estas seguro que quieres borrar</p>
-		<ul class="cd-buttons">
-			<li><a href="<?= "index.php?controller=reservas&action=deleteReserva&idReserva=" . $reserva->getIdReserva() ?>">Si</a></li>
-			<li><a  href="#0">No</a></li>
-		</ul>
-		<a href="#0" class="cd-popup-close img-replace"></a>
-	</div> <!-- cd-popup-container -->
-</div> <!-- cd-popup -->
 
       <script>
       
-      jQuery(document).ready(function($){
-	//open popup
-	$('.cd-popup-trigger').on('click', function(event){
-		event.preventDefault();
-		$('.cd-popup').addClass('is-visible');
-	});
-	
-	//close popup
-	$('.cd-popup').on('click', function(event){
-		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-popup') ) {
-			event.preventDefault();
-			$(this).removeClass('is-visible');
-		}
-	});
-	//close popup when clicking the esc keyboard button
-	$(document).keyup(function(event){
-    	if(event.which=='27'){
-    		$('.cd-popup').removeClass('is-visible');
-	    }
-    });
-});
+        jQuery(document).ready(function($){
+          //open popup
+          $("<?= "#t".$reserva->getIdReserva() ?>").on('click', function(event){
+            event.preventDefault();
+            $("<?= "#c".$reserva->getIdReserva() ?>").addClass('is-visible');
+          });
+          
+          //close popup
+          $("<?= "#c".$reserva->getIdReserva() ?>").on('click', function(event){
+            if( $(event.target).is('.cd-popup-close') || $(event.target).is("<?= "#c".$reserva->getIdReserva() ?>") ) {
+              event.preventDefault();
+              $(this).removeClass('is-visible');
+            }
+          });
+          //close popup when clicking the esc keyboard button
+          $(document).keyup(function(event){
+              if(event.which=='27'){
+                $("<?= "#c".$reserva->getIdReserva() ?>").removeClass('is-visible');
+              }
+            });
+        });
 
 </script>
 
+      <?php endforeach; ?>
+     
+      </div>
+
+
+      
 
