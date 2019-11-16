@@ -114,7 +114,7 @@ class CategoriaNivel {
 			$errors["nivel"] = "El nivel debe tener al menos 2 caracteres";
 		}
 		if (sizeof($errors)>0){
-			throw new ValidationException($errors, "user is not valid");
+			throw new ValidationException($errors, "categoria/nivel is not valid");
 		}
 	}
 
