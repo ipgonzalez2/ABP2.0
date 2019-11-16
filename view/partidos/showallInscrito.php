@@ -44,7 +44,9 @@ $pos=0;
               <td class="cell100 column4"><?= $partido->getHoraPartido()?></td>
               <?php if($pistas[$pos]!=NULL){ ?>
               <td class="cell100 column4"><?= $pistas[$pos]?></td>
-              <?php } ?>
+              <?php }else {?>
+              <td class="cell100 column4"><i class="fas fa-spinner"></i></td>
+              <?php }?>
             </tr>
      
           </tbody>

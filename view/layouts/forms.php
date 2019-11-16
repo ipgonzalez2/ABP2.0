@@ -32,7 +32,11 @@ $currentuser = $view->getVariable("currentusername");
 	<link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 	<link rel="stylesheet" href="./css/header.css" type="text/css">
 	<link rel="stylesheet" type="text/css" href="css/mainForms.css">
-
+<!-- POPUP	 -->
+	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+	<script src="js/jquery.min.js"></script> <!-- Modernizr -->
 
 
 	<!-- enable ji18n() javascript function to translate inside your scripts -->
@@ -45,14 +49,14 @@ $currentuser = $view->getVariable("currentusername");
 <body>
 	<!-- header -->
 	<header class="header-section">
-		<div class="nav-switch">
+	<div class="nav-switch">
 			<a href="javascript:history.back()">
-		<i class="fas fa-long-arrow-alt-left"></i>
+			<i class="fas fa-angle-double-left"></i>
 		</div>
 		<div class="header-social">
         <a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>
         <a href="./index.php?controller=partidos&action=showallPartidosInscrito"><i class="fa fa-table-tennis"></i></a>
-        <a href=""><i class="fa fa-medal"></i></a>
+        <a href="./index.php?controller=campeonatos&action=showallCampeonatos"><i class="fa fa-medal"></i></a>
         <a href="./index.php?controller=users&action=notificaciones"><i class="fa fa-envelope"></i></a>
         <a href="./index.php?controller=users&action=edit"><i class="fas fa-user"></i></i></a>
         <a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>

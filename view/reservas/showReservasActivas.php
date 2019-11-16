@@ -18,7 +18,7 @@ $userRol = $view->getVariable("userRol");
 <?php } ?>
 
 <div class="table100 ver2 m-b-110">
-<div class="table100-head">
+    <div class="table100-head">
       <table>
         <thead>
           <tr class="row100 head">
@@ -63,7 +63,7 @@ $userRol = $view->getVariable("userRol");
         </table> 
         </div>
       <?php endforeach; ?>
-      
+      </div>
 
 <div class="cd-popup" role="alert">
 	<div class="cd-popup-container">

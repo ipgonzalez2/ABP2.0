@@ -18,6 +18,7 @@ $partido = $view->getVariable("partido");
             <th class="cell100 column2">Precio</th>
             <th class="cell100 column3">Estado</th>
             <th class="cell100 column4">Límite inscripcion</th>
+            <th class="cell100 column4">Inscribirse</th>
           </tr>
         </thead>
       </table>
@@ -30,12 +31,51 @@ $partido = $view->getVariable("partido");
               <td class="cell100 column2"><?= $partido->getPrecioPartido() ?></td>
               <td class="cell100 column3"><?= $partido->getEstadoPartido() ?></td>
               <td class="cell100 column4"><?= $partido->getFechaFinInscripcion() ?></td>
-              <td> <a href="<?="index.php?controller=partidos&action=inscribirPartido&idPartido=".$partido->getIdPartido() ?>">Inscribirse</a></td>
+              <td class="cell100 column4"><a class="cd-popup-trigger" href="<?="index.php?controller=partidos&action=inscribirPartido&idPartido=".$partido->getIdPartido() ?>"><i class="fas fa-plus-circle"></i></a></td>
 
               </tr>
-</tbody>
+          </tbody>
         </table>
       </div>
   </div>
 
   
+
+ <div class="cd-popup" role="alert">
+	<div class="cd-popup-container">
+		<p>Estas seguro que quieres inscribirse al partido?</p>
+		<ul class="cd-buttons">
+			<li><a href="<?="index.php?controller=partidos&action=inscribirPartido&idPartido=".$partido->getIdPartido() ?>">Si</a></li>
+			<li><a  href="#0">No</a></li>
+		</ul>
+		<a href="#0" class="cd-popup-close img-replace"></a>
+	</div> <!-- cd-popup-container -->
+</div> <!-- cd-popup -->
+
+      <script>
+      
+      jQuery(document).ready(function($){
+	//open popup
+	$('.cd-popup-trigger').on('click', function(event){
+		event.preventDefault();
+		$('.cd-popup').addClass('is-visible');
+	});
+	
+	//close popup
+	$('.cd-popup').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-popup') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button
+	$(document).keyup(function(event){
+    	if(event.which=='27'){
+    		$('.cd-popup').removeClass('is-visible');
+	    }
+    });
+});
+
+</script>
+
+

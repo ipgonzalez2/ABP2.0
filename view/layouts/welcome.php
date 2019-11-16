@@ -40,4 +40,7 @@ $view = ViewManager::getInstance();
 	<?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
 </body>
 
+
+
+
 </html>

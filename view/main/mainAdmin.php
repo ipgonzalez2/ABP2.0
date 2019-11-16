@@ -7,10 +7,10 @@ $errors = $view->getVariable("errors");
 
 <header class="header-section">
     <div class="nav-switch">
-        <i class="fa fa-bars"></i>
+    <i class="fa fa-cannabis"></i>
     </div>
     <div class="header-social">
-        <a href=""><i class="far fa-calendar-alt"></i></a>
+        <a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>
         <a href="./index.php?controller=partidos&action=showallPartidos"><i class="fa fa-table-tennis"></i></a>
         <a href="./index.php?controller=campeonatos&action=showallCampeonatos"><i class="fa fa-medal"></i></a>
         <a href="./index.php?controller=users&action=edit"><i class="fas fa-user"></i></i></a>
@@ -256,8 +256,23 @@ $errors = $view->getVariable("errors");
     </section>
 
     <!-- Footer -->
+    <!-- Footer -->
     <footer class="wrapper style1 align-center">
         <div class="inner">
+		<small class="d-block mb-3 text-muted">&copy; 2016-2020</small>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Mejoras</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Imagenes Bonitas</a></li>
+        <li><a class="text-muted" href="#">Implementacion Nuevas Funciones</a></li>
+        <li><a class="text-muted" href="#">Algo mas</a></li>
+        <li><a class="text-muted" href="#">Cosas de Informaticos</a></li>
+        <li><a class="text-muted" href="https://weather.com/es-ES/tiempo/hoy/l/251cec6a9bb33f4b37d385cc0642b9a63928ded87b33f79e2041fadbbf504070">El tiempo</a></li>
+      </ul>
+    </div>
+
+
             <ul class="icons">
                 <li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
                 <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>

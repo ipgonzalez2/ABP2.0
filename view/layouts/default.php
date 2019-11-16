@@ -26,7 +26,7 @@ $currentuser = $view->getVariable("currentusername");
 	<link rel="stylesheet" href="./css/main.css" type="text/css">
 	<link rel="stylesheet" href="./css/header.css" type="text/css">
 	<link href="styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
-	<link href="styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<!-- enable ji18n() javascript function to translate inside your scripts -->
 	<link rel="canonical" href="https://html5up.net/story">
 	<script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.es.xhypXBFw-YI.O/m=auth/exm=plusone/rt=j/sv=1/d=1/ed=1/am=wQE/rs=AGLTcCNIYS8P8MA2BPqaol3qYCZ18OvnqA/cb=gapi.loaded_1" async=""></script>
@@ -41,7 +41,6 @@ $currentuser = $view->getVariable("currentusername");
 	<script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.0"></script>
 
 	<script src="js/jquery.min.js"></script>
-	<script src="js/kendo.web.min.js"></script>
 
 	<script src="index.php?controller=language&amp;action=i18njs">
 
@@ -63,15 +62,14 @@ $currentuser = $view->getVariable("currentusername");
 
 	<!-- header -->
 	<header class="header-section">
-		<div class="nav-switch">
-	
+	<div class="nav-switch">
 			<a href="javascript:history.back()">
-		<i class="fas fa-long-arrow-alt-left"></i>
+			<i class="fas fa-angle-double-left"></i>
 		</div>
 		<div class="header-social">
         <a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>
         <a href="./index.php?controller=partidos&action=showallPartidosInscrito"><i class="fa fa-table-tennis"></i></a>
-        <a href=""><i class="fa fa-medal"></i></a>
+        <a href="./index.php?controller=campeonatos&action=showallCampeonatos"><i class="fa fa-medal"></i></a>
         <a href="./index.php?controller=users&action=notificaciones"><i class="fa fa-envelope"></i></a>
         <a href="./index.php?controller=users&action=edit"><i class="fas fa-user"></i></i></a>
         <a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
@@ -88,11 +86,7 @@ $currentuser = $view->getVariable("currentusername");
 
 
 	<footer>
-		<footer>
-			<p>Posted by: Nacho Quintas</p>
-			<p>Helpled by: Ines Prieto</p>
-			<p>Jorge no hagas nada :)</a>.</p>
-		</footer>
+		
 	</footer>
 
 </body>
