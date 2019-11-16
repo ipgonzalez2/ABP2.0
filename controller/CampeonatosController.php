@@ -213,7 +213,10 @@ class CampeonatosController extends BaseController {
 				break;
 			}
 
-			if($deportista2 == NULL || !$posibleInscripcion){
+			$categoriasNiveles = $this->categoriaNivelMapper->findAll($_POST["idCampeonato"]);
+			$inscritos = $this->parejaMapper->estanInscritos($deportista1->getIdUsuario(), $deportista2->getIdUsuario(), $categoriasNiveles);
+
+			if($deportista2 == NULL || !$posibleInscripcion || $inscritos){
 				$this->view->redirect("index", "indexLogged");
 			}
 
@@ -226,6 +229,8 @@ class CampeonatosController extends BaseController {
 
 
 			$this->parejaMapper->save($pareja);
+
+			$this->view->redirect("index", "indexLogged");
 
 
 		}
