@@ -24,7 +24,7 @@ $campeonato = $view->getVariable("campeonato");
 				</div>
 
                 <div class="wrap-input100 validate-input">
-				<input class="input100" type="text" list="categoria" placeholder="Categoria" />
+				<input class="input100" name="categoria" type="text" list="categoria" placeholder="Categoria" />
 				<datalist id="categoria" name="categoria" class="input100">
   					<option name="categoria" value="masculina"></option>
   					<option name="categoria" value="femenina"></option>
@@ -33,7 +33,7 @@ $campeonato = $view->getVariable("campeonato");
 				</div>
 
 				<div class="wrap-input100 validate-input">
-				<input class="input100" type="text" list="nivel" placeholder="Nivel" />
+				<input class="input100" name="nivel" type="text" list="nivel" placeholder="Nivel" />
 				<datalist id="nivel" name="nivel" class="input100">
   					<option name="nivel" value="1"></option>
   					<option name="nivel" value="2"></option>

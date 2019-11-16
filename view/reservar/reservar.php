@@ -95,7 +95,6 @@ $z =0;
 <script>
   
 function openForm(d, anho ,pos) {
-  console.log(d ,"<--dia",anho," <--año",pos)
   var fechas = document.getElementsByClassName("todasFechas");
   var list = document.getElementsByClassName("horas");
 
