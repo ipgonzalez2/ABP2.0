@@ -271,8 +271,8 @@ $pop = $view->popFlash();
     <div class="col-6 col-md">
       <h5>Mejoras</h5>
       <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="#">Imagenes Bonitas</a></li>
-        <li><a class="text-muted" href="#">Implementacion Nuevas Funciones</a></li>
+        <li><a class="text-muted" href="https://www.banksy.co.uk/in.asp">Imagenes Bonitas</a></li>
+        <li><a class="text-muted" href="https://as1.ftcdn.net/jpg/02/33/17/50/500_F_233175040_hwqRyiZlQkXimeLz2AIZhajyfiU9El1m.jpg">Implementacion Nuevas Funciones</a></li>
         <li><a class="text-muted" href="#">Algo mas</a></li>
         <li><a class="text-muted" href="#">Cosas de Informaticos</a></li>
         <li><a class="text-muted" href="https://weather.com/es-ES/tiempo/hoy/l/251cec6a9bb33f4b37d385cc0642b9a63928ded87b33f79e2041fadbbf504070">El tiempo</a></li>
