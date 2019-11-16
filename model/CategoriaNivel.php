@@ -113,20 +113,22 @@ class CategoriaNivel {
     
 	public function checkIsValidForRegister() {
 		$errors = array();
+		$fechaActual = date('d-m-Y');
+
+
 		if (strlen($this->categoria) < 11) {
-			$errors["username"] = "Username must be at least 5 characters length";
+			$errors["categoria"] = "La categoria debe tener al menos 11 caracteres";
 
 		}
-		if (strlen($this->fecha_fin_inscripcion) < 11) {
-			$errors["passwd"] = "Password must be at least 5 characters length";
+		if (strlen($this->fecha_fin_inscripcion ) < 11 || $this->fecha_fin_inscripcion<$fechaActual ) {
+			$errors["fecha_fin_inscripcion"] = "La fecha debe tener al menos 11 caracteres y no puede ser anterior al dia de hoy";
 		}
 		if (strlen($this->nivel) < 2) {
-			$errors["nombre"] = "Name must be at least 5 characters length";
+			$errors["nivel"] = "El nivel debe tener al menos 2 caracteres";
 		}
 		if (sizeof($errors)>0){
-			throw new ValidationException($errors, "user is not valid");
+			throw new ValidationException($errors, "categoria/nivel is not valid");
 		}
 	}
-
 
 }

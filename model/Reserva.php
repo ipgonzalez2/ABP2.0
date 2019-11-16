@@ -178,18 +178,21 @@ class Reserva {
 	*/
 	public function checkIsValidForRegister() {
 		$errors = array();
-		if (strlen($this->fecha) < 5) {
-			$errors["fecha"] = "Username must be at least 5 characters length";
+		$fechaActual = date('d-m-Y');
+
+		if (strlen($this->fecha) < 5 || $this->fecha<$fechaActual  ) {
+			$errors["fecha"] = "La fecha debe tener al menos 5 caracteres y no puede ser anterior al dia de hoy";
 
 		}
 		if (strlen($this->precio) < 1) {
-			$errors["Precio"] = "Password must be at least 5 characters length";
+			$errors["precio"] = "El precio debe tener al menos un caracter";
 		}
 		if (strlen($this->pista_reserva) < 1) {
-			$errors["pista_reserva"] = "Email must be at least 10 characters length";
+			$errors["pista_reserva"] = "Debe tener al menos un caracter";
 		}
 		if (sizeof($errors)>0){
 			throw new ValidationException($errors, "reservation is not valid");
 		}
+
 	}
 }
