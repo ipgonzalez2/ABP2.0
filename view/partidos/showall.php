@@ -58,6 +58,11 @@ $userRol = $view->getVariable("userRol");
                     <td> <i class="far fa-times-circle"></i></td>
                   <?php }?>
             </tr>
+
+
+
+
+            
           <?php endforeach; ?>
 
         </tbody>

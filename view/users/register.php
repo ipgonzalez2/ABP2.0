@@ -42,16 +42,16 @@ $user = $view->getVariable("user");
 					
 				</div>
 
+				<div class="wrap-input100 validate-input">
+				<input class="input100" type="text" list="sexo" placeholder="Sexo" />
+				<datalist id="sexo" name="sexo" >
+  					<option name="sexo" value="hombre"></option>
+  					<option name="sexo" value="mujer"></option>
+  				</datalist>
+				</div>
+
 				
 
-				<div class="wrap-input100 validate-input">
-				<select name="sexo" class="input100">
-  					<option name="sexo" value="hombre">Hombre</option>
-  					<option name="sexo" value="mujer">Mujer</option>
-  				</select>
-				  <span ></span>
-					<span class="label-input100">Sexo</span>
-				</div>
 
 				<div class="container-login100-form-btn">
 				<button class="login100-form-btn">
