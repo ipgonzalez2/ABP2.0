@@ -322,11 +322,11 @@ class CampeonatosController extends BaseController {
 				break;
 			}
 
-			$categoriasNiveles = $this->categoriaNivelMapper->findAll($_POST["idCampeonato"]);
+			
 			$inscritos = $this->parejaMapper->estanInscritos($deportista1->getIdUsuario(), $deportista2->getIdUsuario(), $categoriasNiveles);
 
 			if($deportista2 == NULL || !$posibleInscripcion || $inscritos){
-				$this->view->redirect("index", "indexLogged");
+				$this->view->$categoriasNiveles = $this->categoriaNivelMapper->findAll($_POST["idCampeonato"]);direct("index", "indexLogged");
 			}
 
 			$categoriaNivel = $this->categoriaNivelMapper->findId($_POST["idCampeonato"],$_POST["categoria"],$_POST["nivel"]);
@@ -422,6 +422,33 @@ class CampeonatosController extends BaseController {
 		$this->view->render("campeonatos", "showallInscrito");
 	}
 
+	
+
+	public function showallGrupos() {
+
+		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
+		
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+		if($userRol == "deportista") {
+			$this->view->redirect("index","indexLogged");
+		}
+
+		if(isset($_GET["idCampeonato"])){
+
+			$categoriasNiveles = $this->categoriaNivelMapper->findAll($_GET["idCampeonato"]);
+
+			$grupos = $this->grupoMapper->findAll($categoriasNiveles);
+			
+			$this->view->setVariable("grupos", $grupos);
+			$this->view->setLayout("table");
+			$this->view->render("campeonatos", "showallGrupos");
+		}
+		$this->view->redirect("index", "indexLogged");
+	}
 	
 
 	
