@@ -72,7 +72,7 @@ $userRol = $view->getVariable("userRol");
 			<li><a href="<?= "index.php?controller=reservas&action=deleteReserva&idReserva=" . $reserva->getIdReserva() ?>">Si</a></li>
 			<li><a  href="#0">No</a></li>
 		</ul>
-		<a href="#0" class="cd-popup-close img-replace">Close</a>
+		<a href="#0" class="cd-popup-close img-replace"></a>
 	</div> <!-- cd-popup-container -->
 </div> <!-- cd-popup -->
 

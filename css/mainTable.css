@@ -391,6 +391,11 @@ td {
 .cd-popup-container .cd-buttons li {
     float: left;
     width: 50%;
+    padding-right: 0.5rem;
+}
+
+.cd-buttons a:link {
+    text-decoration: none;
 }
 
 .cd-popup-container .cd-buttons a {
@@ -405,17 +410,17 @@ td {
 }
 
 .cd-popup-container .cd-buttons li:first-child a {
-    background: #fc7169;
-    border-radius: 0 0 0 .25em;
+    background: #69da8394;
+    border-radius: 20px;
 }
 
 .no-touch .cd-popup-container .cd-buttons li:first-child a:hover {
-    background-color: #fc8982;
+    background-color: #464646;
 }
 
 .cd-popup-container .cd-buttons li:last-child a {
-    background: #b6bece;
-    border-radius: 0 0 .25em 0;
+    background: #e47a7adb;
+    border-radius: 20px;
 }
 
 .no-touch .cd-popup-container .cd-buttons li:last-child a:hover {

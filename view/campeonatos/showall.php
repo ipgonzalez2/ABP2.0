@@ -23,12 +23,12 @@ $userRol = $view->getVariable("userRol");
       <table>
         <thead>
           <tr class="row100 head">
-             <th class="cell100 column1">Nombre</th>
+             <th class="cell100 column2">Nombre</th>
              <th class="cell100 column2">Fecha inicio</th>
-             <th class="cell100 column3">Fecha fin</th>
-             <th class="cell100 column4">Precio</th>
+             <th class="cell100 column2">Fecha fin</th>
+             <th class="cell100 column2">Precio</th>
              <th class="cell100 column4">Fecha limite inscripcion</th>
-             <th class="cell100 column4">Estado</th>
+             <th class="cell100 column2">Estado</th>
            </tr>
          </thead>
         </table>
@@ -40,12 +40,12 @@ $userRol = $view->getVariable("userRol");
       <table>
           <tbody>
             <tr class="row100 body">
-  <td class="cell100 column1"><?= $campeonato->getNombreCampeonato()?></td>
+  <td class="cell100 column2"><?= $campeonato->getNombreCampeonato()?></td>
   <td class="cell100 column2"><?= $campeonato->getFechaInicio()?></td>
-  <td class="cell100 column3"><?= $campeonato->getFechaFin()?></td>
-  <td class="cell100 column4"><?= $campeonato->getPrecioCampeonato()?></td>
-  <td class="cell100 column5"><?= $campeonato->getFechaLimiteInscripcion()?></td>
-  <td class="cell100 column6"><?= $campeonato->getEstadoCampeonato()?></td>
+  <td class="cell100 column2"><?= $campeonato->getFechaFin()?></td>
+  <td class="cell100 column2"><?= $campeonato->getPrecioCampeonato()?></td>
+  <td class="cell100 column4"><?= $campeonato->getFechaLimiteInscripcion()?></td>
+  <td class="cell100 column2"><?= $campeonato->getEstadoCampeonato()?></td>
   <?php if($userRol == "administrador" && $campeonato->getEstadoCampeonato() == "abierto"){?>
     <td><a href="<?="index.php?controller=campeonatos&action=deleteCampeonato&idCampeonato=".$campeonato->getIdCampeonato() ?>">
     <i class="fa fa-trash-alt"></i>

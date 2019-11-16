@@ -213,7 +213,7 @@ class UsersController extends BaseController {
 
 			$this->userMapper->edit($user);
 
-			$this->view->redirect("users","main");
+			$this->view->redirect("users","logout");
 		}
 
 		// Put the User object visible to the view
