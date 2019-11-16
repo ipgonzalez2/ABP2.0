@@ -36,8 +36,6 @@ $userRol = $view->getVariable("userRol");
 	<link rel="stylesheet" href="./css/v4-shims.css" type="text/css">
 
 	<!-- POPUP	 -->
-	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
 	<script src="js/modernizr.js"></script> <!-- Modernizr -->
 	<script src="js/jquery.min.js"></script> <!-- Modernizr -->
 
