@@ -5,7 +5,7 @@ require_once(__DIR__."/../core/ValidationException.php");
 
 class CategoriaNivel {
 
-
+	private $id_categorianivel;
 	/**
 	* The reservation name of the reservation
 	* @var string
@@ -32,13 +32,26 @@ class CategoriaNivel {
 	* @param string $Precio The password of the reservation
 	*/
     public function __construct($categoria=NULL, $nivel=NULL,
-    $campeonato=NULL) {
+    $campeonato=NULL, $id_categorianivel=NULL) {
         $this->categoria = $categoria;
         $this->nivel = $nivel;
-        $this->campeonato = $campeonato;
+		$this->campeonato = $campeonato;
+		$this->id_categorianivel = $id_categorianivel;
 	}
 
+	public function getIdCategoriaNivel() {
+		return $this->id_categorianivel;
+	}
 
+	/**
+	* Sets the tipoPista of this reservation
+	*
+	* @param string $categoria The tipoPista of this reservation
+	* @return void
+	*/
+	public function setIdCategoriaNivel($id_categorianivel) {
+		$this->id_categorianivel = $id_categorianivel;
+    }
 	/**
 	* Gets the tipoPista of this reservation
 	*
@@ -100,20 +113,22 @@ class CategoriaNivel {
     
 	public function checkIsValidForRegister() {
 		$errors = array();
+		$fechaActual = date('d-m-Y');
+
+
 		if (strlen($this->categoria) < 11) {
-			$errors["username"] = "Username must be at least 5 characters length";
+			$errors["categoria"] = "La categoria debe tener al menos 11 caracteres";
 
 		}
-		if (strlen($this->fecha_fin_inscripcion) < 11) {
-			$errors["passwd"] = "Password must be at least 5 characters length";
+		if (strlen($this->fecha_fin_inscripcion ) < 11 || $this->fecha_fin_inscripcion<$fechaActual ) {
+			$errors["fecha_fin_inscripcion"] = "La fecha debe tener al menos 11 caracteres y no puede ser anterior al dia de hoy";
 		}
 		if (strlen($this->nivel) < 2) {
-			$errors["nombre"] = "Name must be at least 5 characters length";
+			$errors["nivel"] = "El nivel debe tener al menos 2 caracteres";
 		}
 		if (sizeof($errors)>0){
-			throw new ValidationException($errors, "user is not valid");
+			throw new ValidationException($errors, "categoria/nivel is not valid");
 		}
 	}
-
 
 }

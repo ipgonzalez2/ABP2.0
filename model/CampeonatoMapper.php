@@ -49,28 +49,28 @@ class CampeonatoMapper {
 			array_push($campeonatos, new Campeonato($campeonato["id_campeonato"],
 			$campeonato["nombre_campeonato"], $campeonato["fecha_inicio"],
 			$campeonato["fecha_fin"], $campeonato["precio_campeonato"],
-			$campeonato["fecha_limite_campeonato"],$campeonato["estado_campeonato"]));
+			$campeonato["fecha_limite_inscripcion"],$campeonato["estado_campeonato"]));
 		}
 		return $campeonatos;
-	}/*
+	}
 
-	public function findAllPartidosAbiertos($partidosInscrito) 
+	public function findAllCampeonatosAbiertos($campeonatosInscrito) 
 	{
-		$stmt = $this->db->prepare("SELECT * FROM PARTIDO WHERE ESTADO_PARTIDO=?");
-		$stmt->execute(array("ABIERTO"));
+		$stmt = $this->db->prepare("SELECT * FROM campeonato WHERE estado_campeonato=?");
+		$stmt->execute(array("abierto"));
 		
 		$campeonatos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$campeonatos = array();
 
 		foreach ($campeonatos_db as $campeonato) {
-				if(!(in_array($campeonato["ID_PARTIDO"],$partidosInscrito))){
-					array_push($campeonatos, new Partido($campeonato["ID_PARTIDO"],$campeonato["FECHA_PARTIDO"], $campeonato["PRECIO_PARTIDO"],
-					$campeonato["ESTADO_PARTIDO"], $campeonato["FECHA_FIN_INSCRIPCION"]));
+				if(!(in_array($campeonato["id_campeonato"],$campeonatosInscrito))){
+					array_push($campeonatos, new Campeonato($campeonato["id_campeonato"],$campeonato["nombre_campeonato"], $campeonato["fecha_inicio"],
+					$campeonato["fecha_fin"], $campeonato["precio_campeonato"], $campeonato["fecha_limite_inscripcion"], $campeonato["estado_campeonato"]));
 				}
 		}
 
 		return $campeonatos;
-	}
+	}/*
 
 	public function actualizarPartidos() 
 	{
@@ -111,24 +111,26 @@ class CampeonatoMapper {
 		return true;
 
 	}
-
-	public function findCampeonato($id_partido){
-		$stmt = $this->db->prepare("SELECT * FROM PARTIDO WHERE ID_PARTIDO=?");
-		$stmt->execute(array($id_partido));
+*/
+	public function findCampeonato($id_campeonato){
+		$stmt = $this->db->prepare("SELECT * FROM campeonato WHERE id_campeonato=?");
+		$stmt->execute(array($id_campeonato));
 		$campeonato = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		if($campeonato != null) {
-			return new Partido(
-			$id_partido,
-			$campeonato["FECHA_PARTIDO"],
-			$campeonato["PRECIO_PARTIDO"],
-			$campeonato["ESTADO_PARTIDO"],
-			$campeonato["FECHA_FIN_INSCRIPCION"]);
+			return new Campeonato(
+			$id_campeonato,
+			$campeonato["nombre_campeonato"],
+			$campeonato["fecha_inicio"],
+			$campeonato["fecha_fin"],
+			$campeonato["precio_campeonato"],
+			$campeonato["fecha_limite_inscripcion"],
+			$campeonato["estado_campeonato"]);
 		} else {
 			return NULL;
 		}
 	}
-
+/*
 	public function cerrarPartido($idPartido)
     {
         $stmt = $this->db->prepare("UPDATE PARTIDO SET ESTADO_PARTIDO = ? WHERE ID_PARTIDO=?");

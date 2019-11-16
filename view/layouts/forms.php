@@ -3,6 +3,7 @@
 
 $view = ViewManager::getInstance();
 $currentuser = $view->getVariable("currentusername");
+$userRol = $view->getVariable("userRol");
 
 ?>
 <!DOCTYPE html>
@@ -54,12 +55,24 @@ $currentuser = $view->getVariable("currentusername");
 			<i class="fas fa-angle-double-left"></i>
 		</div>
 		<div class="header-social">
+        <?php if($userRol=="administrador"){?>
         <a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>
-        <a href="./index.php?controller=partidos&action=showallPartidosInscrito"><i class="fa fa-table-tennis"></i></a>
+        <a href="./index.php?controller=partidos&action=showallPartidos"><i class="fa fa-table-tennis"></i></a>
         <a href="./index.php?controller=campeonatos&action=showallCampeonatos"><i class="fa fa-medal"></i></a>
+        <a href="./index.php?controller=users&action=edit"><i class="fas fa-user"></i></i></a>
+		<a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
+		<?php }else{ ?>
+		<a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>
+        <a href="./index.php?controller=partidos&action=showallPartidosInscrito"><i class="fa fa-table-tennis"></i></a>
+<<<<<<< HEAD
+        <a href="./index.php?controller=campeonatos&action=showallCampeonatos"><i class="fa fa-medal"></i></a>
+=======
+        <a href="./index.php?controller=campeonatos&action=showallCampeonatosInscrito"><i class="fa fa-medal"></i></a>
+>>>>>>> ecb11bcafdc454365f54a293ad30e4ef4a24434a
         <a href="./index.php?controller=users&action=notificaciones"><i class="fa fa-envelope"></i></a>
         <a href="./index.php?controller=users&action=edit"><i class="fas fa-user"></i></i></a>
-        <a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
+		<a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
+		<?php } ?>
     </div>
 	</header>
 

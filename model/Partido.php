@@ -166,20 +166,23 @@ class Partido {
 	
 	public function checkIsValidForRegister() {
 		$errors = array();
-		if (strlen($this->fecha_partido) < 11) {
-			$errors["username"] = "Username must be at least 5 characters length";
+		$fechaActual = date('d-m-Y');
+
+		if (strlen($this->fecha_partido) < 11 || $this->fecha_partido<$fechaActual || $this->fecha_partido<$this->fecha_fin_inscripcion) {
+			$errors["fecha_partido"] = "Debe tener al menos 11 caracteres y no puede ser anterior al dia de hoy";
 
 		}
-		if (strlen($this->fecha_fin_inscripcion) < 11) {
-			$errors["passwd"] = "Password must be at least 5 characters length";
+		if (strlen($this->fecha_fin_inscripcion) < 11 || $this->fecha_fin_inscripcion<$fechaActual || $this->fecha_fin_inscripcion>$this->fecha_partido) {
+			$errors["fecha_fin_inscripcion"] = "La fecha de inscripcion debe tener al menos 11 caracteres y no puede ser anterior al dia de hoy";
 		}
 		if (strlen($this->precio_partido) < 2) {
-			$errors["nombre"] = "Name must be at least 5 characters length";
+			$errors["precio_partido"] = "El precio del partido debe tener al menos 2 caracteres";
 		}
 		if (sizeof($errors)>0){
 			throw new ValidationException($errors, "user is not valid");
 		}
 	}
+
 
 
 }

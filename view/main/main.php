@@ -72,7 +72,7 @@ $pop = $view->popFlash();
             <h2>¿Te atreves con un campeonato?</h2>
             <p>Apúntate con tu pareja.</p>
             <ul class="actions stacked">
-                <li><a href="#" class="button">Inscríbete</a></li>
+                <li><a href="./index.php?controller=campeonatos&action=showallCampeonatos" class="button">Inscríbete</a></li>
             </ul>
         </div>
         <div class="image">

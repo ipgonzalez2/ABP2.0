@@ -30,9 +30,16 @@ class CategoriaNivelMapper {
 	* @return void
 	*/
 	public function save($categoria_nivel) {
-		$stmt = $this->db->prepare("INSERT INTO categorianivel values (?,?,?)");
-        $stmt->execute(array($categoria_nivel->getCategoria(), $categoria_nivel->getNivel(), 
+		$stmt = $this->db->prepare("INSERT INTO categorianivel values (?,?,?,?)");
+        $stmt->execute(array(0,$categoria_nivel->getCategoria(), $categoria_nivel->getNivel(), 
         $categoria_nivel->getCampeonato()));
+	}
+
+	public function findId($id_campeonato, $categoria, $nivel){
+		$stmt = $this->db->prepare("SELECT id_categorianivel FROM categorianivel WHERE campeonato=? AND categoria=? AND nivel=?");
+		$stmt->execute(array($id_campeonato, $categoria, $nivel));
+		$categoria_nivel = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $categoria_nivel["id_categorianivel"];
 	}
 /*
 	public function findAllPartidos() 
