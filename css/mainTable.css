@@ -380,6 +380,7 @@ td {
 
 .cd-popup-container p {
     padding: 3em 1em;
+    font-size: 18px;
 }
 
 .cd-popup-container .cd-buttons:after {
@@ -392,6 +393,7 @@ td {
     float: left;
     width: 50%;
     padding-right: 0.5rem;
+    padding-bottom: 4%;
 }
 
 .cd-buttons a:link {
@@ -411,7 +413,7 @@ td {
 
 .cd-popup-container .cd-buttons li:first-child a {
     background: #69da8394;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .no-touch .cd-popup-container .cd-buttons li:first-child a:hover {
@@ -420,7 +422,7 @@ td {
 
 .cd-popup-container .cd-buttons li:last-child a {
     background: #e47a7adb;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .no-touch .cd-popup-container .cd-buttons li:last-child a:hover {
