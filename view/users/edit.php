@@ -38,12 +38,11 @@ $user = $view->getVariable("user");
             <div class="container-contact100-form-btn">
 
                 <button class="contact100-form-btn">
-                    Send
+                    Guardar
                 </button>
 
                 <button class="contact100-form-btn">
-                    <a href="./index.php?controller=users&action=delete">Borrar</a>
-                </button>
+                <a style="text-decoration:none;font-family: Ubuntu-Bold;font-size: 16px;color: #fff;line-height: 1.2;text-transform: uppercase;" href="./index.php?controller=users&amp;action=delete">Borrar</a></button>
             </div>
 
         </form>
