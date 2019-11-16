@@ -27,7 +27,7 @@ class Pareja {
 	* The reservation name of the reservation
 	* @var string
 	*/
-    private $categoria_nivel;
+    private $categorianivel;
     
     /**
 	* The reservation name of the reservation

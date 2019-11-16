@@ -122,8 +122,8 @@ class CampeonatosController extends BaseController {
 
 		$this->view->render("campeonatos", "showall");
 	}	
-/*
-	public function deletePartido() {
+
+		public function cerrarCampeonato() {
 
 		$userRol = $this->view->getVariable("userRol");
 		
@@ -135,32 +135,21 @@ class CampeonatosController extends BaseController {
 			$this->view->redirect("index", "indexLogged");
 		}
 
-		if(isset($_GET["idPartido"])){
-			$campeonato = $this->partidoMapper->findPartido($_GET["idPartido"]);
-			$fechaPartido = $campeonato->getFechaPartido();
-			if($campeonato->getEstadoPartido() == "CERRADO"){
-				$this->view->redirect("index","indexLogged");
+		if(isset($_GET["idCampeonato"])){
+			
+			$categoriasNiveles = $this->categoriaNivelMapper->findAll($_GET["idCampeonato"]);
+			
+			foreach($categoriasNiveles as $cn){
+				$parejas = $this->parejaMapper->findParejas($cn);
+				var_dump(count($parejas),$cn);
 			}
-			$this->partidoMapper->deletePartido($_GET["idPartido"]);
-			$numInscripciones = $this->inscripcionPartidoMapper->getNumInscripciones($_GET["idPartido"]);
-			if($numInscripciones > 0){
-				$inscritos = $this->inscripcionPartidoMapper->getInscritos($_GET["idPartido"]);
-				foreach($inscritos as $inscrito){
-					$notificacion = new Notificacion();
-					$notificacion->setIdUsuarioNotificacion($inscrito);
-					$notificacion->setMensaje("El partido con fecha ".$fechaPartido." ha sido cancelado.
-					\nLo sentimos.\n");
-					$this->notificacionMapper->save($notificacion);
-				}
-				$this->inscripcionPartidoMapper->deleteInscripciones($_GET["idPartido"]);
-			}
-			$this->view->redirect("index", "indexLogged");
+			exit();
 
 		}
 
-		$this->view->render("campeonatos", "showall");
+		$this->view->redirect("campeonatos", "showallCampeonatos");
 	}
-*/
+
 	public function inscribirCampeonato() {
 
 		$userRol = $this->view->getVariable("userRol");

@@ -54,5 +54,20 @@ class ParejaMapper {
 
 		return $estanInscritos;
 	}
-    
+	
+	public function findParejas($cn) {
+
+		$stmt = $this->db->prepare("SELECT * from pareja where categorianivel=?");
+		$stmt->execute(array($cn));
+
+		$parejas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$parejas = array();
+
+		foreach($parejas_db as $pareja){
+			array_push($parejas, new Pareja($pareja["id_pareja"], $pareja["deportista1"],
+					$pareja["deportista2"], $pareja["categorianivel"], $pareja["grupo"]));
+		}
+
+		return $parejas;
+	}
 }
