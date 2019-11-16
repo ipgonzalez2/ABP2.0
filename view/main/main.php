@@ -17,7 +17,7 @@ $pop = $view->popFlash();
     <div class="header-social">
         <a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>
         <a href="./index.php?controller=partidos&action=showallPartidosInscrito"><i class="fa fa-table-tennis"></i></a>
-        <a href=""><i class="fa fa-medal"></i></a>
+        <a href="./index.php?controller=campeonatos&action=showallCampeonatos"><i class="fa fa-medal"></i></a>
         <a href="./index.php?controller=users&action=notificaciones"><i class="fa fa-envelope"></i></a>
         <a href="./index.php?controller=users&action=edit"><i class="fas fa-user"></i></i></a>
         <a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
@@ -72,7 +72,7 @@ $pop = $view->popFlash();
             <h2>¿Te atreves con un campeonato?</h2>
             <p>Apúntate con tu pareja.</p>
             <ul class="actions stacked">
-                <li><a href="#" class="button">Inscríbete</a></li>
+                <li><a href="./index.php?controller=campeonatos&action=showallCampeonatos" class="button">Inscríbete</a></li>
             </ul>
         </div>
         <div class="image">

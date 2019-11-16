@@ -48,7 +48,7 @@ $userRol = $view->getVariable("userRol");
               <td class="cell100 column2"><?= $partido->getPrecioPartido() ?></td>
               <td class="cell100 column3"><?= $partido->getEstadoPartido() ?></td>
               <td class="cell100 column4"><?= $partido->getFechaFinInscripcion() ?></td>
-              <?php if ($userRol == "administrador" && $partido->getEstadoPartido() == "abierto") { ?>
+              <?php if ($userRol == "administrador") { ?>
                 <td><a href="<?= "index.php?controller=partidos&action=deletePartido&idPartido=" . $partido->getIdPartido() ?>">
                     <i class="fa fa-trash-alt"></i>
                   </a></td><?php } else if ($userRol == "deportista") { ?>

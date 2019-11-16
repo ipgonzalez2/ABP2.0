@@ -12,7 +12,7 @@ $errors = $view->getVariable("errors");
 
 	<div class="wrap-contact100">
 
-		<form class="contact100-form validate-form" method="POST" action="./index.php?controller=partidos&action=addPartido">
+		<form class="contact100-form validate-form" method="POST" action="./index.php?controller=campeonatos&action=addCampeonato">
 			
 				<span class="contact100-form-title">
 					Crear un campeonato

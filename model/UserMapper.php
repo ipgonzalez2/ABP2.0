@@ -139,4 +139,24 @@ class UserMapper {
 			return NULL;
 		}
 	}
+
+	public function findUserLogin($login){
+		$stmt = $this->db->prepare("SELECT * FROM usuario WHERE username=?");
+		$stmt->execute(array($login));
+		$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if($user != null) {
+			return new User(
+			$user["id_usuario"],
+			$user["username"],
+			$user["passwd"],
+			$user["nombre"],
+			$user["email"],
+			$user["rol"],
+			$user["sexo"],
+			$user["nivel"]);
+		} else {
+			return NULL;
+		}
+	}
 }

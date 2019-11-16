@@ -148,7 +148,7 @@ class UsersController extends BaseController {
 			$user->setEmail($_POST["email"]);
 			$user->setRol("deportista");
 			$user->setSexo($_POST["sexo"]);
-			$user->setNivel(0);
+			$user->setNivel(1);
 
 			try{
 				$user->checkIsValidForRegister(); // if it fails, ValidationException

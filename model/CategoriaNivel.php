@@ -5,7 +5,7 @@ require_once(__DIR__."/../core/ValidationException.php");
 
 class CategoriaNivel {
 
-
+	private $id_categorianivel;
 	/**
 	* The reservation name of the reservation
 	* @var string
@@ -32,13 +32,26 @@ class CategoriaNivel {
 	* @param string $Precio The password of the reservation
 	*/
     public function __construct($categoria=NULL, $nivel=NULL,
-    $campeonato=NULL) {
+    $campeonato=NULL, $id_categorianivel=NULL) {
         $this->categoria = $categoria;
         $this->nivel = $nivel;
-        $this->campeonato = $campeonato;
+		$this->campeonato = $campeonato;
+		$this->id_categorianivel = $id_categorianivel;
 	}
 
+	public function getIdCategoriaNivel() {
+		return $this->id_categorianivel;
+	}
 
+	/**
+	* Sets the tipoPista of this reservation
+	*
+	* @param string $categoria The tipoPista of this reservation
+	* @return void
+	*/
+	public function setIdCategoriaNivel($id_categorianivel) {
+		$this->id_categorianivel = $id_categorianivel;
+    }
 	/**
 	* Gets the tipoPista of this reservation
 	*
