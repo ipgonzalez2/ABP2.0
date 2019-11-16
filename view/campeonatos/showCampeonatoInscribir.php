@@ -16,7 +16,7 @@ $campeonato = $view->getVariable("campeonato");
 		<form class="contact100-form validate-form" method="POST" action="./index.php?controller=campeonatos&action=inscribirCampeonato">
 			
 				<span class="contact100-form-title">
-					Incríbete
+					Inscríbete
 				</span>
 
                 <div style="display:none" class="wrap-input100 validate-input">
@@ -24,28 +24,25 @@ $campeonato = $view->getVariable("campeonato");
 				</div>
 
                 <div class="wrap-input100 validate-input">
-				<select name="categoria" class="input100">
-  					<option name="categoria" value="masculina">Masculina</option>
-  					<option name="categoria" value="femenina">Femenina</option>
-                    <option name="categoria" value="mixto">Mixta</option>
-  				</select>
-				  <span ></span>
-					<span class="label-input100">Categoria</span>
+				<input class="input100" type="text" list="categoria" placeholder="Categoria" />
+				<datalist id="categoria" name="categoria" class="input100">
+  					<option name="categoria" value="masculina"></option>
+  					<option name="categoria" value="femenina"></option>
+                    <option name="categoria" value="mixto"></option>
+				</datalist>
 				</div>
 
 				<div class="wrap-input100 validate-input">
-				<select name="nivel" class="input100">
-  					<option name="nivel" value="1">1</option>
-  					<option name="nivel" value="2">2</option>
-                    <option name="nivel" value="3">3</option>
-  				</select>
-				  <span ></span>
-					<span class="label-input100">Nivel</span>
+				<input class="input100" type="text" list="nivel" placeholder="Nivel" />
+				<datalist id="nivel" name="nivel" class="input100">
+  					<option name="nivel" value="1"></option>
+  					<option name="nivel" value="2"></option>
+                    <option name="nivel" value="3"></option>
+  				</datalist>
 				</div>
 
 				<div class="wrap-input100 validate-input">
-					<input class="input100" type="text" name="loginPareja" placeholder="Login Pareja">
-					
+					<input class="input100" type="text" name="loginPareja" placeholder="Login Pareja">		
 				</div>
 
 				<div class="container-contact100-form-btn">
