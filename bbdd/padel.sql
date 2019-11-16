@@ -157,3 +157,13 @@ create table if not exists pareja (
 
   
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
+
+create table if not exists grupo (
+  id_grupo int(10) auto_increment,
+  categorianivel_grupo int(10) not null,
+  numParejas int(10) not null,
+
+  constraint pk_grupo primary key(id_grupo),
+  constraint fk_categorianivel_grupo foreign key(categorianivel_grupo) references categorianivel(id_categorianivel) on delete cascade
+  
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;

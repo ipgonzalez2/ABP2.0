@@ -150,25 +150,20 @@ class CategoriaNivelMapper {
     {
         $stmt = $this->db->prepare("UPDATE PARTIDO SET ESTADO_PARTIDO = ? WHERE ID_PARTIDO=?");
         $stmt->execute(array("CERRADO",$idPartido));
-	}
-	
-	public function findAllPartidosInscrito($partidosInscrito) 
-	{
-		$stmt = $this->db->prepare("SELECT * FROM PARTIDO");
-		$stmt->execute();
-		
-		$partidos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$categorias = array();
+	}*/
 
-		foreach ($partidos_db as $categoria_nivel) {
-				if((in_array($categoria_nivel["ID_PARTIDO"],$partidosInscrito))){
-					array_push($categorias, new Partido($categoria_nivel["ID_PARTIDO"],$categoria_nivel["FECHA_PARTIDO"], $categoria_nivel["PRECIO_PARTIDO"],
-					$categoria_nivel["ESTADO_PARTIDO"], $categoria_nivel["FECHA_FIN_INSCRIPCION"]));
-				}
+	public function findAllCampeonatosInscrito($categorias) 
+	{
+		$campeonatos = array();
+		foreach($categorias as $categoria){
+			$stmt = $this->db->prepare("SELECT campeonato FROM categorianivel where id_categorianivel=?");
+			$stmt->execute(array($categoria));
+			$c = $stmt->fetch(PDO::FETCH_ASSOC);
+			array_push($campeonatos, $c["campeonato"]);
 		}
 
-		return $categorias;
+		return $campeonatos;
 	}
 
-*/
+
 }

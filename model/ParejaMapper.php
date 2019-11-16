@@ -57,7 +57,7 @@ class ParejaMapper {
 	
 	public function findParejas($cn) {
 
-		$stmt = $this->db->prepare("SELECT * from pareja where categorianivel=?");
+		$stmt = $this->db->prepare("SELECT * from pareja where categorianivel=? order by id_pareja");
 		$stmt->execute(array($cn));
 
 		$parejas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -69,5 +69,54 @@ class ParejaMapper {
 		}
 
 		return $parejas;
+	}
+
+	public function findInscritos($id_usuario) 
+	{
+		$stmt = $this->db->prepare("SELECT categorianivel FROM pareja where deportista1=? OR deportista2=?");
+		$stmt->execute(array($id_usuario, $id_usuario));
+		
+		$categorias_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		$categorias = array();
+
+		foreach ($categorias_db as $categoria_nivel) {
+				array_push($categorias, $categoria_nivel["categorianivel"]);
+		}
+
+		return $categorias;
+	}
+
+	public function actualizarPareja($id_pareja, $id_grupo) 
+	{
+		$stmt = $this->db->prepare("UPDATE pareja set grupo=? where id_pareja=?");
+		$stmt->execute(array($id_grupo, $id_pareja));
+
+	}
+
+	public function findParejasSinGrupo($categorias)
+	{
+		$parejasSinGrupo = array();
+
+		foreach($categorias as $categoria){
+			$stmt = $this->db->prepare("SELECT * from pareja where categorianivel=? and grupo is null");
+			$stmt->execute(array($categoria));
+			$p = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			foreach($p as $pareja){
+				array_push($parejasSinGrupo, new Pareja($pareja["id_pareja"], $pareja["deportista1"],
+				$pareja["deportista2"], $pareja["categorianivel"], $pareja["grupo"]));
+			}
+			
+		}
+
+		return $parejasSinGrupo;
+		
+
+	}
+
+	public function deletePareja($idPareja){
+		$stmt = $this->db->prepare("DELETE from pareja where id_pareja=?");
+		$stmt->execute(array($idPareja));
 	}
 }

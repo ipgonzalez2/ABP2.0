@@ -130,30 +130,30 @@ class CampeonatoMapper {
 			return NULL;
 		}
 	}
-/*
-	public function cerrarPartido($idPartido)
+
+	public function cerrarCampeonato($idcampeonato)
     {
-        $stmt = $this->db->prepare("UPDATE PARTIDO SET ESTADO_PARTIDO = ? WHERE ID_PARTIDO=?");
-        $stmt->execute(array("CERRADO",$idPartido));
+        $stmt = $this->db->prepare("UPDATE campeonato SET estado_campeonato = ? WHERE id_campeonato=?");
+        $stmt->execute(array("cerrado",$idcampeonato));
 	}
 	
-	public function findAllPartidosInscrito($partidosInscrito) 
+	public function findAll($campeonatos) 
 	{
-		$stmt = $this->db->prepare("SELECT * FROM PARTIDO");
+		$stmt = $this->db->prepare("SELECT * FROM campeonato");
 		$stmt->execute();
 		
 		$campeonatos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$campeonatos = array();
+		$campeonatosInscrito = array();
 
 		foreach ($campeonatos_db as $campeonato) {
-				if((in_array($campeonato["ID_PARTIDO"],$partidosInscrito))){
-					array_push($campeonatos, new Partido($campeonato["ID_PARTIDO"],$campeonato["FECHA_PARTIDO"], $campeonato["PRECIO_PARTIDO"],
-					$campeonato["ESTADO_PARTIDO"], $campeonato["FECHA_FIN_INSCRIPCION"]));
+				if((in_array($campeonato["id_campeonato"],$campeonatos))){
+					array_push($campeonatosInscrito, new Campeonato($campeonato["id_campeonato"],$campeonato["nombre_campeonato"], $campeonato["fecha_inicio"],
+					$campeonato["fecha_fin"], $campeonato["precio_campeonato"], $campeonato["fecha_limite_inscripcion"], $campeonato["estado_campeonato"]));
 				}
 		}
 
-		return $campeonatos;
+		return $campeonatosInscrito;
 	}
 
-*/
+
 }

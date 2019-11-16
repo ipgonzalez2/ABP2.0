@@ -124,5 +124,20 @@ class ReservaMapper {
 		return $pista["pista_reserva"];
 	}
 
+	public function getHorasReserva($fecha, $id_usuario){
+		$stmt = $this->db->prepare("SELECT hora from reserva where fecha=? and usuario_reserva=?");
+		$stmt->execute(array($fecha, $id_usuario));
+
+		$horas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$horas = array();
+
+		foreach($horas_db as $hora){
+			array_push($horas, $hora["hora"]);
+		}
+
+
+		return $horas;
+	}
+
 
 }
