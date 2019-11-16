@@ -183,16 +183,25 @@ class Campeonato {
     
 	public function checkIsValidForRegister() {
 		$errors = array();
-		if (strlen($this->nombre_campeonato) < 11) {
-			$errors["username"] = "Username must be at least 5 characters length";
+		 $patterSoloLetras="/^[a-zA-ZáéíóúÁÉÍÓÚäëïöüÄËÏÖÜàèìòùÀÈÌÒÙ\s]+$/";
+		 $fechaActual = date('d-m-Y');
+
+
+		if (strlen($this->nombre_campeonato) < 11 || !preg_match($patterSoloLetras,$this->nombre_campeonato)) {
+			$errors["nombre_campeonato"] = "El nombre del campeonato debe tener al menos 11 caracteres y deben de ser únicamente letras";
 
 		}
-		if (strlen($this->fecha_fin_inscripcion) < 11) {
-			$errors["passwd"] = "Password must be at least 5 characters length";
+
+		if (strlen($this->fecha_fin_inscripcion) < 11 || $this->fecha_fin_inscripcion<$fechaActual || $this->fecha_fin_inscripcion>$this->fecha_inicio) {
+			$errors["fecha_fin_inscripcion"] = "La fecha de fin de inscripcion es incorrecta o es anterior al dia de hoy";
+
 		}
-		if (strlen($this->fecha_inicio) < 2) {
-			$errors["nombre"] = "Name must be at least 5 characters length";
+
+		if (strlen($this->fecha_inicio) < 2 || $this->fecha_inicio<$fechaActual || $this->fecha_inicio<$this->fecha_fin_inscripcion ) {
+
+			$errors["fecha_inicio"] = "La fecha de inicio es incorrecta";
 		}
+
 		if (sizeof($errors)>0){
 			throw new ValidationException($errors, "user is not valid");
 		}
