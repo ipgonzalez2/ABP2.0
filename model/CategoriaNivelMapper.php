@@ -41,6 +41,20 @@ class CategoriaNivelMapper {
 		$categoria_nivel = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $categoria_nivel["id_categorianivel"];
 	}
+
+	public function findAll($id_campeonato) 
+	{
+		$stmt = $this->db->prepare("SELECT id_categorianivel FROM categorianivel where campeonato=?");
+		$stmt->execute(array($id_campeonato));
+		
+		$categorias_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$categorias = array();
+
+		foreach ($categorias_db as $categoria) {
+			array_push($categorias, $categoria["id_categorianivel"]);
+		}
+		return $categorias;
+	}
 /*
 	public function findAllPartidos() 
 	{
@@ -48,13 +62,13 @@ class CategoriaNivelMapper {
 		$stmt->execute();
 		
 		$partidos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$partidos = array();
+		$categorias = array();
 
 		foreach ($partidos_db as $categoria_nivel) {
-			array_push($partidos, new Partido($categoria_nivel["ID_PARTIDO"],$categoria_nivel["FECHA_PARTIDO"], $categoria_nivel["PRECIO_PARTIDO"],
+			array_push($categorias, new Partido($categoria_nivel["ID_PARTIDO"],$categoria_nivel["FECHA_PARTIDO"], $categoria_nivel["PRECIO_PARTIDO"],
 			$categoria_nivel["ESTADO_PARTIDO"], $categoria_nivel["FECHA_FIN_INSCRIPCION"]));
 		}
-		return $partidos;
+		return $categorias;
 	}
 
 	public function findAllPartidosAbiertos($partidosInscrito) 
@@ -63,16 +77,16 @@ class CategoriaNivelMapper {
 		$stmt->execute(array("ABIERTO"));
 		
 		$partidos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$partidos = array();
+		$categorias = array();
 
 		foreach ($partidos_db as $categoria_nivel) {
 				if(!(in_array($categoria_nivel["ID_PARTIDO"],$partidosInscrito))){
-					array_push($partidos, new Partido($categoria_nivel["ID_PARTIDO"],$categoria_nivel["FECHA_PARTIDO"], $categoria_nivel["PRECIO_PARTIDO"],
+					array_push($categorias, new Partido($categoria_nivel["ID_PARTIDO"],$categoria_nivel["FECHA_PARTIDO"], $categoria_nivel["PRECIO_PARTIDO"],
 					$categoria_nivel["ESTADO_PARTIDO"], $categoria_nivel["FECHA_FIN_INSCRIPCION"]));
 				}
 		}
 
-		return $partidos;
+		return $categorias;
 	}
 
 	public function actualizarPartidos() 
@@ -81,7 +95,7 @@ class CategoriaNivelMapper {
 		$stmt->execute();
 		
 		$partidos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$partidos = array();
+		$categorias = array();
 
 		foreach ($partidos_db as $categoria_nivel) {
 			$fechaInscripcionPartido=date("Y-m-d",strtotime($categoria_nivel["FECHA_FIN_INSCRIPCION"]));
@@ -144,16 +158,16 @@ class CategoriaNivelMapper {
 		$stmt->execute();
 		
 		$partidos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$partidos = array();
+		$categorias = array();
 
 		foreach ($partidos_db as $categoria_nivel) {
 				if((in_array($categoria_nivel["ID_PARTIDO"],$partidosInscrito))){
-					array_push($partidos, new Partido($categoria_nivel["ID_PARTIDO"],$categoria_nivel["FECHA_PARTIDO"], $categoria_nivel["PRECIO_PARTIDO"],
+					array_push($categorias, new Partido($categoria_nivel["ID_PARTIDO"],$categoria_nivel["FECHA_PARTIDO"], $categoria_nivel["PRECIO_PARTIDO"],
 					$categoria_nivel["ESTADO_PARTIDO"], $categoria_nivel["FECHA_FIN_INSCRIPCION"]));
 				}
 		}
 
-		return $partidos;
+		return $categorias;
 	}
 
 */

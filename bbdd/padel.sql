@@ -152,7 +152,7 @@ create table if not exists pareja (
   constraint pk_pareja primary key(id_pareja),
   constraint fk_deportista1 foreign key(deportista1) references usuario(id_usuario) on delete cascade,
   constraint fk_deportista2 foreign key(deportista2) references usuario(id_usuario) on delete cascade,
-  constraint fk_categorianivel foreign key(categorianivel) references categorianivel(id_categorianivel) on delete cascade,
+  constraint fk_categorianivel foreign key(categorianivel) references categorianivel(id_categorianivel) on delete cascade
   -- constraint fk_grupo foreign key(grupo) references grupo(id_grupo) on delete cascade
 
   
