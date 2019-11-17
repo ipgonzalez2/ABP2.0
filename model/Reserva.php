@@ -1,38 +1,18 @@
 <?php
-// file: model/User.php
 
 require_once(__DIR__."/../core/ValidationException.php");
 
 class Reserva {
 
-	/**
-	* The reservation name of the reservation
-	* @var string
-	*/
+
 	private $id_reserva;
 
-	/**
-	* The reservation name of the reservation
-	* @var string
-	*/
 	private $fecha;
 
-	/**
-	* The password of the reservation
-	* @var string
-	*/
 	private $precio;
 
-	/**
-	* The name of the reservation
-	* @var string
-	*/
 	private $usuario_reserva;
 
-	/**
-	* The pista_reserva of the reservation
-	* @var string
-	*/
 	private $pista_reserva;
 
 	private $hora;
@@ -40,12 +20,7 @@ class Reserva {
 	private $partido_reserva;
 
 	
-	/** 
-	* The constructor
-	*
-	* @param string $fecha The name of the reservation
-	* @param string $Precio The password of the reservation
-	*/
+
 	public function __construct($id_reserva=NULL, $fecha=NULL, $precio=NULL, $usuario_reserva=NULL,
 	$pista_reserva=NULL, $hora=NULL, $partido_reserva=NULL) {
 		$this->id_reserva = $id_reserva;
@@ -57,94 +32,52 @@ class Reserva {
 		$this->partido_reserva = $partido_reserva;
 	}
 	
-	/**
-	* Gets the fecha of this reservation
-	*
-	* @return string The fecha of this reservation
-	*/
+	
 	public function getIdReserva() {
 		return $this->id_reserva;
 	}
 
-	/**
-	* Sets the fecha of this reservation
-	*
-	* @param string $fecha The fecha of this reservation
-	* @return void
-	*/
+
 	public function setIdReserva($id_reserva) {
 		$this->id_reserva = $id_reserva;
 	}
 
-	/**
-	* Gets the fecha of this reservation
-	*
-	* @return string The fecha of this reservation
-	*/
+
 	public function getFecha() {
 		return $this->fecha;
 	}
 
-	/**
-	* Sets the fecha of this reservation
-	*
-	* @param string $fecha The fecha of this reservation
-	* @return void
-	*/
+
 	public function setFecha($fecha) {
 		$this->fecha = $fecha;
 	}
 
-	/**
-	* Gets the password of this reservation
-	*
-	* @return string The password of this reservation
-	*/
+
 	public function getPrecio() {
 		return $this->precio;
 	}
-	/**
-	* Sets the password of this reservation
-	*
-	* @param string $Precio The password of this reservation
-	* @return void
-	*/
+
+
 	public function setPrecio($precio) {
 		$this->precio = $precio;
 	}
 
-	/**
-	* Gets the password of this reservation
-	*
-	* @return string The password of this reservation
-	*/
+
 	public function getUsuarioReserva() {
 		return $this->usuario_reserva;
 	}
-	/**
-	* Sets the password of this reservation
-	*
-	* @param string $Precio The password of this reservation
-	* @return void
-	*/
+
+
 	public function setUsuarioReserva($usuario_reserva) {
 		$this->usuario_reserva = $usuario_reserva;
 	}
 
-	/**
-	* Gets the password of this reservation
-	*
-	* @return string The password of this reservation
-	*/
+
 	public function getPistaReserva() {
 		return $this->pista_reserva;
 	}
-	/**
-	* Sets the password of this reservation
-	*
-	* @param string $Precio The password of this reservation
-	* @return void
-	*/
+
+
 	public function setPistaReserva($pista_reserva) {
 		$this->pista_reserva = $pista_reserva;
 	}
@@ -166,16 +99,6 @@ class Reserva {
 	}
 
 
-
-	/**
-	* Checks if the current reservation instance is valid
-	* for being registered in the database
-	*
-	* @throws ValidationException if the instance is
-	* not valid
-	*
-	* @return void
-	*/
 	public function checkIsValidForRegister() {
 		$errors = array();
 		$fechaActual = date('d-m-Y');

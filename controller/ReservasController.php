@@ -1,7 +1,6 @@
 <?php
 
 require_once(__DIR__."/../core/ViewManager.php");
-require_once(__DIR__."/../core/I18n.php");
 
 require_once(__DIR__."/../model/Reserva.php");
 require_once(__DIR__."/../model/ReservaMapper.php");
@@ -19,20 +18,12 @@ require_once(__DIR__."/../model/NotificacionMapper.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
 /**
-* Class UsersController
+* Class ReservasController
 *
-* Controller to login, logout and user registration
-*
-* @author lipido <lipido@gmail.com>
+* Controller to reservas
 */
 class ReservasController extends BaseController {
 
-	/**
-	* Reference to the UserMapper to interact
-	* with the database
-	*
-	* @var UserMapper
-	*/
     private $reservaMapper;
 	private $calendarioMapper;
 	private $pistaMapper;
@@ -50,12 +41,10 @@ class ReservasController extends BaseController {
 		$this->inscripcionPartidoMapper = new InscripcionPartidoMapper();
 		$this->notificacionMapper = new NotificacionMapper();
 
-		// Users controller operates in a "welcome" layout
-		// different to the "default" layout where the internal
-		// menu is displayed
 		$this->view->setLayout("reservar");
 	}
 
+	/* funcion que añade una reserva para una hora y una fecha*/
 	public function addReserva() {
 
 		$reserva = new Reserva();
@@ -144,6 +133,8 @@ class ReservasController extends BaseController {
 		$this->view->render("reservar", "reservar");
 	}
 
+	/*funcion que muestra las reservas activas de un usuario*/
+
 	public function showallReservasActivas(){
 
 		$userRol = $this->view->getVariable("userRol");
@@ -166,6 +157,8 @@ class ReservasController extends BaseController {
 		$this->view->render("reservas", "showReservasActivas");
 	}
 
+
+	/*funcion que elimina una reserva con un margen de 1 dia*/
 	public function deleteReserva() {
 
 		$userRol = $this->view->getVariable("userRol");

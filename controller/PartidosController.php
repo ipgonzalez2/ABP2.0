@@ -1,7 +1,6 @@
 <?php
 
 require_once(__DIR__."/../core/ViewManager.php");
-require_once(__DIR__."/../core/I18n.php");
 
 require_once(__DIR__."/../model/Partido.php");
 require_once(__DIR__."/../model/PartidoMapper.php");
@@ -19,20 +18,12 @@ require_once(__DIR__."/../model/ReservaMapper.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
 /**
-* Class UsersController
+* Class PartidosController
 *
-* Controller to login, logout and user registration
-*
-* @author lipido <lipido@gmail.com>
+* Controller to partidos
 */
 class PartidosController extends BaseController {
 
-	/**
-	* Reference to the UserMapper to interact
-	* with the database
-	*
-	* @var UserMapper
-	*/
 	private $partidoMapper;
 	private $inscripcionPartidoMapper;
 	private $notificacionMapper;
@@ -50,12 +41,11 @@ class PartidosController extends BaseController {
 		$this->pistaMapper = new PistaMapper();
 		$this->reservaMapper = new ReservaMapper();
 
-		// Users controller operates in a "welcome" layout
-		// different to the "default" layout where the internal
-		// menu is displayed
 		$this->view->setLayout("welcome");
 	}
 	
+
+	/*funcion que permite al administrador crear un partido*/
 	public function addPartido() {
 		$partido = new Partido();
 		$userRol = $this->view->getVariable("userRol");
@@ -69,8 +59,6 @@ class PartidosController extends BaseController {
 		}
 
 		if (isset($_POST["hora"])){ 
-			// reaching via HTTP Post...
-			// populate the User object with data form the form
 			$fechaInscripcionPartido=date("Y-m-d", strtotime("-1 day", strtotime($_POST["fecha"])));
 			$partido->setFechaPartido($_POST["fecha"]);
             $partido->setFechaFinInscripcion($fechaInscripcionPartido);
@@ -79,17 +67,6 @@ class PartidosController extends BaseController {
 			$partido->setHoraPartido($_POST["hora"]);
 
 					$this->partidoMapper->save($partido);
-
-					// POST-REDIRECT-GET
-					// Everything OK, we will redirect the user to the list of posts
-					// We want to see a message after redirection, so we establish
-					// a "flash" message (which is simply a Session variable) to be
-					// get in the view after redirection.
-					$this->view->setFlash("Username ".$partido->getIdPartido()." successfully added. Please login now");
-
-					// perform the redirection. More or less:
-					// header("Location: index.php?controller=users&action=login")
-					// die();
 					$this->view->redirect("index", "indexLogged");
 		}
 		$fechas = array();
@@ -109,10 +86,11 @@ class PartidosController extends BaseController {
 		$this->view->setVariable("fechas", $fechas);
 		$this->view->setVariable("horas", $horas);
 
-		// render the view (/view/users/login.php)
 		$this->view->render("partidos", "addPartido");
 	}
 
+	/*funcion que muestra todos los partidos al administrador
+	y los disponibles para inscribirse a los deportistas*/
 	public function showallPartidos() {
 
 		$userRol = $this->view->getVariable("userRol");
@@ -135,6 +113,8 @@ class PartidosController extends BaseController {
 		$this->view->render("partidos", "showall");
 	}	
 
+
+	/*funcion que elimina un partido*/
 	public function deletePartido() {
 
 		$userRol = $this->view->getVariable("userRol");
@@ -170,6 +150,7 @@ class PartidosController extends BaseController {
 		$this->view->render("partidos", "showall");
 	}
 
+	/*funcion que muestra en detalle un partido para ser inscrito*/
 	public function showPartidoInscribir() {
 
 		$userRol = $this->view->getVariable("userRol");
@@ -200,6 +181,8 @@ class PartidosController extends BaseController {
 		$this->view->render("partidos", "showPartidoInscribir");
 	}
 
+
+	/*funcion que inscribe un deportista a un partido*/
 	public function inscribirPartido() {
 
 		$userRol = $this->view->getVariable("userRol");
@@ -262,7 +245,7 @@ class PartidosController extends BaseController {
 	}
 
 	
-
+	/*funcion que muestra todos los partidos en los que esta inscrito un usuario*/
 	public function showallPartidosInscrito() {
 
 		$userRol = $this->view->getVariable("userRol");

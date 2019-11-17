@@ -1,42 +1,6 @@
 <?php
 // file: /core/ViewManager.php
 
-/**
-* Class ViewManager
-*
-* This class implements the glue between the controller
-* and the view.
-*
-* This class is a singleton. You should use getInstance()
-* to get the view manager instance.
-*
-* The main responsibilities are:
-*
-* 1.Save variables from the controller and make them available
-*	 for views. This includes "flash" variables, which are
-*	 variables kept in session that are removed just after
-*	 they are retrieved. Use methods like setVariable, getVariable and
-*	 setFlash.
-*
-* 2.Render views. This basically performs an 'include' of the view
-*	 file, but with more MVC-oriented parameters
-*	 (controller name and view name).
-*
-* 3.Layout (or templating) system. Based on PHP output buffers
-*	 (ob_ functions). Once the view manager is initialized,
-*	 the output buffer is enabled. By default, all contents that are
-*	 generated inside your views will be saved in a DEFAULT_FRAGMENT.
-*	 The DEFAULT_FRAGMENT is normally used as the "main" content of
-*	 the resulting layout. However, you can generate contents for
-*	 other fragments that will go into the layout. For example, inside
-*	 your views, you have to call moveToFragment(fragmentName) before
-*	 generating content for a desired fragment. This fragment normally
-*	 will be after retrieved by the layout (via calls to getFragment).
-*	 Typical fragments are 'css', 'javascript', so you can specify
-*	 additional css and javascripts from your specific views.
-*
-* @author lipido <lipido@gmail.com>
-*/
 class ViewManager {
 
 	/**

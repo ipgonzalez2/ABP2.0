@@ -1,7 +1,6 @@
 <?php
 
 require_once(__DIR__."/../core/ViewManager.php");
-require_once(__DIR__."/../core/I18n.php");
 
 require_once(__DIR__."/../model/User.php");
 require_once(__DIR__."/../model/UserMapper.php");
@@ -9,11 +8,9 @@ require_once(__DIR__."/../model/UserMapper.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
 /**
-* Class UsersController
+* Class IndexController
 *
-* Controller to login, logout and user registration
-*
-* @author lipido <lipido@gmail.com>
+* Controller to the main page
 */
 class IndexController extends BaseController {
 
@@ -29,14 +26,12 @@ class IndexController extends BaseController {
 		parent::__construct();
 
 		$this->userMapper = new UserMapper();
-		// Users controller operates in a "welcome" layout
-		// different to the "default" layout where the internal
-		// menu is displayed
+
 		$this->view->setLayout("default");
 	}
 
 	
-	
+	//Carga la vista si no se ha iniciado sesión
 	public function indexNoLogged() {
 
 		if (isset($this->currentUser)) {
@@ -48,7 +43,8 @@ class IndexController extends BaseController {
 		$this->view->setLayout("default");
 		$this->view->render("main", "mainNoLogged");
     }
-    
+	
+	//Carga la vista correspondiente si hay una sesión abierta
     public function indexLogged() {
 
 		if (!isset($this->currentUser)) {

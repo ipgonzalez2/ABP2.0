@@ -1,36 +1,19 @@
 <?php
-// file: model/User.php
 
 require_once(__DIR__."/../core/ValidationException.php");
 
 class CategoriaNivel {
 
 	private $id_categorianivel;
-	/**
-	* The reservation name of the reservation
-	* @var string
-	*/
+
     private $categoria;
     
-    /**
-	* The reservation name of the reservation
-	* @var string
-	*/
     private $nivel;
     
-    /**
-	* The reservation name of the reservation
-	* @var string
-	*/
     private $campeonato;
 	
 	
-	/** 
-	* The constructor
-	*
-	* @param string $categoria The name of the reservation
-	* @param string $Precio The password of the reservation
-	*/
+
     public function __construct($categoria=NULL, $nivel=NULL,
     $campeonato=NULL, $id_categorianivel=NULL) {
         $this->categoria = $categoria;
@@ -43,69 +26,30 @@ class CategoriaNivel {
 		return $this->id_categorianivel;
 	}
 
-	/**
-	* Sets the tipoPista of this reservation
-	*
-	* @param string $categoria The tipoPista of this reservation
-	* @return void
-	*/
 	public function setIdCategoriaNivel($id_categorianivel) {
 		$this->id_categorianivel = $id_categorianivel;
     }
-	/**
-	* Gets the tipoPista of this reservation
-	*
-	* @return string The tipoPista of this reservation
-	*/
+
 	public function getCategoria() {
 		return $this->categoria;
 	}
 
-	/**
-	* Sets the tipoPista of this reservation
-	*
-	* @param string $categoria The tipoPista of this reservation
-	* @return void
-	*/
 	public function setCategoria($categoria) {
 		$this->categoria = $categoria;
     }
     
-    
-	/**
-	* Gets the tipoPista of this reservation
-	*
-	* @return string The tipoPista of this reservation
-	*/
 	public function getNivel() {
 		return $this->nivel;
 	}
 
-	/**
-	* Sets the tipoPista of this reservation
-	*
-	* @param string $categoria The tipoPista of this reservation
-	* @return void
-	*/
 	public function setNivel($nivel) {
 		$this->nivel = $nivel;
     }
 
-    /**
-	* Gets the tipoPista of this reservation
-	*
-	* @return string The tipoPista of this reservation
-	*/
 	public function getCampeonato() {
 		return $this->campeonato;
 	}
 
-	/**
-	* Sets the tipoPista of this reservation
-	*
-	* @param string $categoria The tipoPista of this reservation
-	* @return void
-	*/
 	public function setCampeonato($campeonato) {
 		$this->campeonato = $campeonato;
     }
