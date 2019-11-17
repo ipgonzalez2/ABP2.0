@@ -116,4 +116,24 @@ class ParejaMapper {
 
 		return $parejas;
 	}
+
+	public function findPareja($idPareja) {
+
+		$stmt = $this->db->prepare("SELECT * from pareja where id_pareja=?");
+		$stmt->execute(array($idPareja));
+
+		$pareja = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if($pareja != null) {
+			return new Pareja(
+			$pareja["id_pareja"],
+			$pareja["deportista1"],
+			$pareja["deportista2"],
+			$pareja["categorianivel"],
+			$pareja["grupo"]
+			);
+		} else {
+			return NULL;
+		}
+	}
 }

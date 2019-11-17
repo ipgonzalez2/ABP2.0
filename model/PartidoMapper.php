@@ -147,7 +147,7 @@ class PartidoMapper {
 		}
 	}
 
-	public function getHoras($fecha){
+	public function getHoras($fecha,$numPistas){
 	$stmt = $this->db->prepare("SELECT hora_partido FROM partido where fecha_partido=? AND estado_partido=?");
     $stmt->execute(array($fecha,"abierto"));
 		
@@ -155,7 +155,12 @@ class PartidoMapper {
 		$horasOcupadas = array();
 
 		foreach ($horas_db as $hora) {
+			$stmt = $this->db->prepare("SELECT COUNT(hora_partido) FROM partido where fecha_partido=? AND hora_partido=?");
+			$stmt->execute(array($fecha,$hora["hora_partido"]));
+			$count = $stmt->fetch(PDO::FETCH_ASSOC);
+			if($count["COUNT(hora_partido)"]==$numPistas){
 			array_push($horasOcupadas, $hora["hora_partido"]);
+			}
 		}
 		
 		return $horasOcupadas;

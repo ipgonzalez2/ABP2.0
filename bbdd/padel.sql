@@ -179,6 +179,8 @@ create table if not exists enfrentamiento (
   resultado2 int(10),
   grupo_enfrentamiento int(10) not null,
   tipo_enfrentamiento enum("liga", "playoff") not null,
+  fecha_enfrentamiento date not null,
+  hora_enfrentamiento time not null,
 
   constraint pk_enfrentamiento primary key(id_enfrentamiento),
   constraint fk_pareja1 foreign key(pareja1) references pareja(id_pareja) on delete cascade,

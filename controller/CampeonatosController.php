@@ -16,6 +16,12 @@ require_once(__DIR__."/../model/Notificacion.php");
 require_once(__DIR__."/../model/NotificacionMapper.php");
 require_once(__DIR__."/../model/Enfrentamiento.php");
 require_once(__DIR__."/../model/EnfrentamientoMapper.php");
+require_once(__DIR__."/../model/Pista.php");
+require_once(__DIR__."/../model/PistaMapper.php");
+require_once(__DIR__."/../model/Calendario.php");
+require_once(__DIR__."/../model/CalendarioMapper.php");
+require_once(__DIR__."/../model/Partido.php");
+require_once(__DIR__."/../model/PartidoMapper.php");
 
 
 require_once(__DIR__."/../controller/BaseController.php");
@@ -34,6 +40,9 @@ class CampeonatosController extends BaseController {
 	private $grupoMapper;
 	private $notificacionMapper;
 	private $enfrentamientoMapper;
+	private $pistaMapper;
+	private $calendarioMapper;
+	private $partidoMapper;
 
 	public function __construct() {
 		parent::__construct();
@@ -45,7 +54,11 @@ class CampeonatosController extends BaseController {
 		$this->grupoMapper = new GrupoMapper();
 		$this->notificacionMapper = new NotificacionMapper();
 		$this->enfrentamientoMapper = new EnfrentamientoMapper();
+		$this->pistaMapper = new PistaMapper();
+		$this->calendarioMapper = new CalendarioMapper();
+		$this->partidoMapper = new PartidoMapper();
 		$this->view->setLayout("forms");
+
 	}
 	
 
@@ -267,9 +280,38 @@ class CampeonatosController extends BaseController {
 						$enfrentamiento->setPareja2($pareja2->getIdPareja());
 						$enfrentamiento->setGrupoEnfrentamiento($grupo->getIdGrupo());
 						$enfrentamiento->setTipoEnfrentamiento("liga");
+						$enfrentamiento->setEstadoEnfrentamiento("abierto");
+						//fecha y hora
+						$numPistas = $this->pistaMapper->getNumPistas();
+						$fechaFin = new DateTime($campeonato->getFechaFin());
+						$fechaInicio = new DateTime($campeonato->getFechaInicio());
+						$interval = ($fechaInicio->diff($fechaFin))->format("%a");
+						$encontrado = false;
+						$z = 0;
+						while(!$encontrado && $i<$interval){
+            			$dias = "+".+$z." days";
+						$fecha=date("Y-m-d",strtotime($dias, strtotime($campeonato->getFechaInicio())));
+						$horasDia = $this->calendarioMapper->getHoras($fecha, $numPistas);
+						$horasPartido = $this->partidoMapper->getHoras($fecha, $numPistas);
+						$horasEnfrentamiento = $this->enfrentamientoMapper->getHoras($fecha,$grupo->getIdGrupo());
+						$horasSinPartidos = array_diff($horasDia, $horasPartido);
+						$horasFinales = array_diff($horasSinPartidos, $horasEnfrentamiento);
+						$horasElegir=array();
+						foreach($horasFinales as $horaFinal){
+							array_push($horasElegir, $horaFinal);
+						}
+						$juegaAlgunaPareja = $this->enfrentamientoMapper->jueganParejas($pareja1->getIdPareja(),$pareja2->getIdPareja(),$fecha);
+						if(!$juegaAlgunaPareja){
+							$encontrado=true;
+							$enfrentamiento->setFechaEnfrentamiento($fecha);
+							$enfrentamiento->setHoraEnfrentamiento($horasElegir[0]);
+						}
+						$z++;
+						}
 						$this->enfrentamientoMapper->save($enfrentamiento);
 					}
 				}
+				
 			}
 
 
@@ -403,12 +445,47 @@ class CampeonatosController extends BaseController {
 			$categoriasNiveles = $this->categoriaNivelMapper->findAll($_GET["idCampeonato"]);
 
 			$grupos = $this->grupoMapper->findAll($categoriasNiveles);
-			
 			$this->view->setVariable("grupos", $grupos);
 			$this->view->setLayout("table");
 			$this->view->render("campeonatos", "showallGrupos");
 		}
-		$this->view->redirect("index", "indexLogged");
+
+	}
+
+	/*funcion que muestra la liga regular asociada a un grupo*/
+	public function verLigaRegularGrupo(){
+
+		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
+		
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+
+		if(isset($_GET["idGrupo"])){
+
+			$enfrentamientos = $this->enfrentamientoMapper->getEnfrentamientos($_GET["idGrupo"]);
+			$nombresDeportistas=array();
+
+			foreach($enfrentamientos as $e){
+				$pareja1 = $this->parejaMapper->findPareja($e->getPareja1());
+				$pareja2 = $this->parejaMapper->findPareja($e->getPareja2());
+				$deportista1 = $this->userMapper->findUser($pareja1->getDeportista1());
+				$deportista2 = $this->userMapper->findUser($pareja1->getDeportista2());
+				$deportista3 = $this->userMapper->findUser($pareja2->getDeportista1());
+				$deportista4 = $this->userMapper->findUser($pareja2->getDeportista2());
+				array_push($nombresDeportistas, $deportista1->getNombre());
+				array_push($nombresDeportistas, $deportista2->getNombre());
+				array_push($nombresDeportistas, $deportista3->getNombre());
+				array_push($nombresDeportistas, $deportista4->getNombre());
+			}
+
+			$this->view->setVariable("enfrentamientos", $enfrentamientos);
+			$this->view->setVariable("deportistas", $nombresDeportistas);
+			$this->view->setLayout("table");
+			$this->view->render("campeonatos", "showLigaRegular");
+		}
 	}
 	
 

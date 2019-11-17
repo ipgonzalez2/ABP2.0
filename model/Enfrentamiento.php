@@ -17,18 +17,27 @@ class Enfrentamiento {
 
     private $grupo_enfrentamiento;
 
-    private $tipo_enfrentamiento;
+	private $tipo_enfrentamiento;
 	
+	private $estado_enfrentamiento;
+	
+	private $fecha_enfrentamiento;
+
+	private $hora_enfrentamiento;
 	
     public function __construct($id_enfrentamiento=NULL, $pareja1=NULL, $pareja2=NULL,
-    $resultado1=NULL,$resultado2=NULL,$grupo_enfrentamiento=NULL,$tipo_enfrentamiento=NULL) {
+	$resultado1=NULL,$resultado2=NULL,$grupo_enfrentamiento=NULL,$tipo_enfrentamiento=NULL,
+	$estado_enfrentamiento=NULL,$fecha_enfrentamiento=NULL, $hora_enfrentamiento=NULL) {
 		$this->id_enfrentamiento = $id_enfrentamiento;
         $this->pareja1 = $pareja1;
         $this->pareja2 = $pareja2;
         $this->resultado1 = $resultado1;
         $this->resultado2 = $resultado2;
         $this->grupo_enfrentamiento = $grupo_enfrentamiento;
-        $this->tipo_enfrentamiento = $tipo_enfrentamiento;
+		$this->tipo_enfrentamiento = $tipo_enfrentamiento;
+		$this->estado_enfrentamiento = $estado_enfrentamiento;
+		$this->fecha_enfrentamiento = $fecha_enfrentamiento;
+		$this->hora_enfrentamiento = $hora_enfrentamiento;
 	}
 	
 	public function getIdEnfrentamiento() {
@@ -86,6 +95,30 @@ class Enfrentamiento {
 
 	public function setTipoEnfrentamiento($tipo_enfrentamiento) {
         $this->tipo_enfrentamiento = $tipo_enfrentamiento;
+	}
+
+	public function getEstadoEnfrentamiento(){
+		return $this->estado_enfrentamiento;
+	}
+
+	public function setEstadoEnfrentamiento($estado_enfrentamiento){
+		$this->estado_enfrentamiento= $estado_enfrentamiento;
+	}
+	
+	public function getFechaEnfrentamiento() {
+		return $this->fecha_enfrentamiento;
+	}
+
+	public function setFechaEnfrentamiento($fecha_enfrentamiento) {
+        $this->fecha_enfrentamiento = $fecha_enfrentamiento;
+	}
+	
+	public function getHoraEnfrentamiento() {
+		return $this->hora_enfrentamiento;
+	}
+
+	public function setHoraEnfrentamiento($hora_enfrentamiento) {
+        $this->hora_enfrentamiento = $hora_enfrentamiento;
     }
     
 	
