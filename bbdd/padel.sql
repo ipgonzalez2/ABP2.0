@@ -58,9 +58,11 @@ create table if not exists reserva(
   pista_reserva int(10) not null,
   hora time not null,
   partido_reserva int(10),
+  enfrentamiento int(10),
 
   constraint fk_usuario foreign key(usuario_reserva) references usuario(id_usuario) on delete cascade,
   constraint fk_pista foreign key(pista_reserva) references pista(id_pista) on delete cascade,
+  constraint fk_enfrentamiento foreign key(enfrentamiento) references enfrentamiento(id_enfrentamiento) on delete cascade,
   constraint pk_reserva primary key(id_reserva)
 
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
@@ -148,12 +150,13 @@ create table if not exists pareja (
   deportista2 int(10) not null,
   categorianivel int(10) not null,
   grupo int(10),
+  puntos int(10),
 
   constraint pk_pareja primary key(id_pareja),
   constraint fk_deportista1 foreign key(deportista1) references usuario(id_usuario) on delete cascade,
   constraint fk_deportista2 foreign key(deportista2) references usuario(id_usuario) on delete cascade,
-  constraint fk_categorianivel foreign key(categorianivel) references categorianivel(id_categorianivel) on delete cascade
-  -- constraint fk_grupo foreign key(grupo) references grupo(id_grupo) on delete cascade
+  constraint fk_categorianivel foreign key(categorianivel) references categorianivel(id_categorianivel) on delete cascade,
+  constraint fk_grupo foreign key(grupo) references grupo(id_grupo) on delete cascade
 
   
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
@@ -167,3 +170,21 @@ create table if not exists grupo (
   constraint fk_categorianivel_grupo foreign key(categorianivel_grupo) references categorianivel(id_categorianivel) on delete cascade
   
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
+
+create table if not exists enfrentamiento (
+  id_enfrentamiento int(10) auto_increment,
+  pareja1 int(10) not null,
+  pareja2 int(10) not null,
+  resultado1 int(10),
+  resultado2 int(10),
+  grupo_enfrentamiento int(10) not null,
+  tipo_enfrentamiento enum("liga", "playoff") not null,
+
+  constraint pk_enfrentamiento primary key(id_enfrentamiento),
+  constraint fk_pareja1 foreign key(pareja1) references pareja(id_pareja) on delete cascade,
+  constraint fk_pareja2 foreign key(pareja2) references pareja(id_pareja) on delete cascade,
+  constraint fk_frupo_enf foreign key(grupo_enfrentamiento) references grupo(id_grupo) on delete cascade
+
+  
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
+

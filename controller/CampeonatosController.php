@@ -14,6 +14,8 @@ require_once(__DIR__."/../model/Grupo.php");
 require_once(__DIR__."/../model/GrupoMapper.php");
 require_once(__DIR__."/../model/Notificacion.php");
 require_once(__DIR__."/../model/NotificacionMapper.php");
+require_once(__DIR__."/../model/Enfrentamiento.php");
+require_once(__DIR__."/../model/EnfrentamientoMapper.php");
 
 
 require_once(__DIR__."/../controller/BaseController.php");
@@ -31,6 +33,7 @@ class CampeonatosController extends BaseController {
 	private $parejaMapper;
 	private $grupoMapper;
 	private $notificacionMapper;
+	private $enfrentamientoMapper;
 
 	public function __construct() {
 		parent::__construct();
@@ -41,6 +44,7 @@ class CampeonatosController extends BaseController {
 		$this->parejaMapper = new ParejaMapper();
 		$this->grupoMapper = new GrupoMapper();
 		$this->notificacionMapper = new NotificacionMapper();
+		$this->enfrentamientoMapper = new EnfrentamientoMapper();
 		$this->view->setLayout("forms");
 	}
 	
@@ -231,6 +235,7 @@ class CampeonatosController extends BaseController {
 				}
 
 			}
+
 		}
 
 			$parejasSinGrupo = $this->parejaMapper->findParejasSinGrupo($categoriasNiveles);
@@ -246,8 +251,29 @@ class CampeonatosController extends BaseController {
 				. Lo sentimos.");
 				$this->notificacionMapper->save($notificacion1);
 				$this->notificacionMapper->save($notificacion2);
-				$this->parejaMapper->deletePareja($parejaSinGrupo->getIdPareja);
+				$this->parejaMapper->deletePareja($parejaSinGrupo->getIdPareja());
 			}
+
+			//LIGA REGULAR
+			$grupos = $this->grupoMapper->findAll($categoriasNiveles);
+			foreach($grupos as $grupo){
+				$parejas = $this->parejaMapper->findAll($grupo->getIdGrupo());
+				for($i = 0; $i < count($parejas); $i++){
+					$pareja1 = $parejas[$i];
+					for($j = $i+1; $j < count($parejas); $j++){
+						$pareja2 = $parejas[$j];
+						$enfrentamiento = new Enfrentamiento();
+						$enfrentamiento->setPareja1($pareja1->getIdPareja());
+						$enfrentamiento->setPareja2($pareja2->getIdPareja());
+						$enfrentamiento->setGrupoEnfrentamiento($grupo->getIdGrupo());
+						$enfrentamiento->setTipoEnfrentamiento("liga");
+						$this->enfrentamientoMapper->save($enfrentamiento);
+					}
+				}
+			}
+
+
+
 
 			$this->campeonatoMapper->cerrarCampeonato($_GET["idCampeonato"]);
 		}

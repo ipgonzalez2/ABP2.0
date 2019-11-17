@@ -100,4 +100,20 @@ class ParejaMapper {
 		$stmt = $this->db->prepare("DELETE from pareja where id_pareja=?");
 		$stmt->execute(array($idPareja));
 	}
+
+	public function findAll($grupo) {
+
+		$stmt = $this->db->prepare("SELECT * from pareja where grupo=? order by id_pareja");
+		$stmt->execute(array($grupo));
+
+		$parejas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$parejas = array();
+
+		foreach($parejas_db as $pareja){
+			array_push($parejas, new Pareja($pareja["id_pareja"], $pareja["deportista1"],
+					$pareja["deportista2"], $pareja["categorianivel"], $pareja["grupo"]));
+		}
+
+		return $parejas;
+	}
 }
