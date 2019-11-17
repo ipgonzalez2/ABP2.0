@@ -36,6 +36,9 @@ $grupos = $view->getVariable("grupos");
               <td class="cell100 column2"><a href="<?="index.php?controller=campeonatos&action=verLigaRegularGrupo&idGrupo=".$grupo->getIdGrupo() ?>">
     <i class="fas fa-eye"></i>
     </a></td>
+    <td class="cell100 column2"><a href="<?="index.php?controller=campeonatos&action=showRanking&idGrupo=".$grupo->getIdGrupo() ?>">
+    <i class="fas fa-trophy"></i>
+    </a></td>
 
             </tr>
      

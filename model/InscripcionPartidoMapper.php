@@ -22,7 +22,7 @@ class InscripcionPartidoMapper {
     
     public function getNumInscripciones($idPartido)
     {
-        $stmt = $this->db->prepare("SELECT COUNT(id_inscripcion_partido) AS num FROM inscripcionpartido WHERE id_inscripcion_partido=?");
+        $stmt = $this->db->prepare("SELECT COUNT(id_inscripcion_usuario) AS num FROM inscripcionpartido WHERE id_inscripcion_partido=?");
         $stmt->execute(array($idPartido));
 
         $inscripciones_db = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -62,11 +62,13 @@ class InscripcionPartidoMapper {
     }
 
     public function estaInscrito($id_usuario,$id_partido) {
-		$stmt = $this->db->prepare("SELECT count(id_inscripcion_partido) FROM inscripcionpartido where id_inscripcion_partido=? and id_inscripcion_partido=?");
+		$stmt = $this->db->prepare("SELECT count(id_inscripcion_usuario) FROM inscripcionpartido where id_inscripcion_usuario=? and id_inscripcion_partido=?");
 		$stmt->execute(array($id_usuario, $id_partido));
 
 		if ($stmt->fetchColumn() > 0) {
 			return true;
+		}else{
+			return false;
 		}
 	}
 

@@ -160,4 +160,36 @@ class ParejaMapper {
 
 
 	}
+
+	public function findGrupo($idPareja) {
+
+		$stmt = $this->db->prepare("SELECT grupo from pareja where id_pareja=?");
+		$stmt->execute(array($idPareja));
+
+		$grupo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if($grupo!=null){
+			return $grupo["grupo"];
+		}
+
+		
+	}
+
+	public function findParejasGrupo($grupo) {
+
+		$stmt = $this->db->prepare("SELECT * from pareja where grupo=? order by puntos desc");
+		$stmt->execute(array($grupo));
+
+		$parejas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$parejas = array();
+
+		foreach($parejas_db as $pareja){
+			array_push($parejas, new Pareja($pareja["id_pareja"], $pareja["deportista1"],
+					$pareja["deportista2"], $pareja["categorianivel"], $pareja["grupo"], $pareja["puntos"]));
+		}
+
+		return $parejas;
+	}
+
+	
 }

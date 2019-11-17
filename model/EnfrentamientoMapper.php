@@ -18,6 +18,27 @@ class EnfrentamientoMapper {
 		$enfrentamiento->getFechaEnfrentamiento(),$enfrentamiento->getHoraEnfrentamiento()));
 	}
 
+	public function getHorasPistas($fecha, $numPistas){
+
+		$stmt = $this->db->prepare("SELECT hora_enfrentamiento FROM enfrentamiento where fecha_enfrentamiento=?");
+		$stmt->execute(array($fecha));
+			
+			$horas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$horasOcupadas = array();
+	
+			foreach ($horas_db as $hora) {
+				$stmt = $this->db->prepare("SELECT COUNT(hora_enfrentamiento) FROM enfrentamiento where fecha_enfrentamiento=?");
+				$stmt->execute(array($fecha,$hora["hora_enfrentamiento"]));
+				$count = $stmt->fetch(PDO::FETCH_ASSOC);
+				if($count["COUNT(hora_enfrentamiento)"]==$numPistas){
+				array_push($horasOcupadas, $hora["hora_partido"]);
+				}
+			}
+
+			return $horasOcupadas;
+
+		}
+
 	public function getHoras($fecha, $grupo){
 
 		$stmt = $this->db->prepare("SELECT hora_enfrentamiento FROM enfrentamiento where fecha_enfrentamiento=? and grupo_enfrentamiento=?");

@@ -1,268 +1,16 @@
--- phpMyAdmin SQL Dump
--- version 4.9.0.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2019 a las 17:18:25
--- Versión del servidor: 10.4.6-MariaDB
--- Versión de PHP: 7.3.9
+-- CREACION DE PISTAS
+insert into pista values(null,'cerrada');
+insert into pista values(null,'cerrada');
+insert into pista values(null,'cerrada');
+insert into pista values(null,'cerrada');
+insert into pista values(null,'cerrada');
+insert into pista values(null,'cerrada');
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+-- CREACION DE USUARIOS
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `padel`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `calendario`
---
-
-CREATE TABLE `calendario` (
-  `fecha_calendario` date NOT NULL,
-  `pista_calendario` int(10) NOT NULL,
-  `estado_calendario` enum('libre','ocupado') COLLATE latin1_spanish_ci NOT NULL,
-  `hora_calendario` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `campeonato`
---
-
-CREATE TABLE `campeonato` (
-  `id_campeonato` int(10) NOT NULL,
-  `nombre_campeonato` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
-  `fecha_inicio` date NOT NULL,
-  `fecha_fin` date NOT NULL,
-  `precio_campeonato` float(10,2) NOT NULL,
-  `fecha_limite_inscripcion` date NOT NULL,
-  `estado_campeonato` enum('abierto','cerrado') COLLATE latin1_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- Volcado de datos para la tabla `campeonato`
---
-
-INSERT INTO `campeonato` (`id_campeonato`, `nombre_campeonato`, `fecha_inicio`, `fecha_fin`, `precio_campeonato`, `fecha_limite_inscripcion`, `estado_campeonato`) VALUES
-(1, 'campeonato 1', '2019-11-18', '2019-12-08', 12.00, '2019-11-15', 'abierto');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `categorianivel`
---
-
-CREATE TABLE `categorianivel` (
-  `id_categorianivel` int(10) NOT NULL,
-  `categoria` enum('masculina','femenina','mixto') COLLATE latin1_spanish_ci DEFAULT NULL,
-  `nivel` enum('1','2','3') COLLATE latin1_spanish_ci DEFAULT NULL,
-  `campeonato` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- Volcado de datos para la tabla `categorianivel`
---
-
-INSERT INTO `categorianivel` (`id_categorianivel`, `categoria`, `nivel`, `campeonato`) VALUES
-(1, 'masculina', '1', 1),
-(2, 'femenina', '1', 1),
-(3, 'mixto', '1', 1),
-(4, 'masculina', '2', 1),
-(5, 'femenina', '2', 1),
-(6, 'mixto', '2', 1),
-(7, 'masculina', '3', 1),
-(8, 'femenina', '3', 1),
-(9, 'mixto', '3', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `inscripcionpartido`
---
-
-CREATE TABLE `inscripcionpartido` (
-  `id_inscripcion_partido` int(10) NOT NULL,
-  `id_inscripcion_usuario` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `notificacion`
---
-
-CREATE TABLE `notificacion` (
-  `id_notificacion` int(10) NOT NULL,
-  `id_usuario_notificacion` int(10) NOT NULL,
-  `mensaje` varchar(255) COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pago`
---
-
-CREATE TABLE `pago` (
-  `id_pago` int(10) NOT NULL,
-  `tipo_pago` enum('efectivo','tarjeta') COLLATE latin1_spanish_ci NOT NULL,
-  `estado_pago` enum('realizado','pendiente') COLLATE latin1_spanish_ci NOT NULL,
-  `reserva_pago` int(10) NOT NULL,
-  `cantidad` float(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pareja`
---
-
-CREATE TABLE `pareja` (
-  `id_pareja` int(10) NOT NULL,
-  `deportista1` int(10) NOT NULL,
-  `deportista2` int(10) NOT NULL,
-  `categorianivel` int(10) NOT NULL,
-  `grupo` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- Volcado de datos para la tabla `pareja`
---
-
-INSERT INTO `pareja` (`id_pareja`, `deportista1`, `deportista2`, `categorianivel`, `grupo`) VALUES
-(1, 2, 3, 3, NULL),
-(2, 4, 5, 3, NULL),
-(3, 6, 7, 2, NULL),
-(4, 8, 9, 1, NULL),
-(5, 10, 11, 3, NULL),
-(6, 12, 13, 1, NULL),
-(7, 14, 15, 1, NULL),
-(8, 16, 17, 3, NULL),
-(9, 18, 19, 1, NULL),
-(10, 20, 21, 2, NULL),
-(11, 22, 23, 3, NULL),
-(12, 24, 25, 1, NULL),
-(13, 26, 27, 3, NULL),
-(14, 28, 29, 3, NULL),
-(15, 30, 31, 2, NULL),
-(16, 32, 33, 3, NULL),
-(17, 34, 35, 2, NULL),
-(18, 36, 37, 3, NULL),
-(19, 38, 39, 3, NULL),
-(20, 40, 41, 3, NULL),
-(21, 42, 43, 2, NULL),
-(22, 44, 45, 3, NULL),
-(23, 46, 47, 2, NULL),
-(24, 48, 49, 2, NULL),
-(25, 50, 51, 3, NULL),
-(26, 52, 53, 2, NULL),
-(27, 54, 55, 3, NULL),
-(28, 56, 57, 3, NULL),
-(29, 58, 59, 3, NULL),
-(30, 60, 61, 3, NULL),
-(31, 62, 63, 1, NULL),
-(32, 64, 65, 3, NULL),
-(33, 66, 67, 2, NULL),
-(34, 68, 69, 2, NULL),
-(35, 70, 71, 2, NULL),
-(36, 72, 73, 2, NULL),
-(37, 74, 75, 3, NULL),
-(38, 76, 77, 1, NULL),
-(39, 78, 79, 3, NULL),
-(40, 80, 81, 1, NULL),
-(41, 82, 83, 2, NULL),
-(42, 84, 85, 3, NULL),
-(43, 86, 87, 2, NULL),
-(44, 88, 89, 2, NULL),
-(45, 90, 91, 3, NULL);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `partido`
---
-
-CREATE TABLE `partido` (
-  `id_partido` int(10) NOT NULL,
-  `fecha_partido` date NOT NULL,
-  `precio_partido` float(10,2) NOT NULL,
-  `estado_partido` enum('abierto','cerrado') COLLATE latin1_spanish_ci NOT NULL,
-  `fecha_fin_inscripcion` date NOT NULL,
-  `hora_partido` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pista`
---
-
-CREATE TABLE `pista` (
-  `id_pista` int(10) NOT NULL,
-  `tipo_pista` enum('abierta','cerrada') COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- Volcado de datos para la tabla `pista`
---
-
-INSERT INTO `pista` (`id_pista`, `tipo_pista`) VALUES
-(1, 'abierta'),
-(2, 'abierta'),
-(3, 'cerrada'),
-(4, 'cerrada');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `reserva`
---
-
-CREATE TABLE `reserva` (
-  `id_reserva` int(10) NOT NULL,
-  `fecha` date NOT NULL,
-  `precio` float(10,2) NOT NULL,
-  `usuario_reserva` int(10) DEFAULT NULL,
-  `pista_reserva` int(10) NOT NULL,
-  `hora` time NOT NULL,
-  `partido_reserva` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario`
---
-
-CREATE TABLE `usuario` (
-  `id_usuario` int(10) NOT NULL,
-  `username` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
-  `passwd` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
-  `nombre` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
-  `email` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
-  `rol` enum('administrador','deportista') COLLATE latin1_spanish_ci NOT NULL,
-  `sexo` enum('hombre','mujer') COLLATE latin1_spanish_ci NOT NULL,
-  `nivel` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- Volcado de datos para la tabla `usuario`
---
+insert into usuario values(0,'admin','admin','','','administrador','hombre',0);
 
 INSERT INTO `usuario` (`id_usuario`, `username`, `passwd`, `nombre`, `email`, `rol`, `sexo`, `nivel`) VALUES
-(1, 'admin', 'admin', '', '', 'administrador', 'hombre', 0),
 (2, 'adene0', 'nnTeSMN', 'Alfreda Dene', 'adene0@marriott.com', 'deportista', 'mujer', 1),
 (3, 'tpridgeon1', 'PShBJhL', 'Tom Pridgeon', 'tpridgeon1@chronoengine.com', 'deportista', 'hombre', 1),
 (4, 'afurley2', 'YHTycQb', 'Alessandra Furley', 'afurley2@diigo.com', 'deportista', 'hombre', 1),
@@ -364,187 +112,106 @@ INSERT INTO `usuario` (`id_usuario`, `username`, `passwd`, `nombre`, `email`, `r
 (100, 'nclamo2q', 'IoDk0U', 'Nanci Clamo', 'nclamo2q@prnewswire.com', 'deportista', 'hombre', 1),
 (101, 'chovel2r', 'RNDW1CeYRU', 'Catlaina Hovel', 'chovel2r@artisteer.com', 'deportista', 'mujer', 1);
 
---
--- Índices para tablas volcadas
---
 
---
--- Indices de la tabla `calendario`
---
-ALTER TABLE `calendario`
-  ADD PRIMARY KEY (`fecha_calendario`,`hora_calendario`,`pista_calendario`),
-  ADD KEY `fk_pista_calendario` (`pista_calendario`);
+-- CREACION DE RESERVAS PARA EL USUARIO 2
 
---
--- Indices de la tabla `campeonato`
---
-ALTER TABLE `campeonato`
-  ADD PRIMARY KEY (`id_campeonato`);
+INSERT INTO `reserva` (`id_reserva`, `fecha`, `precio`, `usuario_reserva`, `pista_reserva`, `hora`, `partido_reserva`, `enfrentamiento`) VALUES
+(1, '2019-11-19', 16.00, 2, 1, '10:30:00', NULL, NULL),
+(2, '2019-11-19', 16.00, 2, 1, '21:00:00', NULL, NULL),
+(3, '2019-12-03', 16.00, 2, 1, '12:00:00', NULL, NULL),
+(5, '2019-11-30', 16.00, 2, 1, '19:30:00', NULL, NULL),
+(6, '2019-12-03', 16.00, 4, 2, '12:00:00', NULL, NULL),
+(7, '2019-12-03', 16.00, 8, 3, '12:00:00', NULL, NULL),
+(8, '2019-12-03', 16.00, 9, 4, '12:00:00', NULL, NULL),
+(9, '2019-12-03', 16.00, 11, 5, '12:00:00', NULL, NULL);
 
---
--- Indices de la tabla `categorianivel`
---
-ALTER TABLE `categorianivel`
-  ADD PRIMARY KEY (`id_categorianivel`),
-  ADD KEY `fk_campeonato` (`campeonato`);
+-- CAMBIOS DERIVADOS EN EL CALENDARIO
 
---
--- Indices de la tabla `inscripcionpartido`
---
-ALTER TABLE `inscripcionpartido`
-  ADD PRIMARY KEY (`id_inscripcion_partido`,`id_inscripcion_usuario`);
+INSERT INTO `calendario` (`fecha_calendario`, `pista_calendario`, `estado_calendario`, `hora_calendario`) VALUES
+('2019-11-19', 1, 'ocupado', '10:30:00'),
+('2019-11-19', 1, 'ocupado', '21:00:00'),
+('2019-11-30', 1, 'ocupado', '19:30:00'),
+('2019-12-03', 1, 'ocupado', '12:00:00'),
+('2019-12-03', 2, 'ocupado', '12:00:00'),
+('2019-12-03', 3, 'ocupado', '12:00:00'),
+('2019-12-03', 4, 'ocupado', '12:00:00'),
+('2019-12-03', 5, 'ocupado', '12:00:00');
 
---
--- Indices de la tabla `notificacion`
---
-ALTER TABLE `notificacion`
-  ADD PRIMARY KEY (`id_notificacion`),
-  ADD KEY `fk_usuario_notificacion` (`id_usuario_notificacion`);
+-- CREACION PARTIDOS
 
---
--- Indices de la tabla `pago`
---
-ALTER TABLE `pago`
-  ADD PRIMARY KEY (`id_pago`),
-  ADD KEY `fk_reserva` (`reserva_pago`);
+INSERT INTO `partido` (`id_partido`, `fecha_partido`, `precio_partido`, `estado_partido`, `fecha_fin_inscripcion`, `hora_partido`) VALUES
+(1, '2019-12-03', 9.00, 'abierto', '2019-12-02', '12:00:00'),
+(2, '2019-11-26', 9.00, 'abierto', '2019-11-25', '09:00:00');
 
---
--- Indices de la tabla `pareja`
---
-ALTER TABLE `pareja`
-  ADD PRIMARY KEY (`id_pareja`),
-  ADD KEY `fk_deportista1` (`deportista1`),
-  ADD KEY `fk_deportista2` (`deportista2`),
-  ADD KEY `fk_categorianivel` (`categorianivel`);
+-- INSCRIPCIONES PARTIDO 1
+INSERT INTO `inscripcionpartido` (`id_inscripcion_partido`, `id_inscripcion_usuario`) VALUES
+(1, 2),
+(1, 11),
+(2, 2),
+(2, 3),
+(2, 18);
 
---
--- Indices de la tabla `partido`
---
-ALTER TABLE `partido`
-  ADD PRIMARY KEY (`id_partido`);
+-- CREACION DE CAMPEONATO
+INSERT INTO `campeonato` (`id_campeonato`, `nombre_campeonato`, `fecha_inicio`, `fecha_fin`, `precio_campeonato`, `fecha_limite_inscripcion`, `estado_campeonato`) VALUES
+(1, 'Campeonato PadelBit', '2019-12-02', '2019-12-23', 12.00, '2019-11-29', 'abierto');
 
---
--- Indices de la tabla `pista`
---
-ALTER TABLE `pista`
-  ADD PRIMARY KEY (`id_pista`);
+-- CREACION DE CATEGORIAS NIVELES CORRESPONDIENTES
+INSERT INTO `categorianivel` (`id_categorianivel`, `categoria`, `nivel`, `campeonato`) VALUES
+(1, 'masculina', '1', 1),
+(2, 'femenina', '1', 1),
+(3, 'mixto', '1', 1),
+(4, 'masculina', '2', 1),
+(5, 'femenina', '2', 1),
+(6, 'mixto', '2', 1),
+(7, 'masculina', '3', 1),
+(8, 'femenina', '3', 1),
+(9, 'mixto', '3', 1);
 
---
--- Indices de la tabla `reserva`
---
-ALTER TABLE `reserva`
-  ADD PRIMARY KEY (`id_reserva`),
-  ADD KEY `fk_usuario` (`usuario_reserva`),
-  ADD KEY `fk_pista` (`pista_reserva`);
 
---
--- Indices de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `campeonato`
---
-ALTER TABLE `campeonato`
-  MODIFY `id_campeonato` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `categorianivel`
---
-ALTER TABLE `categorianivel`
-  MODIFY `id_categorianivel` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de la tabla `notificacion`
---
-ALTER TABLE `notificacion`
-  MODIFY `id_notificacion` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pago`
---
-ALTER TABLE `pago`
-  MODIFY `id_pago` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pareja`
---
-ALTER TABLE `pareja`
-  MODIFY `id_pareja` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
-
---
--- AUTO_INCREMENT de la tabla `partido`
---
-ALTER TABLE `partido`
-  MODIFY `id_partido` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pista`
---
-ALTER TABLE `pista`
-  MODIFY `id_pista` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `reserva`
---
-ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `calendario`
---
-ALTER TABLE `calendario`
-  ADD CONSTRAINT `fk_pista_calendario` FOREIGN KEY (`pista_calendario`) REFERENCES `pista` (`id_pista`) ON DELETE CASCADE;
-
---
--- Filtros para la tabla `categorianivel`
---
-ALTER TABLE `categorianivel`
-  ADD CONSTRAINT `fk_campeonato` FOREIGN KEY (`campeonato`) REFERENCES `campeonato` (`id_campeonato`) ON DELETE CASCADE;
-
---
--- Filtros para la tabla `notificacion`
---
-ALTER TABLE `notificacion`
-  ADD CONSTRAINT `fk_usuario_notificacion` FOREIGN KEY (`id_usuario_notificacion`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE;
-
---
--- Filtros para la tabla `pago`
---
-ALTER TABLE `pago`
-  ADD CONSTRAINT `fk_reserva` FOREIGN KEY (`reserva_pago`) REFERENCES `reserva` (`id_reserva`) ON DELETE CASCADE;
-
---
--- Filtros para la tabla `pareja`
---
-ALTER TABLE `pareja`
-  ADD CONSTRAINT `fk_categorianivel` FOREIGN KEY (`categorianivel`) REFERENCES `categorianivel` (`id_categorianivel`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_deportista1` FOREIGN KEY (`deportista1`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_deportista2` FOREIGN KEY (`deportista2`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE;
-
---
--- Filtros para la tabla `reserva`
---
-ALTER TABLE `reserva`
-  ADD CONSTRAINT `fk_pista` FOREIGN KEY (`pista_reserva`) REFERENCES `pista` (`id_pista`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`usuario_reserva`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- INSCRIPCION DE PAREJAS
+INSERT INTO `pareja` (`id_pareja`, `deportista1`, `deportista2`, `categorianivel`, `grupo`) VALUES
+(1, 2, 3, 3, NULL),
+(2, 4, 5, 3, NULL),
+(3, 6, 7, 2, NULL),
+(4, 8, 9, 1, NULL),
+(5, 10, 11, 3, NULL),
+(6, 12, 13, 1, NULL),
+(7, 14, 15, 1, NULL),
+(8, 16, 17, 3, NULL),
+(9, 18, 19, 1, NULL),
+(10, 20, 21, 2, NULL),
+(11, 22, 23, 3, NULL),
+(12, 24, 25, 1, NULL),
+(13, 26, 27, 3, NULL),
+(14, 28, 29, 3, NULL),
+(15, 30, 31, 2, NULL),
+(16, 32, 33, 3, NULL),
+(17, 34, 35, 2, NULL),
+(18, 36, 37, 3, NULL),
+(19, 38, 39, 3, NULL),
+(20, 40, 41, 3, NULL),
+(21, 42, 43, 2, NULL),
+(22, 44, 45, 3, NULL),
+(23, 46, 47, 2, NULL),
+(24, 48, 49, 2, NULL),
+(25, 50, 51, 3, NULL),
+(26, 52, 53, 2, NULL),
+(27, 54, 55, 3, NULL),
+(28, 56, 57, 3, NULL),
+(29, 58, 59, 3, NULL),
+(30, 60, 61, 3, NULL),
+(31, 62, 63, 1, NULL),
+(32, 64, 65, 3, NULL),
+(33, 66, 67, 2, NULL),
+(34, 68, 69, 2, NULL),
+(35, 70, 71, 2, NULL),
+(36, 72, 73, 2, NULL),
+(37, 74, 75, 3, NULL),
+(38, 76, 77, 1, NULL),
+(39, 78, 79, 3, NULL),
+(40, 80, 81, 1, NULL),
+(41, 82, 83, 2, NULL),
+(42, 84, 85, 3, NULL),
+(43, 86, 87, 2, NULL),
+(44, 88, 89, 2, NULL),
+(45, 90, 91, 3, NULL);

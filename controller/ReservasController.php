@@ -121,6 +121,7 @@ class ReservasController extends BaseController {
             $dias = "+".(7+$i)." days";
 			$fecha=date("Y-m-d",strtotime($dias));
 			$horasDia = $this->calendarioMapper->getHoras($fecha, $numPistas);
+
 			$horasReservas = $this->reservaMapper->getHorasReserva($fecha, $userId);
 			$horasFinalesDia = array_diff($horasDia, $horasReservas);
 			array_push($fechas, $fecha);

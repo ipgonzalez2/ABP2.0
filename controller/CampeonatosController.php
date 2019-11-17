@@ -667,6 +667,92 @@ class CampeonatosController extends BaseController {
 		}
 
 	}
+
+	/*funcion que elimina un partido*/
+	public function deleteCampeonato() {
+
+		$userRol = $this->view->getVariable("userRol");
+		
+		if (!isset($this->currentUser)) {
+			$this->view->redirect("users", "login");
+		}
+
+		if($userRol=="deportista"){
+			$this->view->redirect("index", "indexLogged");
+		}
+
+		if(isset($_GET["idCampeonato"])){
+			$categoriasNiveles = $this->categoriaNivelMapper->findAll($_GET["idCampeonato"]);
+			
+			foreach($categoriasNiveles as $cn){
+				$parejas = $this->parejaMapper->findParejas($cn);
+				foreach($parejas as $pareja){
+					$this->parejaMapper->deletePareja($pareja->getIdPareja());
+				}
+				$this->categoriaNivelMapper->deleteCategoriaNivel($cn);
+			}
+
+			$this->campeonatoMapper->deleteCampeonato($_GET["idCampeonato"]);
+			$this->view->redirect("campeonatos", "showallCampeonatos");
+
+		}
+
+		$this->view->render("campeonatos", "showall");
+	}
+
+
+	/*funcion que muestra el ranking de un grupo*/
+	public function showRanking(){
+
+		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
+		
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+
+		if(isset($_GET["idCampeonato"])){
+
+			$categoriasNiveles = $this->categoriaNivelMapper->findAll($_GET["idCampeonato"]);
+			$grupos = $this->grupoMapper->findAll($categoriasNiveles);
+			$idGrupos = array();
+			foreach($grupos as $grupo){
+				array_push($idGrupos, $grupo->getIdGrupo());
+			}
+			$pareja = $this->parejaMapper->findParejaGrupos($idGrupos, $userId);
+
+			$grupoPareja = $this->parejaMapper->findGrupo($pareja);
+
+			$parejas = $this->parejaMapper->findParejasGrupo($grupoPareja);
+		}
+
+
+			
+		if(isset($_GET["idGrupo"])){
+
+			$parejas = $this->parejaMapper->findParejasGrupo($_GET["idGrupo"]);
+
+		}
+
+			$nombresDeportistas=array();
+			
+			foreach($parejas as $p){
+				
+				$deportista1 = $this->userMapper->findUser($p->getDeportista1());
+				$deportista2 = $this->userMapper->findUser($p->getDeportista2());
+
+				array_push($nombresDeportistas, $deportista1->getNombre());
+				array_push($nombresDeportistas, $deportista2->getNombre());
+
+			}
+
+			$this->view->setVariable("parejas", $parejas);
+			$this->view->setVariable("deportistas", $nombresDeportistas);
+			$this->view->setLayout("table");
+			$this->view->render("campeonatos", "showRanking");
+		
+	}
 	
 
 	

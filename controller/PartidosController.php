@@ -14,6 +14,9 @@ require_once(__DIR__."/../model/Pista.php");
 require_once(__DIR__."/../model/PistaMapper.php");
 require_once(__DIR__."/../model/Reserva.php");
 require_once(__DIR__."/../model/ReservaMapper.php");
+require_once(__DIR__."/../model/Enfrentamiento.php");
+require_once(__DIR__."/../model/EnfrentamientoMapper.php");
+
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -30,6 +33,7 @@ class PartidosController extends BaseController {
 	private $calendarioMapper;
 	private $pistaMapper;
 	private $reservaMapper;
+	private $enfrentamientoMapper;
 
 	public function __construct() {
 		parent::__construct();
@@ -40,6 +44,7 @@ class PartidosController extends BaseController {
 		$this->calendarioMapper = new CalendarioMapper();
 		$this->pistaMapper = new PistaMapper();
 		$this->reservaMapper = new ReservaMapper();
+		$this->enfrentamientoMapper = new EnfrentamientoMapper();
 
 		$this->view->setLayout("welcome");
 	}
@@ -76,8 +81,10 @@ class PartidosController extends BaseController {
             $dias = "+".(7+$i)." days";
 			$fecha=date("Y-m-d",strtotime($dias));
 			$horasDia = $this->calendarioMapper->getHoras($fecha, $numPistas);
-			$horasPartido = $this->partidoMapper->getHoras($fecha);
+			$horasPartido = $this->partidoMapper->getHoras($fecha, $numPistas);
+			$horasEnfrentamiento = $this->enfrentamientoMapper->getHorasPistas($fecha, $numPistas);
 			$horasFinales = array_diff($horasDia, $horasPartido);
+			$horasElegir = array_diff($horasFinales, $horasEnfrentamiento);
 			array_push($fechas, $fecha);
 			array_push($horas, $horasFinales);
 		}

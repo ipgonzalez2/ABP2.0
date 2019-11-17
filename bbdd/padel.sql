@@ -32,50 +32,12 @@ create table if not exists usuario(
 
 )engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-insert into usuario values(0,'admin','admin','','','administrador','hombre',0);
-
 create table if not exists pista (
 
   id_pista int(10) auto_increment,
   tipo_pista enum('abierta','cerrada') not null,
   
   constraint pk_pista primary key(id_pista)
-
-) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
-
-insert into pista values(null,'abierta');
-insert into pista values(null,'abierta');
-insert into pista values(null,'cerrada');
-insert into pista values(null,'cerrada');
-
-
-create table if not exists reserva(
-
-  id_reserva int(10) auto_increment,
-  fecha date not null,
-  precio float(10,2),
-  usuario_reserva int(10),
-  pista_reserva int(10) not null,
-  hora time not null,
-  partido_reserva int(10),
-  enfrentamiento int(10),
-
-  constraint fk_usuario foreign key(usuario_reserva) references usuario(id_usuario) on delete cascade,
-  constraint fk_pista foreign key(pista_reserva) references pista(id_pista) on delete cascade,
-  constraint fk_enfrentamiento foreign key(enfrentamiento) references enfrentamiento(id_enfrentamiento) on delete cascade,
-  constraint pk_reserva primary key(id_reserva)
-
-) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
-
-create table if not exists pago(
-  id_pago int(10) auto_increment,
-  tipo_pago enum('efectivo','tarjeta') not null,
-  estado_pago enum('realizado','pendiente') not null,
-  reserva_pago int(10) not null,
-  cantidad float(10,2) not null,
-
-  constraint fk_reserva foreign key(reserva_pago) references reserva(id_reserva) on delete cascade,
-  constraint pk_pago primary key(id_pago)
 
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
@@ -106,6 +68,8 @@ create table if not exists inscripcionpartido (
   id_inscripcion_partido int(10) not null,
   id_inscripcion_usuario int(10) not null,
 
+  constraint fk_inscripcion_partido foreign key(id_inscripcion_partido) references partido(id_partido) on delete cascade,
+  constraint fk_inscripcion_usuario foreign key(id_inscripcion_usuario) references usuario(id_usuario) on delete cascade,
   constraint pk_partido primary key(id_inscripcion_partido, id_inscripcion_usuario)
   
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
@@ -144,23 +108,6 @@ create table if not exists categorianivel (
   
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-create table if not exists pareja (
-  id_pareja int(10) auto_increment,
-  deportista1 int(10) not null,
-  deportista2 int(10) not null,
-  categorianivel int(10) not null,
-  grupo int(10),
-  puntos int(10),
-
-  constraint pk_pareja primary key(id_pareja),
-  constraint fk_deportista1 foreign key(deportista1) references usuario(id_usuario) on delete cascade,
-  constraint fk_deportista2 foreign key(deportista2) references usuario(id_usuario) on delete cascade,
-  constraint fk_categorianivel foreign key(categorianivel) references categorianivel(id_categorianivel) on delete cascade,
-  constraint fk_grupo foreign key(grupo) references grupo(id_grupo) on delete cascade
-
-  
-) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
-
 create table if not exists grupo (
   id_grupo int(10) auto_increment,
   categorianivel_grupo int(10) not null,
@@ -168,6 +115,23 @@ create table if not exists grupo (
 
   constraint pk_grupo primary key(id_grupo),
   constraint fk_categorianivel_grupo foreign key(categorianivel_grupo) references categorianivel(id_categorianivel) on delete cascade
+  
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
+
+create table if not exists pareja (
+  id_pareja int(10) auto_increment,
+  deportista1 int(10) not null,
+  deportista2 int(10) not null,
+  categorianivel int(10) not null,
+  grupo int(10),
+  puntos int(10) default 0,
+
+  constraint pk_pareja primary key(id_pareja),
+  constraint fk_deportista1 foreign key(deportista1) references usuario(id_usuario) on delete cascade,
+  constraint fk_deportista2 foreign key(deportista2) references usuario(id_usuario) on delete cascade,
+  constraint fk_categorianivel foreign key(categorianivel) references categorianivel(id_categorianivel) on delete cascade,
+  constraint fk_grupo foreign key(grupo) references grupo(id_grupo) on delete cascade
+
   
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
@@ -179,6 +143,7 @@ create table if not exists enfrentamiento (
   resultado2 int(10),
   grupo_enfrentamiento int(10) not null,
   tipo_enfrentamiento enum("liga", "playoff") not null,
+  estado_enfrentamiento enum("abierto", "cerrado") not null,
   fecha_enfrentamiento date not null,
   hora_enfrentamiento time not null,
 
@@ -199,5 +164,25 @@ create table if not exists confirmacion (
   constraint fk_deportista_conf foreign key(deportista) references usuario(id_usuario) on delete cascade
 
   
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
+
+
+create table if not exists reserva(
+
+  id_reserva int(10) auto_increment,
+  fecha date not null,
+  precio float(10,2),
+  usuario_reserva int(10),
+  pista_reserva int(10) not null,
+  hora time not null,
+  partido_reserva int(10),
+  enfrentamiento int(10),
+
+  constraint fk_usuario foreign key(usuario_reserva) references usuario(id_usuario) on delete cascade,
+  constraint fk_pista foreign key(pista_reserva) references pista(id_pista) on delete cascade,
+  constraint fk_enfrentamiento foreign key(enfrentamiento) references enfrentamiento(id_enfrentamiento) on delete cascade,
+   constraint fk_partido foreign key(partido_reserva) references partido(id_partido) on delete cascade,
+  constraint pk_reserva primary key(id_reserva)
+
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 

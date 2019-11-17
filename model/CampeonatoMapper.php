@@ -99,5 +99,11 @@ class CampeonatoMapper {
 		return $campeonatosInscrito;
 	}
 
+	public function deleteCampeonato($idcampeonato)
+    {
+        $stmt = $this->db->prepare("DELETE from campeonato WHERE id_campeonato=?");
+        $stmt->execute(array($idcampeonato));
+	}
+
 
 }

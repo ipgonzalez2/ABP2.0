@@ -53,5 +53,13 @@ class CategoriaNivelMapper {
 		return $campeonatos;
 	}
 
+	public function deleteCategoriaNivel($cn) 
+	{
+
+			$stmt = $this->db->prepare("DELETE FROM categorianivel where id_categorianivel=?");
+			$stmt->execute(array($cn));
+
+	}
+
 
 }
