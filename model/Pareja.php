@@ -20,15 +20,18 @@ class Pareja {
 
 	private $grupo;
 
+	private $puntos;
+
 	
 
     public function __construct($id_pareja=NULL, $deportista1=NULL, $deportista2=NULL,
-    $categorianivel=NULL, $grupo=NULL) {
+    $categorianivel=NULL, $grupo=NULL, $puntos=NULL) {
 		$this->id_pareja = $id_pareja;
         $this->deportista1 = $deportista1;
         $this->deportista2 = $deportista2;
         $this->categorianivel = $categorianivel;
-        $this->grupo = $grupo;
+		$this->grupo = $grupo;
+		$this->puntos = $puntos;
 	}
 	
 
@@ -78,6 +81,13 @@ class Pareja {
 
 	public function setGrupo($grupo) {
 		$this->grupo = $grupo;
+	}
+	public function getPuntos() {
+		return $this->puntos;
+	}
+
+	public function setPuntos($puntos) {
+		$this->puntos = $puntos;
 	}
 
 

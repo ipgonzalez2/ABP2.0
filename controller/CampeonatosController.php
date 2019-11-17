@@ -400,6 +400,7 @@ class CampeonatosController extends BaseController {
 			$pareja->setDeportista1($deportista1->getIdUsuario());
 			$pareja->setDeportista2($deportista2->getIdUsuario());
 			$pareja->setCategoriaNivel($categoriaNivel);
+			$pareja->setPuntos(0);
 
 
 			$this->parejaMapper->save($pareja);
@@ -599,6 +600,70 @@ class CampeonatosController extends BaseController {
 			}
 
 			$this->view->redirect("campeonatos", "showallCampeonatosInscrito");
+		}
+
+	}
+
+	/*funcion que edita el resultado de un enfrentamiento*/
+	public function editarResultado() {
+
+		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
+		
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+
+		if($userRol == "deportista") {
+			$this->view->redirect("index","indexLogged");
+		}
+
+		if(isset($_GET["idEnfrentamiento"])){
+
+			$enfrentamiento = $this->enfrentamientoMapper->findEnfrentamiento($_GET["idEnfrentamiento"]);
+
+			$deportistas = array();
+			$pareja1 = $this->parejaMapper->findPareja($enfrentamiento->getPareja1());
+			$pareja2 = $this->parejaMapper->findPareja($enfrentamiento->getPareja2());
+			$deportista1 = $this->userMapper->findUser($pareja1->getDeportista1());
+			$deportista2 = $this->userMapper->findUser($pareja1->getDeportista2());
+			$deportista3 = $this->userMapper->findUser($pareja2->getDeportista1());
+			$deportista4 = $this->userMapper->findUser($pareja2->getDeportista2());
+
+			array_push($deportistas,$deportista1->getNombre());
+			array_push($deportistas,$deportista2->getNombre());
+			array_push($deportistas,$deportista3->getNombre());
+			array_push($deportistas,$deportista4->getNombre());
+
+			$this->view->setVariable("enfrentamiento", $enfrentamiento);
+			$this->view->setVariable("deportistas", $deportistas);
+			$this->view->setLayout("forms");
+			$this->view->render("campeonatos", "editarResultado");
+		}
+
+		if(isset($_POST["idEnfrentamiento"])){
+
+			$enfrentamiento = $this->enfrentamientoMapper->findEnfrentamiento($_POST["idEnfrentamiento"]);
+
+			$this->enfrentamientoMapper->actualizarResultado($_POST["idEnfrentamiento"],$_POST["resultado1"], $_POST["resultado2"]);
+			
+			$pareja1 = $enfrentamiento->getPareja1();
+			$pareja2 = $enfrentamiento->getPareja2();
+
+			if($_POST["resultado1"] > $_POST["resultado2"]){
+				$this->parejaMapper->sumarPuntos($pareja1, 4);
+				$this->parejaMapper->sumarPuntos($pareja2, 1);
+			}else if($_POST["resultado1"] < $_POST["resultado2"]){
+				$this->parejaMapper->sumarPuntos($pareja1, 1);
+				$this->parejaMapper->sumarPuntos($pareja2, 4);
+			}else{
+				$this->parejaMapper->sumarPuntos($pareja1, 1);
+				$this->parejaMapper->sumarPuntos($pareja2, 1);
+			}
+
+			$this->view->redirect("campeonatos", "showallCampeonatos");
+
 		}
 
 	}

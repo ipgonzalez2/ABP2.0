@@ -11,9 +11,9 @@ class ParejaMapper {
 	}
 
 	public function save($pareja) {
-		$stmt = $this->db->prepare("INSERT INTO pareja values (?,?,?,?,?)");
+		$stmt = $this->db->prepare("INSERT INTO pareja values (?,?,?,?,?,?)");
 		$stmt->execute(array(0,$pareja->getDeportista1(), $pareja->getDeportista2(),
-		$pareja->getCategoriaNivel(), $pareja->getGrupo()));
+		$pareja->getCategoriaNivel(), $pareja->getGrupo(), $pareja->getPuntos()));
 	}
 	
 	public function estanInscritos($deportista1, $deportista2, $categorias_niveles) {
@@ -46,7 +46,7 @@ class ParejaMapper {
 
 		foreach($parejas_db as $pareja){
 			array_push($parejas, new Pareja($pareja["id_pareja"], $pareja["deportista1"],
-					$pareja["deportista2"], $pareja["categorianivel"], $pareja["grupo"]));
+					$pareja["deportista2"], $pareja["categorianivel"], $pareja["grupo"], $pareja["puntos"]));
 		}
 
 		return $parejas;
@@ -86,7 +86,7 @@ class ParejaMapper {
 
 			foreach($p as $pareja){
 				array_push($parejasSinGrupo, new Pareja($pareja["id_pareja"], $pareja["deportista1"],
-				$pareja["deportista2"], $pareja["categorianivel"], $pareja["grupo"]));
+				$pareja["deportista2"], $pareja["categorianivel"], $pareja["grupo"], $pareja["puntos"]));
 			}
 			
 		}
@@ -111,7 +111,7 @@ class ParejaMapper {
 
 		foreach($parejas_db as $pareja){
 			array_push($parejas, new Pareja($pareja["id_pareja"], $pareja["deportista1"],
-					$pareja["deportista2"], $pareja["categorianivel"], $pareja["grupo"]));
+					$pareja["deportista2"], $pareja["categorianivel"], $pareja["grupo"], $pareja["puntos"]));
 		}
 
 		return $parejas;
@@ -130,7 +130,8 @@ class ParejaMapper {
 			$pareja["deportista1"],
 			$pareja["deportista2"],
 			$pareja["categorianivel"],
-			$pareja["grupo"]
+			$pareja["grupo"],
+			$pareja["puntos"]
 			);
 		} else {
 			return NULL;
@@ -148,6 +149,14 @@ class ParejaMapper {
 				return $pareja["id_pareja"];
 			}
 		}
+
+
+	}
+
+	public function sumarPuntos($pareja, $puntos) {
+
+			$stmt = $this->db->prepare("UPDATE pareja set puntos = puntos + ? where id_pareja=?");
+			$stmt->execute(array($puntos, $pareja));
 
 
 	}

@@ -110,5 +110,13 @@ class EnfrentamientoMapper {
 
 		}
 
+		public function actualizarResultado($id_enfrentamiento, $resultado1, $resultado2){
+			$stmt = $this->db->prepare("UPDATE enfrentamiento set resultado1=?, resultado2=? where id_enfrentamiento=?");
+			$stmt->execute(array($resultado1, $resultado2, $id_enfrentamiento));
+
+		}
+
+
+
 	
 }
