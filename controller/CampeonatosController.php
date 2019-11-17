@@ -22,6 +22,10 @@ require_once(__DIR__."/../model/Calendario.php");
 require_once(__DIR__."/../model/CalendarioMapper.php");
 require_once(__DIR__."/../model/Partido.php");
 require_once(__DIR__."/../model/PartidoMapper.php");
+require_once(__DIR__."/../model/Confirmacion.php");
+require_once(__DIR__."/../model/ConfirmacionMapper.php");
+require_once(__DIR__."/../model/Reserva.php");
+require_once(__DIR__."/../model/ReservaMapper.php");
 
 
 require_once(__DIR__."/../controller/BaseController.php");
@@ -43,6 +47,9 @@ class CampeonatosController extends BaseController {
 	private $pistaMapper;
 	private $calendarioMapper;
 	private $partidoMapper;
+	private $confirmacionMapper;
+	private $reservaMapper;
+
 
 	public function __construct() {
 		parent::__construct();
@@ -57,6 +64,8 @@ class CampeonatosController extends BaseController {
 		$this->pistaMapper = new PistaMapper();
 		$this->calendarioMapper = new CalendarioMapper();
 		$this->partidoMapper = new PartidoMapper();
+		$this->confirmacionMapper = new ConfirmacionMapper();
+		$this->reservaMapper = new ReservaMapper();
 		$this->view->setLayout("forms");
 
 	}
@@ -487,6 +496,114 @@ class CampeonatosController extends BaseController {
 			$this->view->render("campeonatos", "showLigaRegular");
 		}
 	}
+
+	/*funcion que muestra los enfrentamientos en los que participa el usuario*/
+	public function verEnfrentamientosCampeonato(){
+
+		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
+		
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+
+		if(isset($_GET["idCampeonato"])){
+
+			$categoriasNiveles = $this->categoriaNivelMapper->findAll($_GET["idCampeonato"]);
+			$grupos = $this->grupoMapper->findAll($categoriasNiveles);
+			$idGrupos = array();
+			foreach($grupos as $grupo){
+				array_push($idGrupos, $grupo->getIdGrupo());
+			}
+			$pareja = $this->parejaMapper->findParejaGrupos($idGrupos, $userId);
+
+			$enfrentamientos = $this->enfrentamientoMapper->findEnfrentamientosPareja($pareja);
+
+			$nombresDeportistas=array();
+			$confirmaciones = array();
+			$pistas = array();
+			foreach($enfrentamientos as $e){
+				$confirmacion = $this->confirmacionMapper->estaConfirmado($e->getIdEnfrentamiento(), $userId);
+				$pareja1 = $this->parejaMapper->findPareja($e->getPareja1());
+				$pareja2 = $this->parejaMapper->findPareja($e->getPareja2());
+				$deportista1 = $this->userMapper->findUser($pareja1->getDeportista1());
+				$deportista2 = $this->userMapper->findUser($pareja1->getDeportista2());
+				$deportista3 = $this->userMapper->findUser($pareja2->getDeportista1());
+				$deportista4 = $this->userMapper->findUser($pareja2->getDeportista2());
+				$pista = $this->reservaMapper->getPistaEnfrentamiento($e->getIdEnfrentamiento());
+				array_push($pistas,$pista);
+				array_push($nombresDeportistas, $deportista1->getNombre());
+				array_push($nombresDeportistas, $deportista2->getNombre());
+				array_push($nombresDeportistas, $deportista3->getNombre());
+				array_push($nombresDeportistas, $deportista4->getNombre());
+				array_push($confirmaciones, $confirmacion);
+			}
+
+			$this->view->setVariable("enfrentamientos", $enfrentamientos);
+			$this->view->setVariable("deportistas", $nombresDeportistas);
+			$this->view->setVariable("confirmaciones", $confirmaciones);
+			$this->view->setVariable("pistas", $pistas);
+			$this->view->setLayout("table");
+			$this->view->render("campeonatos", "showEnfrentamientos");
+		}
+	}
+
+	/*funcion que confirma la asistencia de un deportista a un enfrentamiento*/
+	public function confirmarEnfrentamiento() {
+
+		$userRol = $this->view->getVariable("userRol");
+		$userId = $this->view->getVariable("userId");
+		
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+
+		if($userRol == "administrador") {
+			$this->view->redirect("index","indexLogged");
+		}
+
+		if(isset($_GET["idEnfrentamiento"])){
+
+			$confirmacion = new Confirmacion();
+			$confirmacion->setIdEnfrentamiento($_GET["idEnfrentamiento"]);
+			$confirmacion->setDeportista($userId);
+			
+			$this->confirmacionMapper->save($confirmacion);
+
+			$numConfirmaciones = $this->confirmacionMapper->getNumConfirmaciones($_GET["idEnfrentamiento"]);
+			
+			if($numConfirmaciones == 4){
+				$reserva = new Reserva();
+				$enfrentamiento = $this->enfrentamientoMapper->findEnfrentamiento($_GET["idEnfrentamiento"]);
+				$pistas = $this->pistaMapper->getPistas();
+				$pistaLibre = $this->calendarioMapper->getPistaLibre($enfrentamiento->getFechaEnfrentamiento(),
+				$enfrentamiento->getHoraEnfrentamiento(), $pistas);
+				$reserva->setFecha($enfrentamiento->getFechaEnfrentamiento());
+				$reserva->setHora($enfrentamiento->getHoraEnfrentamiento());
+				$reserva->setPistaReserva($pistaLibre);
+				$reserva->setEnfrentamiento($_GET["idEnfrentamiento"]);
+
+				$this->reservaMapper->save($reserva);
+
+				$calendario = new Calendario();
+				$calendario->setFechaCalendario($enfrentamiento->getFechaEnfrentamiento());
+				$calendario->setPistaCalendario($pistaLibre);
+				$calendario->setEstadoCalendario("ocupado");
+				$calendario->setHoraCalendario($enfrentamiento->getHoraEnfrentamiento());
+
+				$this->calendarioMapper->save($calendario);
+
+				$this->enfrentamientoMapper->setEstado($_GET["idEnfrentamiento"]);
+			}
+
+			$this->view->redirect("campeonatos", "showallCampeonatosInscrito");
+		}
+
+	}
+	
+
 	
 
 	

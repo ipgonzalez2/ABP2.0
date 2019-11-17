@@ -15,9 +15,10 @@ class ReservaMapper {
 
 
 	public function save($reserva) {
-		$stmt = $this->db->prepare("INSERT INTO reserva values (?,?,?,?,?,?,?)");
+		$stmt = $this->db->prepare("INSERT INTO reserva values (?,?,?,?,?,?,?,?)");
 		$stmt->execute(array(0, $reserva->getFecha(), $reserva->getPrecio(),
-		$reserva->getUsuarioReserva(), $reserva->getPistaReserva(), $reserva->getHora(), $reserva->getPartidoReserva()));
+		$reserva->getUsuarioReserva(), $reserva->getPistaReserva(), $reserva->getHora(), $reserva->getPartidoReserva(),
+	$reserva->getEnfrentamiento()));
 	}
 
 	public function getNumReservasUser($id_reserva) {
@@ -102,6 +103,16 @@ class ReservaMapper {
 	public function getPistaPartido($id_partido){
 		$stmt = $this->db->prepare("SELECT pista_reserva from reserva where partido_reserva=?");
 		$stmt->execute(array($id_partido));
+
+		$pista = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+		return $pista["pista_reserva"];
+	}
+
+	public function getPistaEnfrentamiento($id_enfrentamiento){
+		$stmt = $this->db->prepare("SELECT pista_reserva from reserva where enfrentamiento=?");
+		$stmt->execute(array($id_enfrentamiento));
 
 		$pista = $stmt->fetch(PDO::FETCH_ASSOC);
 

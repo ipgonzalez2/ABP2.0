@@ -53,7 +53,7 @@ create table if not exists reserva(
 
   id_reserva int(10) auto_increment,
   fecha date not null,
-  precio float(10,2) not null,
+  precio float(10,2),
   usuario_reserva int(10),
   pista_reserva int(10) not null,
   hora time not null,
@@ -186,6 +186,17 @@ create table if not exists enfrentamiento (
   constraint fk_pareja1 foreign key(pareja1) references pareja(id_pareja) on delete cascade,
   constraint fk_pareja2 foreign key(pareja2) references pareja(id_pareja) on delete cascade,
   constraint fk_frupo_enf foreign key(grupo_enfrentamiento) references grupo(id_grupo) on delete cascade
+
+  
+) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
+
+create table if not exists confirmacion (
+  id_enfrentamiento int(10) not null,
+  deportista int(10) not null,
+
+  constraint pk_enfrentamiento primary key(id_enfrentamiento, deportista),
+  constraint fk_enfrentamiento_conf foreign key(id_enfrentamiento) references enfrentamiento(id_enfrentamiento) on delete cascade,
+  constraint fk_deportista_conf foreign key(deportista) references usuario(id_usuario) on delete cascade
 
   
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;

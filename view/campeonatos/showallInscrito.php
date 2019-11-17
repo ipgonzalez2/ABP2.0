@@ -41,7 +41,7 @@ $campeonatos = $view->getVariable("campeonatos");
               <td class="cell100 column3"><?= $campeonato->getFechaFin()?></td>
               <td class="cell100 column4"><?= $campeonato->getPrecioCampeonato()?></td>
               <td class="cell100 column4"><?= $campeonato->getEstadoCampeonato()?></td>
-              <td class="cell100 column2"><a href="<?="index.php?controller=campeonatos&action=verDetalleCampeonato&idCampeonato=".$campeonato->getIdCampeonato() ?>">
+              <td class="cell100 column2"><a href="<?="index.php?controller=campeonatos&action=verEnfrentamientosCampeonato&idCampeonato=".$campeonato->getIdCampeonato() ?>">
     <i class="fas fa-eye"></i>
     </a></td>
 

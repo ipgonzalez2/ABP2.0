@@ -64,5 +64,51 @@ class EnfrentamientoMapper {
 
 		}
 
+		public function findEnfrentamientosPareja($pareja){
+
+			$stmt = $this->db->prepare("SELECT * FROM enfrentamiento where (pareja1=? or pareja2=?)");
+			$stmt->execute(array($pareja, $pareja));
+				
+				$enfrentamientos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$enfrentamientos = array();
+		
+				foreach ($enfrentamientos_db as $enfrentamiento) {
+					array_push($enfrentamientos, new Enfrentamiento($enfrentamiento["id_enfrentamiento"],
+					$enfrentamiento["pareja1"], $enfrentamiento["pareja2"], $enfrentamiento["resultado1"],
+					$enfrentamiento["resultado2"], $enfrentamiento["grupo_enfrentamiento"],
+					$enfrentamiento["tipo_enfrentamiento"], $enfrentamiento["estado_enfrentamiento"],
+					$enfrentamiento["fecha_enfrentamiento"], $enfrentamiento["hora_enfrentamiento"]));
+				}
+				
+				return $enfrentamientos;
+	
+		}
+
+		public function findEnfrentamiento($id_enfrentamiento){
+
+			$stmt = $this->db->prepare("SELECT * FROM enfrentamiento where id_enfrentamiento=?");
+			$stmt->execute(array($id_enfrentamiento));
+				
+			$enfrentamiento = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			if($enfrentamiento!=null){
+				return new Enfrentamiento($enfrentamiento["id_enfrentamiento"],
+				$enfrentamiento["pareja1"], $enfrentamiento["pareja2"], $enfrentamiento["resultado1"],
+				$enfrentamiento["resultado2"], $enfrentamiento["grupo_enfrentamiento"],
+				$enfrentamiento["tipo_enfrentamiento"], $enfrentamiento["estado_enfrentamiento"],
+				$enfrentamiento["fecha_enfrentamiento"], $enfrentamiento["hora_enfrentamiento"]);
+			}else{
+				return null;
+			}
+				
+	
+		}
+
+		public function setEstado($id_enfrentamiento){
+			$stmt = $this->db->prepare("UPDATE enfrentamiento set estado_enfrentamiento=? where id_enfrentamiento=?");
+			$stmt->execute(array("cerrado",$id_enfrentamiento));
+
+		}
+
 	
 }

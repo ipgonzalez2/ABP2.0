@@ -136,4 +136,19 @@ class ParejaMapper {
 			return NULL;
 		}
 	}
+
+	public function findParejaGrupos($grupos, $id_usuario) {
+
+		foreach($grupos as $grupo){
+			$stmt = $this->db->prepare("SELECT id_pareja from pareja where grupo=? and (deportista1=? or deportista2=?)");
+			$stmt->execute(array($grupo, $id_usuario, $id_usuario));
+
+			$pareja = $stmt->fetch(PDO::FETCH_ASSOC);
+			if($pareja!=null){
+				return $pareja["id_pareja"];
+			}
+		}
+
+
+	}
 }
