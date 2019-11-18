@@ -23,7 +23,7 @@ class CampeonatoMapper {
 
 	public function findAllCampeonatos() 
 	{
-		$stmt = $this->db->prepare("SELECT * FROM campeonato");
+		$stmt = $this->db->prepare("SELECT * FROM campeonato order by fecha_inicio");
 		$stmt->execute();
 		
 		$campeonatos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -40,7 +40,7 @@ class CampeonatoMapper {
 
 	public function findAllCampeonatosAbiertos($campeonatosInscrito) 
 	{
-		$stmt = $this->db->prepare("SELECT * FROM campeonato WHERE estado_campeonato=?");
+		$stmt = $this->db->prepare("SELECT * FROM campeonato WHERE estado_campeonato=? order by fecha_inicio");
 		$stmt->execute(array("abierto"));
 		
 		$campeonatos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);

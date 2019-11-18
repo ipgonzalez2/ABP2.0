@@ -43,7 +43,7 @@ class ReservaMapper {
 	}
 
 	public function getReservasActivas($id_reserva) {
-		$stmt = $this->db->prepare("SELECT * from reserva where usuario_reserva=?");
+		$stmt = $this->db->prepare("SELECT * from reserva where usuario_reserva=? order by fecha, hora");
 		$stmt->execute(array($id_reserva));
 
 		$reservas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);

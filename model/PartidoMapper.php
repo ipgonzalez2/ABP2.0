@@ -22,7 +22,7 @@ class PartidoMapper {
 
 	public function findAllPartidos() 
 	{
-		$stmt = $this->db->prepare("SELECT * FROM partido");
+		$stmt = $this->db->prepare("SELECT * FROM partido order by fecha_partido, hora_partido");
 		$stmt->execute();
 		
 		$partidos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -37,7 +37,7 @@ class PartidoMapper {
 
 	public function findAllPartidosAbiertos($partidosInscrito) 
 	{
-		$stmt = $this->db->prepare("SELECT * FROM partido WHERE estado_partido=?");
+		$stmt = $this->db->prepare("SELECT * FROM partido WHERE estado_partido=? order by fecha_partido, hora_partido");
 		$stmt->execute(array("abierto"));
 		
 		$partidos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);

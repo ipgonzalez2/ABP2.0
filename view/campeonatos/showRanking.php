@@ -13,7 +13,7 @@ $i = 0;
 <?php if(count($parejas) == 0){ ?>
     <div class="alert alert-warning text-center" style="width:100%; height:7%;" id="success-warning" role="alert">
 
-        No hay parejas
+        No hay ranking todavía
     </div>
 <?php } ?>
 

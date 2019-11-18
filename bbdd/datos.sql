@@ -168,7 +168,7 @@ INSERT INTO `categorianivel` (`id_categorianivel`, `categoria`, `nivel`, `campeo
 (9, 'mixto', '3', 1);
 
 
--- INSCRIPCION DE PAREJAS
+-- INSCRIPCION DE PAREJAS EN EL CAMPEONATO
 INSERT INTO `pareja` (`id_pareja`, `deportista1`, `deportista2`, `categorianivel`, `grupo`) VALUES
 (1, 2, 3, 3, NULL),
 (2, 4, 5, 3, NULL),
