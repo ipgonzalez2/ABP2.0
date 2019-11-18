@@ -53,7 +53,7 @@ $errors = $view->getVariable("errors");
 
                     <div class="text-center p-t-46 p-b-20">
                         <span class="txt2">
-                        <a href="./index.php?controller=users&action=register" >
+                        <a href="./index.php?controller=users&action=register" style="text-decoration: none;">
                         o regístrate
                         </a>
 							
@@ -61,11 +61,13 @@ $errors = $view->getVariable("errors");
                     </div>
 
                     <div class="login100-form-social flex-c-m">
-                        <a href="/dashboard" class="login100-form-social-item flex-c-m bg1 m-r-5">
+                        <a href="/dashboard" class="login100-form-social-item flex-c-m bg1 m-r-5" style="
+    text-decoration: none;">
                         <i class="fab fa-facebook"></i></i>
                         </a>
 
-                        <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+                        <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5" style="
+    text-decoration: none;">
                         <i class="fab fa-twitter"></i></i>
                         </a>
                     </div>
