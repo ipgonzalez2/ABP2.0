@@ -26,11 +26,12 @@ $j=0;
       <table>
         <thead>
           <tr class="row100 head">
-            <th class="cell100 column1">Pareja1</th>
-            <th class="cell100 column1">Pareja2</th>
+            <th class="cell100 column2">Pareja1</th>
+            <th class="cell100 column2">Pareja2</th>
             <th class="cell100 column2">Fecha</th>
             <th class="cell100 column4">Hora</th>
             <th class="cell100 column4">Resultado</th>
+            <th class="cell100 column3">Pista</th>
             <th class="cell100 column4">Confirmación</th>
             </tr>
         </thead>
@@ -42,11 +43,11 @@ $j=0;
         <table>
           <tbody>
             <tr class="row100 body">
-              <td class="cell100 column1">
+              <td class="cell100 column2">
               <?= $nombres[$i] ?> <br>
               <?= $nombres[$i+1] ?>
               </td>
-              <td class="cell100 column1">
+              <td class="cell100 column2">
               <?= $nombres[$i+2] ?> <br>
               <?= $nombres[$i+3] ?>
               </td>
@@ -57,7 +58,7 @@ $j=0;
                 <td class="cell100 column3">Pista <?= $pistas[$j]?></td>
               <?php } ?>
               <?php if($confirmaciones[$j]){ ?>
-                <td class="cell100 column4">Confirmado</td>
+                <td class="cell100 column4"><i class="fas fa-check-double fa-2x"></i></td>
               <?php }else{ ?>
               <td class="cell100 column4"><a href="<?="index.php?controller=campeonatos&action=confirmarEnfrentamiento&idEnfrentamiento=".$enfrentamiento->getIdEnfrentamiento() ?>">
                 <i class="fas fa-check-circle fa-2x"></i>
