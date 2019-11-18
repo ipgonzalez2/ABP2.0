@@ -21,6 +21,8 @@ $grupos = $view->getVariable("grupos");
           <tr class="row100 head">
             <th class="cell100 column1">Categoria_Nivel</th>
             <th class="cell100 column2">Num Parejas</th>
+            <th class="cell100 column2"></th>
+            <th class="cell100 column2"></th>
             </tr>
         </thead>
       </table>

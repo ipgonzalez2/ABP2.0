@@ -277,6 +277,13 @@ $pop = $view->popFlash();
         <li><a class="text-muted" href="#">Cosas de Informaticos</a></li>
         <li><a class="text-muted" href="https://weather.com/es-ES/tiempo/hoy/l/251cec6a9bb33f4b37d385cc0642b9a63928ded87b33f79e2041fadbbf504070">El tiempo</a></li>
       </ul>
+      <h5>Horario</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Lunes a viernes : 09:00 -- 21:00</a></li>
+        <li><a class="text-muted" href="#">Sabados : 09:00 - 14:00 </br> 18:00 - 21:00</a></li>
+        <li><a class="text-muted" href="#">Domingos : 09:00 -- 14:00 </a></li>
+        <li><a class="text-muted" href="https://weather.com/es-ES/tiempo/hoy/l/251cec6a9bb33f4b37d385cc0642b9a63928ded87b33f79e2041fadbbf504070">El tiempo</a></li>
+      </ul>
     </div>
 
 

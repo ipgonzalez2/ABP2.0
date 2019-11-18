@@ -62,11 +62,14 @@ $userRol = $view->getVariable("userRol");
     <?php } if($userRol == "administrador" && $campeonato->getEstadoCampeonato() == "cerrado"){ ?>
       <td class="cell100 column2"><a href="<?="index.php?controller=campeonatos&action=showallGrupos&idCampeonato=".$campeonato->getIdCampeonato() ?>">
     <i class="fas fa-eye"></i>
+    <td class="cell100 column2"> <i class="far fa-stop-circle"></i></td>
     </a></td>
   <?php }else if($userRol == "deportista"){ ?>
     <td class="cell100 column2"><a href="<?="index.php?controller=campeonatos&action=inscribirCampeonato&idCampeonato=".$campeonato->getIdCampeonato() ?>">
     <i class="fas fa-user-plus"></i>
-  <?php } ?>
+  <?php }else{ ?>
+    <td class="cell100 column2"> <i class="far fa-stop-circle"></i></td>
+  <?php }?>
 </tr>
 <?php endforeach; ?>
 </table> 

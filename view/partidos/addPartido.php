@@ -19,13 +19,13 @@ $z =0;
 <div class="cabecera">
 <?php foreach($fechas as $fecha):
   if($z<1){?>
-  <h2><i class="fas fa-hand-middle-finger"></i>&nbsp&nbsp&nbsp&nbsp&nbsp<?=date('d-m-Y' , strtotime($fecha))?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="far fa-calendar-alt"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+  <h2><i class="fab fa-angellist"></i>&nbsp&nbsp&nbsp&nbsp&nbsp<?=date('d-m-Y' , strtotime($fecha))?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="far fa-calendar-alt"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
 
   <?php } 
   $z++;
   endforeach ;?>
 
-<?=date('d-m-Y' , strtotime($fecha))?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fas fa-hand-middle-finger"></i></h2>
+<?=date('d-m-Y' , strtotime($fecha))?>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fab fa-angellist"></i></h2>
   </div>
   <form method="POST" action="./index.php?controller=partidos&action=addPartido">
 
@@ -115,7 +115,7 @@ function openForm(d, anho ,pos) {
   document.getElementById("myForm").style.display = "block";
   document.getElementById("myForm").setAttribute("dia",""+d);
   document.getElementById("myForm").setAttribute("posicion",""+pos);
-  document.getElementById("dia").innerHTML = "Partido para el dia " +d+"  (09:00 a 21:00)" ;
+  document.getElementById("dia").innerHTML = "Precio de la reserva es de 12€ <br>Reserva del dia " +d+"  (09:00 a 21:00)" ;
 
 
 

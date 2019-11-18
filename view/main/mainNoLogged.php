@@ -37,11 +37,11 @@ $errors = $view->getVariable("errors");
             <h2>Pistas</h2>
             <p>Quieres reservar las mejores pista del mundo.</p>
             <ul class="actions stacked">
-                <li><a href="./index.php?controller=users&action=login" class="button">Dale duro Broh </a></li>
+                <li><a href="./index.php?controller=users&action=login" class="button">Adelante 🏓 </a></li>
             </ul>
         </div>
         <div class="image">
-            <img src="./images/padel2.jpg" alt="" />
+            <img src="./images/01.jpg" alt="" />
         </div>
     </section>
 
@@ -49,13 +49,13 @@ $errors = $view->getVariable("errors");
      <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
 
         <div class="image">
-            <img src="./images/bananas.jpg" alt="" />
+            <img src="./images/010.jpg" alt="" />
         </div>
         <div class="content">
             <h2>Calendario</h2>
             <p>Calendario</p>
             <ul class="actions stacked">
-                <li><a href="./index.php?controller=users&action=login" class="button">A ver si te gusta 😀 </a></li>
+                <li><a href="./index.php?controller=users&action=login" class="button">Let´s go! </a></li>
             </ul>
         </div>
     </section>
@@ -70,8 +70,8 @@ $errors = $view->getVariable("errors");
         <!-- Gallery -->
         <div class="gallery style2 medium lightbox onscroll-fade-in">
             <article>
-                <a href="images/gallery/fulls/01.jpg" class="image">
-                    <img src="images/gallery/thumbs/01.jpg" alt="" />
+                <a href="images/01.jpg" class="image">
+                    <img src="images/01.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Pistas</h3>
@@ -81,8 +81,8 @@ $errors = $view->getVariable("errors");
                 </div>
             </article>
             <article>
-                <a href="images/gallery/fulls/02.jpg" class="image">
-                    <img src="images/gallery/thumbs/02.jpg" alt="" />
+                <a href="images/02.jpg" class="image">
+                    <img src="images/02.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Vestuarios</h3>
@@ -92,8 +92,8 @@ $errors = $view->getVariable("errors");
                 </div>
             </article>
             <article>
-                <a href="images/gallery/fulls/03.jpg" class="image">
-                    <img src="images/gallery/thumbs/03.jpg" alt="" />
+                <a href="images/03.jpg" class="image">
+                    <img src="images/03.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Profesores</h3>
@@ -103,8 +103,8 @@ $errors = $view->getVariable("errors");
                 </div>
             </article>
             <article>
-                <a href="images/gallery/fulls/04.jpg" class="image">
-                    <img src="images/gallery/thumbs/04.jpg" alt="" />
+                <a href="images/04.jpg" class="image">
+                    <img src="images/04.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Bar</h3>
@@ -175,12 +175,11 @@ $errors = $view->getVariable("errors");
 		<small class="d-block mb-3 text-muted">&copy; 2016-2020</small>
     </div>
     <div class="col-6 col-md">
-      <h5>Mejoras</h5>
+      <h5>Horario</h5>
       <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="#">Imagenes Bonitas</a></li>
-        <li><a class="text-muted" href="#">Implementacion Nuevas Funciones</a></li>
-        <li><a class="text-muted" href="#">Algo mas</a></li>
-        <li><a class="text-muted" href="#">Cosas de Informaticos</a></li>
+        <li><a class="text-muted" href="#">Lunes a viernes : 09:00 -- 21:00</a></li>
+        <li><a class="text-muted" href="#">Sabados : 09:00 - 14:00 </br> 18:00 - 21:00</a></li>
+        <li><a class="text-muted" href="#">Domingos : 09:00 -- 14:00 </a></li>
         <li><a class="text-muted" href="https://weather.com/es-ES/tiempo/hoy/l/251cec6a9bb33f4b37d385cc0642b9a63928ded87b33f79e2041fadbbf504070">El tiempo</a></li>
       </ul>
     </div>

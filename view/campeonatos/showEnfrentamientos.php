@@ -27,8 +27,8 @@ $j=0;
         <thead>
           <tr class="row100 head">
             <th class="cell100 column1">Pareja1</th>
-            <th class="cell100 column2">Pareja2</th>
-            <th class="cell100 column3">Fecha</th>
+            <th class="cell100 column1">Pareja2</th>
+            <th class="cell100 column2">Fecha</th>
             <th class="cell100 column4">Hora</th>
             <th class="cell100 column4">Resultado</th>
             <th class="cell100 column4">Confirmación</th>
@@ -46,11 +46,11 @@ $j=0;
               <?= $nombres[$i] ?> <br>
               <?= $nombres[$i+1] ?>
               </td>
-              <td class="cell100 column2">
+              <td class="cell100 column1">
               <?= $nombres[$i+2] ?> <br>
               <?= $nombres[$i+3] ?>
               </td>
-              <td class="cell100 column3"><?= $enfrentamiento->getFechaEnfrentamiento()?></td>
+              <td class="cell100 column2"><?= $enfrentamiento->getFechaEnfrentamiento()?></td>
               <td class="cell100 column4"><?= $enfrentamiento->getHoraEnfrentamiento()?></td>
               <td class="cell100 column4"><?= $enfrentamiento->getResultado1()?> - <?= $enfrentamiento->getResultado2()?></td>
               <?php if($enfrentamiento->getEstadoEnfrentamiento()=="cerrado"){?>
@@ -59,8 +59,8 @@ $j=0;
               <?php if($confirmaciones[$j]){ ?>
                 <td class="cell100 column4">Confirmado</td>
               <?php }else{ ?>
-              <td class="cell100 column2"><a href="<?="index.php?controller=campeonatos&action=confirmarEnfrentamiento&idEnfrentamiento=".$enfrentamiento->getIdEnfrentamiento() ?>">
-                <i class="fas fa-check-circle"></i>
+              <td class="cell100 column4"><a href="<?="index.php?controller=campeonatos&action=confirmarEnfrentamiento&idEnfrentamiento=".$enfrentamiento->getIdEnfrentamiento() ?>">
+                <i class="fas fa-check-circle fa-2x"></i>
                 </a></td>
               <?php } ?>
 

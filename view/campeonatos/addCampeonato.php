@@ -24,11 +24,13 @@ $errors = $view->getVariable("errors");
 				</div>
 
 				<div class="wrap-input100 validate-input">
+					<span class="input100">Fecha Inicio</span>
 					<input class="input100" type="date"  name="fechaInicio"  placeholder="Fecha Inicio">
 					
 				</div>
 
                 <div class="wrap-input100 validate-input">
+				<span class="input100">Fecha Fin</span>
 					<input class="input100" type="date"  name="fechaFin"  placeholder="Fecha Fin">
 				
 				</div>

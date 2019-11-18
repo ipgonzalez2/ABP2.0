@@ -23,7 +23,7 @@ $i = 0;
       <table>
         <thead>
           <tr class="row100 head">
-            <th class="cell100 column1">Integrante</th>
+            <th class="cell100 column2">Integrante</th>
             <th class="cell100 column2">Integrante</th>
             <th class="cell100 column4">Puntos</th>
             </tr>
@@ -36,13 +36,13 @@ $i = 0;
         <table>
           <tbody>
             <tr class="row100 body">
-              <td class="cell100 column1">
+              <td class="cell100 column2">
               <?= $nombres[$i] ?>
               </td>
               <td class="cell100 column2">
               <?= $nombres[$i+1] ?>
               </td>
-              <td class="cell100 column3"><?= $pareja->getPuntos()?></td>
+              <td class="cell100 column4"><?= $pareja->getPuntos()?></td>
 
             </tr>
      

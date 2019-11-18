@@ -55,7 +55,7 @@ $userRol = $view->getVariable("userRol");
                 <td class="cell100 column4"><a href="<?= "index.php?controller=partidos&action=showPartidoInscribir&idPartido=" . $partido->getIdPartido() ?>">
                     <i class="fa fa-user-plus"></i></a>
                   <?php }else{ ?>
-                    <td> <i class="far fa-times-circle"></i></td>
+                    <td class="cell100 column4"> <i class="far fa-times-circle"></i></td>
                   <?php }?>
             </tr>
 
