@@ -167,7 +167,7 @@ class UsersController extends BaseController {
 
 		// Put the User object visible to the view
 		$this->view->setVariable("notificaciones", $notificaciones);
-		$this->view->setLayout("forms");
+		$this->view->setLayout("table");
 
 		// render the view (/view/users/login.php)
 		$this->view->render("users", "notificaciones");

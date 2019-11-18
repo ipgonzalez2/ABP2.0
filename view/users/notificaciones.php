@@ -10,21 +10,33 @@ $notificaciones = $view->getVariable("notificaciones");
 ?>
 
 <?php if(count($notificaciones) == 0){ ?>
-    <div class="alert alert-warning text-center" style="width:100%; height:7%;" id="success-warning" role="alert">
+    <div class="alert alert-warning text-center" style="width:100%;height:7%;margin-top: 10%;" id="success-warning" role="alert">
 
         No tienes ninguna notificacion
     </div>
 <?php } ?>
-<div class="row">
-<table style="width:100%">
+<div class="table100 ver2 m-b-110">
+    <div class="table100-head">
+      <table>
+        <thead>
+          <tr class="row100 head">
+            <th class="cell100 column1">Notificacion</th>
+             </tr>
+        </thead>
+      </table>
+    </div>
     <?php foreach($notificaciones as $notificacion):?>
 
-<tr>
-  <?= $notificacion?>
-</tr>
-<?php endforeach; ?>
-</table> 
-   
+        <div class="table100-body js-pscroll">
+        <table>
+          <tbody>
+            <tr class="row100 body">
+              <td class="cell100 column1"><?= $notificacion?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+        </table>
 
+      </div>
 
 </div>
