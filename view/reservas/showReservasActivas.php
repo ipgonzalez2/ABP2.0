@@ -3,7 +3,7 @@
 
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
-$view->setVariable("title", "PARTIDOS INSCRITO");
+$view->setVariable("title", "Mis reservas");
 $errors = $view->getVariable("errors");
 $reservasActivas = $view->getVariable("reservasActivas");
 $userRol = $view->getVariable("userRol");
