@@ -64,7 +64,8 @@ $userRol = $view->getVariable("userRol");
 	<!-- header -->
 	<header class="header-section">
 	<div class="nav-switch">
-	<a href="./index.php?"><i class="fa fa-cannabis"></i></a>
+    <img src="images/logo.png" width="70" height="60">
+   </i></a>
 			<a href="javascript:history.back()">
 			<i class="fas fa-angle-double-left"></i></a>
 			
