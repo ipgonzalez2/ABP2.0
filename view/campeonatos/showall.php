@@ -30,7 +30,7 @@ $userRol = $view->getVariable("userRol");
              <th class="cell100 column4">Límite inscripción</th>
              <th class="cell100 column2">Estado</th>
              <?php if($userRol == "administrador"){ ?>
-             <th class="cell100 column2">Borrar</th>
+             <th class="cell100 column2">Borrar/Ver</th>
              <th class="cell100 column2">Cerrar</th>
              <?php }else if($userRol == "deportista"){ ?>
              <th class="cell100 column4">Inscribirse</th>
