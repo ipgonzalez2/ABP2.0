@@ -10,7 +10,7 @@ $notificaciones = $view->getVariable("notificaciones");
 ?>
 
 <?php if(count($notificaciones) == 0){ ?>
-    <div class="alert alert-warning text-center" style="width:100%;height:7%;margin-top: 10%;" id="success-warning" role="alert">
+    <div class="alert alert-warning text-center" style="width:100%;height:7%" id="success-warning" role="alert">
 
         No tienes ninguna notificacion
     </div>
