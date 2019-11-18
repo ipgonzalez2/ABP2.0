@@ -12,7 +12,7 @@ $pop = $view->popFlash();
 
 <header class="header-section">
     <div class="nav-switch">
-    <i class="fa fa-cannabis"></i>
+    <img src="images/logo.png" width="70" height="60">
     </div>
     <div class="header-social">
         <a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>

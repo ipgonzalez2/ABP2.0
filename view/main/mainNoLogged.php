@@ -7,6 +7,7 @@ $errors = $view->getVariable("errors");
 
 <header class="header-section">
     <div class="nav-switch">
+    <img src="images/logo.png" width="70" height="60">
     </div>
     <div class="header-social">
         <a href="./index.php?controller=users&action=login"><i class="fas fa-user"></i></i></a>

@@ -7,8 +7,8 @@ $errors = $view->getVariable("errors");
 
 <header class="header-section">
     <div class="nav-switch">
-    <i class="fa fa-cannabis"></i>
-    </div>
+    <img src="images/logo.png" width="70" height="60">
+   </div>
     <div class="header-social">
         <a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>
         <a href="./index.php?controller=partidos&action=showallPartidos"><i class="fa fa-table-tennis"></i></a>
