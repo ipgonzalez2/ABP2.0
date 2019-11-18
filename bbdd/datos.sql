@@ -11,18 +11,18 @@ insert into pista values(null,'cerrada');
 insert into usuario values(0,'admin','admin','','','administrador','hombre',0);
 
 INSERT INTO `usuario` (`id_usuario`, `username`, `passwd`, `nombre`, `email`, `rol`, `sexo`, `nivel`) VALUES
-(2, 'adene0', 'nnTeSMN', 'Alfreda Dene', 'adene0@marriott.com', 'deportista', 'mujer', 1),
+(2, 'adene0', '12345', 'Alfreda Dene', 'adene0@marriott.com', 'deportista', 'mujer', 1),
 (3, 'tpridgeon1', 'PShBJhL', 'Tom Pridgeon', 'tpridgeon1@chronoengine.com', 'deportista', 'hombre', 1),
 (4, 'afurley2', 'YHTycQb', 'Alessandra Furley', 'afurley2@diigo.com', 'deportista', 'hombre', 1),
-(5, 'efer3', 'sTwMuzrIm', 'Eugenio Fer', 'efer3@guardian.co.uk', 'deportista', 'mujer', 1),
+(5, 'efer3', '12345', 'Eugenio Fer', 'efer3@guardian.co.uk', 'deportista', 'mujer', 1),
 (6, 'mheine4', 'zKNqHMy', 'Mona Heine', 'mheine4@upenn.edu', 'deportista', 'mujer', 1),
 (7, 'dsiflet5', '7wflpOuP6', 'Drusie Siflet', 'dsiflet5@woothemes.com', 'deportista', 'mujer', 1),
-(8, 'dcarnell6', '9xIdL2nUQXlE', 'Dollie Carnell', 'dcarnell6@cnbc.com', 'deportista', 'hombre', 1),
-(9, 'akohnen7', 'UhMw2msmL', 'Angelico Kohnen', 'akohnen7@amazon.com', 'deportista', 'hombre', 1),
+(8, 'dcarnell6', '12345', 'Dollie Carnell', 'dcarnell6@cnbc.com', 'deportista', 'hombre', 1),
+(9, 'akohnen7', '12345', 'Angelico Kohnen', 'akohnen7@amazon.com', 'deportista', 'hombre', 1),
 (10, 'bgallagher8', 'uhJj8F', 'Bard Gallagher', 'bgallagher8@sogou.com', 'deportista', 'hombre', 1),
 (11, 'csarra9', 'jajXst', 'Clayborne Sarra', 'csarra9@jimdo.com', 'deportista', 'mujer', 1),
-(12, 'vchippa', 'UV4eoLSph', 'Valeda Chipp', 'vchippa@prweb.com', 'deportista', 'hombre', 1),
-(13, 'hrichardetb', 'ZL1hk31Kw', 'Harrietta Richardet', 'hrichardetb@twitter.com', 'deportista', 'hombre', 1),
+(12, 'vchippa', '12345', 'Valeda Chipp', 'vchippa@prweb.com', 'deportista', 'hombre', 1),
+(13, 'hrichardetb', '12345', 'Harrietta Richardet', 'hrichardetb@twitter.com', 'deportista', 'hombre', 1),
 (14, 'pmogenotc', 'Tbc9HuUpjw4A', 'Percival Mogenot', 'pmogenotc@wired.com', 'deportista', 'hombre', 1),
 (15, 'sprebbled', '1i6uLZAVX259', 'Skylar Prebble', 'sprebbled@is.gd', 'deportista', 'hombre', 1),
 (16, 'jgandere', 'EnmdApQ6', 'Jan Gander', 'jgandere@bigcartel.com', 'deportista', 'hombre', 1),
@@ -112,6 +112,29 @@ INSERT INTO `usuario` (`id_usuario`, `username`, `passwd`, `nombre`, `email`, `r
 (100, 'nclamo2q', 'IoDk0U', 'Nanci Clamo', 'nclamo2q@prnewswire.com', 'deportista', 'hombre', 1),
 (101, 'chovel2r', 'RNDW1CeYRU', 'Catlaina Hovel', 'chovel2r@artisteer.com', 'deportista', 'mujer', 1);
 
+-- CAMBIOS DERIVADOS EN EL CALENDARIO
+
+INSERT INTO `calendario` (`fecha_calendario`, `pista_calendario`, `estado_calendario`, `hora_calendario`) VALUES
+('2019-11-19', 1, 'ocupado', '10:30:00'),
+('2019-11-19', 1, 'ocupado', '21:00:00'),
+('2019-11-25', 1, 'ocupado', '21:00:00'),
+('2019-11-28', 1, 'ocupado', '19:30:00'),
+('2019-11-30', 1, 'ocupado', '19:30:00'),
+('2019-12-03', 1, 'ocupado', '12:00:00'),
+('2019-12-03', 2, 'ocupado', '12:00:00'),
+('2019-12-03', 3, 'ocupado', '12:00:00'),
+('2019-12-03', 4, 'ocupado', '12:00:00'),
+('2019-12-03', 5, 'ocupado', '12:00:00'),
+('2019-12-04', 1, 'ocupado', '13:30:00'),
+('2019-12-06', 1, 'ocupado', '18:00:00');
+
+-- CREACION PARTIDOS
+
+INSERT INTO `partido` (`id_partido`, `fecha_partido`, `precio_partido`, `estado_partido`, `fecha_fin_inscripcion`, `hora_partido`) VALUES
+(1, '2019-12-03', 9.00, 'abierto', '2019-12-02', '12:00:00'),
+(2, '2019-11-26', 9.00, 'abierto', '2019-11-25', '09:00:00'),
+(3, '2019-12-08', 9.00, 'cerrado', '2019-12-07', '19:30:00'),
+(4, '2019-11-29', 9.00, 'abierto', '2019-11-28', '16:30:00');
 
 -- CREACION DE RESERVAS PARA EL USUARIO 2
 
@@ -119,29 +142,16 @@ INSERT INTO `reserva` (`id_reserva`, `fecha`, `precio`, `usuario_reserva`, `pist
 (1, '2019-11-19', 16.00, 2, 1, '10:30:00', NULL, NULL),
 (2, '2019-11-19', 16.00, 2, 1, '21:00:00', NULL, NULL),
 (3, '2019-12-03', 16.00, 2, 1, '12:00:00', NULL, NULL),
-(5, '2019-11-30', 16.00, 2, 1, '19:30:00', NULL, NULL),
-(6, '2019-12-03', 16.00, 4, 2, '12:00:00', NULL, NULL),
-(7, '2019-12-03', 16.00, 8, 3, '12:00:00', NULL, NULL),
-(8, '2019-12-03', 16.00, 9, 4, '12:00:00', NULL, NULL),
-(9, '2019-12-03', 16.00, 11, 5, '12:00:00', NULL, NULL);
-
--- CAMBIOS DERIVADOS EN EL CALENDARIO
-
-INSERT INTO `calendario` (`fecha_calendario`, `pista_calendario`, `estado_calendario`, `hora_calendario`) VALUES
-('2019-11-19', 1, 'ocupado', '10:30:00'),
-('2019-11-19', 1, 'ocupado', '21:00:00'),
-('2019-11-30', 1, 'ocupado', '19:30:00'),
-('2019-12-03', 1, 'ocupado', '12:00:00'),
-('2019-12-03', 2, 'ocupado', '12:00:00'),
-('2019-12-03', 3, 'ocupado', '12:00:00'),
-('2019-12-03', 4, 'ocupado', '12:00:00'),
-('2019-12-03', 5, 'ocupado', '12:00:00');
-
--- CREACION PARTIDOS
-
-INSERT INTO `partido` (`id_partido`, `fecha_partido`, `precio_partido`, `estado_partido`, `fecha_fin_inscripcion`, `hora_partido`) VALUES
-(1, '2019-12-03', 9.00, 'abierto', '2019-12-02', '12:00:00'),
-(2, '2019-11-26', 9.00, 'abierto', '2019-11-25', '09:00:00');
+(4, '2019-11-30', 16.00, 2, 1, '19:30:00', NULL, NULL),
+(5, '2019-12-03', 16.00, 4, 2, '12:00:00', NULL, NULL),
+(6, '2019-12-03', 16.00, 8, 3, '12:00:00', NULL, NULL),
+(7, '2019-12-03', 16.00, 9, 4, '12:00:00', NULL, NULL),
+(8, '2019-12-03', 16.00, 11, 5, '12:00:00', NULL, NULL),
+(9, '2019-11-25', 16.00, 97, 1, '21:00:00', NULL, NULL),
+(10, '2019-12-04', 16.00, 96, 1, '13:30:00', NULL, NULL),
+(11, '2019-12-06', 16.00, 96, 1, '18:00:00', NULL, NULL),
+(12, '2019-11-28', 16.00, 94, 1, '19:30:00', NULL, NULL),
+(13, '2019-12-08', 9.00, NULL, 1, '19:30:00', 3, NULL);
 
 -- INSCRIPCIONES PARTIDO 1
 INSERT INTO `inscripcionpartido` (`id_inscripcion_partido`, `id_inscripcion_usuario`) VALUES
@@ -149,13 +159,21 @@ INSERT INTO `inscripcionpartido` (`id_inscripcion_partido`, `id_inscripcion_usua
 (1, 11),
 (2, 2),
 (2, 3),
-(2, 18);
+(2, 18),
+(3, 94),
+(3, 95),
+(3, 96),
+(3, 97),
+(4, 97);
 
 -- CREACION DE CAMPEONATO
+
 INSERT INTO `campeonato` (`id_campeonato`, `nombre_campeonato`, `fecha_inicio`, `fecha_fin`, `precio_campeonato`, `fecha_limite_inscripcion`, `estado_campeonato`) VALUES
-(1, 'Campeonato PadelBit', '2019-12-02', '2019-12-23', 12.00, '2019-11-29', 'abierto');
+(1, 'Campeonato PadelBit', '2019-12-02', '2019-12-23', 12.00, '2019-11-29', 'abierto'),
+(2, 'Campeonato Navidad', '2019-12-09', '2019-12-23', 12.00, '2019-12-06', 'abierto');
 
 -- CREACION DE CATEGORIAS NIVELES CORRESPONDIENTES
+
 INSERT INTO `categorianivel` (`id_categorianivel`, `categoria`, `nivel`, `campeonato`) VALUES
 (1, 'masculina', '1', 1),
 (2, 'femenina', '1', 1),
@@ -165,7 +183,16 @@ INSERT INTO `categorianivel` (`id_categorianivel`, `categoria`, `nivel`, `campeo
 (6, 'mixto', '2', 1),
 (7, 'masculina', '3', 1),
 (8, 'femenina', '3', 1),
-(9, 'mixto', '3', 1);
+(9, 'mixto', '3', 1),
+(10, 'masculina', '1', 2),
+(11, 'femenina', '1', 2),
+(12, 'mixto', '1', 2),
+(13, 'masculina', '2', 2),
+(14, 'femenina', '2', 2),
+(15, 'mixto', '2', 2),
+(16, 'masculina', '3', 2),
+(17, 'femenina', '3', 2),
+(18, 'mixto', '3', 2);
 
 
 -- INSCRIPCION DE PAREJAS EN EL CAMPEONATO
@@ -214,4 +241,16 @@ INSERT INTO `pareja` (`id_pareja`, `deportista1`, `deportista2`, `categorianivel
 (42, 84, 85, 3, NULL),
 (43, 86, 87, 2, NULL),
 (44, 88, 89, 2, NULL),
-(45, 90, 91, 3, NULL);
+(45, 90, 91, 3, NULL),
+(46, 97, 2, 18, NULL),
+(47, 96, 89, 15, NULL),
+(48, 95, 85, 14, NULL);
+
+
+-- NOTIFICACIONES
+
+INSERT INTO `notificacion` (`id_notificacion`, `id_usuario_notificacion`, `mensaje`) VALUES
+(1, 94, 'El partido con fecha 2019-12-08 ha sido cerrado.\r\n					\nRecuerde que tendrá que pagar un importe de 9 al acceder al mismo.\n Pista: 1\n'),
+(2, 95, 'El partido con fecha 2019-12-08 ha sido cerrado.\r\n					\nRecuerde que tendrá que pagar un importe de 9 al acceder al mismo.\n Pista: 1\n'),
+(3, 96, 'El partido con fecha 2019-12-08 ha sido cerrado.\r\n					\nRecuerde que tendrá que pagar un importe de 9 al acceder al mismo.\n Pista: 1\n'),
+(4, 97, 'El partido con fecha 2019-12-08 ha sido cerrado.\r\n					\nRecuerde que tendrá que pagar un importe de 9 al acceder al mismo.\n Pista: 1\n');
