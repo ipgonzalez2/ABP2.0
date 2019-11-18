@@ -5,9 +5,6 @@ $view->setVariable("title", "Añadir Partido");
 $errors = $view->getVariable("errors");
 $fechas = $view->getVariable("fechas");
 $arrayHoras = $view->getVariable("horas");
-$arrayHoras[1] = array();
-
-$arrayHoras[5] = array();
 $arrayHoras[7] = array();
 $i =0;
 $pos =0;
