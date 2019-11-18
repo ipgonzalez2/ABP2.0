@@ -93,8 +93,8 @@ $errors = $view->getVariable("errors");
                 </div>
             </article>
             <article>
-                <a href="images/PROFESORES.jpeg"  class="image">
-                    <img src="images/PROFESORES.jpeg" alt="" />
+                <a href="images/014.jpg"  class="image">
+                    <img src="images/014.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Profesores</h3>
@@ -104,8 +104,8 @@ $errors = $view->getVariable("errors");
                 </div>
             </article>
             <article>
-                <a href="images/014.jpg" class="image">
-                    <img src="images/016.jpg" alt="" />
+                <a href="images/PROFESORES.jpg" class="image">
+                    <img src="images/015.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Bar</h3>

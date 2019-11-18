@@ -82,76 +82,7 @@ $errors = $view->getVariable("errors");
             <p>Son las mejores.</p>
         </div>
 
-        <!-- Gallery -->
-        <div class="gallery style2 medium lightbox onscroll-fade-in">
-            <article>
-                <a href="images/gallery/fulls/01.jpg" class="image">
-                    <img src="images/gallery/thumbs/01.jpg" alt="" />
-                </a>
-                <div class="caption">
-                    <h3>Pistas</h3>
-                    <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
-                    </ul>
-                </div>
-            </article>
-            <article>
-                <a href="images/gallery/fulls/02.jpg" class="image">
-                    <img src="images/gallery/thumbs/02.jpg" alt="" />
-                </a>
-                <div class="caption">
-                    <h3>Vestuarios</h3>
-                    <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
-                    </ul>
-                </div>
-            </article>
-            <article>
-                <a href="images/gallery/fulls/03.jpg" class="image">
-                    <img src="images/gallery/thumbs/03.jpg" alt="" />
-                </a>
-                <div class="caption">
-                    <h3>Profesores</h3>
-                    <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
-                    </ul>
-                </div>
-            </article>
-            <article>
-                <a href="images/gallery/fulls/04.jpg" class="image">
-                    <img src="images/gallery/thumbs/04.jpg" alt="" />
-                </a>
-                <div class="caption">
-                    <h3>Bar</h3>
-                    <p>Quieres unas copas.</p>
-                    <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
-                    </ul>
-                </div>
-            </article>
-            <article>
-                <a href="images/gallery/fulls/05.jpg" class="image">
-                    <img src="images/gallery/thumbs/05.jpg" alt="" />
-                </a>
-                <div class="caption">
-                    <h3>Servicio de Alquiler</h3>
-                    <p>Palas y pelotas.</p>
-                    <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
-                    </ul>
-                </div>
-            </article>
-            <article>
-                <a href="images/gallery/fulls/06.jpg" class="image">
-                    <img src="images/gallery/thumbs/06.jpg" alt="" />
-                </a>
-                <div class="caption">
-                    <h3>Quieres tu posibles colegas</h3>
-                    <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
-                    </ul>
-                </div>
-            </article>
+     
 
         </div>
 
