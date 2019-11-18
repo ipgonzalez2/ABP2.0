@@ -43,7 +43,7 @@ $user = $view->getVariable("user");
 				</div>
 
 				<div class="wrap-input100 validate-input">
-				<input class="input100" name="sexo" type="text" list="sexo" placeholder="Sexo" />
+				<input class="input100" name="sexo" type="text" list="sexo" placeholder="Sexo" autocomplete=off/>
 				<datalist id="sexo" name="sexo" >
   					<option name="sexo" value="hombre"></option>
   					<option name="sexo" value="mujer"></option>

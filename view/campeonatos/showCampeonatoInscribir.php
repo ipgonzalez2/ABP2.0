@@ -33,7 +33,7 @@ $campeonato = $view->getVariable("campeonato");
 				</div>
 
 				<div class="wrap-input100 validate-input">
-				<input class="input100" name="nivel" type="text" list="nivel" placeholder="Nivel" />
+				<input class="input100" name="nivel" type="text" list="nivel" placeholder="Nivel" autocomplete=off/>
 				<datalist id="nivel" name="nivel" class="input100">
   					<option name="nivel" value="1"></option>
   					<option name="nivel" value="2"></option>
