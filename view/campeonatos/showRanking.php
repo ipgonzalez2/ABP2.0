@@ -3,7 +3,7 @@
 
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
-$view->setVariable("title", "RANKING");
+$view->setVariable("title", "Ranking Liga");
 $errors = $view->getVariable("errors");
 $parejas = $view->getVariable("parejas");
 $nombres = $view->getVariable("deportistas");

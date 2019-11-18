@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../../core/ViewManager.php";
 $view = ViewManager::getInstance();
-$view->setVariable("title", "Main");
+$view->setVariable("title", "PadelBit");
 $errors = $view->getVariable("errors");
 ?>
 

@@ -3,7 +3,7 @@
 
 require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
-$view->setVariable("title", "Edit");
+$view->setVariable("title", "Mi perfil");
 
 $errors = $view->getVariable("errors");
 $user = $view->getVariable("user");

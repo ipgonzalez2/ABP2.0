@@ -3,7 +3,7 @@
 
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
-$view->setVariable("title", "CAMPEONATOS INSCRITO");
+$view->setVariable("title", "Liga regular");
 $errors = $view->getVariable("errors");
 $enfrentamientos = $view->getVariable("enfrentamientos");
 $nombres = $view->getVariable("deportistas");
