@@ -54,11 +54,19 @@ $userRol = $view->getVariable("userRol");
                                  <td class="cell100 column4"><a class="cd-popup-trigger" id="<?= "t".$reserva->getIdReserva() ?>"  href="<?= "index.php?controller=reservas&action=deleteReserva&idReserva=" . $reserva->getIdReserva() ?>">
                                  <i class="fa fa-trash-alt"></i>
                                   </a></td>
-                                  <?php } }else if($interval>1){ ?>
+                                  <?php }else{?>
+                                    <td class="cell100 column4"></td>
+
+                                 <?php } }else if($interval>1){ ?>
                                  <td class="cell100 column4"><a class="cd-popup-trigger" id="<?= "t".$reserva->getIdReserva() ?>"href="<?= "index.php?controller=reservas&action=deleteReserva&idReserva=" . $reserva->getIdReserva()  ?>">
-                                 <i class="fa fa-trash-alt"></i>
+                                 <i class="fa fa-trash-alt"></i>                                
+
                                  </a></td>
-                                 <?php } ?>
+                                 <?php }else{ ?>
+                                  <td class="cell100 column4"></td>
+
+                                 <?php }?>
+                                 
               </tr>
         </table> 
         </div>
