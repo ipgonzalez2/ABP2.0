@@ -42,7 +42,7 @@ $errors = $view->getVariable("errors");
             </ul>
         </div>
         <div class="image">
-            <img src="./images/01.jpg" alt="" />
+            <img src="./images/011.jpg" alt="" />
         </div>
     </section>
 
@@ -50,7 +50,7 @@ $errors = $view->getVariable("errors");
      <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
 
         <div class="image">
-            <img src="./images/010.jpg" alt="" />
+            <img src="./images/calendar-8.jpg" alt="" />
         </div>
         <div class="content">
             <h2>Calendario</h2>
@@ -71,8 +71,8 @@ $errors = $view->getVariable("errors");
         <!-- Gallery -->
         <div class="gallery style2 medium lightbox onscroll-fade-in">
             <article>
-                <a href="images/01.jpg" class="image">
-                    <img src="images/01.jpg" alt="" />
+                <a href="images/015.jpg" class="image">
+                    <img src="images/015.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Pistas</h3>
@@ -82,8 +82,8 @@ $errors = $view->getVariable("errors");
                 </div>
             </article>
             <article>
-                <a href="images/02.jpg" class="image">
-                    <img src="images/02.jpg" alt="" />
+                <a href="images/018.jpg" class="image">
+                    <img src="images/018.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Vestuarios</h3>
@@ -93,8 +93,8 @@ $errors = $view->getVariable("errors");
                 </div>
             </article>
             <article>
-                <a href="images/03.jpg" class="image">
-                    <img src="images/03.jpg" alt="" />
+                <a href="images/PROFESORES.jpeg"  class="image">
+                    <img src="images/PROFESORES.jpeg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Profesores</h3>
@@ -104,8 +104,8 @@ $errors = $view->getVariable("errors");
                 </div>
             </article>
             <article>
-                <a href="images/04.jpg" class="image">
-                    <img src="images/04.jpg" alt="" />
+                <a href="images/014.jpg" class="image">
+                    <img src="images/016.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Bar</h3>
@@ -116,8 +116,8 @@ $errors = $view->getVariable("errors");
                 </div>
             </article>
             <article>
-                <a href="images/gallery/fulls/05.jpg" class="image">
-                    <img src="images/gallery/thumbs/05.jpg" alt="" />
+                <a href="images/gallery/fulls/015.jpg" class="image">
+                    <img src="images/gallery/thumbs/015.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Servicio de Alquiler</h3>
@@ -178,9 +178,8 @@ $errors = $view->getVariable("errors");
     <div class="col-6 col-md">
       <h5>Horario</h5>
       <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="#">Lunes a viernes : 09:00 -- 21:00</a></li>
-        <li><a class="text-muted" href="#">Sabados : 09:00 - 14:00 </br> 18:00 - 21:00</a></li>
-        <li><a class="text-muted" href="#">Domingos : 09:00 -- 14:00 </a></li>
+        <li><a class="text-muted" href="#">Lunes a Domingo : 09:00 -- 22:30</a></li>
+       
         <li><a class="text-muted" href="https://weather.com/es-ES/tiempo/hoy/l/251cec6a9bb33f4b37d385cc0642b9a63928ded87b33f79e2041fadbbf504070">El tiempo</a></li>
       </ul>
     </div>

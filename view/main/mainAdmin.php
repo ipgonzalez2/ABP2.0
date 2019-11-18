@@ -39,7 +39,7 @@ $errors = $view->getVariable("errors");
             <h2>Ver calendario</h2>
             <p>Así podrás ver todos los eventos.</p>
             <ul class="actions stacked">
-                <li><a href="./index.php?controller=campeonatos&action=showLigaRegular" class="button">Ver</a></li>
+                <li><a href="#0" class="button">Ver</a></li>
             </ul>
         </div>
         <div class="image">
@@ -71,7 +71,7 @@ $errors = $view->getVariable("errors");
             </ul>
         </div>
         <div class="image">
-            <img src="./images/icon.jpg" alt="" />
+            <img src="./images/logo-padel.jpg" alt="" />
         </div>
     </section>
 
@@ -262,20 +262,12 @@ $errors = $view->getVariable("errors");
 		<small class="d-block mb-3 text-muted">&copy; 2016-2020</small>
     </div>
     <div class="col-6 col-md">
-      <h5>Mejoras</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="#">Imagenes Bonitas</a></li>
-        <li><a class="text-muted" href="#">Implementacion Nuevas Funciones</a></li>
-        <li><a class="text-muted" href="https://i.pinimg.com/originals/9f/bd/64/9fbd647f14c399ee80b6050adb761a9e.jpg">Algo mas</a></li>
-        <li><a class="text-muted" href="#">Cosas de Informaticos</a></li>
-        <li><a class="text-muted" href="https://weather.com/es-ES/tiempo/hoy/l/251cec6a9bb33f4b37d385cc0642b9a63928ded87b33f79e2041fadbbf504070">El tiempo</a></li>
-      </ul>
+     
 
       <h5>Horario</h5>
       <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="#">Lunes a viernes : 09:00 -- 21:00</a></li>
-        <li><a class="text-muted" href="#">Sabados : 09:00 - 14:00 </br> 18:00 - 21:00</a></li>
-        <li><a class="text-muted" href="#">Domingos : 09:00 -- 14:00 </a></li>
+        <li><a class="text-muted" href="#">Lunes a Domingo : 09:00 -- 22:30</a></li>
+        <li><a class="text-muted" href="https://i.pinimg.com/originals/9f/bd/64/9fbd647f14c399ee80b6050adb761a9e.jpg">Algo mas</a></li>
         <li><a class="text-muted" href="https://weather.com/es-ES/tiempo/hoy/l/251cec6a9bb33f4b37d385cc0642b9a63928ded87b33f79e2041fadbbf504070">El tiempo</a></li>
       </ul>
     </div>

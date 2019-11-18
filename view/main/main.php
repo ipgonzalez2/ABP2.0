@@ -76,7 +76,7 @@ $pop = $view->popFlash();
             </ul>
         </div>
         <div class="image">
-            <img src="./images/icon.jpg" alt="" />
+            <img src="./images/logo-padel.jpg" alt="" />
         </div>
     </section>
 
@@ -87,83 +87,84 @@ $pop = $view->popFlash();
             <p>Acércate al club.</p>
         </div>
 
-        <!-- Gallery -->
-        <div class="gallery style2 medium lightbox onscroll-fade-in">
+         <!-- Gallery -->
+         <div class="gallery style2 medium lightbox onscroll-fade-in">
             <article>
-                <a href="images/01.jpg" class="image">
-                    <img src="images/01.jpg" alt="" />
+                <a href="images/015.jpg" class="image">
+                    <img src="images/015.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Pistas</h3>
                     <ul class="actions fixed">
-                        <li><span class="button small">Detalles</span></li>
+                        <li><span class="button small">Details</span></li>
                     </ul>
                 </div>
             </article>
             <article>
-                <a href="images/06.jpg" class="image">
-                    <img src="images/07.jpg" alt="" />
+                <a href="images/018.jpg" class="image">
+                    <img src="images/018.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Vestuarios</h3>
                     <ul class="actions fixed">
-                        <li><span class="button small">Detalles</span></li>
+                        <li><span class="button small">Details</span></li>
                     </ul>
                 </div>
             </article>
             <article>
-                <a href="images/03.jpg" class="image">
-                    <img src="images/03.jpg" alt="" />
+                <a href="images/PROFESORES.jpeg"  class="image">
+                    <img src="images/PROFESORES.jpeg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Profesores</h3>
                     <ul class="actions fixed">
-                        <li><span class="button small">Detalles</span></li>
+                        <li><span class="button small">Details</span></li>
                     </ul>
                 </div>
             </article>
             <article>
-                <a href="images/04.jpg" class="image">
-                    <img src="images/04.jpg" alt="" />
+                <a href="images/014.jpg" class="image">
+                    <img src="images/016.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Bar</h3>
                     <p>Quieres unas copas.</p>
                     <ul class="actions fixed">
-                        <li><span class="button small">Detalles</span></li>
+                        <li><span class="button small">Details</span></li>
                     </ul>
                 </div>
             </article>
             <article>
-                <a href="images/05.jpg" class="image">
-                    <img src="images/05.jpg" alt="" />
+                <a href="images/gallery/fulls/015.jpg" class="image">
+                    <img src="images/gallery/thumbs/015.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Servicio de Alquiler</h3>
                     <p>Palas y pelotas.</p>
                     <ul class="actions fixed">
-                        <li><span class="button small">Detalles</span></li>
+                        <li><span class="button small">Details</span></li>
                     </ul>
                 </div>
             </article>
             <article>
-                <a href="images/06.jpg" class="image">
-                    <img src="images/06.jpg" alt="" />
+                <a href="images/gallery/fulls/06.jpg" class="image">
+                    <img src="images/gallery/thumbs/06.jpg" alt="" />
                 </a>
                 <div class="caption">
                     <h3>Quieres tu posibles colegas</h3>
                     <ul class="actions fixed">
-                        <li><span class="button small">Detalles</span></li>
+                        <li><span class="button small">Details</span></li>
                     </ul>
                 </div>
             </article>
-            <div class="forward"></div>
-            <div class="backward"></div>
 
-            
         </div>
 
     </section>
+
+    
+    </section>
+
 
     <!-- Six -->
     <!--<section class="wrapper style1 align-center">
@@ -239,7 +240,7 @@ $pop = $view->popFlash();
     <!-- Seven -->
     <section class="wrapper style1 align-center">
         <div class="inner medium">
-            <h2>Contactanos 🐒</h2>
+            <h2>Contáctanos 🐒</h2>
             <form method="post" action="#">
                 <div class="fields">
                     <div class="field half">
@@ -256,7 +257,7 @@ $pop = $view->popFlash();
                     </div>
                 </div>
                 <ul class="actions special">
-                    <li><input type="submit" name="submit" id="submit" value="Envia" /></li>
+                    <li><input type="submit" name="submit" id="submit" value="Envía" /></li>
                 </ul>
             </form>
 
@@ -269,21 +270,16 @@ $pop = $view->popFlash();
 		<small class="d-block mb-3 text-muted">&copy; 2016-2020</small>
     </div>
     <div class="col-6 col-md">
-      <h5>Mejoras</h5>
+      <h5>Stuff</h5>
       <ul class="list-unstyled text-small">
         <li><a class="text-muted" href="https://www.banksy.co.uk/in.asp">Imagenes Bonitas</a></li>
         <li><a class="text-muted" href="https://as1.ftcdn.net/jpg/02/33/17/50/500_F_233175040_hwqRyiZlQkXimeLz2AIZhajyfiU9El1m.jpg">Implementacion Nuevas Funciones</a></li>
-        <li><a class="text-muted" href="#">Algo mas</a></li>
-        <li><a class="text-muted" href="#">Cosas de Informaticos</a></li>
-        <li><a class="text-muted" href="https://weather.com/es-ES/tiempo/hoy/l/251cec6a9bb33f4b37d385cc0642b9a63928ded87b33f79e2041fadbbf504070">El tiempo</a></li>
+        <li><a class="text-muted" href="#">Lunes a Domingo : 09:00 -- 22:30</a></li>
+       
+       <li><a class="text-muted" href="https://weather.com/es-ES/tiempo/hoy/l/251cec6a9bb33f4b37d385cc0642b9a63928ded87b33f79e2041fadbbf504070">El tiempo</a></li>
+     
       </ul>
-      <h5>Horario</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="#">Lunes a viernes : 09:00 -- 21:00</a></li>
-        <li><a class="text-muted" href="#">Sabados : 09:00 - 14:00 </br> 18:00 - 21:00</a></li>
-        <li><a class="text-muted" href="#">Domingos : 09:00 -- 14:00 </a></li>
-        <li><a class="text-muted" href="https://weather.com/es-ES/tiempo/hoy/l/251cec6a9bb33f4b37d385cc0642b9a63928ded87b33f79e2041fadbbf504070">El tiempo</a></li>
-      </ul>
+      
     </div>
 
 

@@ -20,7 +20,7 @@ $notificaciones = $view->getVariable("notificaciones");
       <table>
         <thead>
           <tr class="row100 head">
-            <th class="cell100 column1">Notificacion</th>
+            <th class="cell100 column1" style="text-align: center;">Notificaciones</th>
              </tr>
         </thead>
       </table>
