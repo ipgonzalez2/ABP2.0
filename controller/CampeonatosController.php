@@ -362,7 +362,6 @@ class CampeonatosController extends BaseController {
 		}
 
 		if(isset($_POST["loginPareja"])){
-			var_dump($_POST);
 			$posibleInscripcion = false;
 			$deportista1 = $this->userMapper->findUser($userId);
 			$deportista2 = $this->userMapper->findUserLogin($_POST["loginPareja"]);
@@ -387,11 +386,11 @@ class CampeonatosController extends BaseController {
 				break;
 			}
 
-			
+			$categoriasNiveles = $this->categoriaNivelMapper->findAll($_POST["idCampeonato"]);
 			$inscritos = $this->parejaMapper->estanInscritos($deportista1->getIdUsuario(), $deportista2->getIdUsuario(), $categoriasNiveles);
 
 			if($deportista2 == NULL || !$posibleInscripcion || $inscritos){
-				$this->view->$categoriasNiveles = $this->categoriaNivelMapper->findAll($_POST["idCampeonato"]);direct("index", "indexLogged");
+				$this->view->redirect("index", "indexLogged");
 			}
 
 			$categoriaNivel = $this->categoriaNivelMapper->findId($_POST["idCampeonato"],$_POST["categoria"],$_POST["nivel"]);
