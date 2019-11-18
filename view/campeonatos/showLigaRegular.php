@@ -51,7 +51,8 @@ $i=0;
               <td class="cell100 column4"><?= $enfrentamiento->getHoraEnfrentamiento()?></td>
               <td class="cell100 column4"><?= $enfrentamiento->getResultado1()?> - <?= $enfrentamiento->getResultado2()?></td>
               <td class="cell100 column4"><a href="<?="index.php?controller=campeonatos&action=editarResultado&idEnfrentamiento=".$enfrentamiento->getIdEnfrentamiento() ?>">
-                <i class="fas fa-pen-square"></i>
+                <i class="fas fa-pen-square"></i>    <td class="cell100 column2"> </td>
+
                 </a></td>
 
             </tr>
