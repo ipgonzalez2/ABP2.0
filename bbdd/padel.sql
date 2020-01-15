@@ -27,6 +27,7 @@ create table if not exists usuario(
 	rol enum('administrador', 'deportista') not null,
   sexo enum('hombre', 'mujer') not null ,
   nivel int(10) not null,
+  socio bool not null,
 
 	constraint pk_usuario primary key(id_usuario)
 
@@ -185,4 +186,41 @@ create table if not exists reserva(
   constraint pk_reserva primary key(id_reserva)
 
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
+
+create table if not exists clase(
+
+	id_clase int(10) auto_increment,
+  usuario_clase int(10) not null,
+  precio float(10,2) not null,
+	duracion int(10),
+
+	constraint pk_clase primary key(id_clase),
+  constraint fk_usuario_clase foreign key(usuario_clase) references usuario(id_usuario) on delete cascade
+
+
+)engine=innodb default charset=latin1 collate=latin1_spanish_ci;
+
+create table if not exists pago(
+
+	id_pago int(10) auto_increment,
+  usuario_pago int(10) not null,
+  precio float(10,2) not null,
+	reserva_pago int(10),
+	partido_pago int(10),
+  campeonato_pago int(10),
+  clase_pago int(10),
+	estado_pago enum('pagado', 'pendiente') not null,
+  tipo_pago enum('tarjeta', 'efectivo') not null ,
+
+	constraint pk_pago primary key(id_pago),
+  constraint fk_usuario_pago foreign key(usuario_pago) references usuario(id_usuario) on delete cascade,
+  constraint fk_reserva_pago foreign key(reserva_pago) references reserva(id_reserva) on delete cascade,
+  constraint fk_partido_pago foreign key(partido_pago) references partido(id_partido) on delete cascade,
+  constraint fk_campeonato_pago foreign key(campeonato_pago) references campeonato(id_campeonato) on delete cascade,
+  constraint fk_clase_pago foreign key(clase_pago) references clase(id_clase) on delete cascade
+
+
+)engine=innodb default charset=latin1 collate=latin1_spanish_ci;
+
+
 
