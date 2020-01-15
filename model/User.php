@@ -28,10 +28,12 @@ class User {
 
 
 	private $nivel;
+
+	private $socio;
 	
 
 	public function __construct($id_usuario=NULL, $username=NULL, $passwd=NULL, $nombre=NULL, $email=NULL,
-	$rol=NULL, $sexo=NULL, $nivel=NULL ) {
+	$rol=NULL, $sexo=NULL, $nivel=NULL, $socio=NULL ) {
 		$this->id_usuario = $id_usuario;
 		$this->username = $username;
 		$this->passwd = $passwd;
@@ -40,6 +42,7 @@ class User {
 		$this->rol = $rol;
 		$this->sexo = $sexo;
 		$this->nivel = $nivel;
+		$this->socio = $socio;
 	}
 	
 
@@ -120,6 +123,14 @@ class User {
 
 	public function setNivel($nivel) {
 		$this->nivel = $nivel;
+	}
+
+	public function getSocio(){
+		return $this->socio;
+	}
+
+	public function setSocio($socio){
+		$this->socio = $socio;
 	}
 
 	

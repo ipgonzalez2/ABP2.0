@@ -14,9 +14,9 @@ class UserMapper {
 
 
 	public function save($user) {
-		$stmt = $this->db->prepare("INSERT INTO usuario values (?,?,?,?,?,?,?,?)");
+		$stmt = $this->db->prepare("INSERT INTO usuario values (?,?,?,?,?,?,?,?,?)");
 		$stmt->execute(array(NULL,$user->getUsername(), $user->getPasswd(), $user->getNombre(), $user->getEmail(),
-		$user->getRol(), $user->getSexo(), $user->getNivel()));
+		$user->getRol(), $user->getSexo(), $user->getNivel(), $user->getSocio()));
 	}
 
 	public function edit($user) {
@@ -28,6 +28,14 @@ class UserMapper {
 		WHERE id_usuario = ?");
 		$stmt->execute(array($user->getUsername(), $user->getPasswd(), $user->getNombre(),
 		$user->getEmail(), $user->getIdusuario()));
+	}
+
+	public function setSocio($user, $estado) {
+		$stmt = $this->db->prepare("UPDATE usuario SET 
+		socio = ?
+		WHERE id_usuario = ?");
+		
+		$stmt->execute(array($estado, $user));
 	}
 
 	public function delete($id_usuario) {
@@ -107,7 +115,8 @@ class UserMapper {
 			$user["email"],
 			$user["rol"],
 			$user["sexo"],
-			$user["nivel"]);
+			$user["nivel"],
+			$user["socio"]);
 		} else {
 			return NULL;
 		}

@@ -210,7 +210,7 @@ create table if not exists pago(
   campeonato_pago int(10),
   clase_pago int(10),
 	estado_pago enum('pagado', 'pendiente') not null,
-  tipo_pago enum('tarjeta', 'efectivo') not null ,
+  fecha_valido date,
 
 	constraint pk_pago primary key(id_pago),
   constraint fk_usuario_pago foreign key(usuario_pago) references usuario(id_usuario) on delete cascade,

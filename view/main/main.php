@@ -80,6 +80,29 @@ $pop = $view->popFlash();
         </div>
     </section>
 
+    <!-- SOCIO -->
+    <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
+        <div class="content">
+            <h2>Conviértete en socio/a</h2>
+            <p>Consulta tus privilegios.</p>
+            <ul class="actions stacked">
+                <li><a href="./index.php?controller=users&action=addSocio" class="button">Ver</a></li>
+            </ul>
+        </div>
+        <div class="content">
+        <table>
+            <tr>
+                <th>Cuota socio mensual</th>
+                <th>25€ / mes</th>
+            </tr>
+            <tr>
+                <th>Cuota socio anual</th>
+                <th>204€</th>
+            </tr>
+        </table>
+        </div>
+    </section>
+
     <!-- Five -->
     <section class="wrapper style1 align-center">
         <div class="inner">

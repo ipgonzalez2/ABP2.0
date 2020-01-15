@@ -6,6 +6,8 @@ require_once(__DIR__."/../model/User.php");
 require_once(__DIR__."/../model/UserMapper.php");
 require_once(__DIR__."/../model/Notificacion.php");
 require_once(__DIR__."/../model/NotificacionMapper.php");
+require_once(__DIR__."/../model/Pago.php");
+require_once(__DIR__."/../model/PagoMapper.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -30,6 +32,7 @@ class UsersController extends BaseController {
 
 		$this->userMapper = new UserMapper();
 		$this->notificacionMapper = new NotificacionMapper();
+		$this->pagoMapper = new PagoMapper();
 
 		$this->view->setLayout("welcome");
 	}
@@ -76,9 +79,10 @@ class UsersController extends BaseController {
 			$user->setRol("deportista");
 			$user->setSexo($_POST["sexo"]);
 			$user->setNivel(1);
+			$user->setSocio(false);
 
 			try{
-				$user->checkIsValidForRegister(); 
+				$user->checkIsValidForRegister();
 				if (!$this->userMapper->usernameExists($_POST["username"])){
 
 					
@@ -91,7 +95,6 @@ class UsersController extends BaseController {
 					$this->view->setVariable("errors", $errors);
 				}
 			}catch(ValidationException $ex) {
-				
 				$errors = $ex->getErrors();
 				$this->view->setVariable("errors", $errors);
 			}
@@ -178,6 +181,73 @@ class UsersController extends BaseController {
 		session_destroy();
 
 		$this->view->redirect("index", "indexNoLogged");
+
+	}
+
+	/*funcion que convierte en socio a un usuario*/
+	public function addSocio() {
+
+		$userId = $this->view->getVariable("userId");
+		$user = $this->userMapper->findUser($userId);
+		$pago = new Pago();
+
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+	
+
+		if($user->getSocio() == true){
+			$this->view->setVariable("esSocio", true);
+			$pagoSocio = $this->pagoMapper->findPago($userId);
+			$this->view->setVariable("pago", $pagoSocio);
+		}else{
+			$this->view->setVariable("esSocio", false);
+		}
+
+		if(isset($_POST["pago"])){
+			$pago->setUsuarioPago($userId);
+			if($_POST["pago"] == "anual"){
+				$pago->setPrecio(204);
+				$fecha_actual = new DateTime(date("Y-m-d"));
+				$pago->setFechaValido($fecha_actual->format('Y-m-d'));
+			}else{
+				$pago->setPrecio(25);
+				$fecha_actual = new DateTime(date("Y-m-d"));
+				$pago->setFechaValido($fecha_actual->format('Y-m-d'));
+			}
+			$pago->setEstadoPago("pagado");
+
+			$this->pagoMapper->save($pago);
+			$this->userMapper->setSocio($userId, true);
+
+			$this->view->redirect("index", "indexLogged");
+		}
+
+		// render the view (/view/users/register.php)
+		$this->view->render("users", "socio");
+
+	}
+
+	public function removeSocio() {
+
+		$userId = $this->view->getVariable("userId");
+		$user = $this->userMapper->findUser($userId);
+
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+
+		$pagoSocio = $this->pagoMapper->findPago($userId);
+
+			$this->pagoMapper->remove($pagoSocio->getIdPago());
+			$this->userMapper->setSocio($userId, false);
+
+			$this->view->redirect("index", "indexLogged");
+
+		// render the view (/view/users/register.php)
+		$this->view->render("users", "socio");
 
 	}
 
