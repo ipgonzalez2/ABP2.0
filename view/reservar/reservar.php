@@ -79,7 +79,7 @@ $z =0;
     <?php } ?>
 
     <div class="botones">
-          <button type="submit">Guardar</button>
+          <button type="submit">Pagar</button>
           <button type="button" onclick="closeForm()" >cerrar </button>
     </div>
 
@@ -110,7 +110,7 @@ function openForm(d, anho ,pos) {
   document.getElementById("myForm").style.display = "block";
   document.getElementById("myForm").setAttribute("dia",""+d);
   document.getElementById("myForm").setAttribute("posicion",""+pos);
-  document.getElementById("dia").innerHTML = "Reserva del dia " +d+"  (09:00 a 21:00)<br> Precio de la reserva es de 10€" ;
+  document.getElementById("dia").innerHTML = "Reserva del dia " +d+"  (09:00 a 21:00)<br> Precio de la reserva es de 22€ ( Socios 12€ )" ;
 
 
 

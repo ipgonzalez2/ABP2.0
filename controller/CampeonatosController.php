@@ -263,16 +263,30 @@ class CampeonatosController extends BaseController {
 			$parejasSinGrupo = $this->parejaMapper->findParejasSinGrupo($categoriasNiveles);
 			$campeonato = $this->campeonatoMapper->findCampeonato($_GET["idCampeonato"]);
 			foreach($parejasSinGrupo as $parejaSinGrupo){
+				$email = "padelbit@gmail.com";
+		$headers = 'From: ' .$email . "\r\n". 
+  		'Reply-To: ' . $email. "\r\n" . 
+  		'X-Mailer: PHP/' . phpversion();
 				$notificacion1 = new Notificacion();
 				$notificacion2 = new Notificacion();
 				$notificacion1->setIdUsuarioNotificacion($parejaSinGrupo->getDeportista1());
 				$notificacion2->setIdUsuarioNotificacion($parejaSinGrupo->getDeportista2());
-				$notificacion1->setMensaje("\nSe ha quedado fuera del campeonato ".$campeonato->getNombreCampeonato()."
-				. Lo sentimos.");
-				$notificacion2->setMensaje("\nSe ha quedado fuera del campeonato ".$campeonato->getNombreCampeonato()."
-				. Lo sentimos.");
+				$user1 = $this->userMapper->findUser($parejaSinGrupo->getDeportista1());
+				$user2 = $this->userMapper->findUser($parejaSinGrupo->getDeportista2());
+				$email1 = $user1->getEmail();
+				$email2 = $user2->getEmail();
+				$mensaje1 = "\nSe ha quedado fuera del campeonato ".$campeonato->getNombreCampeonato()."
+				. Lo sentimos.";
+				$notificacion1->setMensaje($mensaje1);
+				$mensaje2 = "\nSe ha quedado fuera del campeonato ".$campeonato->getNombreCampeonato()."
+				. Lo sentimos.";
+				$notificacion2->setMensaje($mensaje2);
 				$this->notificacionMapper->save($notificacion1);
 				$this->notificacionMapper->save($notificacion2);
+				$mensaje1 = wordwrap($mensaje1, 70, "\r\n");
+				$mensaje2 = wordwrap($mensaje2, 70, "\r\n");
+				mail($email1, "Sin plazas en campeonato", $mensaje1, $headers);
+				mail($email2, "Sin plazas en campeonato", $mensaje2, $headers);
 				$this->parejaMapper->deletePareja($parejaSinGrupo->getIdPareja());
 			}
 

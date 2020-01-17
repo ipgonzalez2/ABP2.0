@@ -16,6 +16,8 @@ require_once(__DIR__."/../model/Reserva.php");
 require_once(__DIR__."/../model/ReservaMapper.php");
 require_once(__DIR__."/../model/Enfrentamiento.php");
 require_once(__DIR__."/../model/EnfrentamientoMapper.php");
+require_once(__DIR__."/../model/User.php");
+require_once(__DIR__."/../model/UserMapper.php");
 
 
 require_once(__DIR__."/../controller/BaseController.php");
@@ -45,6 +47,7 @@ class PartidosController extends BaseController {
 		$this->pistaMapper = new PistaMapper();
 		$this->reservaMapper = new ReservaMapper();
 		$this->enfrentamientoMapper = new EnfrentamientoMapper();
+		$this->userMapper = new UserMapper();
 
 		$this->view->setLayout("welcome");
 	}
@@ -125,6 +128,7 @@ class PartidosController extends BaseController {
 	public function deletePartido() {
 
 		$userRol = $this->view->getVariable("userRol");
+		$userEmail = $this->view->getVariable("userEmail");
 		
 		if (!isset($this->currentUser)) {
 			$this->view->redirect("users", "login");
@@ -142,11 +146,20 @@ class PartidosController extends BaseController {
 			if($numInscripciones > 0){
 				$inscritos = $this->inscripcionPartidoMapper->getInscritos($_GET["idPartido"]);
 				foreach($inscritos as $inscrito){
+					$user = $this->userMapper->findUser($inscrito);
+					$email = "padelbit@gmail.com";
+		$headers = 'From: ' .$email . "\r\n". 
+  		'Reply-To: ' . $email. "\r\n" . 
+  		'X-Mailer: PHP/' . phpversion();
+					$email = $user->getEmail();
 					$notificacion = new Notificacion();
 					$notificacion->setIdUsuarioNotificacion($inscrito);
-					$notificacion->setMensaje("El partido con fecha ".$fechaPartido." ha sido cancelado.
-					\nLo sentimos.\n");
+					$mensaje = "El partido con fecha ".$fechaPartido." ha sido cancelado.
+					\nLo sentimos.\n";
+					$notificacion->setMensaje($mensaje);
+					$mensaje = wordwrap($mensaje, 70, "\r\n");
 					$this->notificacionMapper->save($notificacion);
+					mail($email, "Partido cancelado", $mensaje, $headers);
 				}
 				$this->inscripcionPartidoMapper->deleteInscripciones($_GET["idPartido"]);
 			}
@@ -174,6 +187,12 @@ class PartidosController extends BaseController {
 		if(isset($_GET["idPartido"])){
 
 			$partido = $this->partidoMapper->findPartido($_GET["idPartido"]);
+			$inscritos = $this->inscripcionPartidoMapper->getInscritos($_GET["idPartido"]);
+			$nombres = array();
+			foreach($inscritos as $ins){
+				$user = $this->userMapper->findUser($ins);
+				array_push($nombres, $user->getNombre());
+			}
 			$inscrito = $this->inscripcionPartidoMapper->estaInscrito($userId,$_GET["idPartido"]);
 
 			if($inscrito || $partido->getEstadoPartido()=="cerrado"){
@@ -181,6 +200,7 @@ class PartidosController extends BaseController {
 			}
 			
 			$this->view->setVariable("partido", $partido);
+			$this->view->setVariable("nombres", $nombres);
 
 		}
 		$this->view->setLayout("table");
@@ -194,6 +214,7 @@ class PartidosController extends BaseController {
 
 		$userRol = $this->view->getVariable("userRol");
 		$userId = $this->view->getVariable("userId");
+		$userEmail = $this->view->getVariable("userEmail");
 
 		if (!isset($this->currentUser)) {
 			$this->view->setFlashDanger("You must be logged");
@@ -236,11 +257,20 @@ class PartidosController extends BaseController {
 
 				$inscritos = $this->inscripcionPartidoMapper->getInscritos($_GET["idPartido"]);
 				foreach($inscritos as $inscrito){
+					$email = "padelbit@gmail.com";
+		$headers = 'From: ' .$email . "\r\n". 
+  		'Reply-To: ' . $email. "\r\n" . 
+  		'X-Mailer: PHP/' . phpversion();
+					$user = $this->userMapper->findUser($inscrito);
+					$email = $user->getEmail();
 					$notificacion = new Notificacion();
 					$notificacion->setIdUsuarioNotificacion($inscrito);
-					$notificacion->setMensaje("El partido con fecha ".$fechaPartido." ha sido cerrado.
-					\nRecuerde que tendrá que pagar un importe de ".$pago." al acceder al mismo.\n Pista: ".$pista."\n");
+					$mensaje = "El partido con fecha ".$fechaPartido." ha sido cerrado.
+					\nRecuerde que tendrá que pagar un importe de ".$pago." al acceder al mismo.\n Pista: ".$pista."\n";
+					$notificacion->setMensaje($mensaje);
+					$mensaje = wordwrap($mensaje, 70, "\r\n");
 					$this->notificacionMapper->save($notificacion);
+					mail($email, "Partido cerrado", $mensaje , $headers);
 				}
 			}else if($numInscripciones>-1 && $numInscripciones<4){
 				$this->inscripcionPartidoMapper->save($inscripcionPartido);

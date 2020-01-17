@@ -6,6 +6,7 @@ $view = ViewManager::getInstance();
 $view->setVariable("title", "Inscripcion partido");
 $errors = $view->getVariable("errors");
 $partido = $view->getVariable("partido");
+$nombres = $view->getVariable("nombres");
 
 ?>
 
@@ -15,6 +16,7 @@ $partido = $view->getVariable("partido");
         <thead>
           <tr class="row100 head">
             <th class="cell100 column1">Fecha</th>
+            <th class="cell100 column1">Participantes</th>
             <th class="cell100 column2">Precio</th>
             <th class="cell100 column3">Estado</th>
             <th class="cell100 column4">Límite inscripcion</th>
@@ -28,6 +30,13 @@ $partido = $view->getVariable("partido");
           <tbody>
             <tr class="row100 body">
               <td class="cell100 column1"><?= $partido->getFechaPartido() ?></td>
+              <td class="cell100 column1">
+              <?php foreach($nombres as $nombre){ 
+                echo($nombre);?><br>
+                <?php
+              }
+              ?>
+              </td>
               <td class="cell100 column2"><?= $partido->getPrecioPartido() ?></td>
               <td class="cell100 column3"><?= $partido->getEstadoPartido() ?></td>
               <td class="cell100 column4"><?= $partido->getFechaFinInscripcion() ?></td>

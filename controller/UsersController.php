@@ -8,6 +8,8 @@ require_once(__DIR__."/../model/Notificacion.php");
 require_once(__DIR__."/../model/NotificacionMapper.php");
 require_once(__DIR__."/../model/Pago.php");
 require_once(__DIR__."/../model/PagoMapper.php");
+require_once(__DIR__."/../model/Reserva.php");
+require_once(__DIR__."/../model/ReservaMapper.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -33,6 +35,7 @@ class UsersController extends BaseController {
 		$this->userMapper = new UserMapper();
 		$this->notificacionMapper = new NotificacionMapper();
 		$this->pagoMapper = new PagoMapper();
+		$this->reservaMapper = new ReservaMapper();
 
 		$this->view->setLayout("welcome");
 	}
@@ -248,6 +251,19 @@ class UsersController extends BaseController {
 
 		// render the view (/view/users/register.php)
 		$this->view->render("users", "socio");
+
+	}
+
+	public function verEstadisticas() {
+
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger("You must be logged");
+			$this->view->redirect("users", "login");
+		}
+
+		$numReservasHora = $this->reservaMapper->getReservasHora();
+
+		$this->view->render("users", "estadisticas");
 
 	}
 

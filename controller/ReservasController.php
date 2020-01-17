@@ -14,6 +14,8 @@ require_once(__DIR__."/../model/InscripcionPartido.php");
 require_once(__DIR__."/../model/InscripcionPartidoMapper.php");
 require_once(__DIR__."/../model/Notificacion.php");
 require_once(__DIR__."/../model/NotificacionMapper.php");
+require_once(__DIR__."/../model/User.php");
+require_once(__DIR__."/../model/UserMapper.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -40,6 +42,7 @@ class ReservasController extends BaseController {
 		$this->partidoMapper = new PartidoMapper();
 		$this->inscripcionPartidoMapper = new InscripcionPartidoMapper();
 		$this->notificacionMapper = new NotificacionMapper();
+		$this->userMapper = new UserMapper();
 
 		$this->view->setLayout("reservar");
 	}
@@ -51,6 +54,7 @@ class ReservasController extends BaseController {
 		$calendario = new Calendario();
 		$userRol = $this->view->getVariable("userRol");
 		$userId = $this->view->getVariable("userId");
+		$user = $this->userMapper->findUser($userId);
 
 
 		if (!isset($this->currentUser)) {
@@ -77,7 +81,11 @@ class ReservasController extends BaseController {
 			$pista = $this->calendarioMapper->getPistaLibre($_POST["fecha"],$_POST["hora"],$pistas);
 			$esUltimaPistaLibre = $this->calendarioMapper->esUltimaPistaLibre($_POST["fecha"],$_POST["hora"],$pista,$numPistas);
 			$reserva->setFecha($_POST["fecha"]);
-			$reserva->setPrecio(16);
+			if($user->getSocio()==true){
+				$reserva->setPrecio(12);
+			}else{
+			$reserva->setPrecio(22);
+			}
 			$reserva->setUsuarioReserva($userId);
 			$reserva->setPistaReserva($pista);
 			$reserva->setHora($_POST["hora"]);
@@ -91,11 +99,20 @@ class ReservasController extends BaseController {
 					if($numInscripciones > 0){
 						$inscritos = $this->inscripcionPartidoMapper->getInscritos($partidoMismaFecha);
 						foreach($inscritos as $inscrito){
+							$user = $this->userMapper->findUser($inscrito);
+							$email = $user->getEmail();
 						$notificacion = new Notificacion();
 						$notificacion->setIdUsuarioNotificacion($inscrito);
-						$notificacion->setMensaje("El partido con fecha ".$_POST["fecha"]." ha sido cancelado.
-						\nLo sentimos.\n");
+						$mensaje = "El partido con fecha ".$_POST["fecha"]." ha sido cancelado.
+						\nLo sentimos.\n";
+						$notificacion->setMensaje($mensaje);
+						$mensaje = wordwrap($mensaje, 70, "\r\n");
 						$this->notificacionMapper->save($notificacion);
+						$email = "padelbit@gmail.com";
+		$headers = 'From: ' .$email . "\r\n". 
+  		'Reply-To: ' . $email. "\r\n" . 
+  		'X-Mailer: PHP/' . phpversion();
+						mail($email, "Partido cancelado", $mensaje, $headers);
 						}
 						$this->inscripcionPartidoMapper->deleteInscripciones($partidoMismaFecha);
 						}

@@ -135,5 +135,17 @@ class ReservaMapper {
 		return $horas;
 	}
 
+	public function getReservasHora(){
+		$horas = array("09:00:00", "10:30:00", "12:00:00", "13:30:00", "15:00:00", "16:30:00", "18:00:00", "19:30:00", "21:00:00" );
+		$stmt = $this->db->prepare("SELECT hora, count(id_reserva) from reserva group by hora");
+		$stmt->execute(null);
+
+		$horas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$horas = array();
+
+
+		return $horas;
+	}
+
 
 }

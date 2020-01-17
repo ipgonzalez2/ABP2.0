@@ -27,6 +27,9 @@ $errors = $view->getVariable("errors");
         <div class="content">
             <h1>PadelBit </h1>
             <p class="major">La mejor web de padel del mundo.</p>
+            <ul class="actions stacked">
+                <li><a href="./index.php?controller=users&action=verEstadisticas" class="button">Estadísticas</a></li>
+            </ul>
         </div>
         <div class="image">
             <img src="./images/padel6.jpg" alt="" />
