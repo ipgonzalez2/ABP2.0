@@ -136,15 +136,29 @@ class ReservaMapper {
 	}
 
 	public function getReservasHora(){
-		$horas = array("09:00:00", "10:30:00", "12:00:00", "13:30:00", "15:00:00", "16:30:00", "18:00:00", "19:30:00", "21:00:00" );
-		$stmt = $this->db->prepare("SELECT hora, count(id_reserva) from reserva group by hora");
+		
+		$stmt = $this->db->prepare("SELECT hora, count(id_reserva) from reserva where partido_reserva is null and enfrentamiento is null group by hora  order by count(id_reserva) desc ");
 		$stmt->execute(null);
 
 		$horas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$horas = array();
 
+		foreach($horas_db as $hora){
+			array_push($horas, $hora["hora"]);
+			array_push($horas, $hora["count(id_reserva)"]);
+		}
+
 
 		return $horas;
+	}
+
+	public function getTotalSinPartidos(){
+		
+		$stmt = $this->db->prepare("SELECT count(id_reserva) from reserva where partido_reserva is null and enfrentamiento is null");
+		$stmt->execute(null);
+
+		$reservas_db = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $reservas_db["count(id_reserva)"];
 	}
 
 

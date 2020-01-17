@@ -10,6 +10,11 @@ require_once(__DIR__."/../model/Pago.php");
 require_once(__DIR__."/../model/PagoMapper.php");
 require_once(__DIR__."/../model/Reserva.php");
 require_once(__DIR__."/../model/ReservaMapper.php");
+require_once(__DIR__."/../model/InscripcionPartido.php");
+require_once(__DIR__."/../model/InscripcionPartidoMapper.php");
+require_once(__DIR__."/../model/Grupo.php");
+require_once(__DIR__."/../model/GrupoMapper.php");
+
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -36,6 +41,8 @@ class UsersController extends BaseController {
 		$this->notificacionMapper = new NotificacionMapper();
 		$this->pagoMapper = new PagoMapper();
 		$this->reservaMapper = new ReservaMapper();
+		$this->inscripcionPartidoMapper = new InscripcionPartidoMapper();
+		$this->grupoMapper = new GrupoMapper();
 
 		$this->view->setLayout("welcome");
 	}
@@ -262,6 +269,28 @@ class UsersController extends BaseController {
 		}
 
 		$numReservasHora = $this->reservaMapper->getReservasHora();
+		$numReservasTotales = $this->reservaMapper->getTotalSinPartidos();
+
+		$horas = array();
+		$porcentajes = array();
+
+		for($i = 0; $i < count($numReservasHora); $i = $i + 2){
+			array_push($horas, $numReservasHora[$i]);
+			$p = ($numReservasHora[$i + 1] / $numReservasTotales) * 100;
+			array_push($porcentajes, round($p,2)); 
+		}
+
+		$numSocios = $this->userMapper->getNumSocios();
+
+		$numPartidosPorDeportista = $this->inscripcionPartidoMapper->getPartidosPorDeportista();
+
+		$numInscritosCampeonato = $this->grupoMapper->getInscritosCampeonato();
+
+		$this->view->setVariable("horas", $horas);
+		$this->view->setVariable("porcentajes", $porcentajes);
+		$this->view->setVariable("numSocios", $numSocios);
+		$this->view->setVariable("partidos", $numPartidosPorDeportista);
+		$this->view->setVariable("campeonatos", $numInscritosCampeonato);
 
 		$this->view->render("users", "estadisticas");
 

@@ -89,6 +89,23 @@ class UserMapper {
 		}
 	}
 
+	public function getNumSocios(){
+		$stmt1 = $this->db->prepare("SELECT count(id_usuario) FROM usuario where rol=?");
+		$stmt1->execute(array("deportista"));
+		$numUsuarios = $stmt1->fetch(PDO::FETCH_ASSOC);
+	
+		$stmt = $this->db->prepare("SELECT count(id_usuario) FROM usuario where socio=?");
+		$stmt->execute(array(true));
+		$numSocios = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		$valores = array();
+		array_push($valores, ($numSocios["count(id_usuario)"]/$numUsuarios["count(id_usuario)"]) * 100);
+		array_push($valores, $numSocios["count(id_usuario)"]);
+		array_push($valores, $numUsuarios["count(id_usuario)"]);
+
+		return $valores;
+	}
+
 	public function findByUserRol($username) {
 		$stmt = $this->db->prepare("SELECT rol FROM usuario where username=?");
 		$stmt->execute(array($username));

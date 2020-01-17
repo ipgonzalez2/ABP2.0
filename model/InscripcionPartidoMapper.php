@@ -77,5 +77,21 @@ class InscripcionPartidoMapper {
 		$stmt->execute(array($id_partido));
 	}
 
+	public function getPartidosPorDeportista(){
+
+        $stmt = $this->db->prepare("SELECT count(i.id_inscripcion_partido), u.nombre FROM inscripcionpartido i, usuario u where u.id_usuario = i.id_inscripcion_usuario group by id_inscripcion_usuario ");
+		$stmt->execute(null);
+		
+		$inscritos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$inscritos = array();
+
+		foreach ($inscritos_db as $inscrito) {
+			array_push($inscritos, $inscrito["nombre"]);
+			array_push($inscritos, $inscrito["count(i.id_inscripcion_partido)"]);
+		}
+
+		return $inscritos;
+    }
+
 
 }
