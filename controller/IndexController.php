@@ -66,6 +66,9 @@ class IndexController extends BaseController {
             $this->view->setLayout("default");
             $this->view->render("main", "main");
 
+		}else{
+			$this->view->setLayout("default");
+			$this->view->render("main", "mainEntrenador");
 		}
 
 	}

@@ -21,10 +21,12 @@ class Reserva {
 
 	private $enfrentamiento;
 
+	private $clase;
+
 	
 
 	public function __construct($id_reserva=NULL, $fecha=NULL, $precio=NULL, $usuario_reserva=NULL,
-	$pista_reserva=NULL, $hora=NULL, $partido_reserva=NULL, $enfrentamiento=null) {
+	$pista_reserva=NULL, $hora=NULL, $partido_reserva=NULL, $enfrentamiento=null, $clase=null) {
 		$this->id_reserva = $id_reserva;
 		$this->fecha = $fecha;
 		$this->precio = $precio;
@@ -33,6 +35,7 @@ class Reserva {
 		$this->hora = $hora;
 		$this->partido_reserva = $partido_reserva;
 		$this->enfrentamiento = $enfrentamiento;
+		$this->clase = $clase;
 	}
 	
 	
@@ -107,6 +110,14 @@ class Reserva {
 
 	public function setEnfrentamiento($enfrentamiento){
 		$this->enfrentamiento = $enfrentamiento;
+	}
+
+	public function getClase(){
+		return $this->clase;
+	}
+
+	public function setClase($clase){
+		$this->clase = $clase;
 	}
 
 

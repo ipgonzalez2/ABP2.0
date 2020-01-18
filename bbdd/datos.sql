@@ -9,6 +9,7 @@ insert into pista values(null,'cerrada');
 -- creacion de usuarios
 
 insert into usuario values(0,'admin','admin','','','administrador','hombre',0, false);
+insert into usuario values(102,'entrenador','entrenador','','entrenador@gmail.com','entrenador','hombre',0, false);
 
 insert into `usuario` values(2, 'adene0', '12345', 'alfreda dene', 'adene0@marriott.com', 'deportista', 'mujer', 1, true),
 (3, 'tpridgeon1', 'pshbjhl', 'tom pridgeon', 'tpridgeon1@chronoengine.com', 'deportista', 'hombre', 1, false),

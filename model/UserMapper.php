@@ -118,6 +118,27 @@ class UserMapper {
 		}
 	}
 
+	public function findEntrenador() {
+		$stmt = $this->db->prepare("SELECT * FROM usuario where rol=?");
+		$stmt->execute(array("entrenador"));
+		$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if($user != null) {
+			return new User(
+			$user["id_usuario"],
+			$user["username"],
+			$user["passwd"],
+			$user["nombre"],
+			$user["email"],
+			$user["rol"],
+			$user["sexo"],
+			$user["nivel"],
+			$user["socio"]);
+		} else {
+			return NULL;
+		}
+	}
+
 	public function findUser($id_usuario){
 		$stmt = $this->db->prepare("SELECT * FROM usuario WHERE id_usuario=?");
 		$stmt->execute(array($id_usuario));

@@ -18,6 +18,7 @@ $pop = $view->popFlash();
         <a href="./index.php?controller=reservas&action=showallReservasActivas"><i class="fa fa-calendar-alt"></i></a>
         <a href="./index.php?controller=partidos&action=showallPartidosInscrito"><i class="fa fa-table-tennis"></i></a>
         <a href="./index.php?controller=campeonatos&action=showallCampeonatosInscrito"><i class="fa fa-medal"></i></a>
+        <a href="./index.php?controller=clases&action=showallClases"><i class="fa fa-chalkboard-teacher"></i></a>
         <a href="./index.php?controller=users&action=notificaciones"><i class="fa fa-envelope"></i></a>
         <a href="./index.php?controller=users&action=edit"><i class="fas fa-user"></i></i></a>
         <a href="./index.php?controller=users&action=logout"><i class="fas fa-sign-out-alt"></i></a>
@@ -77,6 +78,21 @@ $pop = $view->popFlash();
         </div>
         <div class="image">
             <img src="./images/logo-padel.jpg" alt="" />
+        </div>
+    </section>
+
+    <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
+        <div class="content">
+            <h2>Aprende a jugar de forma fácil</h2>
+            <p>Clases particulares</p>
+            <ul class="actions stacked">
+                <li><a href="./index.php?controller=clases&action=solicitarClase" class="button">Ver opciones</a></li>
+            </ul>
+        </div>
+        <div> 1 clase <br> 30€ </div>
+        <div> 5 clases <br> 140 €</div>
+        <div> 10 clases <br> 260 €</div>
+        <p> Todos los socios disponen de un 10% de descuento </p>
         </div>
     </section>
 

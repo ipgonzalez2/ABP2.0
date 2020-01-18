@@ -24,7 +24,7 @@ create table if not exists usuario(
 	passwd varchar(255) not null,
   nombre varchar(255) not null,
 	email varchar(255) not null,
-	rol enum('administrador', 'deportista') not null,
+	rol enum('administrador', 'deportista', 'entrenador') not null,
   sexo enum('hombre', 'mujer') not null ,
   nivel int(10) not null,
   socio bool not null,
@@ -167,6 +167,20 @@ create table if not exists confirmacion (
   
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
+create table if not exists clase(
+
+	id_clase int(10) auto_increment,
+  usuario_clase int(10) not null,
+  precio float(10,2) not null,
+	duracion int(10),
+  estado enum("pendiente", "cerrado") not null,
+  comentario varchar(255) not null,
+
+	constraint pk_clase primary key(id_clase),
+  constraint fk_usuario_clase foreign key(usuario_clase) references usuario(id_usuario) on delete cascade
+
+
+)engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
 create table if not exists reserva(
 
@@ -178,27 +192,18 @@ create table if not exists reserva(
   hora time not null,
   partido_reserva int(10),
   enfrentamiento int(10),
+  clase int(10),
 
   constraint fk_usuario foreign key(usuario_reserva) references usuario(id_usuario) on delete cascade,
   constraint fk_pista foreign key(pista_reserva) references pista(id_pista) on delete cascade,
   constraint fk_enfrentamiento foreign key(enfrentamiento) references enfrentamiento(id_enfrentamiento) on delete cascade,
-   constraint fk_partido foreign key(partido_reserva) references partido(id_partido) on delete cascade,
+  constraint fk_partido foreign key(partido_reserva) references partido(id_partido) on delete cascade,
+  constraint fk_clase foreign key(clase) references clase(id_clase) on delete cascade,
   constraint pk_reserva primary key(id_reserva)
 
 ) engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
-create table if not exists clase(
 
-	id_clase int(10) auto_increment,
-  usuario_clase int(10) not null,
-  precio float(10,2) not null,
-	duracion int(10),
-
-	constraint pk_clase primary key(id_clase),
-  constraint fk_usuario_clase foreign key(usuario_clase) references usuario(id_usuario) on delete cascade
-
-
-)engine=innodb default charset=latin1 collate=latin1_spanish_ci;
 
 create table if not exists pago(
 

@@ -15,10 +15,10 @@ class ReservaMapper {
 
 
 	public function save($reserva) {
-		$stmt = $this->db->prepare("INSERT INTO reserva values (?,?,?,?,?,?,?,?)");
+		$stmt = $this->db->prepare("INSERT INTO reserva values (?,?,?,?,?,?,?,?,?)");
 		$stmt->execute(array(0, $reserva->getFecha(), $reserva->getPrecio(),
 		$reserva->getUsuarioReserva(), $reserva->getPistaReserva(), $reserva->getHora(), $reserva->getPartidoReserva(),
-	$reserva->getEnfrentamiento()));
+	$reserva->getEnfrentamiento(), $reserva->getClase()));
 	}
 
 	public function getNumReservasUser($id_reserva) {
@@ -135,6 +135,21 @@ class ReservaMapper {
 		return $horas;
 	}
 
+	public function getHorasClases($fecha){
+		$stmt = $this->db->prepare("SELECT hora from reserva where fecha=? and clase is not null");
+		$stmt->execute(array($fecha));
+
+		$horas_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$horas = array();
+
+		foreach($horas_db as $hora){
+			array_push($horas, $hora["hora"]);
+		}
+
+
+		return $horas;
+	}
+
 	public function getReservasHora(){
 		
 		$stmt = $this->db->prepare("SELECT hora, count(id_reserva) from reserva where partido_reserva is null and enfrentamiento is null group by hora  order by count(id_reserva) desc ");
@@ -159,6 +174,44 @@ class ReservaMapper {
 
 		$reservas_db = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $reservas_db["count(id_reserva)"];
+	}
+
+	public function findClases(){
+
+		$stmt = $this->db->prepare("SELECT r.id_reserva, u.nombre, r.fecha, r.hora, r.pista_reserva, r.clase FROM reserva r, usuario u WHERE r.usuario_reserva = u.id_usuario and r.clase is not null ORDER BY r.fecha, r.hora");
+		$stmt->execute(null);
+		
+		$clases_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$clases = array();
+
+		foreach ($clases_db as $clase) {
+			array_push($clases, $clase["nombre"]);
+			array_push($clases, $clase["fecha"]);
+			array_push($clases, $clase["hora"]);
+			array_push($clases, $clase["pista_reserva"]);
+			array_push($clases, $clase["clase"]);
+			array_push($clases, $clase["id_reserva"]);
+		}
+		return $clases;
+	}
+
+	public function findClasesUsuario($id){
+
+		$stmt = $this->db->prepare("SELECT r.id_reserva, u.nombre, r.fecha, r.hora, r.pista_reserva, r.clase FROM reserva r, usuario u WHERE r.usuario_reserva = u.id_usuario and r.usuario_reserva=? and r.clase is not null ORDER BY r.fecha, r.hora");
+		$stmt->execute(array($id));
+		
+		$clases_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$clases = array();
+
+		foreach ($clases_db as $clase) {
+			array_push($clases, $clase["nombre"]);
+			array_push($clases, $clase["fecha"]);
+			array_push($clases, $clase["hora"]);
+			array_push($clases, $clase["pista_reserva"]);
+			array_push($clases, $clase["clase"]);
+			array_push($clases, $clase["id_reserva"]);
+		}
+		return $clases;
 	}
 
 
