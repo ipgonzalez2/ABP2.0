@@ -81,7 +81,7 @@ $pop = $view->popFlash();
         </div>
     </section>
 
-    <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
+    <section class="spotlight style1 orient-left content-align-left image-position-center onscroll-image-fade-in">
         <div class="content">
             <h2>Aprende a jugar de forma fácil</h2>
             <p>Clases particulares</p>
@@ -89,11 +89,15 @@ $pop = $view->popFlash();
                 <li><a href="./index.php?controller=clases&action=solicitarClase" class="button">Ver opciones</a></li>
             </ul>
         </div>
+            <div class="image">
+            <img src="./images/Professor-Farnsworth-futurama.jpg" alt="" />
+        </div>
+        <!-- </div>
         <div> 1 clase <br> 30€ </div>
         <div> 5 clases <br> 140 €</div>
         <div> 10 clases <br> 260 €</div>
         <p> Todos los socios disponen de un 10% de descuento </p>
-        </div>
+        </div> -->
     </section>
 
     <!-- SOCIO -->

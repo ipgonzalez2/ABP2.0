@@ -1,22 +1,29 @@
 <?php
 //file: view/users/register.php
 
-require_once(__DIR__ . "/../../core/ViewManager.php");
+require_once __DIR__ . "/../../core/ViewManager.php";
 $view = ViewManager::getInstance();
 $view->setVariable("title", "Solicitar clases");
 
 $errors = $view->getVariable("errors");
 ?>
 
+<div class="container-contact100">
 
+    <div class="wrap-contact100">
 
 			<form class=" validate-form" method="POST" action="./index.php?controller=clases&action=solicitarClase">
 				<span class="login100-form-title p-b-43">
 					Solicitud de clases
 				</span>
 
+				<span>
+				
+				Socios disponen de un 10% de descuento
+
+				</span>
                 <div class="wrap-input100 validate-input">
-                Socios disponen de un 10% de descuento
+                
 				<input class="input100" name="duracion" type="text" list="duracion" placeholder="Duración" autocomplete=off/>
 				<datalist id="duracion" name="duracion" >
   					<option name="duracion" value="1">1 clase (30€)</option>
@@ -26,10 +33,10 @@ $errors = $view->getVariable("errors");
 				</div>
 
     <div>
-					<textarea  type="text"  name="comentario"  placeholder="Indica de lunes a viernes horarios que tiene disponibles (MAÑANA 9:00-15:00) O (TARDE 15:00-22:30)"></textarea>
+		<textarea  type="text"  name="comentario"  placeholder="Indica de lunes a viernes horarios que tiene disponibles (MAÑANA 9:00-15:00) O (TARDE 15:00-22:30)"  style="margin: 0px; width: 541px; height: 136px;"></textarea>
 
 </div>
-				
+
 
 
 				<div class="container-login100-form-btn">
@@ -37,6 +44,9 @@ $errors = $view->getVariable("errors");
 							Pagar y solicitar
 				</button>
 				</div>
-				
+
 
 			</form>
+
+	</div>
+</div>
