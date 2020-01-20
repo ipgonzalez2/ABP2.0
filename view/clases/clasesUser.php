@@ -25,6 +25,8 @@ $i=0;
             <th class="cell100 column2">Fecha</th>
             <th class="cell100 column3">Hora</th>
             <th class="cell100 column4">Pista</th>
+            <th class="cell100 column4">Eliminar</th>
+
             </tr>
         </thead>
       </table>
@@ -39,7 +41,7 @@ $i=0;
               <td class="cell100 column3"><?= $clases[$i+2]?></td>
               <td class="cell100 column4"><?= $clases[$i+3]?></td>
 
-              <td class="cell100 column5"><a href="<?="index.php?controller=clases&action=cancelarClase&idClase=".$clases[$i+4]."&idReserva=".$clases[$i+5] ?>">
+              <td class="cell100 column4"><a href="<?="index.php?controller=clases&action=cancelarClase&idClase=".$clases[$i+4]."&idReserva=".$clases[$i+5] ?>">
               <i class="fas fa-times-circle"></i>
               </a></td>
             </tr>
