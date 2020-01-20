@@ -412,3 +412,11 @@ select {
 select .input100 {
     text-align: center;
 }
+
+#reservas,
+#bar-chart-horizontal,
+#socios {
+    margin-left: 10%;
+    width: 80% !important;
+    height: 80% !important;
+}
