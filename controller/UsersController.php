@@ -233,6 +233,7 @@ class UsersController extends BaseController {
 
 			$this->view->redirect("index", "indexLogged");
 		}
+		$this->view->setLayout("socio");
 
 		// render the view (/view/users/register.php)
 		$this->view->render("users", "socio");

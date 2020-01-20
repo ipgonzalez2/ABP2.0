@@ -105,7 +105,11 @@ $pop = $view->popFlash();
                 <li><a href="./index.php?controller=users&action=addSocio" class="button">Ver</a></li>
             </ul>
         </div>
-        <div class="content">
+
+        <div class="image">
+            <img src="./images/hazte-socio.jpg" alt="" />
+        </div>
+       <!--  <div class="content">
         <table>
             <tr>
                 <th>Cuota socio mensual</th>
@@ -116,7 +120,7 @@ $pop = $view->popFlash();
                 <th>204€</th>
             </tr>
         </table>
-        </div>
+        </div> -->
     </section>
 
     <!-- Five -->
