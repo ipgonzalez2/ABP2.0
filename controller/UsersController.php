@@ -293,6 +293,8 @@ class UsersController extends BaseController {
 		$this->view->setVariable("partidos", $numPartidosPorDeportista);
 		$this->view->setVariable("campeonatos", $numInscritosCampeonato);
 
+		$this->view->setLayout("stats");
+
 		$this->view->render("users", "estadisticas");
 
 	}
