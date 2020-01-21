@@ -170,11 +170,51 @@ $pago = $view->getVariable("pago");
 			</span>
 
 			<div>
-			TARIFA
 			<?php if($pago->getPrecio() == 204){ ?>
-			<span class="input100">Tarifa anual 204€</span>
+				<div class="item-unlimited item-column" style="padding: 2.5%;margin: 2.5%;/* border-style: solid; */border: 1px groove #03A9F4;background-color: #ffff;border-radius: 50px;">
+									<div  class="bear-pic">
+										<div class="bear-img-wrap unlimited">
+										</div> 
+										<h2  class="h2" style="
+    text-align: center;
+"> Anual</h2>
+									</div> 
+									<div class="inner-wrap">
+										<div  class="inner">
+											<div  class="content">
+												<p>La mejor Opción</p> 
+												<ul class="check-list copy">
+													<li >Unico Pago</li> 
+													<li >Clases mas baratas</li> 
+													<li >Descuento en reservas</li>
+												</ul> <!----> <div  class="pricing">
+													
+												</div>
+											
+											</div>
+										</div>
+									</div>
+								</div> 
 			<?php }else{ ?>
-			<span class="input100">Tarifa mensual 25€ / mes</span>
+        <div class="item-teams item-column" style="padding: 2.5%;margin: 2.5%;/* border-style: solid; */border: 1px groove #03A9F4;background-color: #ffff;border-radius: 50px;">		
+										<h2  class="h2" style="
+    text-align: center;
+">Mensual</h2>
+									<div  class="inner-wrap">
+										<div  class="inner">
+											<div  class="content">
+												<p >Tienes que pagar todos los meses. Que coñazo</p> 
+												<ul  class="check-list copy">
+													<li >Clases mas baratas</li> 
+													<li >Descuento en reservas</li> 
+
+												</ul> <div  class="pricing"><p >
+												</div> 
+												
+										</div> 
+										</div>
+									</div>
+								</div>
 			<?php } ?>
 			</div>
 
