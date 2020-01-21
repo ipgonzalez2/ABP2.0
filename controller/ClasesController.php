@@ -109,6 +109,7 @@ class ClasesController extends BaseController {
             mail($emailE, "Solicitud clases", $mensaje , $headers);
 			$this->view->redirect("index", "indexLogged");
 		}
+		$this->view->setLayout("socio");
 
 		$this->view->render("clases", "solicitarClase");
     }

@@ -33,7 +33,8 @@ $userRol = $view->getVariable("userRol");
 
 	<link rel="stylesheet" href="./css/mainTable.css" type="text/css">
 	<link rel="stylesheet" href="./css/style.css" type="text/css">
-	<link rel="stylesheet" href="./css/v4-shims.css" type="text/css">
+	<link rel="stylesheet" href="./css/tarjeta.css" type="text/css">
+
 
 	<!-- POPUP	 -->
 	<script src="js/modernizr.js"></script> <!-- Modernizr -->

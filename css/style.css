@@ -10433,7 +10433,7 @@ input.input100 {
   [ Alert validate ]*/
 
 .validate-input {
-    position: relative;
+    position: static;
 }
 
 .alert-validate::before {

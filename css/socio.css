@@ -1,9 +1,47 @@
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
+.myButton {
+    background-color: #83b84d;
+    border: 1px solid #83b84d;
+    color: #fff;
+    font-size: 1em;
+    font-family: Montserrat, Helvetica, sans-serif;
+    border-radius: 30px;
+    display: inline-block;
+    padding: 10px 22px;
+    text-align: center;
+    font-weight: 500;
+    margin: 10%;
+}
+
+button {
+    outline: none !important;
+    border: none;
+    background: transparent;
+}
+
+.myButton:hover {
+    background: linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+    background-color: #476e9e;
+}
+
+.myButton:active {
+    position: relative;
+    top: 1px;
+}
+
 @font-face {
     font-family: Ubuntu-Bold;
     src: url('../fonts/ubuntu/Ubuntu-Bold.ttf');
+}
+
+.plans {
+    padding-left: 7%;
+}
+
+.botones {
+    text-align: center;
 }
 
 

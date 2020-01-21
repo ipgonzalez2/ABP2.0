@@ -25,7 +25,16 @@ $view = ViewManager::getInstance();
     <link rel="stylesheet" type="text/css" href="css/socio.css">
     
 	<link rel="stylesheet" href="./css/style.css" type="text/css">
+	<link rel="stylesheet" href="./css/mainTable.css" type="text/css">
+	<link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 
+	<link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
+
+	<link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/header.css" type="text/css">
+
+	<link rel="stylesheet" href="./css/tarjeta.css" type="text/css">
+	<script src="js/jquery.min.js"></script> <!-- Modernizr -->
 
 
 	<?= $view->getFragment("css") ?>
