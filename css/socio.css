@@ -2669,11 +2669,6 @@ body a:hover {
     text-decoration: underline
 }
 
-body img {
-    width: 100%;
-    max-width: 100%
-}
-
 body .bg-blue {
     background-color: #dff4f6
 }

@@ -13,7 +13,7 @@ $errors = $view->getVariable("errors");
     <div class="wrap-contact100">
 
 			<form class=" validate-form" method="POST" action="./index.php?controller=clases&action=solicitarClase">
-				<span class="login100-form-title p-b-43">
+				<span class="contact100-form-title">
 					Solicitud de clases
 				</span>
 

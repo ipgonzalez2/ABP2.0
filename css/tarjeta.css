@@ -29,7 +29,7 @@ body {
 }
 
 #tarjeta {
-    padding: 30%;
+    padding-left: 30%;
     position: absolute;
     display: flex;
     flex-direction: row;
