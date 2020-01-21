@@ -99,7 +99,6 @@ class UserMapper {
 		$numSocios = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$valores = array();
-		array_push($valores, ($numSocios["count(id_usuario)"]/$numUsuarios["count(id_usuario)"]) * 100);
 		array_push($valores, $numSocios["count(id_usuario)"]);
 		array_push($valores, $numUsuarios["count(id_usuario)"]);
 
