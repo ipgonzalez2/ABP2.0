@@ -22,7 +22,6 @@ $userRol = $view->getVariable("userRol");
 
 
 
-    <link rel="stylesheet" type="text/css" href="css/socio.css">
     
 	<link rel="stylesheet" href="./css/style.css" type="text/css">
 	<link rel="stylesheet" href="./css/mainTable.css" type="text/css">
@@ -34,6 +33,7 @@ $userRol = $view->getVariable("userRol");
     <link rel="stylesheet" href="./css/header.css" type="text/css">
 
 	<link rel="stylesheet" href="./css/tarjeta.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/socio.css">
 
 	<script src="js/jquery.min.js"></script> <!-- Modernizr -->
 

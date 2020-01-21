@@ -15,29 +15,33 @@ $j = 0;
 $z = 0;
 ?>
 
-<div>
-<span> RESERVAS </span>
+<nav id="navbar-primary" class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+  
+    <div class="collapse navbar-collapse" id="navbar-primary-collapse">
+      <ul class="nav navbar-nav">
+        
+        <li><a id="aReserva" onclick="showReservas()">RESERVAS</a></li>
+        <li><a id="aSocios" onclick="showSocios()">SOCIOS</a></li>
+        <li><a id="aPartidos" onclick="showPartidos()">PARTIDOS</a></li>
+        <li><a id="aCampeonatos" onclick="showCampeonatos()">CAMPEONATOS</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
 
-<canvas id="reservas" ></canvas>
+
+<canvas id="reservas" style="display: block"></canvas>
+
+<canvas id="socios" style="display: none" ></canvas>
 
 
-<span> SOCIOS </span>
+<canvas id="bar-chart-horizontal" style="display: none"></canvas>
 
 
-<canvas id="socios" ></canvas>
 
-<div id="partidos">
-<span> PARTIDOS </span>
-
-
-    <canvas id="bar-chart-horizontal" ></canvas>
-
-</div>
-
-    <span> CAMPEONATOS </span>
-
-<canvas id="campeonato" ></canvas>
+<canvas id="campeonato" style="display: none"></canvas>
 
 
 
@@ -48,6 +52,81 @@ $z = 0;
 
 
 <script>
+function showReservas(){
+    
+    document.getElementById("reservas").style.display="none";
+    document.getElementById("aReserva").style.color="#000000";
+   
+    document.getElementById("socios").style.display="none";
+    document.getElementById("aSocios").style.color="#000000";
+   
+    document.getElementById("bar-chart-horizontal").style.display="none";
+    document.getElementById("aPartidos").style.color="#000000";
+   
+    document.getElementById("campeonato").style.display="none";
+    document.getElementById("aCampeonatos").style.color="#000000";
+
+    document.getElementById("reservas").style.display="block";
+    document.getElementById("aReserva").style.color="#56adec";
+    
+}
+
+function showSocios(){
+    
+    document.getElementById("reservas").style.display="none";
+    document.getElementById("aReserva").style.color="#000000";
+   
+    document.getElementById("socios").style.display="none";
+    document.getElementById("aSocios").style.color="#000000";
+   
+    document.getElementById("bar-chart-horizontal").style.display="none";
+    document.getElementById("aPartidos").style.color="#000000";
+   
+    document.getElementById("campeonato").style.display="none";
+    document.getElementById("aCampeonatos").style.color="#000000";
+
+    document.getElementById("socios").style.display="block";
+    document.getElementById("aSocios").style.color="#56adec";
+    
+}
+
+function showPartidos(){
+    
+    document.getElementById("reservas").style.display="none";
+    document.getElementById("aReserva").style.color="#000000";
+   
+    document.getElementById("socios").style.display="none";
+    document.getElementById("aSocios").style.color="#000000";
+   
+    document.getElementById("bar-chart-horizontal").style.display="none";
+    document.getElementById("aPartidos").style.color="#000000";
+   
+    document.getElementById("campeonato").style.display="none";
+    document.getElementById("aCampeonatos").style.color="#000000";
+
+    document.getElementById("bar-chart-horizontal").style.display="block";
+    document.getElementById("aPartidos").style.color="#56adec";
+    
+}
+
+function showCampeonatos(){
+    
+    document.getElementById("reservas").style.display="none";
+    document.getElementById("aReserva").style.color="#000000";
+   
+    document.getElementById("socios").style.display="none";
+    document.getElementById("aSocios").style.color="#000000";
+   
+    document.getElementById("bar-chart-horizontal").style.display="none";
+    document.getElementById("aPartidos").style.color="#000000";
+   
+    document.getElementById("campeonato").style.display="none";
+    document.getElementById("aCampeonatos").style.color="#000000";
+
+    document.getElementById("campeonato").style.display="block";
+    document.getElementById("aCampeonatos").style.color="#56adec";
+    
+}
 
 
 var ctx = document.getElementById('reservas').getContext('2d');
@@ -219,11 +298,11 @@ new Chart(document.getElementById("campeonato"), {
       labels: nombreCampeonatos,
       datasets: [
         {
-          label: "Parejas",
+          label: "Participantes",
           backgroundColor: ["#3e95cd"],
           data: nParejas
         },{
-          label: "Participantes",
+          label: "Parejas",
           backgroundColor: "#8e5ea2",
           data: nParticipantes
         }

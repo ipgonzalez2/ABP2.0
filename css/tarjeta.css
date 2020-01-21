@@ -212,7 +212,7 @@ body {
 
 #tarjeta .col2 input:focus {
     outline-width: 0;
-    background: rgba(31, 134, 252, 0.15);
+    background: rgba(255, 255, 255);
     transition: background 0.5s;
 }
 

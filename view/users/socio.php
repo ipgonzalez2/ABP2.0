@@ -20,7 +20,7 @@ $pago = $view->getVariable("pago");
 				<div>
 					<div class="section-inner" >
 						<div  class="plans select-unlimited" style="display: flex;">
-							<div  class="item-free item-column"   style="padding: 2.5%;margin: 2.5%;/* border-style: solid; */border: 1px groove #03A9F4;background-color: #ffff;border-radius: 50px;">
+							<div  class="item-free item-column" id="tGratis"  >
 
 								<div  class="bear-pic">
 									<div class="bear-img-wrap free">
@@ -42,7 +42,7 @@ $pago = $view->getVariable("pago");
 										</div>
 									</div>
 								</div> 
-								<div class="item-unlimited item-column" style="padding: 2.5%;margin: 2.5%;/* border-style: solid; */border: 1px groove #03A9F4;background-color: #ffff;border-radius: 50px;">
+								<div class="item-unlimited item-column" id="tAnual" >
 									<div  class="bear-pic">
 										<div class="bear-img-wrap unlimited">
 										</div> 
@@ -60,14 +60,14 @@ $pago = $view->getVariable("pago");
 													
 												</div>
 												
-												 <a class="btn btn-lg" >
-													 <input type="radio" name="pago" value="anual">
+												 <a class="btn btn-lg" id="anual" >
+													 <input id="inputAnual" type="radio" name="pago" value="anual">
 												 Desde <span class="amount">199.99 €</span></a>
 											</div>
 										</div>
 									</div>
 								</div> 
-								<div class="item-teams item-column" style="padding: 2.5%;margin: 2.5%;/* border-style: solid; */border: 1px groove #03A9F4;background-color: #ffff;border-radius: 50px;">		
+								<div class="item-teams item-column" id="tMensual" >		
 										<h2  class="h2">Mensual</h2>
 									<div  class="inner-wrap">
 										<div  class="inner">
@@ -79,8 +79,8 @@ $pago = $view->getVariable("pago");
 
 												</ul> <div  class="pricing"><p >
 												</div> 
-												<a class="btn btn-lg" >
-													 <input type="radio" name="pago" value="mensual">
+												<a class="btn btn-lg"  id="mensual">
+													 <input id="inputMensual" type="radio" name="pago" value="mensual">
 												 Desde <span class="amount">24.99 €</span> /mes</a>
 										</div> 
 										</div>
@@ -89,24 +89,8 @@ $pago = $view->getVariable("pago");
 						</div>
           </div>
           <div class="botones">
-          <a id="bpagar" type="pagar" class="myButton" onclick="card()" style="cursor: pointer;
-          margin :0;
-    display: inline-block;
-    font-weight: 400;
-    letter-spacing: 0.125em;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    white-space: nowrap;
-    font-size: 0.75rem;
-    max-width: 20rem;
-    height: 3.75em;
-    line-height: 3.75em;
-    border-radius: 3.75em;
-    padding: 0 2.5em;
-    text-overflow: ellipsis;
-    overflow: hidden;">Pagar</a>
-    </div>
+          <a id="bpagar" type="pagar" class="myButton" onclick="card()" >Pagar</a>
+         </div>
 				</div>
             
                  
@@ -237,6 +221,15 @@ $pago = $view->getVariable("pago");
 
 
 <script>
+
+$( "#anual" ).click(function() {
+  $("#inputAnual").prop("checked", true);
+});
+
+$( "#mensual" ).click(function() {
+  $("#inputMensual").prop("checked", true);
+});
+
 function card(){
   document.getElementById("tarjeta").style.display = "flex";
   document.getElementById("myForm").style.display = "none";

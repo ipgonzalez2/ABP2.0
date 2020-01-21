@@ -37,7 +37,7 @@ button {
 }
 
 .plans {
-    padding-left: 7%;
+    padding-left: 10%;
 }
 
 .botones {
@@ -7543,4 +7543,65 @@ section .anchor[data-v-288cfeef] {
         overflow: hidden;
         background-color: #fff
     }
+}
+
+#bpagar {
+    cursor: pointer;
+    margin: 0;
+    display: inline-block;
+    font-weight: 400;
+    letter-spacing: 0.125em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    max-width: 20rem;
+    height: 3.75em;
+    line-height: 3.75em;
+    border-radius: 3.75em;
+    padding: 0 2.5em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#tGratis,
+#tAnual,
+#tMensual {
+    max-width: 25%;
+}
+
+h2 {
+    text-align: center;
+}
+
+input {
+    display: inherit;
+}
+
+#tGratis {
+    padding: 2.5%;
+    margin: 2.5%;
+    /* border-style: solid; */
+    border: 1px solid #03A9F4;
+    background-color: #ffff;
+    border-radius: 50px;
+}
+
+#tAnual {
+    padding: 2.5%;
+    margin: 2.5%;
+    /* border-style: solid; */
+    border: 1px solid #03A9F4;
+    background-color: #ffff;
+    border-radius: 50px;
+}
+
+#tMensual {
+    padding: 2.5%;
+    margin: 2.5%;
+    /* border-style: solid; */
+    border: 1px solid #03A9F4;
+    background-color: #ffff;
+    border-radius: 50px;
 }

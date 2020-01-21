@@ -79,23 +79,8 @@ $z =0;
     <?php } ?>
 
     <div class="botones">
-          <a id="bpagar" type="pagar" onclick="card()" style="cursor: pointer;
-    display: inline-block;
-    font-weight: 400;
-    letter-spacing: 0.125em;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    white-space: nowrap;
-    font-size: 0.75rem;
-    max-width: 20rem;
-    height: 3.75em;
-    line-height: 3.75em;
-    border-radius: 3.75em;
-    padding: 0 2.5em;
-    text-overflow: ellipsis;
-    overflow: hidden;">Pagar</a>
-          <button type="button" onclick="closeForm()" >cerrar </button>
+          <a id="bpagar" type="pagar" onclick="card()">Pagar</a>
+          <button id="bcerrar" type="button" onclick="closeForm()" >cerrar </button>
     </div>
 
     </div>
