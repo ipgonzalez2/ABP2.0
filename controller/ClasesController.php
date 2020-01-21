@@ -10,6 +10,8 @@ require_once(__DIR__."/../model/Calendario.php");
 require_once(__DIR__."/../model/CalendarioMapper.php");
 require_once(__DIR__."/../model/Pista.php");
 require_once(__DIR__."/../model/PistaMapper.php");
+require_once(__DIR__."/../model/Pago.php");
+require_once(__DIR__."/../model/PagoMapper.php");
 require_once(__DIR__."/../model/Reserva.php");
 require_once(__DIR__."/../model/ReservaMapper.php");
 require_once(__DIR__."/../model/Enfrentamiento.php");
@@ -50,7 +52,8 @@ class ClasesController extends BaseController {
         $this->userMapper = new UserMapper();
         $this->claseMapper = new ClaseMapper();
         $this->partidoMapper = new PartidoMapper();
-        $this->inscripcionPartidoMapper = new InscripcionPartidoMapper();
+		$this->inscripcionPartidoMapper = new InscripcionPartidoMapper();
+		$this->pagoMapper = new PagoMapper();
 
 		$this->view->setLayout("welcome");
 	}
@@ -97,7 +100,13 @@ class ClasesController extends BaseController {
             $clase->setDuracion(intval($_POST["duracion"]));
             $clase->setEstado("pendiente");
             $clase->setComentario($_POST["comentario"]);
-            $this->claseMapper->save($clase);
+			$idClase = $this->claseMapper->save($clase);
+			$pago = new Pago();
+			$pago->setUsuarioPago($userId);
+			$pago->setPrecio($precio);
+			$pago->setClasePago($idClase);
+			$pago->setEstadoPago("pagado");
+			$this->pagoMapper->save($pago);
             $email = "padelbit@gmail.com";
             $emailE = $entrenador->getEmail();
 		    $headers = 'From: ' .$email . "\r\n". 
@@ -187,7 +196,8 @@ class ClasesController extends BaseController {
 			$calendario->setPistaCalendario($pista);
 			$calendario->setHoraCalendario($_POST["hora"]);
 			$this->reservaMapper->save($reserva);
-            $this->calendarioMapper->save($calendario);
+			$this->calendarioMapper->save($calendario);
+			
             $this->claseMapper->actualizarClase($clase->getIdClase(), $clase->getDuracion());
             $user = $this->userMapper->findUser($clase->getUsuarioClase());
             $emailUsuario = $user->getEmail();

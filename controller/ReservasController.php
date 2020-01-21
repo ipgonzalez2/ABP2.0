@@ -8,6 +8,8 @@ require_once(__DIR__."/../model/Calendario.php");
 require_once(__DIR__."/../model/CalendarioMapper.php");
 require_once(__DIR__."/../model/Pista.php");
 require_once(__DIR__."/../model/PistaMapper.php");
+require_once(__DIR__."/../model/Pago.php");
+require_once(__DIR__."/../model/PagoMapper.php");
 require_once(__DIR__."/../model/Partido.php");
 require_once(__DIR__."/../model/PartidoMapper.php");
 require_once(__DIR__."/../model/InscripcionPartido.php");
@@ -43,6 +45,7 @@ class ReservasController extends BaseController {
 		$this->inscripcionPartidoMapper = new InscripcionPartidoMapper();
 		$this->notificacionMapper = new NotificacionMapper();
 		$this->userMapper = new UserMapper();
+		$this->pagoMapper = new PagoMapper();
 
 		$this->view->setLayout("reservar");
 	}
@@ -125,8 +128,14 @@ class ReservasController extends BaseController {
 			$calendario->setHoraCalendario($_POST["hora"]);
 
 
-			$this->reservaMapper->save($reserva);
+			$idReserva = $this->reservaMapper->save($reserva);
 			$this->calendarioMapper->save($calendario);
+			$pago = new Pago();
+			$pago->setUsuarioPago($userId);
+			$pago->setPrecio($reserva->getPrecio());
+			$pago->setReservaPago($idReserva);
+			$pago->setEstadoPago("pagado");
+			$this->pagoMapper->save($pago);
 			$this->view->redirect("index","indexLogged");
 		}
 

@@ -16,7 +16,8 @@ class ClaseMapper {
 	public function save($clase) {
 		$stmt = $this->db->prepare("INSERT INTO clase values (?,?,?,?,?, ?)");
         $stmt->execute(array(0,$clase->getUsuarioClase(), $clase->getPrecio(), 
-        $clase->getDuracion(), $clase->getEstado(), $clase->getComentario()));
+		$clase->getDuracion(), $clase->getEstado(), $clase->getComentario()));
+		return $this->db->lastInsertId();
 	}
 
 	public function findSolicitudes(){

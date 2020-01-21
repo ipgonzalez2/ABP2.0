@@ -19,6 +19,7 @@ class ReservaMapper {
 		$stmt->execute(array(0, $reserva->getFecha(), $reserva->getPrecio(),
 		$reserva->getUsuarioReserva(), $reserva->getPistaReserva(), $reserva->getHora(), $reserva->getPartidoReserva(),
 	$reserva->getEnfrentamiento(), $reserva->getClase()));
+	return $this->db->lastInsertId();
 	}
 
 	public function getNumReservasUser($id_reserva) {
