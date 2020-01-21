@@ -11,6 +11,7 @@ $pago = $view->getVariable("pago");
 <?php if(!$esSocio){ ?>
 <div class="container-contact100">
 
+<form class="contact100-form validate-form" method="POST" action="./index.php?controller=users&action=addSocio">
 
 			<div >
 				<span class="contact100-form-title">
@@ -79,7 +80,7 @@ $pago = $view->getVariable("pago");
 												</ul> <div  class="pricing"><p >
 												</div> 
 												<a class="btn btn-lg" >
-													 <input type="radio" name="pago" value="anual">
+													 <input type="radio" name="pago" value="mensual">
 												 Desde <span class="amount">24.99 €</span> /mes</a>
 										</div> 
 										</div>
