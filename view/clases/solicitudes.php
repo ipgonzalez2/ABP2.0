@@ -25,7 +25,7 @@ $i = 0;
             <th class="cell100 column2">Deportista</th>
             <th class="cell100 column1">Clases pendientes</th>
             <th class="cell100 column1">Horario</th>
-            <th class="cell100 column1">Cita</th>
+            <th class="cell100 column1">Fijar Horario Clase</th>
             </tr>
         </thead>
       </table>
@@ -40,7 +40,8 @@ $i = 0;
               <td class="cell100 column1"><?=$clases[$i + 3]?></td>
               <td class="cell100 column1"><?=$clases[$i + 4]?></td>
               <td class="cell100 column1">
-                <select class="selectBox" size="1" onchange="changeFunc();">
+                <select class="selectBox" size="1" onfocus="changeFunc();">
+                <option > Selecciona clase a Fijar </option>
               <?php for ($j = 1; $j <= $clases[$i + 3]; $j++) {?> 
               <option value="<?='index.php?controller=clases&action=reservarClase&idClase=' . $clases[$i]?>" > <?=$j?></option>
                 <i class="fas fa-calendar-alt"></i>
