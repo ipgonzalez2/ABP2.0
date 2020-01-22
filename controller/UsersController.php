@@ -89,13 +89,14 @@ class UsersController extends BaseController {
 			$user->setRol("deportista");
 			$user->setSexo($_POST["sexo"]);
 			$user->setNivel(1);
-			$user->setSocio(false);
+			$user->setSocio(0);
 
 			try{
 				$user->checkIsValidForRegister();
 				if (!$this->userMapper->usernameExists($_POST["username"])){
 
-					
+				/* 	var_dump($user);
+					exit; */
 					$this->userMapper->save($user);
 
 					$this->view->redirect("users", "login");

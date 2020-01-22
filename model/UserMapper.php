@@ -31,11 +31,16 @@ class UserMapper {
 	}
 
 	public function setSocio($user, $estado) {
+		if($estado == false ){
+			$socio =0;
+		}else{
+			$socio =1;
+		}
 		$stmt = $this->db->prepare("UPDATE usuario SET 
 		socio = ?
 		WHERE id_usuario = ?");
 		
-		$stmt->execute(array($estado, $user));
+		$stmt->execute(array($socio, $user));
 	}
 
 	public function delete($id_usuario) {

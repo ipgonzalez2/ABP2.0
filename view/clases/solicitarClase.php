@@ -22,7 +22,7 @@ $errors = $view->getVariable("errors");
 				Socios disponen de un 10% de descuento
 
 				</span>
-                <div class="wrap-input100 validate-input">
+                <div class="wrap-input100 validate-input" id="inputDuracion">
                 
 				<input class="input100" name="duracion" type="text" list="duracion" placeholder="Duración" autocomplete=off/>
 				<datalist id="duracion" name="duracion" >
@@ -110,8 +110,9 @@ $errors = $view->getVariable("errors");
 function card(){
   document.getElementById("tarjeta").style.display = "flex";
   document.getElementById("myForm").style.display = "none";
- 
+
   document.getElementById("tarjeta").setAttribute("class"," cd-popup is-visible");
+  document.getElementById("inputDuracion").style.display = "contents";
 
 }
 
