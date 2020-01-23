@@ -256,12 +256,12 @@ insert into `notificacion` (`id_notificacion`, `id_usuario_notificacion`, `mensa
 (4, 97, 'el partido con fecha 2019-12-08 ha sido cerrado.\r\n					\nrecuerde que tendrá que pagar un importe de 9 al acceder al mismo.\n pista: 1\n');
 
 insert into `clase` (`id_clase`, `usuario_clase`, `precio`, `duracion`) values
-(1, 2, 8.00, 4),
-(2, 54, 8.00, 8),
-(3, 65, 8.00, 12),
-(4, 3, 8.00, 2),
-(5, 8, 8.00, 20),
-(6, 10, 8.00, 4);
+(1, 2, 8.00, 5),
+(2, 54, 8.00, 1),
+(3, 65, 8.00, 10),
+(4, 3, 8.00, 5),
+(5, 8, 8.00, 10),
+(6, 10, 8.00, 1);
 
 
 insert into `pago` values(1, 2, 16.00, 1, null, null, null, 'pagado', 'tarjeta'),
